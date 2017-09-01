@@ -205,15 +205,19 @@ namespace MundiAPI.Standard.Http.Client
                     Convert.ToBase64String(byteArray));
             }
 
-            if (request.HttpMethod.Equals(HttpMethod.Post) || request.HttpMethod.Equals(HttpMethod.Put) || request.HttpMethod.Equals(new HttpMethod("PATCH")))
+            if (request.HttpMethod.Equals(HttpMethod.Delete) || request.HttpMethod.Equals(HttpMethod.Post) || request.HttpMethod.Equals(HttpMethod.Put) || request.HttpMethod.Equals(new HttpMethod("PATCH")))
             {
                 requestMessage.Content = new StringContent(string.Empty);
-                if (request.Body!=null)
+                if (request.Body != null)
                 {
                     if (request.Body is FileStreamInfo)
                     {
-                        requestMessage.Content = new StreamContent(((FileStreamInfo)request.Body).FileStream);
-                        requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                        var file = ((FileStreamInfo)request.Body);
+                        requestMessage.Content = new StreamContent(file.FileStream);
+                        if (!string.IsNullOrWhiteSpace(file.ContentType))
+                            requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+                        else
+                            requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                     }
                     else if (request.Headers.Any(f => f.Key == "content-type" && f.Value == "application/json; charset=utf-8"))
                         requestMessage.Content = new StringContent((string)request.Body ?? string.Empty, Encoding.UTF8,
@@ -236,7 +240,10 @@ namespace MundiAPI.Standard.Http.Client
                                 Name = param.Key,
                                 FileName = fileInfo.FileName
                             };
-                            fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                            if (!string.IsNullOrWhiteSpace(fileInfo.ContentType))
+                                fileContent.Headers.ContentType = new MediaTypeHeaderValue(fileInfo.ContentType);
+                            else
+                                fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                             formContent.Add(fileContent, param.Key);
                         }
                         else
