@@ -28,6 +28,7 @@ namespace MundiAPI.Standard.Models
         private string customerId;
         private Models.CreateShippingRequest shipping;
         private Dictionary<string, string> metadata;
+        private bool? antifraudEnabled;
 
         /// <summary>
         /// Items
@@ -145,6 +146,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.metadata = value;
                 onPropertyChanged("Metadata");
+            }
+        }
+
+        /// <summary>
+        /// Defines whether the order will go through anti-fraud
+        /// </summary>
+        [JsonProperty("antifraud_enabled")]
+        public bool? AntifraudEnabled 
+        { 
+            get 
+            {
+                return this.antifraudEnabled; 
+            } 
+            set 
+            {
+                this.antifraudEnabled = value;
+                onPropertyChanged("AntifraudEnabled");
             }
         }
     }
