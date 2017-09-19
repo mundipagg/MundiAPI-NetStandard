@@ -33,6 +33,7 @@ namespace MundiAPI.Standard.Models
         private string invoiceUrl;
         private Models.GetShippingResponse shipping;
         private Dictionary<string, string> metadata;
+        private List<Models.GetCheckoutPaymentSettingsResponse> checkouts;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -237,6 +238,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.metadata = value;
                 onPropertyChanged("Metadata");
+            }
+        }
+
+        /// <summary>
+        /// Checkout Payment Settings Response
+        /// </summary>
+        [JsonProperty("checkouts")]
+        public List<Models.GetCheckoutPaymentSettingsResponse> Checkouts 
+        { 
+            get 
+            {
+                return this.checkouts; 
+            } 
+            set 
+            {
+                this.checkouts = value;
+                onPropertyChanged("Checkouts");
             }
         }
     }
