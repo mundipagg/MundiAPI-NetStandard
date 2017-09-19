@@ -44,6 +44,7 @@ namespace MundiAPI.Standard.Models
         private int? billingDay;
         private int? minimumPrice;
         private DateTime? canceledAt;
+        private List<Models.GetDiscountResponse> discounts;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -438,6 +439,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.canceledAt = value;
                 onPropertyChanged("CanceledAt");
+            }
+        }
+
+        /// <summary>
+        /// Subscription discounts
+        /// </summary>
+        [JsonProperty("discounts")]
+        public List<Models.GetDiscountResponse> Discounts 
+        { 
+            get 
+            {
+                return this.discounts; 
+            } 
+            set 
+            {
+                this.discounts = value;
+                onPropertyChanged("Discounts");
             }
         }
     }
