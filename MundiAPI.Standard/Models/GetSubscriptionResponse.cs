@@ -35,7 +35,7 @@ namespace MundiAPI.Standard.Models
         private DateTime createdAt;
         private DateTime updatedAt;
         private Models.GetCustomerResponse customer;
-        private Models.GetCardResponse creditCard;
+        private Models.GetCardResponse card;
         private List<Models.GetSubscriptionItemResponse> items;
         private string statementDescriptor;
         private Dictionary<string, string> metadata;
@@ -290,17 +290,17 @@ namespace MundiAPI.Standard.Models
         /// <summary>
         /// TODO: Write general description for this method
         /// </summary>
-        [JsonProperty("credit_card")]
-        public Models.GetCardResponse CreditCard 
+        [JsonProperty("card")]
+        public Models.GetCardResponse Card 
         { 
             get 
             {
-                return this.creditCard; 
+                return this.card; 
             } 
             set 
             {
-                this.creditCard = value;
-                onPropertyChanged("CreditCard");
+                this.card = value;
+                onPropertyChanged("Card");
             }
         }
 
