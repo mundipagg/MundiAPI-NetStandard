@@ -24,6 +24,7 @@ namespace MundiAPI.Standard.Models
         private int amount;
         private string description;
         private int quantity;
+        private Models.GetSellerResponse getSellerResponse;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -73,6 +74,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.quantity = value;
                 onPropertyChanged("Quantity");
+            }
+        }
+
+        /// <summary>
+        /// Seller data
+        /// </summary>
+        [JsonProperty("GetSellerResponse")]
+        public Models.GetSellerResponse GetSellerResponse 
+        { 
+            get 
+            {
+                return this.getSellerResponse; 
+            } 
+            set 
+            {
+                this.getSellerResponse = value;
+                onPropertyChanged("GetSellerResponse");
             }
         }
     }
