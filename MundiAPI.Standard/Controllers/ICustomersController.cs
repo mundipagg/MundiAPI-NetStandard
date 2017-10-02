@@ -49,18 +49,6 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.ListCardsResponse> GetCardsAsync(string customerId);
 
         /// <summary>
-        /// Get all Customers
-        /// </summary>
-        /// <return>Returns the Models.ListCustomersResponse response from the API call</return>
-        Models.ListCustomersResponse GetCustomers();
-
-        /// <summary>
-        /// Get all Customers
-        /// </summary>
-        /// <return>Returns the Models.ListCustomersResponse response from the API call</return>
-        Task<Models.ListCustomersResponse> GetCustomersAsync();
-
-        /// <summary>
         /// Creates a new customer
         /// </summary>
         /// <param name="request">Required parameter: Request for creating a customer</param>
@@ -263,6 +251,34 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="customerId">Required parameter: Customer Id</param>
         /// <return>Returns the Models.ListAccessTokensResponse response from the API call</return>
         Task<Models.ListAccessTokensResponse> GetAccessTokensAsync(string customerId);
+
+        /// <summary>
+        /// Get all Customers
+        /// </summary>
+        /// <param name="name">Optional parameter: Name of the Customer</param>
+        /// <param name="document">Optional parameter: Document of the Customer</param>
+        /// <param name="page">Optional parameter: Current page the the search</param>
+        /// <param name="size">Optional parameter: Quantity pages of the search</param>
+        /// <return>Returns the Models.ListCustomersResponse response from the API call</return>
+        Models.ListCustomersResponse GetCustomers(
+                string name = null,
+                string document = null,
+                string page = "1",
+                string size = "10");
+
+        /// <summary>
+        /// Get all Customers
+        /// </summary>
+        /// <param name="name">Optional parameter: Name of the Customer</param>
+        /// <param name="document">Optional parameter: Document of the Customer</param>
+        /// <param name="page">Optional parameter: Current page the the search</param>
+        /// <param name="size">Optional parameter: Quantity pages of the search</param>
+        /// <return>Returns the Models.ListCustomersResponse response from the API call</return>
+        Task<Models.ListCustomersResponse> GetCustomersAsync(
+                string name = null,
+                string document = null,
+                string page = "1",
+                string size = "10");
 
         /// <summary>
         /// Delete a customer's access token
