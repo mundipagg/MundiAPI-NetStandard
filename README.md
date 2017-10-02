@@ -407,24 +407,6 @@ Models.ListCardsResponse result = await customers.GetCards(customerId);
 ```
 
 
-### <a name="get_customers"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.GetCustomers") GetCustomers
-
-> Get all Customers
-
-
-```csharp
-Task<Models.ListCustomersResponse> GetCustomers()
-```
-
-#### Example Usage
-
-```csharp
-
-Models.ListCustomersResponse result = await customers.GetCustomers();
-
-```
-
-
 ### <a name="create_customer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.CreateCustomer") CreateCustomer
 
 > Creates a new customer
@@ -781,6 +763,42 @@ Task<Models.ListAccessTokensResponse> GetAccessTokens(string customerId)
 string customerId = "customer_id";
 
 Models.ListAccessTokensResponse result = await customers.GetAccessTokens(customerId);
+
+```
+
+
+### <a name="get_customers"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.GetCustomers") GetCustomers
+
+> Get all Customers
+
+
+```csharp
+Task<Models.ListCustomersResponse> GetCustomers(
+        string name = null,
+        string document = null,
+        string page = "1",
+        string size = "10")
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| name |  ``` Optional ```  | Name of the Customer |
+| document |  ``` Optional ```  | Document of the Customer |
+| page |  ``` Optional ```  ``` DefaultValue ```  | Current page the the search |
+| size |  ``` Optional ```  ``` DefaultValue ```  | Quantity pages of the search |
+
+
+#### Example Usage
+
+```csharp
+string name = "name";
+string document = "document";
+string page = "1";
+string size = "10";
+
+Models.ListCustomersResponse result = await customers.GetCustomers(name, document, page, size);
 
 ```
 

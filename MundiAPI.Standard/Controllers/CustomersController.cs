@@ -174,60 +174,6 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// Get all Customers
-        /// </summary>
-        /// <return>Returns the Models.ListCustomersResponse response from the API call</return>
-        public Models.ListCustomersResponse GetCustomers()
-        {
-            Task<Models.ListCustomersResponse> t = GetCustomersAsync();
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Get all Customers
-        /// </summary>
-        /// <return>Returns the Models.ListCustomersResponse response from the API call</return>
-        public async Task<Models.ListCustomersResponse> GetCustomersAsync()
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/customers");
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK" },
-                { "accept", "application/json" }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.ListCustomersResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
         /// Creates a new customer
         /// </summary>
         /// <param name="request">Required parameter: Request for creating a customer</param>
@@ -1072,6 +1018,85 @@ namespace MundiAPI.Standard.Controllers
             try
             {
                 return APIHelper.JsonDeserialize<Models.ListAccessTokensResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Get all Customers
+        /// </summary>
+        /// <param name="name">Optional parameter: Name of the Customer</param>
+        /// <param name="document">Optional parameter: Document of the Customer</param>
+        /// <param name="page">Optional parameter: Current page the the search</param>
+        /// <param name="size">Optional parameter: Quantity pages of the search</param>
+        /// <return>Returns the Models.ListCustomersResponse response from the API call</return>
+        public Models.ListCustomersResponse GetCustomers(
+                string name = null,
+                string document = null,
+                string page = "1",
+                string size = "10")
+        {
+            Task<Models.ListCustomersResponse> t = GetCustomersAsync(name, document, page, size);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Get all Customers
+        /// </summary>
+        /// <param name="name">Optional parameter: Name of the Customer</param>
+        /// <param name="document">Optional parameter: Document of the Customer</param>
+        /// <param name="page">Optional parameter: Current page the the search</param>
+        /// <param name="size">Optional parameter: Quantity pages of the search</param>
+        /// <return>Returns the Models.ListCustomersResponse response from the API call</return>
+        public async Task<Models.ListCustomersResponse> GetCustomersAsync(
+                string name = null,
+                string document = null,
+                string page = "1",
+                string size = "10")
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/customers");
+
+            //process optional query parameters
+            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "name", name },
+                { "document", document },
+                { "page", (null != page) ? page : "1" },
+                { "size", (null != size) ? size : "10" }
+            },ArrayDeserializationFormat,ParameterSeparator);
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.ListCustomersResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
