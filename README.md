@@ -776,8 +776,8 @@ Models.ListAccessTokensResponse result = await customers.GetAccessTokens(custome
 Task<Models.ListCustomersResponse> GetCustomers(
         string name = null,
         string document = null,
-        string page = "1",
-        string size = "10")
+        int? page = 1,
+        int? size = 10)
 ```
 
 #### Parameters
@@ -795,8 +795,8 @@ Task<Models.ListCustomersResponse> GetCustomers(
 ```csharp
 string name = "name";
 string document = "document";
-string page = "1";
-string size = "10";
+int? page = 1;
+int? size = 10;
 
 Models.ListCustomersResponse result = await customers.GetCustomers(name, document, page, size);
 
