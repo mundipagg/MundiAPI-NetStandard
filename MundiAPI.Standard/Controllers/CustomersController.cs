@@ -1036,8 +1036,8 @@ namespace MundiAPI.Standard.Controllers
         public Models.ListCustomersResponse GetCustomers(
                 string name = null,
                 string document = null,
-                string page = "1",
-                string size = "10")
+                int? page = 1,
+                int? size = 10)
         {
             Task<Models.ListCustomersResponse> t = GetCustomersAsync(name, document, page, size);
             APIHelper.RunTaskSynchronously(t);
@@ -1055,8 +1055,8 @@ namespace MundiAPI.Standard.Controllers
         public async Task<Models.ListCustomersResponse> GetCustomersAsync(
                 string name = null,
                 string document = null,
-                string page = "1",
-                string size = "10")
+                int? page = 1,
+                int? size = 10)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -1070,8 +1070,8 @@ namespace MundiAPI.Standard.Controllers
             {
                 { "name", name },
                 { "document", document },
-                { "page", (null != page) ? page : "1" },
-                { "size", (null != size) ? size : "10" }
+                { "page", (null != page) ? page : 1 },
+                { "size", (null != size) ? size : 10 }
             },ArrayDeserializationFormat,ParameterSeparator);
 
 

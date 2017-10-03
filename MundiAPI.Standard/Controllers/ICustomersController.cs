@@ -263,8 +263,8 @@ namespace MundiAPI.Standard.Controllers
         Models.ListCustomersResponse GetCustomers(
                 string name = null,
                 string document = null,
-                string page = "1",
-                string size = "10");
+                int? page = 1,
+                int? size = 10);
 
         /// <summary>
         /// Get all Customers
@@ -277,8 +277,8 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.ListCustomersResponse> GetCustomersAsync(
                 string name = null,
                 string document = null,
-                string page = "1",
-                string size = "10");
+                int? page = 1,
+                int? size = 10);
 
         /// <summary>
         /// Delete a customer's access token
