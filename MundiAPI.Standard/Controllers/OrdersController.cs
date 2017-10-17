@@ -112,60 +112,6 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// Gets all orders
-        /// </summary>
-        /// <return>Returns the Models.ListOrderResponse response from the API call</return>
-        public Models.ListOrderResponse GetOrders()
-        {
-            Task<Models.ListOrderResponse> t = GetOrdersAsync();
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Gets all orders
-        /// </summary>
-        /// <return>Returns the Models.ListOrderResponse response from the API call</return>
-        public async Task<Models.ListOrderResponse> GetOrdersAsync()
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/orders");
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK" },
-                { "accept", "application/json" }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.ListOrderResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
         /// Creates a new Order
         /// </summary>
         /// <param name="body">Required parameter: Request for creating an order</param>
@@ -286,6 +232,100 @@ namespace MundiAPI.Standard.Controllers
             try
             {
                 return APIHelper.JsonDeserialize<Models.GetOrderResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Gets all orders
+        /// </summary>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="code">Optional parameter: Filter for order's code</param>
+        /// <param name="status">Optional parameter: Filter for order's status</param>
+        /// <param name="createdSince">Optional parameter: Filter for order's creation date start range</param>
+        /// <param name="createdUntil">Optional parameter: Filter for order's creation date end range</param>
+        /// <param name="customerId">Optional parameter: Filter for order's customer id</param>
+        /// <return>Returns the Models.ListOrderResponse response from the API call</return>
+        public Models.ListOrderResponse GetOrders(
+                int? page = null,
+                int? size = null,
+                string code = null,
+                string status = null,
+                DateTime? createdSince = null,
+                DateTime? createdUntil = null,
+                string customerId = null)
+        {
+            Task<Models.ListOrderResponse> t = GetOrdersAsync(page, size, code, status, createdSince, createdUntil, customerId);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Gets all orders
+        /// </summary>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="code">Optional parameter: Filter for order's code</param>
+        /// <param name="status">Optional parameter: Filter for order's status</param>
+        /// <param name="createdSince">Optional parameter: Filter for order's creation date start range</param>
+        /// <param name="createdUntil">Optional parameter: Filter for order's creation date end range</param>
+        /// <param name="customerId">Optional parameter: Filter for order's customer id</param>
+        /// <return>Returns the Models.ListOrderResponse response from the API call</return>
+        public async Task<Models.ListOrderResponse> GetOrdersAsync(
+                int? page = null,
+                int? size = null,
+                string code = null,
+                string status = null,
+                DateTime? createdSince = null,
+                DateTime? createdUntil = null,
+                string customerId = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/orders");
+
+            //process optional query parameters
+            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "page", page },
+                { "size", size },
+                { "code", code },
+                { "status", status },
+                { "created_since", (createdSince.HasValue) ? createdSince.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") : null },
+                { "created_until", (createdUntil.HasValue) ? createdUntil.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") : null },
+                { "customer_id", customerId }
+            },ArrayDeserializationFormat,ParameterSeparator);
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.ListOrderResponse>(_response.Body);
             }
             catch (Exception _ex)
             {

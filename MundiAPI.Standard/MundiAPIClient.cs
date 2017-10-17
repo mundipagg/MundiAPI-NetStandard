@@ -36,13 +36,13 @@ namespace MundiAPI.Standard
         }
 
         /// <summary>
-        /// Singleton access to Subscriptions controller
+        /// Singleton access to Invoices controller
         /// </summary>
-        public ISubscriptionsController Subscriptions
+        public IInvoicesController Invoices
         {
             get
             {
-                return SubscriptionsController.Instance;
+                return InvoicesController.Instance;
             }
         }
 
@@ -58,13 +58,13 @@ namespace MundiAPI.Standard
         }
 
         /// <summary>
-        /// Singleton access to Invoices controller
+        /// Singleton access to Subscriptions controller
         /// </summary>
-        public IInvoicesController Invoices
+        public ISubscriptionsController Subscriptions
         {
             get
             {
-                return InvoicesController.Instance;
+                return SubscriptionsController.Instance;
             }
         }
 

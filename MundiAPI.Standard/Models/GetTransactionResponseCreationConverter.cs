@@ -18,10 +18,10 @@ namespace MundiAPI.Standard.Models
             dic = new Dictionary<string, Type>()
             {
                 { "boleto",typeof(GetBoletoTransactionResponse)},
-                { "bank_transfer",typeof(GetBankTransferTransactionResponse)},
-                { "safetypay",typeof(GetSafetyPayTransactionResponse)},
                 { "credit_card",typeof(GetCreditCardTransactionResponse)},
                 { "voucher",typeof(GetVoucherTransactionResponse)},
+                { "bank_transfer",typeof(GetBankTransferTransactionResponse)},
+                { "safetypay",typeof(GetSafetyPayTransactionResponse)},
             };
         }
     }

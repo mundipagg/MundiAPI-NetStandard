@@ -91,9 +91,9 @@ MundiAPIClient client = new MundiAPIClient(basicAuthUserName, basicAuthPassword)
 
 * [ChargesController](#charges_controller)
 * [CustomersController](#customers_controller)
-* [SubscriptionsController](#subscriptions_controller)
-* [PlansController](#plans_controller)
 * [InvoicesController](#invoices_controller)
+* [PlansController](#plans_controller)
+* [SubscriptionsController](#subscriptions_controller)
 * [OrdersController](#orders_controller)
 * [TokensController](#tokens_controller)
 
@@ -155,24 +155,6 @@ Task<Models.GetChargeResponse> RetryCharge(string chargeId)
 string chargeId = "charge_id";
 
 Models.GetChargeResponse result = await charges.RetryCharge(chargeId);
-
-```
-
-
-### <a name="get_charges"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.ChargesController.GetCharges") GetCharges
-
-> Lists all charges
-
-
-```csharp
-Task<Models.ListChargesResponse> GetCharges()
-```
-
-#### Example Usage
-
-```csharp
-
-Models.ListChargesResponse result = await charges.GetCharges();
 
 ```
 
@@ -343,6 +325,57 @@ Models.GetChargeResponse result = await charges.UpdateChargeMetadata(chargeId, r
 ```
 
 
+### <a name="get_charges"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.ChargesController.GetCharges") GetCharges
+
+> Lists all charges
+
+
+```csharp
+Task<Models.ListChargesResponse> GetCharges(
+        int? page = null,
+        int? size = null,
+        string code = null,
+        string status = null,
+        string paymentMethod = null,
+        string customerId = null,
+        string orderId = null,
+        DateTime? createdSince = null,
+        DateTime? createdUntil = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
+| code |  ``` Optional ```  | Filter for charge's code |
+| status |  ``` Optional ```  | Filter for charge's status |
+| paymentMethod |  ``` Optional ```  | Filter for charge's payment method |
+| customerId |  ``` Optional ```  | Filter for charge's customer id |
+| orderId |  ``` Optional ```  | Filter for charge's order id |
+| createdSince |  ``` Optional ```  | Filter for the beginning of the range for charge's creation |
+| createdUntil |  ``` Optional ```  | Filter for the end of the range for charge's creation |
+
+
+#### Example Usage
+
+```csharp
+int? page = 132;
+int? size = 132;
+string code = "code";
+string status = "status";
+string paymentMethod = "payment_method";
+string customerId = "customer_id";
+string orderId = "order_id";
+DateTime? createdSince = DateTime.Now();
+DateTime? createdUntil = DateTime.Now();
+
+Models.ListChargesResponse result = await charges.GetCharges(page, size, code, status, paymentMethod, customerId, orderId, createdSince, createdUntil);
+
+```
+
+
 [Back to List of Controllers](#list_of_controllers)
 
 ## <a name="customers_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.CustomersController") CustomersController
@@ -354,58 +387,6 @@ The singleton instance of the ``` CustomersController ``` class can be accessed 
 ```csharp
 ICustomersController customers = client.Customers;
 ```
-
-### <a name="get_addresses"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.GetAddresses") GetAddresses
-
-> Gets all adressess from a customer
-
-
-```csharp
-Task<Models.ListAddressesResponse> GetAddresses(string customerId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| customerId |  ``` Required ```  | Customer id |
-
-
-#### Example Usage
-
-```csharp
-string customerId = "customer_id";
-
-Models.ListAddressesResponse result = await customers.GetAddresses(customerId);
-
-```
-
-
-### <a name="get_cards"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.GetCards") GetCards
-
-> Get all cards from a customer
-
-
-```csharp
-Task<Models.ListCardsResponse> GetCards(string customerId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| customerId |  ``` Required ```  | Customer Id |
-
-
-#### Example Usage
-
-```csharp
-string customerId = "customer_id";
-
-Models.ListCardsResponse result = await customers.GetCards(customerId);
-
-```
-
 
 ### <a name="create_customer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.CreateCustomer") CreateCustomer
 
@@ -459,36 +440,6 @@ Models.GetCustomerResponse result = await customers.GetCustomer(customerId);
 ```
 
 
-### <a name="update_address"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.UpdateAddress") UpdateAddress
-
-> Updates an address
-
-
-```csharp
-Task<Models.GetAddressResponse> UpdateAddress(string customerId, string addressId, Models.UpdateAddressRequest request)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| customerId |  ``` Required ```  | Customer Id |
-| addressId |  ``` Required ```  | Address Id |
-| request |  ``` Required ```  | Request for updating an address |
-
-
-#### Example Usage
-
-```csharp
-string customerId = "customer_id";
-string addressId = "address_id";
-var request = new Models.UpdateAddressRequest();
-
-Models.GetAddressResponse result = await customers.UpdateAddress(customerId, addressId, request);
-
-```
-
-
 ### <a name="update_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.UpdateCard") UpdateCard
 
 > Updates a card
@@ -515,6 +466,36 @@ string cardId = "card_id";
 var request = new Models.UpdateCardRequest();
 
 Models.GetCardResponse result = await customers.UpdateCard(customerId, cardId, request);
+
+```
+
+
+### <a name="update_address"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.UpdateAddress") UpdateAddress
+
+> Updates an address
+
+
+```csharp
+Task<Models.GetAddressResponse> UpdateAddress(string customerId, string addressId, Models.UpdateAddressRequest request)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| customerId |  ``` Required ```  | Customer Id |
+| addressId |  ``` Required ```  | Address Id |
+| request |  ``` Required ```  | Request for updating an address |
+
+
+#### Example Usage
+
+```csharp
+string customerId = "customer_id";
+string addressId = "address_id";
+var request = new Models.UpdateAddressRequest();
+
+Models.GetAddressResponse result = await customers.UpdateAddress(customerId, addressId, request);
 
 ```
 
@@ -741,32 +722,6 @@ Models.ListAccessTokensResponse result = await customers.DeleteAccessTokens(cust
 ```
 
 
-### <a name="get_access_tokens"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.GetAccessTokens") GetAccessTokens
-
-> Get all access tokens from a customer
-
-
-```csharp
-Task<Models.ListAccessTokensResponse> GetAccessTokens(string customerId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| customerId |  ``` Required ```  | Customer Id |
-
-
-#### Example Usage
-
-```csharp
-string customerId = "customer_id";
-
-Models.ListAccessTokensResponse result = await customers.GetAccessTokens(customerId);
-
-```
-
-
 ### <a name="get_customers"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.GetCustomers") GetCustomers
 
 > Get all Customers
@@ -777,7 +732,8 @@ Task<Models.ListCustomersResponse> GetCustomers(
         string name = null,
         string document = null,
         int? page = 1,
-        int? size = 10)
+        int? size = 10,
+        string email = null)
 ```
 
 #### Parameters
@@ -788,6 +744,7 @@ Task<Models.ListCustomersResponse> GetCustomers(
 | document |  ``` Optional ```  | Document of the Customer |
 | page |  ``` Optional ```  ``` DefaultValue ```  | Current page the the search |
 | size |  ``` Optional ```  ``` DefaultValue ```  | Quantity pages of the search |
+| email |  ``` Optional ```  | Customer's email |
 
 
 #### Example Usage
@@ -797,64 +754,9 @@ string name = "name";
 string document = "document";
 int? page = 1;
 int? size = 10;
+string email = "email";
 
-Models.ListCustomersResponse result = await customers.GetCustomers(name, document, page, size);
-
-```
-
-
-### <a name="delete_access_token"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.DeleteAccessToken") DeleteAccessToken
-
-> Delete a customer's access token
-
-
-```csharp
-Task<Models.GetAccessTokenResponse> DeleteAccessToken(string customerId, string tokenId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| customerId |  ``` Required ```  | Customer Id |
-| tokenId |  ``` Required ```  | Token Id |
-
-
-#### Example Usage
-
-```csharp
-string customerId = "customer_id";
-string tokenId = "token_id";
-
-Models.GetAccessTokenResponse result = await customers.DeleteAccessToken(customerId, tokenId);
-
-```
-
-
-### <a name="create_access_token"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.CreateAccessToken") CreateAccessToken
-
-> Creates a access token for a customer
-
-
-```csharp
-Task<Models.GetAccessTokenResponse> CreateAccessToken(string customerId, Models.CreateAccessTokenRequest request)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| customerId |  ``` Required ```  | Customer Id |
-| request |  ``` Required ```  | Request for creating a access token |
-
-
-#### Example Usage
-
-```csharp
-string customerId = "customer_id";
-var request = new Models.CreateAccessTokenRequest();
-
-Models.GetAccessTokenResponse result = await customers.CreateAccessToken(customerId, request);
+Models.ListCustomersResponse result = await customers.GetCustomers(name, document, page, size, email);
 
 ```
 
@@ -887,6 +789,62 @@ Models.GetAccessTokenResponse result = await customers.GetAccessToken(customerId
 ```
 
 
+### <a name="create_access_token"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.CreateAccessToken") CreateAccessToken
+
+> Creates a access token for a customer
+
+
+```csharp
+Task<Models.GetAccessTokenResponse> CreateAccessToken(string customerId, Models.CreateAccessTokenRequest request)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| customerId |  ``` Required ```  | Customer Id |
+| request |  ``` Required ```  | Request for creating a access token |
+
+
+#### Example Usage
+
+```csharp
+string customerId = "customer_id";
+var request = new Models.CreateAccessTokenRequest();
+
+Models.GetAccessTokenResponse result = await customers.CreateAccessToken(customerId, request);
+
+```
+
+
+### <a name="delete_access_token"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.DeleteAccessToken") DeleteAccessToken
+
+> Delete a customer's access token
+
+
+```csharp
+Task<Models.GetAccessTokenResponse> DeleteAccessToken(string customerId, string tokenId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| customerId |  ``` Required ```  | Customer Id |
+| tokenId |  ``` Required ```  | Token Id |
+
+
+#### Example Usage
+
+```csharp
+string customerId = "customer_id";
+string tokenId = "token_id";
+
+Models.GetAccessTokenResponse result = await customers.DeleteAccessToken(customerId, tokenId);
+
+```
+
+
 ### <a name="update_customer_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.UpdateCustomerMetadata") UpdateCustomerMetadata
 
 > Updates the metadata a customer
@@ -915,6 +873,547 @@ Models.GetCustomerResponse result = await customers.UpdateCustomerMetadata(custo
 ```
 
 
+### <a name="get_access_tokens"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.GetAccessTokens") GetAccessTokens
+
+> Get all access tokens from a customer
+
+
+```csharp
+Task<Models.ListAccessTokensResponse> GetAccessTokens(string customerId, int? page = null, int? size = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| customerId |  ``` Required ```  | Customer Id |
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
+
+
+#### Example Usage
+
+```csharp
+string customerId = "customer_id";
+int? page = 224;
+int? size = 224;
+
+Models.ListAccessTokensResponse result = await customers.GetAccessTokens(customerId, page, size);
+
+```
+
+
+### <a name="get_addresses"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.GetAddresses") GetAddresses
+
+> Gets all adressess from a customer
+
+
+```csharp
+Task<Models.ListAddressesResponse> GetAddresses(string customerId, int? page = null, int? size = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| customerId |  ``` Required ```  | Customer id |
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
+
+
+#### Example Usage
+
+```csharp
+string customerId = "customer_id";
+int? page = 224;
+int? size = 224;
+
+Models.ListAddressesResponse result = await customers.GetAddresses(customerId, page, size);
+
+```
+
+
+### <a name="get_cards"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.GetCards") GetCards
+
+> Get all cards from a customer
+
+
+```csharp
+Task<Models.ListCardsResponse> GetCards(string customerId, int? page = null, int? size = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| customerId |  ``` Required ```  | Customer Id |
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
+
+
+#### Example Usage
+
+```csharp
+string customerId = "customer_id";
+int? page = 224;
+int? size = 224;
+
+Models.ListCardsResponse result = await customers.GetCards(customerId, page, size);
+
+```
+
+
+[Back to List of Controllers](#list_of_controllers)
+
+## <a name="invoices_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.InvoicesController") InvoicesController
+
+### Get singleton instance
+
+The singleton instance of the ``` InvoicesController ``` class can be accessed from the API Client.
+
+```csharp
+IInvoicesController invoices = client.Invoices;
+```
+
+### <a name="get_invoice"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.InvoicesController.GetInvoice") GetInvoice
+
+> Gets an invoice
+
+
+```csharp
+Task<Models.GetInvoiceResponse> GetInvoice(string invoiceId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| invoiceId |  ``` Required ```  | Invoice Id |
+
+
+#### Example Usage
+
+```csharp
+string invoiceId = "invoice_id";
+
+Models.GetInvoiceResponse result = await invoices.GetInvoice(invoiceId);
+
+```
+
+
+### <a name="cancel_invoice"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.InvoicesController.CancelInvoice") CancelInvoice
+
+> Cancels an invoice
+
+
+```csharp
+Task<Models.GetInvoiceResponse> CancelInvoice(string invoiceId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| invoiceId |  ``` Required ```  | Invoice id |
+
+
+#### Example Usage
+
+```csharp
+string invoiceId = "invoice_id";
+
+Models.GetInvoiceResponse result = await invoices.CancelInvoice(invoiceId);
+
+```
+
+
+### <a name="update_invoice_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.InvoicesController.UpdateInvoiceMetadata") UpdateInvoiceMetadata
+
+> Updates the metadata from an invoice
+
+
+```csharp
+Task<Models.GetInvoiceResponse> UpdateInvoiceMetadata(string invoiceId, Models.UpdateMetadataRequest request)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| invoiceId |  ``` Required ```  | The invoice id |
+| request |  ``` Required ```  | Request for updating the invoice metadata |
+
+
+#### Example Usage
+
+```csharp
+string invoiceId = "invoice_id";
+var request = new Models.UpdateMetadataRequest();
+
+Models.GetInvoiceResponse result = await invoices.UpdateInvoiceMetadata(invoiceId, request);
+
+```
+
+
+### <a name="get_invoices"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.InvoicesController.GetInvoices") GetInvoices
+
+> Gets all invoices
+
+
+```csharp
+Task<Models.ListInvoicesResponse> GetInvoices(
+        int? page = null,
+        int? size = null,
+        string code = null,
+        string customerId = null,
+        string subscriptionId = null,
+        DateTime? createdSince = null,
+        DateTime? createdUntil = null,
+        string status = null,
+        DateTime? dueSince = null,
+        DateTime? dueUntil = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
+| code |  ``` Optional ```  | Filter for Invoice's code |
+| customerId |  ``` Optional ```  | Filter for Invoice's customer id |
+| subscriptionId |  ``` Optional ```  | Filter for Invoice's subscription id |
+| createdSince |  ``` Optional ```  | Filter for Invoice's creation date start range |
+| createdUntil |  ``` Optional ```  | Filter for Invoices creation date end range |
+| status |  ``` Optional ```  | Filter for Invoice's status |
+| dueSince |  ``` Optional ```  | Filter for Invoice's due date start range |
+| dueUntil |  ``` Optional ```  | Filter for Invoice's due date end range |
+
+
+#### Example Usage
+
+```csharp
+int? page = 224;
+int? size = 224;
+string code = "code";
+string customerId = "customer_id";
+string subscriptionId = "subscription_id";
+DateTime? createdSince = DateTime.Now();
+DateTime? createdUntil = DateTime.Now();
+string status = "status";
+DateTime? dueSince = DateTime.Now();
+DateTime? dueUntil = DateTime.Now();
+
+Models.ListInvoicesResponse result = await invoices.GetInvoices(page, size, code, customerId, subscriptionId, createdSince, createdUntil, status, dueSince, dueUntil);
+
+```
+
+
+[Back to List of Controllers](#list_of_controllers)
+
+## <a name="plans_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.PlansController") PlansController
+
+### Get singleton instance
+
+The singleton instance of the ``` PlansController ``` class can be accessed from the API Client.
+
+```csharp
+IPlansController plans = client.Plans;
+```
+
+### <a name="update_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.UpdatePlanItem") UpdatePlanItem
+
+> Updates a plan item
+
+
+```csharp
+Task<Models.GetPlanItemResponse> UpdatePlanItem(string planId, string planItemId, Models.UpdatePlanItemRequest body)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| planId |  ``` Required ```  | Plan id |
+| planItemId |  ``` Required ```  | Plan item id |
+| body |  ``` Required ```  | Request for updating the plan item |
+
+
+#### Example Usage
+
+```csharp
+string planId = "plan_id";
+string planItemId = "plan_item_id";
+var body = new Models.UpdatePlanItemRequest();
+
+Models.GetPlanItemResponse result = await plans.UpdatePlanItem(planId, planItemId, body);
+
+```
+
+
+### <a name="get_plan"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.GetPlan") GetPlan
+
+> Gets a plan
+
+
+```csharp
+Task<Models.GetPlanResponse> GetPlan(string planId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| planId |  ``` Required ```  | Plan id |
+
+
+#### Example Usage
+
+```csharp
+string planId = "plan_id";
+
+Models.GetPlanResponse result = await plans.GetPlan(planId);
+
+```
+
+
+### <a name="create_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.CreatePlanItem") CreatePlanItem
+
+> Adds a new item to a plan
+
+
+```csharp
+Task<Models.GetPlanItemResponse> CreatePlanItem(string planId, Models.CreatePlanItemRequest request)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| planId |  ``` Required ```  | Plan id |
+| request |  ``` Required ```  | Request for creating a plan item |
+
+
+#### Example Usage
+
+```csharp
+string planId = "plan_id";
+var request = new Models.CreatePlanItemRequest();
+
+Models.GetPlanItemResponse result = await plans.CreatePlanItem(planId, request);
+
+```
+
+
+### <a name="update_plan"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.UpdatePlan") UpdatePlan
+
+> Updates a plan
+
+
+```csharp
+Task<Models.GetPlanResponse> UpdatePlan(string planId, Models.UpdatePlanRequest request)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| planId |  ``` Required ```  | Plan id |
+| request |  ``` Required ```  | Request for updating a plan |
+
+
+#### Example Usage
+
+```csharp
+string planId = "plan_id";
+var request = new Models.UpdatePlanRequest();
+
+Models.GetPlanResponse result = await plans.UpdatePlan(planId, request);
+
+```
+
+
+### <a name="create_plan"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.CreatePlan") CreatePlan
+
+> Creates a new plan
+
+
+```csharp
+Task<Models.GetPlanResponse> CreatePlan(Models.CreatePlanRequest body)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| body |  ``` Required ```  | Request for creating a plan |
+
+
+#### Example Usage
+
+```csharp
+var body = new Models.CreatePlanRequest();
+
+Models.GetPlanResponse result = await plans.CreatePlan(body);
+
+```
+
+
+### <a name="delete_plan"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.DeletePlan") DeletePlan
+
+> Deletes a plan
+
+
+```csharp
+Task<Models.GetPlanResponse> DeletePlan(string planId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| planId |  ``` Required ```  | Plan id |
+
+
+#### Example Usage
+
+```csharp
+string planId = "plan_id";
+
+Models.GetPlanResponse result = await plans.DeletePlan(planId);
+
+```
+
+
+### <a name="get_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.GetPlanItem") GetPlanItem
+
+> Gets a plan item
+
+
+```csharp
+Task<Models.GetPlanItemResponse> GetPlanItem(string planId, string planItemId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| planId |  ``` Required ```  | Plan id |
+| planItemId |  ``` Required ```  | Plan item id |
+
+
+#### Example Usage
+
+```csharp
+string planId = "plan_id";
+string planItemId = "plan_item_id";
+
+Models.GetPlanItemResponse result = await plans.GetPlanItem(planId, planItemId);
+
+```
+
+
+### <a name="delete_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.DeletePlanItem") DeletePlanItem
+
+> Removes an item from a plan
+
+
+```csharp
+Task<Models.GetPlanItemResponse> DeletePlanItem(string planId, string planItemId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| planId |  ``` Required ```  | Plan id |
+| planItemId |  ``` Required ```  | Plan item id |
+
+
+#### Example Usage
+
+```csharp
+string planId = "plan_id";
+string planItemId = "plan_item_id";
+
+Models.GetPlanItemResponse result = await plans.DeletePlanItem(planId, planItemId);
+
+```
+
+
+### <a name="update_plan_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.UpdatePlanMetadata") UpdatePlanMetadata
+
+> Updates the metadata from a plan
+
+
+```csharp
+Task<Models.GetPlanResponse> UpdatePlanMetadata(string planId, Models.UpdateMetadataRequest request)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| planId |  ``` Required ```  | The plan id |
+| request |  ``` Required ```  | Request for updating the plan metadata |
+
+
+#### Example Usage
+
+```csharp
+string planId = "plan_id";
+var request = new Models.UpdateMetadataRequest();
+
+Models.GetPlanResponse result = await plans.UpdatePlanMetadata(planId, request);
+
+```
+
+
+### <a name="get_plans"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.GetPlans") GetPlans
+
+> Gets all plans
+
+
+```csharp
+Task<Models.ListPlansResponse> GetPlans(
+        int? page = null,
+        int? size = null,
+        string name = null,
+        string status = null,
+        string billingType = null,
+        DateTime? createdSince = null,
+        DateTime? createdUntil = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
+| name |  ``` Optional ```  | Filter for Plan's name |
+| status |  ``` Optional ```  | Filter for Plan's status |
+| billingType |  ``` Optional ```  | Filter for plan's billing type |
+| createdSince |  ``` Optional ```  | Filter for plan's creation date start range |
+| createdUntil |  ``` Optional ```  | Filter for plan's creation date end range |
+
+
+#### Example Usage
+
+```csharp
+int? page = 224;
+int? size = 224;
+string name = "name";
+string status = "status";
+string billingType = "billing_type";
+DateTime? createdSince = DateTime.Now();
+DateTime? createdUntil = DateTime.Now();
+
+Models.ListPlansResponse result = await plans.GetPlans(page, size, name, status, billingType, createdSince, createdUntil);
+
+```
+
+
 [Back to List of Controllers](#list_of_controllers)
 
 ## <a name="subscriptions_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.SubscriptionsController") SubscriptionsController
@@ -927,30 +1426,32 @@ The singleton instance of the ``` SubscriptionsController ``` class can be acces
 ISubscriptionsController subscriptions = client.Subscriptions;
 ```
 
-### <a name="update_subscription_billing_date"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionBillingDate") UpdateSubscriptionBillingDate
+### <a name="update_subscription_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionItem") UpdateSubscriptionItem
 
-> Updates the billing date from a subscription
+> Updates a subscription item
 
 
 ```csharp
-Task<Models.GetSubscriptionResponse> UpdateSubscriptionBillingDate(string subscriptionId, Models.UpdateSubscriptionBillingDateRequest request)
+Task<Models.GetSubscriptionItemResponse> UpdateSubscriptionItem(string subscriptionId, string itemId, Models.UpdateSubscriptionItemRequest body)
 ```
 
 #### Parameters
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | The subscription id |
-| request |  ``` Required ```  | Request for updating the subscription billing date |
+| subscriptionId |  ``` Required ```  | Subscription Id |
+| itemId |  ``` Required ```  | Item id |
+| body |  ``` Required ```  | Request for updating a subscription item |
 
 
 #### Example Usage
 
 ```csharp
 string subscriptionId = "subscription_id";
-var request = new Models.UpdateSubscriptionBillingDateRequest();
+string itemId = "item_id";
+var body = new Models.UpdateSubscriptionItemRequest();
 
-Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionBillingDate(subscriptionId, request);
+Models.GetSubscriptionItemResponse result = await subscriptions.UpdateSubscriptionItem(subscriptionId, itemId, body);
 
 ```
 
@@ -985,50 +1486,30 @@ Models.GetUsageResponse result = await subscriptions.CreateUsage(subscriptionId,
 ```
 
 
-### <a name="update_subscription_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionItem") UpdateSubscriptionItem
+### <a name="update_subscription_billing_date"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionBillingDate") UpdateSubscriptionBillingDate
 
-> Updates a subscription item
+> Updates the billing date from a subscription
 
 
 ```csharp
-Task<Models.GetSubscriptionItemResponse> UpdateSubscriptionItem(string subscriptionId, string itemId, Models.UpdateSubscriptionItemRequest body)
+Task<Models.GetSubscriptionResponse> UpdateSubscriptionBillingDate(string subscriptionId, Models.UpdateSubscriptionBillingDateRequest request)
 ```
 
 #### Parameters
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription Id |
-| itemId |  ``` Required ```  | Item id |
-| body |  ``` Required ```  | Request for updating a subscription item |
+| subscriptionId |  ``` Required ```  | The subscription id |
+| request |  ``` Required ```  | Request for updating the subscription billing date |
 
 
 #### Example Usage
 
 ```csharp
 string subscriptionId = "subscription_id";
-string itemId = "item_id";
-var body = new Models.UpdateSubscriptionItemRequest();
+var request = new Models.UpdateSubscriptionBillingDateRequest();
 
-Models.GetSubscriptionItemResponse result = await subscriptions.UpdateSubscriptionItem(subscriptionId, itemId, body);
-
-```
-
-
-### <a name="get_subscriptions"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetSubscriptions") GetSubscriptions
-
-> Gets all subscriptions
-
-
-```csharp
-Task<Models.ListSubscriptionsResponse> GetSubscriptions()
-```
-
-#### Example Usage
-
-```csharp
-
-Models.ListSubscriptionsResponse result = await subscriptions.GetSubscriptions();
+Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionBillingDate(subscriptionId, request);
 
 ```
 
@@ -1197,64 +1678,6 @@ Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionPa
 ```
 
 
-### <a name="get_usages"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetUsages") GetUsages
-
-> Lists all usages from a subscription item
-
-
-```csharp
-Task<Models.ListUsagesResponse> GetUsages(string subscriptionId, string itemId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | The subscription id |
-| itemId |  ``` Required ```  | The subscription item id |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string itemId = "item_id";
-
-Models.ListUsagesResponse result = await subscriptions.GetUsages(subscriptionId, itemId);
-
-```
-
-
-### <a name="delete_usage"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.DeleteUsage") DeleteUsage
-
-> Deletes a usage
-
-
-```csharp
-Task<Models.GetUsageResponse> DeleteUsage(string subscriptionId, string itemId, string usageId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | The subscription id |
-| itemId |  ``` Required ```  | The subscription item id |
-| usageId |  ``` Required ```  | The usage id |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string itemId = "item_id";
-string usageId = "usage_id";
-
-Models.GetUsageResponse result = await subscriptions.DeleteUsage(subscriptionId, itemId, usageId);
-
-```
-
-
 ### <a name="delete_discount"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.DeleteDiscount") DeleteDiscount
 
 > Deletes a discount
@@ -1339,6 +1762,72 @@ Models.GetSubscriptionItemResponse result = await subscriptions.DeleteSubscripti
 ```
 
 
+### <a name="delete_usage"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.DeleteUsage") DeleteUsage
+
+> Deletes a usage
+
+
+```csharp
+Task<Models.GetUsageResponse> DeleteUsage(string subscriptionId, string itemId, string usageId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | The subscription id |
+| itemId |  ``` Required ```  | The subscription item id |
+| usageId |  ``` Required ```  | The usage id |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+string itemId = "item_id";
+string usageId = "usage_id";
+
+Models.GetUsageResponse result = await subscriptions.DeleteUsage(subscriptionId, itemId, usageId);
+
+```
+
+
+### <a name="get_usages"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetUsages") GetUsages
+
+> Lists all usages from a subscription item
+
+
+```csharp
+Task<Models.ListUsagesResponse> GetUsages(
+        string subscriptionId,
+        string itemId,
+        int? page = null,
+        int? size = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | The subscription id |
+| itemId |  ``` Required ```  | The subscription item id |
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+string itemId = "item_id";
+int? page = 224;
+int? size = 224;
+
+Models.ListUsagesResponse result = await subscriptions.GetUsages(subscriptionId, itemId, page, size);
+
+```
+
+
 ### <a name="update_subscription_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionMetadata") UpdateSubscriptionMetadata
 
 > Updates the metadata from a subscription
@@ -1367,416 +1856,62 @@ Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionMe
 ```
 
 
-[Back to List of Controllers](#list_of_controllers)
+### <a name="get_subscriptions"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetSubscriptions") GetSubscriptions
 
-## <a name="plans_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.PlansController") PlansController
-
-### Get singleton instance
-
-The singleton instance of the ``` PlansController ``` class can be accessed from the API Client.
-
-```csharp
-IPlansController plans = client.Plans;
-```
-
-### <a name="update_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.UpdatePlanItem") UpdatePlanItem
-
-> Updates a plan item
+> Gets all subscriptions
 
 
 ```csharp
-Task<Models.GetPlanItemResponse> UpdatePlanItem(string planId, string planItemId, Models.UpdatePlanItemRequest body)
+Task<Models.ListSubscriptionsResponse> GetSubscriptions(
+        int? page = null,
+        int? size = null,
+        string code = null,
+        string billingType = null,
+        string customerId = null,
+        string planId = null,
+        string cardId = null,
+        string status = null,
+        DateTime? nextBillingSince = null,
+        DateTime? nextBillingUntil = null,
+        DateTime? createdSince = null,
+        DateTime? createdUntil = null)
 ```
 
 #### Parameters
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| planId |  ``` Required ```  | Plan id |
-| planItemId |  ``` Required ```  | Plan item id |
-| body |  ``` Required ```  | Request for updating the plan item |
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
+| code |  ``` Optional ```  | Filter for subscription's code |
+| billingType |  ``` Optional ```  | Filter for subscription's billing type |
+| customerId |  ``` Optional ```  | Filter for subscription's customer id |
+| planId |  ``` Optional ```  | Filter for subscription's plan id |
+| cardId |  ``` Optional ```  | Filter for subscription's card id |
+| status |  ``` Optional ```  | Filter for subscription's status |
+| nextBillingSince |  ``` Optional ```  | Filter for subscription's next billing date start range |
+| nextBillingUntil |  ``` Optional ```  | Filter for subscription's next billing date end range |
+| createdSince |  ``` Optional ```  | Filter for subscription's creation date start range |
+| createdUntil |  ``` Optional ```  | Filter for subscriptions creation date end range |
 
 
 #### Example Usage
 
 ```csharp
+int? page = 224;
+int? size = 224;
+string code = "code";
+string billingType = "billing_type";
+string customerId = "customer_id";
 string planId = "plan_id";
-string planItemId = "plan_item_id";
-var body = new Models.UpdatePlanItemRequest();
-
-Models.GetPlanItemResponse result = await plans.UpdatePlanItem(planId, planItemId, body);
-
-```
-
-
-### <a name="get_plan"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.GetPlan") GetPlan
-
-> Gets a plan
-
-
-```csharp
-Task<Models.GetPlanResponse> GetPlan(string planId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| planId |  ``` Required ```  | Plan id |
-
-
-#### Example Usage
-
-```csharp
-string planId = "plan_id";
-
-Models.GetPlanResponse result = await plans.GetPlan(planId);
-
-```
-
-
-### <a name="create_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.CreatePlanItem") CreatePlanItem
-
-> Adds a new item to a plan
-
-
-```csharp
-Task<Models.GetPlanItemResponse> CreatePlanItem(string planId, Models.CreatePlanItemRequest request)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| planId |  ``` Required ```  | Plan id |
-| request |  ``` Required ```  | Request for creating a plan item |
-
-
-#### Example Usage
-
-```csharp
-string planId = "plan_id";
-var request = new Models.CreatePlanItemRequest();
-
-Models.GetPlanItemResponse result = await plans.CreatePlanItem(planId, request);
-
-```
-
-
-### <a name="update_plan"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.UpdatePlan") UpdatePlan
-
-> Updates a plan
-
-
-```csharp
-Task<Models.GetPlanResponse> UpdatePlan(string planId, Models.UpdatePlanRequest request)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| planId |  ``` Required ```  | Plan id |
-| request |  ``` Required ```  | Request for updating a plan |
-
-
-#### Example Usage
-
-```csharp
-string planId = "plan_id";
-var request = new Models.UpdatePlanRequest();
-
-Models.GetPlanResponse result = await plans.UpdatePlan(planId, request);
-
-```
-
-
-### <a name="create_plan"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.CreatePlan") CreatePlan
-
-> Creates a new plan
-
-
-```csharp
-Task<Models.GetPlanResponse> CreatePlan(Models.CreatePlanRequest body)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| body |  ``` Required ```  | Request for creating a plan |
-
-
-#### Example Usage
-
-```csharp
-var body = new Models.CreatePlanRequest();
-
-Models.GetPlanResponse result = await plans.CreatePlan(body);
-
-```
-
-
-### <a name="get_plans"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.GetPlans") GetPlans
-
-> Gets all plans
-
-
-```csharp
-Task<Models.ListPlansResponse> GetPlans()
-```
-
-#### Example Usage
-
-```csharp
-
-Models.ListPlansResponse result = await plans.GetPlans();
-
-```
-
-
-### <a name="delete_plan"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.DeletePlan") DeletePlan
-
-> Deletes a plan
-
-
-```csharp
-Task<Models.GetPlanResponse> DeletePlan(string planId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| planId |  ``` Required ```  | Plan id |
-
-
-#### Example Usage
-
-```csharp
-string planId = "plan_id";
-
-Models.GetPlanResponse result = await plans.DeletePlan(planId);
-
-```
-
-
-### <a name="get_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.GetPlanItem") GetPlanItem
-
-> Gets a plan item
-
-
-```csharp
-Task<Models.GetPlanItemResponse> GetPlanItem(string planId, string planItemId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| planId |  ``` Required ```  | Plan id |
-| planItemId |  ``` Required ```  | Plan item id |
-
-
-#### Example Usage
-
-```csharp
-string planId = "plan_id";
-string planItemId = "plan_item_id";
-
-Models.GetPlanItemResponse result = await plans.GetPlanItem(planId, planItemId);
-
-```
-
-
-### <a name="delete_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.DeletePlanItem") DeletePlanItem
-
-> Removes an item from a plan
-
-
-```csharp
-Task<Models.GetPlanItemResponse> DeletePlanItem(string planId, string planItemId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| planId |  ``` Required ```  | Plan id |
-| planItemId |  ``` Required ```  | Plan item id |
-
-
-#### Example Usage
-
-```csharp
-string planId = "plan_id";
-string planItemId = "plan_item_id";
-
-Models.GetPlanItemResponse result = await plans.DeletePlanItem(planId, planItemId);
-
-```
-
-
-### <a name="update_plan_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.UpdatePlanMetadata") UpdatePlanMetadata
-
-> Updates the metadata from a plan
-
-
-```csharp
-Task<Models.GetPlanResponse> UpdatePlanMetadata(string planId, Models.UpdateMetadataRequest request)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| planId |  ``` Required ```  | The plan id |
-| request |  ``` Required ```  | Request for updating the plan metadata |
-
-
-#### Example Usage
-
-```csharp
-string planId = "plan_id";
-var request = new Models.UpdateMetadataRequest();
-
-Models.GetPlanResponse result = await plans.UpdatePlanMetadata(planId, request);
-
-```
-
-
-[Back to List of Controllers](#list_of_controllers)
-
-## <a name="invoices_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.InvoicesController") InvoicesController
-
-### Get singleton instance
-
-The singleton instance of the ``` InvoicesController ``` class can be accessed from the API Client.
-
-```csharp
-IInvoicesController invoices = client.Invoices;
-```
-
-### <a name="cancel_invoice"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.InvoicesController.CancelInvoice") CancelInvoice
-
-> Cancels an invoice
-
-
-```csharp
-Task<Models.GetInvoiceResponse> CancelInvoice(string invoiceId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| invoiceId |  ``` Required ```  | Invoice id |
-
-
-#### Example Usage
-
-```csharp
-string invoiceId = "invoice_id";
-
-Models.GetInvoiceResponse result = await invoices.CancelInvoice(invoiceId);
-
-```
-
-
-### <a name="get_last_invoice_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.InvoicesController.GetLastInvoiceCharge") GetLastInvoiceCharge
-
-> Gets the last charge from an invoice
-
-
-```csharp
-Task<Models.GetChargeResponse> GetLastInvoiceCharge(string invoiceId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| invoiceId |  ``` Required ```  | Invoice id |
-
-
-#### Example Usage
-
-```csharp
-string invoiceId = "invoice_id";
-
-Models.GetChargeResponse result = await invoices.GetLastInvoiceCharge(invoiceId);
-
-```
-
-
-### <a name="get_invoices"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.InvoicesController.GetInvoices") GetInvoices
-
-> Gets all invoices
-
-
-```csharp
-Task<Models.ListInvoicesResponse> GetInvoices()
-```
-
-#### Example Usage
-
-```csharp
-
-Models.ListInvoicesResponse result = await invoices.GetInvoices();
-
-```
-
-
-### <a name="get_invoice"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.InvoicesController.GetInvoice") GetInvoice
-
-> Gets an invoice
-
-
-```csharp
-Task<Models.GetInvoiceResponse> GetInvoice(string invoiceId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| invoiceId |  ``` Required ```  | Invoice Id |
-
-
-#### Example Usage
-
-```csharp
-string invoiceId = "invoice_id";
-
-Models.GetInvoiceResponse result = await invoices.GetInvoice(invoiceId);
-
-```
-
-
-### <a name="update_invoice_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.InvoicesController.UpdateInvoiceMetadata") UpdateInvoiceMetadata
-
-> Updates the metadata from an invoice
-
-
-```csharp
-Task<Models.GetInvoiceResponse> UpdateInvoiceMetadata(string invoiceId, Models.UpdateMetadataRequest request)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| invoiceId |  ``` Required ```  | The invoice id |
-| request |  ``` Required ```  | Request for updating the invoice metadata |
-
-
-#### Example Usage
-
-```csharp
-string invoiceId = "invoice_id";
-var request = new Models.UpdateMetadataRequest();
-
-Models.GetInvoiceResponse result = await invoices.UpdateInvoiceMetadata(invoiceId, request);
+string cardId = "card_id";
+string status = "status";
+DateTime? nextBillingSince = DateTime.Now();
+DateTime? nextBillingUntil = DateTime.Now();
+DateTime? createdSince = DateTime.Now();
+DateTime? createdUntil = DateTime.Now();
+
+Models.ListSubscriptionsResponse result = await subscriptions.GetSubscriptions(page, size, code, billingType, customerId, planId, cardId, status, nextBillingSince, nextBillingUntil, createdSince, createdUntil);
 
 ```
 
@@ -1815,24 +1950,6 @@ Task<Models.GetOrderResponse> GetOrder(string orderId)
 string orderId = "order_id";
 
 Models.GetOrderResponse result = await orders.GetOrder(orderId);
-
-```
-
-
-### <a name="get_orders"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.GetOrders") GetOrders
-
-> Gets all orders
-
-
-```csharp
-Task<Models.ListOrderResponse> GetOrders()
-```
-
-#### Example Usage
-
-```csharp
-
-Models.ListOrderResponse result = await orders.GetOrders();
 
 ```
 
@@ -1887,6 +2004,51 @@ string orderId = "order_id";
 var request = new Models.UpdateMetadataRequest();
 
 Models.GetOrderResponse result = await orders.UpdateOrderMetadata(orderId, request);
+
+```
+
+
+### <a name="get_orders"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.GetOrders") GetOrders
+
+> Gets all orders
+
+
+```csharp
+Task<Models.ListOrderResponse> GetOrders(
+        int? page = null,
+        int? size = null,
+        string code = null,
+        string status = null,
+        DateTime? createdSince = null,
+        DateTime? createdUntil = null,
+        string customerId = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
+| code |  ``` Optional ```  | Filter for order's code |
+| status |  ``` Optional ```  | Filter for order's status |
+| createdSince |  ``` Optional ```  | Filter for order's creation date start range |
+| createdUntil |  ``` Optional ```  | Filter for order's creation date end range |
+| customerId |  ``` Optional ```  | Filter for order's customer id |
+
+
+#### Example Usage
+
+```csharp
+int? page = 224;
+int? size = 224;
+string code = "code";
+string status = "status";
+DateTime? createdSince = DateTime.Now();
+DateTime? createdUntil = DateTime.Now();
+string customerId = "customer_id";
+
+Models.ListOrderResponse result = await orders.GetOrders(page, size, code, status, createdSince, createdUntil, customerId);
 
 ```
 
