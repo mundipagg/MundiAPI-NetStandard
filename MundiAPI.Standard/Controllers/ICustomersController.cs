@@ -21,34 +21,6 @@ namespace MundiAPI.Standard.Controllers
     public partial interface ICustomersController
     {
         /// <summary>
-        /// Gets all adressess from a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer id</param>
-        /// <return>Returns the Models.ListAddressesResponse response from the API call</return>
-        Models.ListAddressesResponse GetAddresses(string customerId);
-
-        /// <summary>
-        /// Gets all adressess from a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer id</param>
-        /// <return>Returns the Models.ListAddressesResponse response from the API call</return>
-        Task<Models.ListAddressesResponse> GetAddressesAsync(string customerId);
-
-        /// <summary>
-        /// Get all cards from a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <return>Returns the Models.ListCardsResponse response from the API call</return>
-        Models.ListCardsResponse GetCards(string customerId);
-
-        /// <summary>
-        /// Get all cards from a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <return>Returns the Models.ListCardsResponse response from the API call</return>
-        Task<Models.ListCardsResponse> GetCardsAsync(string customerId);
-
-        /// <summary>
         /// Creates a new customer
         /// </summary>
         /// <param name="request">Required parameter: Request for creating a customer</param>
@@ -77,24 +49,6 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.GetCustomerResponse> GetCustomerAsync(string customerId);
 
         /// <summary>
-        /// Updates an address
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="addressId">Required parameter: Address Id</param>
-        /// <param name="request">Required parameter: Request for updating an address</param>
-        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
-        Models.GetAddressResponse UpdateAddress(string customerId, string addressId, Models.UpdateAddressRequest request);
-
-        /// <summary>
-        /// Updates an address
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="addressId">Required parameter: Address Id</param>
-        /// <param name="request">Required parameter: Request for updating an address</param>
-        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
-        Task<Models.GetAddressResponse> UpdateAddressAsync(string customerId, string addressId, Models.UpdateAddressRequest request);
-
-        /// <summary>
         /// Updates a card
         /// </summary>
         /// <param name="customerId">Required parameter: Customer Id</param>
@@ -111,6 +65,24 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="request">Required parameter: Request for updating a card</param>
         /// <return>Returns the Models.GetCardResponse response from the API call</return>
         Task<Models.GetCardResponse> UpdateCardAsync(string customerId, string cardId, Models.UpdateCardRequest request);
+
+        /// <summary>
+        /// Updates an address
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="addressId">Required parameter: Address Id</param>
+        /// <param name="request">Required parameter: Request for updating an address</param>
+        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
+        Models.GetAddressResponse UpdateAddress(string customerId, string addressId, Models.UpdateAddressRequest request);
+
+        /// <summary>
+        /// Updates an address
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="addressId">Required parameter: Address Id</param>
+        /// <param name="request">Required parameter: Request for updating an address</param>
+        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
+        Task<Models.GetAddressResponse> UpdateAddressAsync(string customerId, string addressId, Models.UpdateAddressRequest request);
 
         /// <summary>
         /// Get a customer's address
@@ -239,32 +211,20 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.ListAccessTokensResponse> DeleteAccessTokensAsync(string customerId);
 
         /// <summary>
-        /// Get all access tokens from a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <return>Returns the Models.ListAccessTokensResponse response from the API call</return>
-        Models.ListAccessTokensResponse GetAccessTokens(string customerId);
-
-        /// <summary>
-        /// Get all access tokens from a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <return>Returns the Models.ListAccessTokensResponse response from the API call</return>
-        Task<Models.ListAccessTokensResponse> GetAccessTokensAsync(string customerId);
-
-        /// <summary>
         /// Get all Customers
         /// </summary>
         /// <param name="name">Optional parameter: Name of the Customer</param>
         /// <param name="document">Optional parameter: Document of the Customer</param>
         /// <param name="page">Optional parameter: Current page the the search</param>
         /// <param name="size">Optional parameter: Quantity pages of the search</param>
+        /// <param name="email">Optional parameter: Customer's email</param>
         /// <return>Returns the Models.ListCustomersResponse response from the API call</return>
         Models.ListCustomersResponse GetCustomers(
                 string name = null,
                 string document = null,
                 int? page = 1,
-                int? size = 10);
+                int? size = 10,
+                string email = null);
 
         /// <summary>
         /// Get all Customers
@@ -273,44 +233,14 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="document">Optional parameter: Document of the Customer</param>
         /// <param name="page">Optional parameter: Current page the the search</param>
         /// <param name="size">Optional parameter: Quantity pages of the search</param>
+        /// <param name="email">Optional parameter: Customer's email</param>
         /// <return>Returns the Models.ListCustomersResponse response from the API call</return>
         Task<Models.ListCustomersResponse> GetCustomersAsync(
                 string name = null,
                 string document = null,
                 int? page = 1,
-                int? size = 10);
-
-        /// <summary>
-        /// Delete a customer's access token
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="tokenId">Required parameter: Token Id</param>
-        /// <return>Returns the Models.GetAccessTokenResponse response from the API call</return>
-        Models.GetAccessTokenResponse DeleteAccessToken(string customerId, string tokenId);
-
-        /// <summary>
-        /// Delete a customer's access token
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="tokenId">Required parameter: Token Id</param>
-        /// <return>Returns the Models.GetAccessTokenResponse response from the API call</return>
-        Task<Models.GetAccessTokenResponse> DeleteAccessTokenAsync(string customerId, string tokenId);
-
-        /// <summary>
-        /// Creates a access token for a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="request">Required parameter: Request for creating a access token</param>
-        /// <return>Returns the Models.GetAccessTokenResponse response from the API call</return>
-        Models.GetAccessTokenResponse CreateAccessToken(string customerId, Models.CreateAccessTokenRequest request);
-
-        /// <summary>
-        /// Creates a access token for a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="request">Required parameter: Request for creating a access token</param>
-        /// <return>Returns the Models.GetAccessTokenResponse response from the API call</return>
-        Task<Models.GetAccessTokenResponse> CreateAccessTokenAsync(string customerId, Models.CreateAccessTokenRequest request);
+                int? size = 10,
+                string email = null);
 
         /// <summary>
         /// Get a Customer's access token
@@ -329,6 +259,38 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.GetAccessTokenResponse> GetAccessTokenAsync(string customerId, string tokenId);
 
         /// <summary>
+        /// Creates a access token for a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="request">Required parameter: Request for creating a access token</param>
+        /// <return>Returns the Models.GetAccessTokenResponse response from the API call</return>
+        Models.GetAccessTokenResponse CreateAccessToken(string customerId, Models.CreateAccessTokenRequest request);
+
+        /// <summary>
+        /// Creates a access token for a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="request">Required parameter: Request for creating a access token</param>
+        /// <return>Returns the Models.GetAccessTokenResponse response from the API call</return>
+        Task<Models.GetAccessTokenResponse> CreateAccessTokenAsync(string customerId, Models.CreateAccessTokenRequest request);
+
+        /// <summary>
+        /// Delete a customer's access token
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="tokenId">Required parameter: Token Id</param>
+        /// <return>Returns the Models.GetAccessTokenResponse response from the API call</return>
+        Models.GetAccessTokenResponse DeleteAccessToken(string customerId, string tokenId);
+
+        /// <summary>
+        /// Delete a customer's access token
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="tokenId">Required parameter: Token Id</param>
+        /// <return>Returns the Models.GetAccessTokenResponse response from the API call</return>
+        Task<Models.GetAccessTokenResponse> DeleteAccessTokenAsync(string customerId, string tokenId);
+
+        /// <summary>
         /// Updates the metadata a customer
         /// </summary>
         /// <param name="customerId">Required parameter: The customer id</param>
@@ -343,6 +305,60 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="request">Required parameter: Request for updating the customer metadata</param>
         /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
         Task<Models.GetCustomerResponse> UpdateCustomerMetadataAsync(string customerId, Models.UpdateMetadataRequest request);
+
+        /// <summary>
+        /// Get all access tokens from a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.ListAccessTokensResponse response from the API call</return>
+        Models.ListAccessTokensResponse GetAccessTokens(string customerId, int? page = null, int? size = null);
+
+        /// <summary>
+        /// Get all access tokens from a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.ListAccessTokensResponse response from the API call</return>
+        Task<Models.ListAccessTokensResponse> GetAccessTokensAsync(string customerId, int? page = null, int? size = null);
+
+        /// <summary>
+        /// Gets all adressess from a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.ListAddressesResponse response from the API call</return>
+        Models.ListAddressesResponse GetAddresses(string customerId, int? page = null, int? size = null);
+
+        /// <summary>
+        /// Gets all adressess from a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.ListAddressesResponse response from the API call</return>
+        Task<Models.ListAddressesResponse> GetAddressesAsync(string customerId, int? page = null, int? size = null);
+
+        /// <summary>
+        /// Get all cards from a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.ListCardsResponse response from the API call</return>
+        Models.ListCardsResponse GetCards(string customerId, int? page = null, int? size = null);
+
+        /// <summary>
+        /// Get all cards from a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.ListCardsResponse response from the API call</return>
+        Task<Models.ListCardsResponse> GetCardsAsync(string customerId, int? page = null, int? size = null);
 
     }
 } 

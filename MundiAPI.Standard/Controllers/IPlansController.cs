@@ -99,18 +99,6 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.GetPlanResponse> CreatePlanAsync(Models.CreatePlanRequest body);
 
         /// <summary>
-        /// Gets all plans
-        /// </summary>
-        /// <return>Returns the Models.ListPlansResponse response from the API call</return>
-        Models.ListPlansResponse GetPlans();
-
-        /// <summary>
-        /// Gets all plans
-        /// </summary>
-        /// <return>Returns the Models.ListPlansResponse response from the API call</return>
-        Task<Models.ListPlansResponse> GetPlansAsync();
-
-        /// <summary>
         /// Deletes a plan
         /// </summary>
         /// <param name="planId">Required parameter: Plan id</param>
@@ -171,6 +159,46 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="request">Required parameter: Request for updating the plan metadata</param>
         /// <return>Returns the Models.GetPlanResponse response from the API call</return>
         Task<Models.GetPlanResponse> UpdatePlanMetadataAsync(string planId, Models.UpdateMetadataRequest request);
+
+        /// <summary>
+        /// Gets all plans
+        /// </summary>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="name">Optional parameter: Filter for Plan's name</param>
+        /// <param name="status">Optional parameter: Filter for Plan's status</param>
+        /// <param name="billingType">Optional parameter: Filter for plan's billing type</param>
+        /// <param name="createdSince">Optional parameter: Filter for plan's creation date start range</param>
+        /// <param name="createdUntil">Optional parameter: Filter for plan's creation date end range</param>
+        /// <return>Returns the Models.ListPlansResponse response from the API call</return>
+        Models.ListPlansResponse GetPlans(
+                int? page = null,
+                int? size = null,
+                string name = null,
+                string status = null,
+                string billingType = null,
+                DateTime? createdSince = null,
+                DateTime? createdUntil = null);
+
+        /// <summary>
+        /// Gets all plans
+        /// </summary>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="name">Optional parameter: Filter for Plan's name</param>
+        /// <param name="status">Optional parameter: Filter for Plan's status</param>
+        /// <param name="billingType">Optional parameter: Filter for plan's billing type</param>
+        /// <param name="createdSince">Optional parameter: Filter for plan's creation date start range</param>
+        /// <param name="createdUntil">Optional parameter: Filter for plan's creation date end range</param>
+        /// <return>Returns the Models.ListPlansResponse response from the API call</return>
+        Task<Models.ListPlansResponse> GetPlansAsync(
+                int? page = null,
+                int? size = null,
+                string name = null,
+                string status = null,
+                string billingType = null,
+                DateTime? createdSince = null,
+                DateTime? createdUntil = null);
 
     }
 } 

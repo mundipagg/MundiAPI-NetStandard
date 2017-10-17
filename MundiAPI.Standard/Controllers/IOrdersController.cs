@@ -35,18 +35,6 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.GetOrderResponse> GetOrderAsync(string orderId);
 
         /// <summary>
-        /// Gets all orders
-        /// </summary>
-        /// <return>Returns the Models.ListOrderResponse response from the API call</return>
-        Models.ListOrderResponse GetOrders();
-
-        /// <summary>
-        /// Gets all orders
-        /// </summary>
-        /// <return>Returns the Models.ListOrderResponse response from the API call</return>
-        Task<Models.ListOrderResponse> GetOrdersAsync();
-
-        /// <summary>
         /// Creates a new Order
         /// </summary>
         /// <param name="body">Required parameter: Request for creating an order</param>
@@ -75,6 +63,46 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="request">Required parameter: Request for updating the order metadata</param>
         /// <return>Returns the Models.GetOrderResponse response from the API call</return>
         Task<Models.GetOrderResponse> UpdateOrderMetadataAsync(string orderId, Models.UpdateMetadataRequest request);
+
+        /// <summary>
+        /// Gets all orders
+        /// </summary>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="code">Optional parameter: Filter for order's code</param>
+        /// <param name="status">Optional parameter: Filter for order's status</param>
+        /// <param name="createdSince">Optional parameter: Filter for order's creation date start range</param>
+        /// <param name="createdUntil">Optional parameter: Filter for order's creation date end range</param>
+        /// <param name="customerId">Optional parameter: Filter for order's customer id</param>
+        /// <return>Returns the Models.ListOrderResponse response from the API call</return>
+        Models.ListOrderResponse GetOrders(
+                int? page = null,
+                int? size = null,
+                string code = null,
+                string status = null,
+                DateTime? createdSince = null,
+                DateTime? createdUntil = null,
+                string customerId = null);
+
+        /// <summary>
+        /// Gets all orders
+        /// </summary>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="code">Optional parameter: Filter for order's code</param>
+        /// <param name="status">Optional parameter: Filter for order's status</param>
+        /// <param name="createdSince">Optional parameter: Filter for order's creation date start range</param>
+        /// <param name="createdUntil">Optional parameter: Filter for order's creation date end range</param>
+        /// <param name="customerId">Optional parameter: Filter for order's customer id</param>
+        /// <return>Returns the Models.ListOrderResponse response from the API call</return>
+        Task<Models.ListOrderResponse> GetOrdersAsync(
+                int? page = null,
+                int? size = null,
+                string code = null,
+                string status = null,
+                DateTime? createdSince = null,
+                DateTime? createdUntil = null,
+                string customerId = null);
 
     }
 } 

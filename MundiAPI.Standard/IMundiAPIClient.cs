@@ -22,9 +22,9 @@ namespace MundiAPI.Standard
         ICustomersController Customers { get;}
 
         /// <summary>
-        /// Singleton access to Subscriptions controller
+        /// Singleton access to Invoices controller
         /// </summary>
-        ISubscriptionsController Subscriptions { get;}
+        IInvoicesController Invoices { get;}
 
         /// <summary>
         /// Singleton access to Plans controller
@@ -32,9 +32,9 @@ namespace MundiAPI.Standard
         IPlansController Plans { get;}
 
         /// <summary>
-        /// Singleton access to Invoices controller
+        /// Singleton access to Subscriptions controller
         /// </summary>
-        IInvoicesController Invoices { get;}
+        ISubscriptionsController Subscriptions { get;}
 
         /// <summary>
         /// Singleton access to Orders controller

@@ -24,7 +24,7 @@ namespace MundiAPI.Standard.Models
         private string name;
         private string email;
         private string document;
-        private string personType;
+        private string type;
         private Models.CreateAddressRequest address;
         private Dictionary<string, string> metadata;
         private Models.CreatePhonesRequest phones;
@@ -83,17 +83,17 @@ namespace MundiAPI.Standard.Models
         /// <summary>
         /// Person type
         /// </summary>
-        [JsonProperty("person_type")]
-        public string PersonType 
+        [JsonProperty("type")]
+        public string Type 
         { 
             get 
             {
-                return this.personType; 
+                return this.type; 
             } 
             set 
             {
-                this.personType = value;
-                onPropertyChanged("PersonType");
+                this.type = value;
+                onPropertyChanged("Type");
             }
         }
 
