@@ -18,25 +18,25 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class CreateAccessTokenRequest : BaseModel 
+    public class UpdateRecipientBankAccountRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
-        private int? expiresIn;
+        private Models.CreateBankAccountRequest bankAccount;
 
         /// <summary>
-        /// Minutes to expire the token
+        /// Bank account
         /// </summary>
-        [JsonProperty("expires_in")]
-        public int? ExpiresIn 
+        [JsonProperty("bank_account")]
+        public Models.CreateBankAccountRequest BankAccount 
         { 
             get 
             {
-                return this.expiresIn; 
+                return this.bankAccount; 
             } 
             set 
             {
-                this.expiresIn = value;
-                onPropertyChanged("ExpiresIn");
+                this.bankAccount = value;
+                onPropertyChanged("BankAccount");
             }
         }
     }

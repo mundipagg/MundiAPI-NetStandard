@@ -30,6 +30,7 @@ namespace MundiAPI.Standard.Models
         private DateTime updatedAt;
         private int attemptCount;
         private int maxAttempts;
+        private List<Models.GetSplitResponse> splits;
         private DateTime? nextAttempt;
         private string transactionType;
 
@@ -168,6 +169,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.maxAttempts = value;
                 onPropertyChanged("MaxAttempts");
+            }
+        }
+
+        /// <summary>
+        /// Splits
+        /// </summary>
+        [JsonProperty("splits")]
+        public List<Models.GetSplitResponse> Splits 
+        { 
+            get 
+            {
+                return this.splits; 
+            } 
+            set 
+            {
+                this.splits = value;
+                onPropertyChanged("Splits");
             }
         }
 

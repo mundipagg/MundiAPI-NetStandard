@@ -27,6 +27,7 @@ namespace MundiAPI.Standard.Models
         private string currency;
         private Models.CreateVoucherPaymentRequest voucher;
         private Dictionary<string, string> metadata;
+        private List<Models.CreateSplitRequest> split;
         private Models.CreateBankTransferPaymentRequest bankTransfer;
         private string gatewayAffiliationId;
         private int? amount;
@@ -131,6 +132,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.metadata = value;
                 onPropertyChanged("Metadata");
+            }
+        }
+
+        /// <summary>
+        /// Splits
+        /// </summary>
+        [JsonProperty("split")]
+        public List<Models.CreateSplitRequest> Split 
+        { 
+            get 
+            {
+                return this.split; 
+            } 
+            set 
+            {
+                this.split = value;
+                onPropertyChanged("Split");
             }
         }
 
