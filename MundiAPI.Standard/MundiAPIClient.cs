@@ -89,6 +89,17 @@ namespace MundiAPI.Standard
                 return TokensController.Instance;
             }
         }
+
+        /// <summary>
+        /// Singleton access to Recipients controller
+        /// </summary>
+        public IRecipientsController Recipients
+        {
+            get
+            {
+                return RecipientsController.Instance;
+            }
+        }
         /// <summary>
         /// The shared http client to use for all API calls
         /// </summary>

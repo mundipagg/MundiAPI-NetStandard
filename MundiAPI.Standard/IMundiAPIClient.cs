@@ -46,5 +46,10 @@ namespace MundiAPI.Standard
         /// </summary>
         ITokensController Tokens { get;}
 
+        /// <summary>
+        /// Singleton access to Recipients controller
+        /// </summary>
+        IRecipientsController Recipients { get;}
+
     }
 }
