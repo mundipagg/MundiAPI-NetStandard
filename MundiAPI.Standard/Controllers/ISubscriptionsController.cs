@@ -334,5 +334,39 @@ namespace MundiAPI.Standard.Controllers
                 DateTime? createdSince = null,
                 DateTime? createdUntil = null);
 
+        /// <summary>
+        /// Get Subscription Item
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <param name="itemId">Required parameter: Item id</param>
+        /// <return>Returns the Models.GetSubscriptionItemResponse response from the API call</return>
+        Models.GetSubscriptionItemResponse GetSubscriptionItem(string subscriptionId, string itemId);
+
+        /// <summary>
+        /// Get Subscription Item
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <param name="itemId">Required parameter: Item id</param>
+        /// <return>Returns the Models.GetSubscriptionItemResponse response from the API call</return>
+        Task<Models.GetSubscriptionItemResponse> GetSubscriptionItemAsync(string subscriptionId, string itemId);
+
+        /// <summary>
+        /// Get Subscription Itens
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <param name="status">Required parameter: Status</param>
+        /// <param name="description">Required parameter: Description</param>
+        /// <return>Returns the Models.ListSubscriptionsResponse response from the API call</return>
+        Models.ListSubscriptionsResponse GetSubscriptionItems(string subscriptionId, string status, string description);
+
+        /// <summary>
+        /// Get Subscription Itens
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <param name="status">Required parameter: Status</param>
+        /// <param name="description">Required parameter: Description</param>
+        /// <return>Returns the Models.ListSubscriptionsResponse response from the API call</return>
+        Task<Models.ListSubscriptionsResponse> GetSubscriptionItemsAsync(string subscriptionId, string status, string description);
+
     }
 } 
