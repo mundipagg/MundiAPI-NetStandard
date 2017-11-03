@@ -116,5 +116,21 @@ namespace MundiAPI.Standard.Controllers
                 DateTime? dueSince = null,
                 DateTime? dueUntil = null);
 
+        /// <summary>
+        /// Create an Invoice
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <param name="cycleId">Required parameter: Cycle Id</param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        Models.GetInvoiceResponse CreateInvoice(string subscriptionId, string cycleId);
+
+        /// <summary>
+        /// Create an Invoice
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <param name="cycleId">Required parameter: Cycle Id</param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        Task<Models.GetInvoiceResponse> CreateInvoiceAsync(string subscriptionId, string cycleId);
+
     }
 } 
