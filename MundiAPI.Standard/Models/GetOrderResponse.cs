@@ -34,6 +34,10 @@ namespace MundiAPI.Standard.Models
         private Models.GetShippingResponse shipping;
         private Dictionary<string, string> metadata;
         private List<Models.GetCheckoutPaymentSettingsResponse> checkouts;
+        private string ip;
+        private string sessionId;
+        private Models.GetLocationResponse location;
+        private Models.GetDeviceResponse device;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -255,6 +259,74 @@ namespace MundiAPI.Standard.Models
             {
                 this.checkouts = value;
                 onPropertyChanged("Checkouts");
+            }
+        }
+
+        /// <summary>
+        /// Ip address
+        /// </summary>
+        [JsonProperty("ip")]
+        public string Ip 
+        { 
+            get 
+            {
+                return this.ip; 
+            } 
+            set 
+            {
+                this.ip = value;
+                onPropertyChanged("Ip");
+            }
+        }
+
+        /// <summary>
+        /// Session id
+        /// </summary>
+        [JsonProperty("session_id")]
+        public string SessionId 
+        { 
+            get 
+            {
+                return this.sessionId; 
+            } 
+            set 
+            {
+                this.sessionId = value;
+                onPropertyChanged("SessionId");
+            }
+        }
+
+        /// <summary>
+        /// Location
+        /// </summary>
+        [JsonProperty("location")]
+        public Models.GetLocationResponse Location 
+        { 
+            get 
+            {
+                return this.location; 
+            } 
+            set 
+            {
+                this.location = value;
+                onPropertyChanged("Location");
+            }
+        }
+
+        /// <summary>
+        /// Device's informations
+        /// </summary>
+        [JsonProperty("device")]
+        public Models.GetDeviceResponse Device 
+        { 
+            get 
+            {
+                return this.device; 
+            } 
+            set 
+            {
+                this.device = value;
+                onPropertyChanged("Device");
             }
         }
     }

@@ -335,6 +335,22 @@ namespace MundiAPI.Standard.Controllers
                 DateTime? createdUntil = null);
 
         /// <summary>
+        /// Create Usage
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription id</param>
+        /// <param name="itemId">Required parameter: Item id</param>
+        /// <return>Returns the Models.GetUsageResponse response from the API call</return>
+        Models.GetUsageResponse CreateAnUsage(string subscriptionId, string itemId);
+
+        /// <summary>
+        /// Create Usage
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription id</param>
+        /// <param name="itemId">Required parameter: Item id</param>
+        /// <return>Returns the Models.GetUsageResponse response from the API call</return>
+        Task<Models.GetUsageResponse> CreateAnUsageAsync(string subscriptionId, string itemId);
+
+        /// <summary>
         /// Get Subscription Item
         /// </summary>
         /// <param name="subscriptionId">Required parameter: Subscription Id</param>

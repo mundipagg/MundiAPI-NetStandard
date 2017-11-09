@@ -29,6 +29,10 @@ namespace MundiAPI.Standard.Models
         private Models.CreateShippingRequest shipping;
         private Dictionary<string, string> metadata;
         private bool? antifraudEnabled;
+        private string ip;
+        private string sessionId;
+        private Models.CreateLocationRequest location;
+        private Models.CreateDeviceRequest device;
 
         /// <summary>
         /// Items
@@ -163,6 +167,74 @@ namespace MundiAPI.Standard.Models
             {
                 this.antifraudEnabled = value;
                 onPropertyChanged("AntifraudEnabled");
+            }
+        }
+
+        /// <summary>
+        /// Ip address
+        /// </summary>
+        [JsonProperty("ip")]
+        public string Ip 
+        { 
+            get 
+            {
+                return this.ip; 
+            } 
+            set 
+            {
+                this.ip = value;
+                onPropertyChanged("Ip");
+            }
+        }
+
+        /// <summary>
+        /// Session id
+        /// </summary>
+        [JsonProperty("session_id")]
+        public string SessionId 
+        { 
+            get 
+            {
+                return this.sessionId; 
+            } 
+            set 
+            {
+                this.sessionId = value;
+                onPropertyChanged("SessionId");
+            }
+        }
+
+        /// <summary>
+        /// Request's location
+        /// </summary>
+        [JsonProperty("location")]
+        public Models.CreateLocationRequest Location 
+        { 
+            get 
+            {
+                return this.location; 
+            } 
+            set 
+            {
+                this.location = value;
+                onPropertyChanged("Location");
+            }
+        }
+
+        /// <summary>
+        /// Device's informations
+        /// </summary>
+        [JsonProperty("device")]
+        public Models.CreateDeviceRequest Device 
+        { 
+            get 
+            {
+                return this.device; 
+            } 
+            set 
+            {
+                this.device = value;
+                onPropertyChanged("Device");
             }
         }
     }
