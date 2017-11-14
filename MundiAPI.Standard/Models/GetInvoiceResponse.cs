@@ -36,6 +36,7 @@ namespace MundiAPI.Standard.Models
         private Models.GetSubscriptionResponse subscription;
         private Models.GetPeriodResponse cycle;
         private Models.GetShippingResponse shipping;
+        private Dictionary<string, string> metadata;
         private DateTime? dueAt;
         private DateTime? canceledAt;
         private DateTime? billingAt;
@@ -294,6 +295,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.shipping = value;
                 onPropertyChanged("Shipping");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("metadata")]
+        public Dictionary<string, string> Metadata 
+        { 
+            get 
+            {
+                return this.metadata; 
+            } 
+            set 
+            {
+                this.metadata = value;
+                onPropertyChanged("Metadata");
             }
         }
 
