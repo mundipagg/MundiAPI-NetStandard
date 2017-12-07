@@ -26,6 +26,7 @@ namespace MundiAPI.Standard.Models
         private string id;
         private string planItemId;
         private List<Models.CreateDiscountRequest> discounts;
+        private string name;
         private int? cycles;
         private int? quantity;
         private int? minimumPrice;
@@ -112,6 +113,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.discounts = value;
                 onPropertyChanged("Discounts");
+            }
+        }
+
+        /// <summary>
+        /// Item name
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name 
+        { 
+            get 
+            {
+                return this.name; 
+            } 
+            set 
+            {
+                this.name = value;
+                onPropertyChanged("Name");
             }
         }
 

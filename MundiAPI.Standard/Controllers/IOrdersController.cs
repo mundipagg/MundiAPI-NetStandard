@@ -49,22 +49,6 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.GetOrderResponse> CreateOrderAsync(Models.CreateOrderRequest body);
 
         /// <summary>
-        /// Updates the metadata from an order
-        /// </summary>
-        /// <param name="orderId">Required parameter: The order id</param>
-        /// <param name="request">Required parameter: Request for updating the order metadata</param>
-        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
-        Models.GetOrderResponse UpdateOrderMetadata(string orderId, Models.UpdateMetadataRequest request);
-
-        /// <summary>
-        /// Updates the metadata from an order
-        /// </summary>
-        /// <param name="orderId">Required parameter: The order id</param>
-        /// <param name="request">Required parameter: Request for updating the order metadata</param>
-        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
-        Task<Models.GetOrderResponse> UpdateOrderMetadataAsync(string orderId, Models.UpdateMetadataRequest request);
-
-        /// <summary>
         /// Gets all orders
         /// </summary>
         /// <param name="page">Optional parameter: Page number</param>
@@ -103,6 +87,22 @@ namespace MundiAPI.Standard.Controllers
                 DateTime? createdSince = null,
                 DateTime? createdUntil = null,
                 string customerId = null);
+
+        /// <summary>
+        /// Updates the metadata from an order
+        /// </summary>
+        /// <param name="orderId">Required parameter: The order id</param>
+        /// <param name="request">Required parameter: Request for updating the order metadata</param>
+        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
+        Models.GetOrderResponse UpdateOrderMetadata(string orderId, Models.UpdateMetadataRequest request);
+
+        /// <summary>
+        /// Updates the metadata from an order
+        /// </summary>
+        /// <param name="orderId">Required parameter: The order id</param>
+        /// <param name="request">Required parameter: Request for updating the order metadata</param>
+        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
+        Task<Models.GetOrderResponse> UpdateOrderMetadataAsync(string orderId, Models.UpdateMetadataRequest request);
 
     }
 } 

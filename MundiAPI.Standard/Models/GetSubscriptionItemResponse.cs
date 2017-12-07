@@ -29,6 +29,7 @@ namespace MundiAPI.Standard.Models
         private Models.GetPricingSchemeResponse pricingScheme;
         private List<Models.GetDiscountResponse> discounts;
         private Models.GetSubscriptionResponse subscription;
+        private string name;
         private int? quantity;
         private int? cycles;
         private DateTime? deletedAt;
@@ -168,6 +169,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.subscription = value;
                 onPropertyChanged("Subscription");
+            }
+        }
+
+        /// <summary>
+        /// Item name
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name 
+        { 
+            get 
+            {
+                return this.name; 
+            } 
+            set 
+            {
+                this.name = value;
+                onPropertyChanged("Name");
             }
         }
 

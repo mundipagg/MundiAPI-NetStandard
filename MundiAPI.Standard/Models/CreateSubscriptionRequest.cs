@@ -46,6 +46,7 @@ namespace MundiAPI.Standard.Models
         private int? minimumPrice;
         private int? cycles;
         private string cardToken;
+        private string gatewayAffiliationId;
 
         /// <summary>
         /// Customer
@@ -470,6 +471,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.cardToken = value;
                 onPropertyChanged("CardToken");
+            }
+        }
+
+        /// <summary>
+        /// Gateway Affiliation code
+        /// </summary>
+        [JsonProperty("gateway_affiliation_id")]
+        public string GatewayAffiliationId 
+        { 
+            get 
+            {
+                return this.gatewayAffiliationId; 
+            } 
+            set 
+            {
+                this.gatewayAffiliationId = value;
+                onPropertyChanged("GatewayAffiliationId");
             }
         }
     }

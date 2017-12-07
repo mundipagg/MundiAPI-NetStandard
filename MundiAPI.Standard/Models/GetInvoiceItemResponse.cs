@@ -26,6 +26,7 @@ namespace MundiAPI.Standard.Models
         private Models.GetPricingSchemeResponse pricingScheme;
         private Models.GetPriceBracketResponse priceBracket;
         private int? quantity;
+        private string name;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -109,6 +110,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.quantity = value;
                 onPropertyChanged("Quantity");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name 
+        { 
+            get 
+            {
+                return this.name; 
+            } 
+            set 
+            {
+                this.name = value;
+                onPropertyChanged("Name");
             }
         }
     }
