@@ -29,6 +29,8 @@ namespace MundiAPI.Standard.Models
         private string state;
         private string country;
         private string complement;
+        private string line1;
+        private string line2;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -163,6 +165,40 @@ namespace MundiAPI.Standard.Models
             {
                 this.complement = value;
                 onPropertyChanged("Complement");
+            }
+        }
+
+        /// <summary>
+        /// Line 1 for address
+        /// </summary>
+        [JsonProperty("line_1")]
+        public string Line1 
+        { 
+            get 
+            {
+                return this.line1; 
+            } 
+            set 
+            {
+                this.line1 = value;
+                onPropertyChanged("Line1");
+            }
+        }
+
+        /// <summary>
+        /// Line 2 for address
+        /// </summary>
+        [JsonProperty("line_2")]
+        public string Line2 
+        { 
+            get 
+            {
+                return this.line2; 
+            } 
+            set 
+            {
+                this.line2 = value;
+                onPropertyChanged("Line2");
             }
         }
     }

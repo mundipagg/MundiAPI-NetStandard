@@ -30,6 +30,8 @@ namespace MundiAPI.Standard.Models
         private string country;
         private string complement;
         private Dictionary<string, string> metadata;
+        private string line1;
+        private string line2;
 
         /// <summary>
         /// Street
@@ -181,6 +183,40 @@ namespace MundiAPI.Standard.Models
             {
                 this.metadata = value;
                 onPropertyChanged("Metadata");
+            }
+        }
+
+        /// <summary>
+        /// Line 1 for address
+        /// </summary>
+        [JsonProperty("line_1")]
+        public string Line1 
+        { 
+            get 
+            {
+                return this.line1; 
+            } 
+            set 
+            {
+                this.line1 = value;
+                onPropertyChanged("Line1");
+            }
+        }
+
+        /// <summary>
+        /// Line 2 for address
+        /// </summary>
+        [JsonProperty("line_2")]
+        public string Line2 
+        { 
+            get 
+            {
+                return this.line2; 
+            } 
+            set 
+            {
+                this.line2 = value;
+                onPropertyChanged("Line2");
             }
         }
     }

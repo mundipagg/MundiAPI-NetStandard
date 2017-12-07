@@ -27,7 +27,7 @@ namespace MundiAPI.Standard.Models
         private string interval;
         private int intervalCount;
         private string billingType;
-        private Models.GetPeriodResponse currentPeriod;
+        private Models.GetPeriodResponse currentCycle;
         private string paymentMethod;
         private string currency;
         private int installments;
@@ -40,6 +40,7 @@ namespace MundiAPI.Standard.Models
         private string statementDescriptor;
         private Dictionary<string, string> metadata;
         private Models.GetSetupResponse setup;
+        private string gatewayAffiliationId;
         private DateTime? nextBillingAt;
         private int? billingDay;
         private int? minimumPrice;
@@ -152,17 +153,17 @@ namespace MundiAPI.Standard.Models
         /// <summary>
         /// TODO: Write general description for this method
         /// </summary>
-        [JsonProperty("current_period")]
-        public Models.GetPeriodResponse CurrentPeriod 
+        [JsonProperty("current_cycle")]
+        public Models.GetPeriodResponse CurrentCycle 
         { 
             get 
             {
-                return this.currentPeriod; 
+                return this.currentCycle; 
             } 
             set 
             {
-                this.currentPeriod = value;
-                onPropertyChanged("CurrentPeriod");
+                this.currentCycle = value;
+                onPropertyChanged("CurrentCycle");
             }
         }
 
@@ -369,6 +370,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.setup = value;
                 onPropertyChanged("Setup");
+            }
+        }
+
+        /// <summary>
+        /// Affiliation Code
+        /// </summary>
+        [JsonProperty("gateway_affiliation_id")]
+        public string GatewayAffiliationId 
+        { 
+            get 
+            {
+                return this.gatewayAffiliationId; 
+            } 
+            set 
+            {
+                this.gatewayAffiliationId = value;
+                onPropertyChanged("GatewayAffiliationId");
             }
         }
 

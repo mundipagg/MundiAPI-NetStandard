@@ -30,6 +30,7 @@ namespace MundiAPI.Standard.Models
         private string operationType;
         private Models.GetCardResponse card;
         private string acquirerMessage;
+        private string acquirerReturnCode;
         private int? installments;
 
         /// <summary>
@@ -182,6 +183,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.acquirerMessage = value;
                 onPropertyChanged("AcquirerMessage");
+            }
+        }
+
+        /// <summary>
+        /// Acquirer Return Code
+        /// </summary>
+        [JsonProperty("acquirer_return_code")]
+        public string AcquirerReturnCode 
+        { 
+            get 
+            {
+                return this.acquirerReturnCode; 
+            } 
+            set 
+            {
+                this.acquirerReturnCode = value;
+                onPropertyChanged("AcquirerReturnCode");
             }
         }
 

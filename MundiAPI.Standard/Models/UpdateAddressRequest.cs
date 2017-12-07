@@ -24,6 +24,7 @@ namespace MundiAPI.Standard.Models
         private string number;
         private string complement;
         private Dictionary<string, string> metadata;
+        private string line2;
 
         /// <summary>
         /// Number
@@ -73,6 +74,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.metadata = value;
                 onPropertyChanged("Metadata");
+            }
+        }
+
+        /// <summary>
+        /// Line 2 for address
+        /// </summary>
+        [JsonProperty("line_2")]
+        public string Line2 
+        { 
+            get 
+            {
+                return this.line2; 
+            } 
+            set 
+            {
+                this.line2 = value;
+                onPropertyChanged("Line2");
             }
         }
     }
