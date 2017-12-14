@@ -190,5 +190,21 @@ namespace MundiAPI.Standard.Controllers
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
         Task<Models.GetChargeResponse> CaptureChargeAsync(string chargeId, Models.CreateCaptureChargeRequest request = null);
 
+        /// <summary>
+        /// Updates the due date from a charge
+        /// </summary>
+        /// <param name="chargeId">Required parameter: Charge Id</param>
+        /// <param name="request">Required parameter: Request for updating the due date</param>
+        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
+        Models.GetChargeResponse UpdateChargeDueDate(string chargeId, Models.UpdateChargeDueDateRequest request);
+
+        /// <summary>
+        /// Updates the due date from a charge
+        /// </summary>
+        /// <param name="chargeId">Required parameter: Charge Id</param>
+        /// <param name="request">Required parameter: Request for updating the due date</param>
+        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
+        Task<Models.GetChargeResponse> UpdateChargeDueDateAsync(string chargeId, Models.UpdateChargeDueDateRequest request);
+
     }
 } 
