@@ -28,6 +28,8 @@ namespace MundiAPI.Standard.Models
         private Models.CreateVoucherPaymentRequest voucher;
         private Dictionary<string, string> metadata;
         private List<Models.CreateSplitRequest> split;
+        private string customerId;
+        private Models.CreateCustomerRequest customer;
         private Models.CreateBankTransferPaymentRequest bankTransfer;
         private string gatewayAffiliationId;
         private int? amount;
@@ -149,6 +151,40 @@ namespace MundiAPI.Standard.Models
             {
                 this.split = value;
                 onPropertyChanged("Split");
+            }
+        }
+
+        /// <summary>
+        /// Customer Id
+        /// </summary>
+        [JsonProperty("customer_id")]
+        public string CustomerId 
+        { 
+            get 
+            {
+                return this.customerId; 
+            } 
+            set 
+            {
+                this.customerId = value;
+                onPropertyChanged("CustomerId");
+            }
+        }
+
+        /// <summary>
+        /// Customer
+        /// </summary>
+        [JsonProperty("customer")]
+        public Models.CreateCustomerRequest Customer 
+        { 
+            get 
+            {
+                return this.customer; 
+            } 
+            set 
+            {
+                this.customer = value;
+                onPropertyChanged("Customer");
             }
         }
 
