@@ -47,6 +47,7 @@ namespace MundiAPI.Standard.Models
         private int? cycles;
         private string cardToken;
         private string gatewayAffiliationId;
+        private int? quantity;
 
         /// <summary>
         /// Customer
@@ -488,6 +489,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.gatewayAffiliationId = value;
                 onPropertyChanged("GatewayAffiliationId");
+            }
+        }
+
+        /// <summary>
+        /// Quantity
+        /// </summary>
+        [JsonProperty("quantity")]
+        public int? Quantity 
+        { 
+            get 
+            {
+                return this.quantity; 
+            } 
+            set 
+            {
+                this.quantity = value;
+                onPropertyChanged("Quantity");
             }
         }
     }

@@ -18,19 +18,19 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class CreateSellerRequest : BaseModel 
+    public class GetSellersRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
         private string name;
-        private Dictionary<string, string> metadata;
-        private string code;
-        private string description;
         private string document;
-        private Models.CreateAddressRequest address;
+        private string code;
+        private string status;
         private string type;
+        private string createdSince;
+        private string createdUntil;
 
         /// <summary>
-        /// Name
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("name")]
         public string Name 
@@ -47,58 +47,7 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Metadata
-        /// </summary>
-        [JsonProperty("metadata")]
-        public Dictionary<string, string> Metadata 
-        { 
-            get 
-            {
-                return this.metadata; 
-            } 
-            set 
-            {
-                this.metadata = value;
-                onPropertyChanged("Metadata");
-            }
-        }
-
-        /// <summary>
-        /// Seller's code identification
-        /// </summary>
-        [JsonProperty("code")]
-        public string Code 
-        { 
-            get 
-            {
-                return this.code; 
-            } 
-            set 
-            {
-                this.code = value;
-                onPropertyChanged("Code");
-            }
-        }
-
-        /// <summary>
-        /// Description
-        /// </summary>
-        [JsonProperty("description")]
-        public string Description 
-        { 
-            get 
-            {
-                return this.description; 
-            } 
-            set 
-            {
-                this.description = value;
-                onPropertyChanged("Description");
-            }
-        }
-
-        /// <summary>
-        /// Document number (individual / company)
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("document")]
         public string Document 
@@ -115,24 +64,41 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Address
+        /// TODO: Write general description for this method
         /// </summary>
-        [JsonProperty("address")]
-        public Models.CreateAddressRequest Address 
+        [JsonProperty("code")]
+        public string Code 
         { 
             get 
             {
-                return this.address; 
+                return this.code; 
             } 
             set 
             {
-                this.address = value;
-                onPropertyChanged("Address");
+                this.code = value;
+                onPropertyChanged("Code");
             }
         }
 
         /// <summary>
-        /// Person type (individual / company)
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("status")]
+        public string Status 
+        { 
+            get 
+            {
+                return this.status; 
+            } 
+            set 
+            {
+                this.status = value;
+                onPropertyChanged("Status");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("type")]
         public string Type 
@@ -145,6 +111,40 @@ namespace MundiAPI.Standard.Models
             {
                 this.type = value;
                 onPropertyChanged("Type");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("created_Since")]
+        public string CreatedSince 
+        { 
+            get 
+            {
+                return this.createdSince; 
+            } 
+            set 
+            {
+                this.createdSince = value;
+                onPropertyChanged("CreatedSince");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("created_Until")]
+        public string CreatedUntil 
+        { 
+            get 
+            {
+                return this.createdUntil; 
+            } 
+            set 
+            {
+                this.createdUntil = value;
+                onPropertyChanged("CreatedUntil");
             }
         }
     }

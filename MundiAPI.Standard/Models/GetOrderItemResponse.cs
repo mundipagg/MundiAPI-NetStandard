@@ -21,10 +21,29 @@ namespace MundiAPI.Standard.Models
     public class GetOrderItemResponse : BaseModel 
     {
         // These fields hold the values for the public properties.
+        private string id;
         private int amount;
         private string description;
         private int quantity;
+        private string category;
         private Models.GetSellerResponse getSellerResponse;
+
+        /// <summary>
+        /// Id
+        /// </summary>
+        [JsonProperty("Id")]
+        public string Id 
+        { 
+            get 
+            {
+                return this.id; 
+            } 
+            set 
+            {
+                this.id = value;
+                onPropertyChanged("Id");
+            }
+        }
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -74,6 +93,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.quantity = value;
                 onPropertyChanged("Quantity");
+            }
+        }
+
+        /// <summary>
+        /// Category
+        /// </summary>
+        [JsonProperty("category")]
+        public string Category 
+        { 
+            get 
+            {
+                return this.category; 
+            } 
+            set 
+            {
+                this.category = value;
+                onPropertyChanged("Category");
             }
         }
 

@@ -28,6 +28,7 @@ namespace MundiAPI.Standard.Models
         private string customerId;
         private Models.CreateShippingRequest shipping;
         private Dictionary<string, string> metadata;
+        private bool closed = true;
         private bool? antifraudEnabled;
         private string ip;
         private string sessionId;
@@ -150,6 +151,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.metadata = value;
                 onPropertyChanged("Metadata");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("closed")]
+        public bool Closed 
+        { 
+            get 
+            {
+                return this.closed; 
+            } 
+            set 
+            {
+                this.closed = value;
+                onPropertyChanged("Closed");
             }
         }
 

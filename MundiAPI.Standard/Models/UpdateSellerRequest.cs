@@ -18,40 +18,20 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class GetSellerResponse : BaseModel 
+    public class UpdateSellerRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
-        private string id;
         private string name;
         private string code;
-        private string document;
         private string description;
+        private string document;
         private string status;
-        private string createdAt;
-        private string updatedAt;
-        private Models.GetAddressResponse address;
+        private string type;
+        private Models.CreateAddressRequest address;
         private Dictionary<string, string> metadata;
-        private string deletedAt;
 
         /// <summary>
-        /// Identification
-        /// </summary>
-        [JsonProperty("id")]
-        public string Id 
-        { 
-            get 
-            {
-                return this.id; 
-            } 
-            set 
-            {
-                this.id = value;
-                onPropertyChanged("Id");
-            }
-        }
-
-        /// <summary>
-        /// TODO: Write general description for this method
+        /// Seller name
         /// </summary>
         [JsonProperty("name")]
         public string Name 
@@ -68,7 +48,7 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Seller code
         /// </summary>
         [JsonProperty("code")]
         public string Code 
@@ -85,24 +65,7 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
-        /// </summary>
-        [JsonProperty("document")]
-        public string Document 
-        { 
-            get 
-            {
-                return this.document; 
-            } 
-            set 
-            {
-                this.document = value;
-                onPropertyChanged("Document");
-            }
-        }
-
-        /// <summary>
-        /// Description
+        /// Seller description
         /// </summary>
         [JsonProperty("description")]
         public string Description 
@@ -119,9 +82,26 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Status
+        /// Seller document CPF or CNPJ
         /// </summary>
-        [JsonProperty("Status")]
+        [JsonProperty("document")]
+        public string Document 
+        { 
+            get 
+            {
+                return this.document; 
+            } 
+            set 
+            {
+                this.document = value;
+                onPropertyChanged("Document");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("status")]
         public string Status 
         { 
             get 
@@ -136,44 +116,27 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Creation date
+        /// TODO: Write general description for this method
         /// </summary>
-        [JsonProperty("CreatedAt")]
-        public string CreatedAt 
+        [JsonProperty("type")]
+        public string Type 
         { 
             get 
             {
-                return this.createdAt; 
+                return this.type; 
             } 
             set 
             {
-                this.createdAt = value;
-                onPropertyChanged("CreatedAt");
+                this.type = value;
+                onPropertyChanged("Type");
             }
         }
 
         /// <summary>
-        /// Updated date
+        /// TODO: Write general description for this method
         /// </summary>
-        [JsonProperty("UpdatedAt")]
-        public string UpdatedAt 
-        { 
-            get 
-            {
-                return this.updatedAt; 
-            } 
-            set 
-            {
-                this.updatedAt = value;
-                onPropertyChanged("UpdatedAt");
-            }
-        }
-
-        /// <summary>
-        /// Address
-        /// </summary>
-        [JsonProperty("Address")]
-        public Models.GetAddressResponse Address 
+        [JsonProperty("address")]
+        public Models.CreateAddressRequest Address 
         { 
             get 
             {
@@ -187,9 +150,9 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Metadata
+        /// TODO: Write general description for this method
         /// </summary>
-        [JsonProperty("Metadata")]
+        [JsonProperty("metadata")]
         public Dictionary<string, string> Metadata 
         { 
             get 
@@ -200,23 +163,6 @@ namespace MundiAPI.Standard.Models
             {
                 this.metadata = value;
                 onPropertyChanged("Metadata");
-            }
-        }
-
-        /// <summary>
-        /// Deleted date
-        /// </summary>
-        [JsonProperty("DeletedAt")]
-        public string DeletedAt 
-        { 
-            get 
-            {
-                return this.deletedAt; 
-            } 
-            set 
-            {
-                this.deletedAt = value;
-                onPropertyChanged("DeletedAt");
             }
         }
     }
