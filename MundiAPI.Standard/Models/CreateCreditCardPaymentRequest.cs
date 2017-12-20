@@ -29,6 +29,8 @@ namespace MundiAPI.Standard.Models
         private string cardId;
         private string cardToken;
         private bool recurrence;
+        private bool extendedLimitEnabled;
+        private string extendedLimitCode;
         private bool? capture = true;
 
         /// <summary>
@@ -164,6 +166,40 @@ namespace MundiAPI.Standard.Models
             {
                 this.recurrence = value;
                 onPropertyChanged("Recurrence");
+            }
+        }
+
+        /// <summary>
+        /// Indicates whether the extended label (private label) is enabled
+        /// </summary>
+        [JsonProperty("extended_limit_enabled")]
+        public bool ExtendedLimitEnabled 
+        { 
+            get 
+            {
+                return this.extendedLimitEnabled; 
+            } 
+            set 
+            {
+                this.extendedLimitEnabled = value;
+                onPropertyChanged("ExtendedLimitEnabled");
+            }
+        }
+
+        /// <summary>
+        /// Extended Limit Code
+        /// </summary>
+        [JsonProperty("extended_limit_code")]
+        public string ExtendedLimitCode 
+        { 
+            get 
+            {
+                return this.extendedLimitCode; 
+            } 
+            set 
+            {
+                this.extendedLimitCode = value;
+                onPropertyChanged("ExtendedLimitCode");
             }
         }
 

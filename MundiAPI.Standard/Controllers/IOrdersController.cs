@@ -104,5 +104,101 @@ namespace MundiAPI.Standard.Controllers
         /// <return>Returns the Models.GetOrderResponse response from the API call</return>
         Task<Models.GetOrderResponse> UpdateOrderMetadataAsync(string orderId, Models.UpdateMetadataRequest request);
 
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="orderId">Required parameter: Order Id</param>
+        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
+        Models.GetOrderResponse DeleteAllOrderItems(string orderId);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="orderId">Required parameter: Order Id</param>
+        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
+        Task<Models.GetOrderResponse> DeleteAllOrderItemsAsync(string orderId);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="orderId">Required parameter: Order Id</param>
+        /// <param name="itemId">Required parameter: Item Id</param>
+        /// <param name="request">Required parameter: Item Model</param>
+        /// <return>Returns the Models.GetOrderItemResponse response from the API call</return>
+        Models.GetOrderItemResponse UpdateOrderItem(string orderId, string itemId, Models.UpdateOrderItemRequest request);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="orderId">Required parameter: Order Id</param>
+        /// <param name="itemId">Required parameter: Item Id</param>
+        /// <param name="request">Required parameter: Item Model</param>
+        /// <return>Returns the Models.GetOrderItemResponse response from the API call</return>
+        Task<Models.GetOrderItemResponse> UpdateOrderItemAsync(string orderId, string itemId, Models.UpdateOrderItemRequest request);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="orderId">Required parameter: Order Id</param>
+        /// <param name="itemId">Required parameter: Item Id</param>
+        /// <return>Returns the Models.GetOrderItemResponse response from the API call</return>
+        Models.GetOrderItemResponse DeleteOrderItem(string orderId, string itemId);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="orderId">Required parameter: Order Id</param>
+        /// <param name="itemId">Required parameter: Item Id</param>
+        /// <return>Returns the Models.GetOrderItemResponse response from the API call</return>
+        Task<Models.GetOrderItemResponse> DeleteOrderItemAsync(string orderId, string itemId);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="orderId">Required parameter: Order Id</param>
+        /// <param name="request">Required parameter: Order Item Model</param>
+        /// <return>Returns the Models.GetOrderItemResponse response from the API call</return>
+        Models.GetOrderItemResponse CreateOrderItem(string orderId, Models.CreateOrderItemRequest request);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="orderId">Required parameter: Order Id</param>
+        /// <param name="request">Required parameter: Order Item Model</param>
+        /// <return>Returns the Models.GetOrderItemResponse response from the API call</return>
+        Task<Models.GetOrderItemResponse> CreateOrderItemAsync(string orderId, Models.CreateOrderItemRequest request);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="orderId">Required parameter: Order Id</param>
+        /// <param name="itemId">Required parameter: Item Id</param>
+        /// <return>Returns the Models.GetOrderItemResponse response from the API call</return>
+        Models.GetOrderItemResponse GetOrderItem(string orderId, string itemId);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="orderId">Required parameter: Order Id</param>
+        /// <param name="itemId">Required parameter: Item Id</param>
+        /// <return>Returns the Models.GetOrderItemResponse response from the API call</return>
+        Task<Models.GetOrderItemResponse> GetOrderItemAsync(string orderId, string itemId);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="id">Required parameter: Order Id</param>
+        /// <param name="request">Required parameter: Update Order Model</param>
+        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
+        Models.GetOrderResponse UpdateOrderStatus(string id, Models.UpdateOrderStatusRequest request);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="id">Required parameter: Order Id</param>
+        /// <param name="request">Required parameter: Update Order Model</param>
+        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
+        Task<Models.GetOrderResponse> UpdateOrderStatusAsync(string id, Models.UpdateOrderStatusRequest request);
+
     }
 } 

@@ -33,6 +33,7 @@ namespace MundiAPI.Standard.Models
         private string invoiceUrl;
         private Models.GetShippingResponse shipping;
         private Dictionary<string, string> metadata;
+        private bool closed;
         private List<Models.GetCheckoutPaymentSettingsResponse> checkouts;
         private string ip;
         private string sessionId;
@@ -242,6 +243,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.metadata = value;
                 onPropertyChanged("Metadata");
+            }
+        }
+
+        /// <summary>
+        /// Indicates whether the order is closed
+        /// </summary>
+        [JsonProperty("closed")]
+        public bool Closed 
+        { 
+            get 
+            {
+                return this.closed; 
+            } 
+            set 
+            {
+                this.closed = value;
+                onPropertyChanged("Closed");
             }
         }
 
