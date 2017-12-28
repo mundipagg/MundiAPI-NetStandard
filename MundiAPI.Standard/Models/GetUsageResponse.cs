@@ -26,7 +26,9 @@ namespace MundiAPI.Standard.Models
         private string description;
         private DateTime usedAt;
         private DateTime createdAt;
+        private string status;
         private Models.GetSubscriptionItemResponse subscriptionItem;
+        private DateTime? deletedAt;
 
         /// <summary>
         /// Id
@@ -116,6 +118,23 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
+        /// Status
+        /// </summary>
+        [JsonProperty("status")]
+        public string Status 
+        { 
+            get 
+            {
+                return this.status; 
+            } 
+            set 
+            {
+                this.status = value;
+                onPropertyChanged("Status");
+            }
+        }
+
+        /// <summary>
         /// Subscription item
         /// </summary>
         [JsonProperty("subscription_item")]
@@ -129,6 +148,24 @@ namespace MundiAPI.Standard.Models
             {
                 this.subscriptionItem = value;
                 onPropertyChanged("SubscriptionItem");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [JsonProperty("deleted_at")]
+        public DateTime? DeletedAt 
+        { 
+            get 
+            {
+                return this.deletedAt; 
+            } 
+            set 
+            {
+                this.deletedAt = value;
+                onPropertyChanged("DeletedAt");
             }
         }
     }
