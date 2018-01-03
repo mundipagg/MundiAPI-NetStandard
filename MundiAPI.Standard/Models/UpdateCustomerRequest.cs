@@ -27,6 +27,7 @@ namespace MundiAPI.Standard.Models
         private string type;
         private Models.CreateAddressRequest address;
         private Dictionary<string, string> metadata;
+        private string code;
         private Models.CreatePhonesRequest phones;
 
         /// <summary>
@@ -128,6 +129,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.metadata = value;
                 onPropertyChanged("Metadata");
+            }
+        }
+
+        /// <summary>
+        /// Código de referência do cliente no sistema da loja. Max: 52 caracteres
+        /// </summary>
+        [JsonProperty("code")]
+        public string Code 
+        { 
+            get 
+            {
+                return this.code; 
+            } 
+            set 
+            {
+                this.code = value;
+                onPropertyChanged("Code");
             }
         }
 

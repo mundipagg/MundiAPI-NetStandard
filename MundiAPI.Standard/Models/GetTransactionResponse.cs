@@ -31,6 +31,7 @@ namespace MundiAPI.Standard.Models
         private int attemptCount;
         private int maxAttempts;
         private List<Models.GetSplitResponse> splits;
+        private string id;
         private DateTime? nextAttempt;
         private string transactionType;
 
@@ -186,6 +187,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.splits = value;
                 onPropertyChanged("Splits");
+            }
+        }
+
+        /// <summary>
+        /// Código da transação
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id 
+        { 
+            get 
+            {
+                return this.id; 
+            } 
+            set 
+            {
+                this.id = value;
+                onPropertyChanged("Id");
             }
         }
 
