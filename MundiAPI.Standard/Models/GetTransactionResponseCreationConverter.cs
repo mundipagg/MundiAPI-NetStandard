@@ -17,11 +17,11 @@ namespace MundiAPI.Standard.Models
             typeName = "transaction_type";
             dic = new Dictionary<string, Type>()
             {
-                { "boleto",typeof(GetBoletoTransactionResponse)},
                 { "credit_card",typeof(GetCreditCardTransactionResponse)},
                 { "voucher",typeof(GetVoucherTransactionResponse)},
                 { "bank_transfer",typeof(GetBankTransferTransactionResponse)},
                 { "safetypay",typeof(GetSafetyPayTransactionResponse)},
+                { "boleto",typeof(GetBoletoTransactionResponse)},
             };
         }
     }

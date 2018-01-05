@@ -21,6 +21,34 @@ namespace MundiAPI.Standard.Controllers
     public partial interface ICustomersController
     {
         /// <summary>
+        /// Creates a new customer
+        /// </summary>
+        /// <param name="request">Required parameter: Request for creating a customer</param>
+        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
+        Models.GetCustomerResponse CreateCustomer(Models.CreateCustomerRequest request);
+
+        /// <summary>
+        /// Creates a new customer
+        /// </summary>
+        /// <param name="request">Required parameter: Request for creating a customer</param>
+        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
+        Task<Models.GetCustomerResponse> CreateCustomerAsync(Models.CreateCustomerRequest request);
+
+        /// <summary>
+        /// Get a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
+        Models.GetCustomerResponse GetCustomer(string customerId);
+
+        /// <summary>
+        /// Get a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
+        Task<Models.GetCustomerResponse> GetCustomerAsync(string customerId);
+
+        /// <summary>
         /// Updates a card
         /// </summary>
         /// <param name="customerId">Required parameter: Customer Id</param>
@@ -57,86 +85,116 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.GetAddressResponse> UpdateAddressAsync(string customerId, string addressId, Models.UpdateAddressRequest request);
 
         /// <summary>
-        /// Creates a new customer
-        /// </summary>
-        /// <param name="request">Required parameter: Request for creating a customer</param>
-        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
-        Models.GetCustomerResponse CreateCustomer(Models.CreateCustomerRequest request);
-
-        /// <summary>
-        /// Creates a new customer
-        /// </summary>
-        /// <param name="request">Required parameter: Request for creating a customer</param>
-        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
-        Task<Models.GetCustomerResponse> CreateCustomerAsync(Models.CreateCustomerRequest request);
-
-        /// <summary>
-        /// Get a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
-        Models.GetCustomerResponse GetCustomer(string customerId);
-
-        /// <summary>
-        /// Get a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
-        Task<Models.GetCustomerResponse> GetCustomerAsync(string customerId);
-
-        /// <summary>
-        /// Get all access tokens from a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListAccessTokensResponse response from the API call</return>
-        Models.ListAccessTokensResponse GetAccessTokens(string customerId, int? page = null, int? size = null);
-
-        /// <summary>
-        /// Get all access tokens from a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListAccessTokensResponse response from the API call</return>
-        Task<Models.ListAccessTokensResponse> GetAccessTokensAsync(string customerId, int? page = null, int? size = null);
-
-        /// <summary>
-        /// Gets all adressess from a customer
+        /// Get a customer's address
         /// </summary>
         /// <param name="customerId">Required parameter: Customer id</param>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListAddressesResponse response from the API call</return>
-        Models.ListAddressesResponse GetAddresses(string customerId, int? page = null, int? size = null);
+        /// <param name="addressId">Required parameter: Address Id</param>
+        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
+        Models.GetAddressResponse GetAddress(string customerId, string addressId);
 
         /// <summary>
-        /// Gets all adressess from a customer
+        /// Get a customer's address
         /// </summary>
         /// <param name="customerId">Required parameter: Customer id</param>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListAddressesResponse response from the API call</return>
-        Task<Models.ListAddressesResponse> GetAddressesAsync(string customerId, int? page = null, int? size = null);
+        /// <param name="addressId">Required parameter: Address Id</param>
+        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
+        Task<Models.GetAddressResponse> GetAddressAsync(string customerId, string addressId);
 
         /// <summary>
-        /// Get all cards from a customer
+        /// Delete a Customer's address
         /// </summary>
         /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListCardsResponse response from the API call</return>
-        Models.ListCardsResponse GetCards(string customerId, int? page = null, int? size = null);
+        /// <param name="addressId">Required parameter: Address Id</param>
+        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
+        Models.GetAddressResponse DeleteAddress(string customerId, string addressId);
 
         /// <summary>
-        /// Get all cards from a customer
+        /// Delete a Customer's address
         /// </summary>
         /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListCardsResponse response from the API call</return>
-        Task<Models.ListCardsResponse> GetCardsAsync(string customerId, int? page = null, int? size = null);
+        /// <param name="addressId">Required parameter: Address Id</param>
+        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
+        Task<Models.GetAddressResponse> DeleteAddressAsync(string customerId, string addressId);
+
+        /// <summary>
+        /// Delete a customer's card
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="cardId">Required parameter: Card Id</param>
+        /// <return>Returns the Models.GetCardResponse response from the API call</return>
+        Models.GetCardResponse DeleteCard(string customerId, string cardId);
+
+        /// <summary>
+        /// Delete a customer's card
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="cardId">Required parameter: Card Id</param>
+        /// <return>Returns the Models.GetCardResponse response from the API call</return>
+        Task<Models.GetCardResponse> DeleteCardAsync(string customerId, string cardId);
+
+        /// <summary>
+        /// Creates a new address for a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="request">Required parameter: Request for creating an address</param>
+        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
+        Models.GetAddressResponse CreateAddress(string customerId, Models.CreateAddressRequest request);
+
+        /// <summary>
+        /// Creates a new address for a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="request">Required parameter: Request for creating an address</param>
+        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
+        Task<Models.GetAddressResponse> CreateAddressAsync(string customerId, Models.CreateAddressRequest request);
+
+        /// <summary>
+        /// Get a customer's card
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer id</param>
+        /// <param name="cardId">Required parameter: Card id</param>
+        /// <return>Returns the Models.GetCardResponse response from the API call</return>
+        Models.GetCardResponse GetCard(string customerId, string cardId);
+
+        /// <summary>
+        /// Get a customer's card
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer id</param>
+        /// <param name="cardId">Required parameter: Card id</param>
+        /// <return>Returns the Models.GetCardResponse response from the API call</return>
+        Task<Models.GetCardResponse> GetCardAsync(string customerId, string cardId);
+
+        /// <summary>
+        /// Creates a new card for a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer id</param>
+        /// <param name="request">Required parameter: Request for creating a card</param>
+        /// <return>Returns the Models.GetCardResponse response from the API call</return>
+        Models.GetCardResponse CreateCard(string customerId, Models.CreateCardRequest request);
+
+        /// <summary>
+        /// Creates a new card for a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer id</param>
+        /// <param name="request">Required parameter: Request for creating a card</param>
+        /// <return>Returns the Models.GetCardResponse response from the API call</return>
+        Task<Models.GetCardResponse> CreateCardAsync(string customerId, Models.CreateCardRequest request);
+
+        /// <summary>
+        /// Updates a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer id</param>
+        /// <param name="request">Required parameter: Request for updating a customer</param>
+        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
+        Models.GetCustomerResponse UpdateCustomer(string customerId, Models.UpdateCustomerRequest request);
+
+        /// <summary>
+        /// Updates a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer id</param>
+        /// <param name="request">Required parameter: Request for updating a customer</param>
+        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
+        Task<Models.GetCustomerResponse> UpdateCustomerAsync(string customerId, Models.UpdateCustomerRequest request);
 
         /// <summary>
         /// Delete a Customer's access tokens
@@ -249,116 +307,58 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.GetCustomerResponse> UpdateCustomerMetadataAsync(string customerId, Models.UpdateMetadataRequest request);
 
         /// <summary>
-        /// Updates a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer id</param>
-        /// <param name="request">Required parameter: Request for updating a customer</param>
-        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
-        Models.GetCustomerResponse UpdateCustomer(string customerId, Models.UpdateCustomerRequest request);
-
-        /// <summary>
-        /// Updates a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer id</param>
-        /// <param name="request">Required parameter: Request for updating a customer</param>
-        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
-        Task<Models.GetCustomerResponse> UpdateCustomerAsync(string customerId, Models.UpdateCustomerRequest request);
-
-        /// <summary>
-        /// Get a customer's address
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer id</param>
-        /// <param name="addressId">Required parameter: Address Id</param>
-        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
-        Models.GetAddressResponse GetAddress(string customerId, string addressId);
-
-        /// <summary>
-        /// Get a customer's address
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer id</param>
-        /// <param name="addressId">Required parameter: Address Id</param>
-        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
-        Task<Models.GetAddressResponse> GetAddressAsync(string customerId, string addressId);
-
-        /// <summary>
-        /// Delete a Customer's address
+        /// Get all access tokens from a customer
         /// </summary>
         /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="addressId">Required parameter: Address Id</param>
-        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
-        Models.GetAddressResponse DeleteAddress(string customerId, string addressId);
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.ListAccessTokensResponse response from the API call</return>
+        Models.ListAccessTokensResponse GetAccessTokens(string customerId, int? page = null, int? size = null);
 
         /// <summary>
-        /// Delete a Customer's address
+        /// Get all access tokens from a customer
         /// </summary>
         /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="addressId">Required parameter: Address Id</param>
-        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
-        Task<Models.GetAddressResponse> DeleteAddressAsync(string customerId, string addressId);
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.ListAccessTokensResponse response from the API call</return>
+        Task<Models.ListAccessTokensResponse> GetAccessTokensAsync(string customerId, int? page = null, int? size = null);
 
         /// <summary>
-        /// Delete a customer's card
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="cardId">Required parameter: Card Id</param>
-        /// <return>Returns the Models.GetCardResponse response from the API call</return>
-        Models.GetCardResponse DeleteCard(string customerId, string cardId);
-
-        /// <summary>
-        /// Delete a customer's card
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="cardId">Required parameter: Card Id</param>
-        /// <return>Returns the Models.GetCardResponse response from the API call</return>
-        Task<Models.GetCardResponse> DeleteCardAsync(string customerId, string cardId);
-
-        /// <summary>
-        /// Creates a new address for a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="request">Required parameter: Request for creating an address</param>
-        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
-        Models.GetAddressResponse CreateAddress(string customerId, Models.CreateAddressRequest request);
-
-        /// <summary>
-        /// Creates a new address for a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="request">Required parameter: Request for creating an address</param>
-        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
-        Task<Models.GetAddressResponse> CreateAddressAsync(string customerId, Models.CreateAddressRequest request);
-
-        /// <summary>
-        /// Get a customer's card
+        /// Gets all adressess from a customer
         /// </summary>
         /// <param name="customerId">Required parameter: Customer id</param>
-        /// <param name="cardId">Required parameter: Card id</param>
-        /// <return>Returns the Models.GetCardResponse response from the API call</return>
-        Models.GetCardResponse GetCard(string customerId, string cardId);
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.ListAddressesResponse response from the API call</return>
+        Models.ListAddressesResponse GetAddresses(string customerId, int? page = null, int? size = null);
 
         /// <summary>
-        /// Get a customer's card
+        /// Gets all adressess from a customer
         /// </summary>
         /// <param name="customerId">Required parameter: Customer id</param>
-        /// <param name="cardId">Required parameter: Card id</param>
-        /// <return>Returns the Models.GetCardResponse response from the API call</return>
-        Task<Models.GetCardResponse> GetCardAsync(string customerId, string cardId);
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.ListAddressesResponse response from the API call</return>
+        Task<Models.ListAddressesResponse> GetAddressesAsync(string customerId, int? page = null, int? size = null);
 
         /// <summary>
-        /// Creates a new card for a customer
+        /// Get all cards from a customer
         /// </summary>
-        /// <param name="customerId">Required parameter: Customer id</param>
-        /// <param name="request">Required parameter: Request for creating a card</param>
-        /// <return>Returns the Models.GetCardResponse response from the API call</return>
-        Models.GetCardResponse CreateCard(string customerId, Models.CreateCardRequest request);
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.ListCardsResponse response from the API call</return>
+        Models.ListCardsResponse GetCards(string customerId, int? page = null, int? size = null);
 
         /// <summary>
-        /// Creates a new card for a customer
+        /// Get all cards from a customer
         /// </summary>
-        /// <param name="customerId">Required parameter: Customer id</param>
-        /// <param name="request">Required parameter: Request for creating a card</param>
-        /// <return>Returns the Models.GetCardResponse response from the API call</return>
-        Task<Models.GetCardResponse> CreateCardAsync(string customerId, Models.CreateCardRequest request);
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.ListCardsResponse response from the API call</return>
+        Task<Models.ListCardsResponse> GetCardsAsync(string customerId, int? page = null, int? size = null);
 
     }
 } 
