@@ -28,6 +28,14 @@ namespace MundiAPI.Standard.Models
         private string documentNumber;
         private string instructions;
         private Models.GetBillingAddressResponse billingAddress;
+        private string qrCode;
+        private string line;
+        private string pdfPassword;
+        private string pdf;
+        private string paidAmount;
+        private string type;
+        private DateTime? dueAt;
+        private DateTime? paidAt;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -145,6 +153,144 @@ namespace MundiAPI.Standard.Models
             {
                 this.billingAddress = value;
                 onPropertyChanged("BillingAddress");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("qr_code")]
+        public string QrCode 
+        { 
+            get 
+            {
+                return this.qrCode; 
+            } 
+            set 
+            {
+                this.qrCode = value;
+                onPropertyChanged("QrCode");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("line")]
+        public string Line 
+        { 
+            get 
+            {
+                return this.line; 
+            } 
+            set 
+            {
+                this.line = value;
+                onPropertyChanged("Line");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("pdf_password")]
+        public string PdfPassword 
+        { 
+            get 
+            {
+                return this.pdfPassword; 
+            } 
+            set 
+            {
+                this.pdfPassword = value;
+                onPropertyChanged("PdfPassword");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("pdf")]
+        public string Pdf 
+        { 
+            get 
+            {
+                return this.pdf; 
+            } 
+            set 
+            {
+                this.pdf = value;
+                onPropertyChanged("Pdf");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("paid_amount")]
+        public string PaidAmount 
+        { 
+            get 
+            {
+                return this.paidAmount; 
+            } 
+            set 
+            {
+                this.paidAmount = value;
+                onPropertyChanged("PaidAmount");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("type")]
+        public string Type 
+        { 
+            get 
+            {
+                return this.type; 
+            } 
+            set 
+            {
+                this.type = value;
+                onPropertyChanged("Type");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [JsonProperty("due_at")]
+        public DateTime? DueAt 
+        { 
+            get 
+            {
+                return this.dueAt; 
+            } 
+            set 
+            {
+                this.dueAt = value;
+                onPropertyChanged("DueAt");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [JsonProperty("paid_at")]
+        public DateTime? PaidAt 
+        { 
+            get 
+            {
+                return this.paidAt; 
+            } 
+            set 
+            {
+                this.paidAt = value;
+                onPropertyChanged("PaidAt");
             }
         }
     }
