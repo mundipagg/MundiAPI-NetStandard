@@ -34,7 +34,7 @@ namespace MundiAPI.Standard.Models
         private Models.GetShippingResponse shipping;
         private Dictionary<string, string> metadata;
         private bool closed;
-        private List<Models.GetCheckoutPaymentSettingsResponse> checkouts;
+        private List<Models.GetCheckoutPaymentResponse> checkouts;
         private string ip;
         private string sessionId;
         private Models.GetLocationResponse location;
@@ -267,7 +267,7 @@ namespace MundiAPI.Standard.Models
         /// Checkout Payment Settings Response
         /// </summary>
         [JsonProperty("checkouts")]
-        public List<Models.GetCheckoutPaymentSettingsResponse> Checkouts 
+        public List<Models.GetCheckoutPaymentResponse> Checkouts 
         { 
             get 
             {

@@ -27,6 +27,7 @@ namespace MundiAPI.Standard.Models
         private string gatewayAffiliationId;
         private Models.CreateCheckoutCardPaymentRequest creditCard;
         private Models.CreateCheckoutBoletoPaymentRequest boleto;
+        private bool? customerEditable;
 
         /// <summary>
         /// Accepted Payment Methods
@@ -127,6 +128,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.boleto = value;
                 onPropertyChanged("Boleto");
+            }
+        }
+
+        /// <summary>
+        /// Torna o objeto editável
+        /// </summary>
+        [JsonProperty("customer_editable")]
+        public bool? CustomerEditable 
+        { 
+            get 
+            {
+                return this.customerEditable; 
+            } 
+            set 
+            {
+                this.customerEditable = value;
+                onPropertyChanged("CustomerEditable");
             }
         }
     }
