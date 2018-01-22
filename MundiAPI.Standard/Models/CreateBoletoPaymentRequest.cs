@@ -27,6 +27,7 @@ namespace MundiAPI.Standard.Models
         private DateTime dueAt;
         private Models.CreateAddressRequest billingAddress;
         private string billingAddressId;
+        private string nossoNumero;
 
         /// <summary>
         /// Number of retries
@@ -128,6 +129,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.billingAddressId = value;
                 onPropertyChanged("BillingAddressId");
+            }
+        }
+
+        /// <summary>
+        /// Número de identificação do cliente com o banco
+        /// </summary>
+        [JsonProperty("nosso_numero")]
+        public string NossoNumero 
+        { 
+            get 
+            {
+                return this.nossoNumero; 
+            } 
+            set 
+            {
+                this.nossoNumero = value;
+                onPropertyChanged("NossoNumero");
             }
         }
     }
