@@ -25,6 +25,7 @@ namespace MundiAPI.Standard.Models
         private string description;
         private Models.GetPricingSchemeResponse pricingScheme;
         private Models.GetPriceBracketResponse priceBracket;
+        private string subscriptionItemId;
         private int? quantity;
         private string name;
 
@@ -93,6 +94,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.priceBracket = value;
                 onPropertyChanged("PriceBracket");
+            }
+        }
+
+        /// <summary>
+        /// Subscription Item Id
+        /// </summary>
+        [JsonProperty("subscription_item_id")]
+        public string SubscriptionItemId 
+        { 
+            get 
+            {
+                return this.subscriptionItemId; 
+            } 
+            set 
+            {
+                this.subscriptionItemId = value;
+                onPropertyChanged("SubscriptionItemId");
             }
         }
 
