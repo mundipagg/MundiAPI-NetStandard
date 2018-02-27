@@ -235,6 +235,8 @@ namespace MundiAPI.Standard.Http.Client
                         {
                             FileStreamInfo fileInfo = (FileStreamInfo)param.Value;
                             var fileContent = new StreamContent(fileInfo.FileStream);
+                            if (string.IsNullOrEmpty(fileInfo.FileName))
+                                fileInfo.FileName = "file";
                             fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
                             {
                                 Name = param.Key,

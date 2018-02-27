@@ -23,11 +23,15 @@ namespace MundiAPI.Standard.Models
         // These fields hold the values for the public properties.
         private List<string> acceptedPaymentMethods;
         private string successUrl;
+        private bool skipCheckoutSuccessPage;
+        private bool billingAddressEditable;
+        private Models.CreateAddressRequest billingAddress;
         private string defaultPaymentMethod;
         private string gatewayAffiliationId;
         private Models.CreateCheckoutCardPaymentRequest creditCard;
         private Models.CreateCheckoutBoletoPaymentRequest boleto;
         private bool? customerEditable;
+        private int? expiresIn;
 
         /// <summary>
         /// Accepted Payment Methods
@@ -60,6 +64,57 @@ namespace MundiAPI.Standard.Models
             {
                 this.successUrl = value;
                 onPropertyChanged("SuccessUrl");
+            }
+        }
+
+        /// <summary>
+        /// Pular tela de sucesso pós-pagamento?
+        /// </summary>
+        [JsonProperty("skip_checkout_success_page")]
+        public bool SkipCheckoutSuccessPage 
+        { 
+            get 
+            {
+                return this.skipCheckoutSuccessPage; 
+            } 
+            set 
+            {
+                this.skipCheckoutSuccessPage = value;
+                onPropertyChanged("SkipCheckoutSuccessPage");
+            }
+        }
+
+        /// <summary>
+        /// Torna o objeto billing address editável
+        /// </summary>
+        [JsonProperty("billing_address_editable")]
+        public bool BillingAddressEditable 
+        { 
+            get 
+            {
+                return this.billingAddressEditable; 
+            } 
+            set 
+            {
+                this.billingAddressEditable = value;
+                onPropertyChanged("BillingAddressEditable");
+            }
+        }
+
+        /// <summary>
+        /// Endereço de cobrança
+        /// </summary>
+        [JsonProperty("billing_address")]
+        public Models.CreateAddressRequest BillingAddress 
+        { 
+            get 
+            {
+                return this.billingAddress; 
+            } 
+            set 
+            {
+                this.billingAddress = value;
+                onPropertyChanged("BillingAddress");
             }
         }
 
@@ -145,6 +200,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.customerEditable = value;
                 onPropertyChanged("CustomerEditable");
+            }
+        }
+
+        /// <summary>
+        /// Tempo em minutos para a expiração
+        /// </summary>
+        [JsonProperty("expires_in")]
+        public int? ExpiresIn 
+        { 
+            get 
+            {
+                return this.expiresIn; 
+            } 
+            set 
+            {
+                this.expiresIn = value;
+                onPropertyChanged("ExpiresIn");
             }
         }
     }

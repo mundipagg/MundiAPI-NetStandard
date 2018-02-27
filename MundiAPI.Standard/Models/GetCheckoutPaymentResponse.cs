@@ -36,8 +36,14 @@ namespace MundiAPI.Standard.Models
         private Models.GetAddressResponse billingaddress;
         private Models.GetCheckoutCardPaymentResponse creditCard;
         private Models.GetCheckoutBoletoPaymentResponse boleto;
+        private bool billingAddressEditable;
+        private Models.GetShippingResponse shipping;
+        private bool shippable;
+        private string currency;
         private int? amount;
         private DateTime? canceledAt;
+        private DateTime? closedAt;
+        private DateTime? expiresAt;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -297,6 +303,74 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
+        /// Indica se o billing address poderá ser editado
+        /// </summary>
+        [JsonProperty("billing_address_editable")]
+        public bool BillingAddressEditable 
+        { 
+            get 
+            {
+                return this.billingAddressEditable; 
+            } 
+            set 
+            {
+                this.billingAddressEditable = value;
+                onPropertyChanged("BillingAddressEditable");
+            }
+        }
+
+        /// <summary>
+        /// Configurações  de entrega
+        /// </summary>
+        [JsonProperty("shipping")]
+        public Models.GetShippingResponse Shipping 
+        { 
+            get 
+            {
+                return this.shipping; 
+            } 
+            set 
+            {
+                this.shipping = value;
+                onPropertyChanged("Shipping");
+            }
+        }
+
+        /// <summary>
+        /// Indica se possui entrega
+        /// </summary>
+        [JsonProperty("shippable")]
+        public bool Shippable 
+        { 
+            get 
+            {
+                return this.shippable; 
+            } 
+            set 
+            {
+                this.shippable = value;
+                onPropertyChanged("Shippable");
+            }
+        }
+
+        /// <summary>
+        /// Moeda
+        /// </summary>
+        [JsonProperty("currency")]
+        public string Currency 
+        { 
+            get 
+            {
+                return this.currency; 
+            } 
+            set 
+            {
+                this.currency = value;
+                onPropertyChanged("Currency");
+            }
+        }
+
+        /// <summary>
         /// Valor em centavos
         /// </summary>
         [JsonProperty("amount")]
@@ -328,6 +402,42 @@ namespace MundiAPI.Standard.Models
             {
                 this.canceledAt = value;
                 onPropertyChanged("CanceledAt");
+            }
+        }
+
+        /// <summary>
+        /// Data de fechamento
+        /// </summary>
+        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [JsonProperty("closed_at")]
+        public DateTime? ClosedAt 
+        { 
+            get 
+            {
+                return this.closedAt; 
+            } 
+            set 
+            {
+                this.closedAt = value;
+                onPropertyChanged("ClosedAt");
+            }
+        }
+
+        /// <summary>
+        /// Data de expiração
+        /// </summary>
+        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [JsonProperty("expires_at")]
+        public DateTime? ExpiresAt 
+        { 
+            get 
+            {
+                return this.expiresAt; 
+            } 
+            set 
+            {
+                this.expiresAt = value;
+                onPropertyChanged("ExpiresAt");
             }
         }
     }
