@@ -416,5 +416,23 @@ namespace MundiAPI.Standard.Controllers
         /// <return>Returns the Models.GetDiscountResponse response from the API call</return>
         Task<Models.GetDiscountResponse> GetDiscountByIdAsync(string subscriptionId, string discountId);
 
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The subscription id</param>
+        /// <param name="page">Required parameter: Page number</param>
+        /// <param name="size">Required parameter: Page size</param>
+        /// <return>Returns the Models.ListDiscountsResponse response from the API call</return>
+        Models.ListDiscountsResponse GetDiscounts(string subscriptionId, int page, int size);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The subscription id</param>
+        /// <param name="page">Required parameter: Page number</param>
+        /// <param name="size">Required parameter: Page size</param>
+        /// <return>Returns the Models.ListDiscountsResponse response from the API call</return>
+        Task<Models.ListDiscountsResponse> GetDiscountsAsync(string subscriptionId, int page, int size);
+
     }
 } 

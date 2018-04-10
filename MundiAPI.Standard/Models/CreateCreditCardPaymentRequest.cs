@@ -32,6 +32,7 @@ namespace MundiAPI.Standard.Models
         private bool extendedLimitEnabled;
         private string extendedLimitCode;
         private bool? capture = true;
+        private long? merchantCategoryCode;
 
         /// <summary>
         /// Number of installments
@@ -217,6 +218,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.capture = value;
                 onPropertyChanged("Capture");
+            }
+        }
+
+        /// <summary>
+        /// Customer business segment code
+        /// </summary>
+        [JsonProperty("merchant_category_code")]
+        public long? MerchantCategoryCode 
+        { 
+            get 
+            {
+                return this.merchantCategoryCode; 
+            } 
+            set 
+            {
+                this.merchantCategoryCode = value;
+                onPropertyChanged("MerchantCategoryCode");
             }
         }
     }
