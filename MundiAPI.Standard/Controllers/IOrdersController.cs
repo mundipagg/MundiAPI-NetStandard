@@ -49,6 +49,22 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.GetOrderResponse> CreateOrderAsync(Models.CreateOrderRequest body);
 
         /// <summary>
+        /// Updates the metadata from an order
+        /// </summary>
+        /// <param name="orderId">Required parameter: The order id</param>
+        /// <param name="request">Required parameter: Request for updating the order metadata</param>
+        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
+        Models.GetOrderResponse UpdateOrderMetadata(string orderId, Models.UpdateMetadataRequest request);
+
+        /// <summary>
+        /// Updates the metadata from an order
+        /// </summary>
+        /// <param name="orderId">Required parameter: The order id</param>
+        /// <param name="request">Required parameter: Request for updating the order metadata</param>
+        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
+        Task<Models.GetOrderResponse> UpdateOrderMetadataAsync(string orderId, Models.UpdateMetadataRequest request);
+
+        /// <summary>
         /// Gets all orders
         /// </summary>
         /// <param name="page">Optional parameter: Page number</param>
@@ -89,36 +105,6 @@ namespace MundiAPI.Standard.Controllers
                 string customerId = null);
 
         /// <summary>
-        /// Updates the metadata from an order
-        /// </summary>
-        /// <param name="orderId">Required parameter: The order id</param>
-        /// <param name="request">Required parameter: Request for updating the order metadata</param>
-        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
-        Models.GetOrderResponse UpdateOrderMetadata(string orderId, Models.UpdateMetadataRequest request);
-
-        /// <summary>
-        /// Updates the metadata from an order
-        /// </summary>
-        /// <param name="orderId">Required parameter: The order id</param>
-        /// <param name="request">Required parameter: Request for updating the order metadata</param>
-        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
-        Task<Models.GetOrderResponse> UpdateOrderMetadataAsync(string orderId, Models.UpdateMetadataRequest request);
-
-        /// <summary>
-        /// TODO: type endpoint description here
-        /// </summary>
-        /// <param name="orderId">Required parameter: Order Id</param>
-        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
-        Models.GetOrderResponse DeleteAllOrderItems(string orderId);
-
-        /// <summary>
-        /// TODO: type endpoint description here
-        /// </summary>
-        /// <param name="orderId">Required parameter: Order Id</param>
-        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
-        Task<Models.GetOrderResponse> DeleteAllOrderItemsAsync(string orderId);
-
-        /// <summary>
         /// TODO: type endpoint description here
         /// </summary>
         /// <param name="orderId">Required parameter: Order Id</param>
@@ -151,6 +137,20 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="itemId">Required parameter: Item Id</param>
         /// <return>Returns the Models.GetOrderItemResponse response from the API call</return>
         Task<Models.GetOrderItemResponse> DeleteOrderItemAsync(string orderId, string itemId);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="orderId">Required parameter: Order Id</param>
+        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
+        Models.GetOrderResponse DeleteAllOrderItems(string orderId);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="orderId">Required parameter: Order Id</param>
+        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
+        Task<Models.GetOrderResponse> DeleteAllOrderItemsAsync(string orderId);
 
         /// <summary>
         /// TODO: type endpoint description here

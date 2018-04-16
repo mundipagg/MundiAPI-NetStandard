@@ -48,6 +48,7 @@ namespace MundiAPI.Standard.Models
         private string cardToken;
         private string gatewayAffiliationId;
         private int? quantity;
+        private int? boletoDueDays;
 
         /// <summary>
         /// Customer
@@ -506,6 +507,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.quantity = value;
                 onPropertyChanged("Quantity");
+            }
+        }
+
+        /// <summary>
+        /// Days until boleto expires
+        /// </summary>
+        [JsonProperty("boleto_due_days")]
+        public int? BoletoDueDays 
+        { 
+            get 
+            {
+                return this.boletoDueDays; 
+            } 
+            set 
+            {
+                this.boletoDueDays = value;
+                onPropertyChanged("BoletoDueDays");
             }
         }
     }
