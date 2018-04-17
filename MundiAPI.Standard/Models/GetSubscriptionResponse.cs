@@ -46,6 +46,7 @@ namespace MundiAPI.Standard.Models
         private int? minimumPrice;
         private DateTime? canceledAt;
         private List<Models.GetDiscountResponse> discounts;
+        private int? boletoDueDays;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -474,6 +475,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.discounts = value;
                 onPropertyChanged("Discounts");
+            }
+        }
+
+        /// <summary>
+        /// Days until boleto expires
+        /// </summary>
+        [JsonProperty("boleto_due_days")]
+        public int? BoletoDueDays 
+        { 
+            get 
+            {
+                return this.boletoDueDays; 
+            } 
+            set 
+            {
+                this.boletoDueDays = value;
+                onPropertyChanged("BoletoDueDays");
             }
         }
     }

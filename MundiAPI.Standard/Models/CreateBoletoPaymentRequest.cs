@@ -24,9 +24,9 @@ namespace MundiAPI.Standard.Models
         private int retries;
         private string bank;
         private string instructions;
-        private DateTime dueAt;
         private Models.CreateAddressRequest billingAddress;
         private string billingAddressId;
+        private DateTime? dueAt;
         private string nossoNumero;
 
         /// <summary>
@@ -81,24 +81,6 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Boleto due date
-        /// </summary>
-        [JsonConverter(typeof(IsoDateTimeConverter))]
-        [JsonProperty("due_at")]
-        public DateTime DueAt 
-        { 
-            get 
-            {
-                return this.dueAt; 
-            } 
-            set 
-            {
-                this.dueAt = value;
-                onPropertyChanged("DueAt");
-            }
-        }
-
-        /// <summary>
         /// Card's billing address
         /// </summary>
         [JsonProperty("billing_address")]
@@ -129,6 +111,24 @@ namespace MundiAPI.Standard.Models
             {
                 this.billingAddressId = value;
                 onPropertyChanged("BillingAddressId");
+            }
+        }
+
+        /// <summary>
+        /// Boleto due date
+        /// </summary>
+        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [JsonProperty("due_at")]
+        public DateTime? DueAt 
+        { 
+            get 
+            {
+                return this.dueAt; 
+            } 
+            set 
+            {
+                this.dueAt = value;
+                onPropertyChanged("DueAt");
             }
         }
 
