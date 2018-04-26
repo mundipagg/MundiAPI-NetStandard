@@ -37,6 +37,7 @@ namespace MundiAPI.Standard.Models
         private List<Models.CreateDiscountRequest> discounts;
         private Dictionary<string, string> metadata;
         private Models.CreateSetupRequest setup;
+        private List<Models.CreateIncrementRequest> increments;
         private string planId;
         private string customerId;
         private string cardId;
@@ -319,6 +320,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.setup = value;
                 onPropertyChanged("Setup");
+            }
+        }
+
+        /// <summary>
+        /// Increments
+        /// </summary>
+        [JsonProperty("increments")]
+        public List<Models.CreateIncrementRequest> Increments 
+        { 
+            get 
+            {
+                return this.increments; 
+            } 
+            set 
+            {
+                this.increments = value;
+                onPropertyChanged("Increments");
             }
         }
 

@@ -18,17 +18,17 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class CreateDiscountRequest : BaseModel 
+    public class CreateIncrementRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
         private double mvalue;
-        private string discountType;
+        private string incrementType;
         private string itemId;
         private int? cycles;
         private string description;
 
         /// <summary>
-        /// The discount value
+        /// The increment value
         /// </summary>
         [JsonProperty("value")]
         public double Value 
@@ -45,24 +45,24 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Discount type. Can be either flat or percentage.
+        /// Increment type. Can be either flat or percentage.
         /// </summary>
-        [JsonProperty("discount_type")]
-        public string DiscountType 
+        [JsonProperty("increment_type")]
+        public string IncrementType 
         { 
             get 
             {
-                return this.discountType; 
+                return this.incrementType; 
             } 
             set 
             {
-                this.discountType = value;
-                onPropertyChanged("DiscountType");
+                this.incrementType = value;
+                onPropertyChanged("IncrementType");
             }
         }
 
         /// <summary>
-        /// The item where the discount will be applied
+        /// The item where the increment will be applied
         /// </summary>
         [JsonProperty("item_id")]
         public string ItemId 
@@ -79,7 +79,7 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Number of cycles that the discount will be applied
+        /// Number of cycles that the increment will be applied
         /// </summary>
         [JsonProperty("cycles")]
         public int? Cycles 

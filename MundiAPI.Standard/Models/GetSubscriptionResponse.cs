@@ -41,6 +41,7 @@ namespace MundiAPI.Standard.Models
         private Dictionary<string, string> metadata;
         private Models.GetSetupResponse setup;
         private string gatewayAffiliationId;
+        private List<Models.GetIncrementResponse> increments;
         private DateTime? nextBillingAt;
         private int? billingDay;
         private int? minimumPrice;
@@ -388,6 +389,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.gatewayAffiliationId = value;
                 onPropertyChanged("GatewayAffiliationId");
+            }
+        }
+
+        /// <summary>
+        /// Subscription increments
+        /// </summary>
+        [JsonProperty("increments")]
+        public List<Models.GetIncrementResponse> Increments 
+        { 
+            get 
+            {
+                return this.increments; 
+            } 
+            set 
+            {
+                this.increments = value;
+                onPropertyChanged("Increments");
             }
         }
 

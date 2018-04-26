@@ -450,5 +450,55 @@ namespace MundiAPI.Standard.Controllers
         /// <return>Returns the Models.GetSubscriptionUsagesDetailsResponse response from the API call</return>
         Task<Models.GetSubscriptionUsagesDetailsResponse> GetSubscriptionUsagesDetailsAsync(string subscriptionId, string cycleId = null);
 
+        /// <summary>
+        /// Creates a increment
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription id</param>
+        /// <param name="request">Required parameter: Request for creating a increment</param>
+        /// <return>Returns the Models.GetIncrementResponse response from the API call</return>
+        Models.GetIncrementResponse CreateIncrement(string subscriptionId, Models.CreateIncrementRequest request);
+
+        /// <summary>
+        /// Creates a increment
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription id</param>
+        /// <param name="request">Required parameter: Request for creating a increment</param>
+        /// <return>Returns the Models.GetIncrementResponse response from the API call</return>
+        Task<Models.GetIncrementResponse> CreateIncrementAsync(string subscriptionId, Models.CreateIncrementRequest request);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The subscription id</param>
+        /// <param name="page">Required parameter: Page number</param>
+        /// <param name="size">Required parameter: Page size</param>
+        /// <return>Returns the Models.ListIncrementsResponse response from the API call</return>
+        Models.ListIncrementsResponse GetIncrements(string subscriptionId, int page, int size);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The subscription id</param>
+        /// <param name="page">Required parameter: Page number</param>
+        /// <param name="size">Required parameter: Page size</param>
+        /// <return>Returns the Models.ListIncrementsResponse response from the API call</return>
+        Task<Models.ListIncrementsResponse> GetIncrementsAsync(string subscriptionId, int page, int size);
+
+        /// <summary>
+        /// Deletes a increment
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription id</param>
+        /// <param name="incrementId">Required parameter: Increment id</param>
+        /// <return>Returns the Models.GetIncrementResponse response from the API call</return>
+        Models.GetIncrementResponse DeleteIncrement(string subscriptionId, string incrementId);
+
+        /// <summary>
+        /// Deletes a increment
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription id</param>
+        /// <param name="incrementId">Required parameter: Increment id</param>
+        /// <return>Returns the Models.GetIncrementResponse response from the API call</return>
+        Task<Models.GetIncrementResponse> DeleteIncrementAsync(string subscriptionId, string incrementId);
+
     }
 } 

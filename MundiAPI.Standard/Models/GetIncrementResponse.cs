@@ -18,21 +18,21 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class GetUsageResponse : BaseModel 
+    public class GetIncrementResponse : BaseModel 
     {
         // These fields hold the values for the public properties.
         private string id;
-        private int quantity;
-        private string description;
-        private DateTime usedAt;
-        private DateTime createdAt;
+        private double mvalue;
+        private string incrementType;
         private string status;
-        private Models.GetSubscriptionItemResponse subscriptionItem;
+        private DateTime createdAt;
+        private Models.GetSubscriptionResponse subscription;
+        private int? cycles;
         private DateTime? deletedAt;
-        private string code;
+        private string description;
 
         /// <summary>
-        /// Id
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("id")]
         public string Id 
@@ -49,59 +49,58 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Quantity
+        /// TODO: Write general description for this method
         /// </summary>
-        [JsonProperty("quantity")]
-        public int Quantity 
+        [JsonProperty("value")]
+        public double Value 
         { 
             get 
             {
-                return this.quantity; 
+                return this.mvalue; 
             } 
             set 
             {
-                this.quantity = value;
-                onPropertyChanged("Quantity");
+                this.mvalue = value;
+                onPropertyChanged("Value");
             }
         }
 
         /// <summary>
-        /// Description
+        /// TODO: Write general description for this method
         /// </summary>
-        [JsonProperty("description")]
-        public string Description 
+        [JsonProperty("increment_type")]
+        public string IncrementType 
         { 
             get 
             {
-                return this.description; 
+                return this.incrementType; 
             } 
             set 
             {
-                this.description = value;
-                onPropertyChanged("Description");
+                this.incrementType = value;
+                onPropertyChanged("IncrementType");
             }
         }
 
         /// <summary>
-        /// Used at
+        /// TODO: Write general description for this method
         /// </summary>
-        [JsonConverter(typeof(IsoDateTimeConverter))]
-        [JsonProperty("used_at")]
-        public DateTime UsedAt 
+        [JsonProperty("status")]
+        public string Status 
         { 
             get 
             {
-                return this.usedAt; 
+                return this.status; 
             } 
             set 
             {
-                this.usedAt = value;
-                onPropertyChanged("UsedAt");
+                this.status = value;
+                onPropertyChanged("Status");
             }
         }
 
         /// <summary>
-        /// Creation date
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonConverter(typeof(IsoDateTimeConverter))]
         [JsonProperty("created_at")]
@@ -119,36 +118,36 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Status
+        /// TODO: Write general description for this method
         /// </summary>
-        [JsonProperty("status")]
-        public string Status 
+        [JsonProperty("subscription")]
+        public Models.GetSubscriptionResponse Subscription 
         { 
             get 
             {
-                return this.status; 
+                return this.subscription; 
             } 
             set 
             {
-                this.status = value;
-                onPropertyChanged("Status");
+                this.subscription = value;
+                onPropertyChanged("Subscription");
             }
         }
 
         /// <summary>
-        /// Subscription item
+        /// TODO: Write general description for this method
         /// </summary>
-        [JsonProperty("subscription_item")]
-        public Models.GetSubscriptionItemResponse SubscriptionItem 
+        [JsonProperty("cycles")]
+        public int? Cycles 
         { 
             get 
             {
-                return this.subscriptionItem; 
+                return this.cycles; 
             } 
             set 
             {
-                this.subscriptionItem = value;
-                onPropertyChanged("SubscriptionItem");
+                this.cycles = value;
+                onPropertyChanged("Cycles");
             }
         }
 
@@ -171,19 +170,19 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Identification code in the client system
+        /// TODO: Write general description for this method
         /// </summary>
-        [JsonProperty("code")]
-        public string Code 
+        [JsonProperty("description")]
+        public string Description 
         { 
             get 
             {
-                return this.code; 
+                return this.description; 
             } 
             set 
             {
-                this.code = value;
-                onPropertyChanged("Code");
+                this.description = value;
+                onPropertyChanged("Description");
             }
         }
     }
