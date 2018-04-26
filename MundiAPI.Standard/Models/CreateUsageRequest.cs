@@ -24,6 +24,7 @@ namespace MundiAPI.Standard.Models
         private int quantity;
         private string description;
         private DateTime usedAt;
+        private string code;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -74,6 +75,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.usedAt = value;
                 onPropertyChanged("UsedAt");
+            }
+        }
+
+        /// <summary>
+        /// Identification code in the client system
+        /// </summary>
+        [JsonProperty("code")]
+        public string Code 
+        { 
+            get 
+            {
+                return this.code; 
+            } 
+            set 
+            {
+                this.code = value;
+                onPropertyChanged("Code");
             }
         }
     }

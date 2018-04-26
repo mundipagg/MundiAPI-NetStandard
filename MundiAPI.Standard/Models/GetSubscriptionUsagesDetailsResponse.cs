@@ -25,6 +25,8 @@ namespace MundiAPI.Standard.Models
         private int totalAmount;
         private Models.GetPeriodResponse period;
         private List<Models.GetUsageResponse> usages;
+        private int? totalDiscount;
+        private int? totalIncrement;
 
         /// <summary>
         /// Subscription Identifier
@@ -91,6 +93,40 @@ namespace MundiAPI.Standard.Models
             {
                 this.usages = value;
                 onPropertyChanged("Usages");
+            }
+        }
+
+        /// <summary>
+        /// Total discounted value
+        /// </summary>
+        [JsonProperty("total_discount")]
+        public int? TotalDiscount 
+        { 
+            get 
+            {
+                return this.totalDiscount; 
+            } 
+            set 
+            {
+                this.totalDiscount = value;
+                onPropertyChanged("TotalDiscount");
+            }
+        }
+
+        /// <summary>
+        /// Total inremented value
+        /// </summary>
+        [JsonProperty("total_increment")]
+        public int? TotalIncrement 
+        { 
+            get 
+            {
+                return this.totalIncrement; 
+            } 
+            set 
+            {
+                this.totalIncrement = value;
+                onPropertyChanged("TotalIncrement");
             }
         }
     }

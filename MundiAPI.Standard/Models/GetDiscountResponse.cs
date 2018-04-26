@@ -29,6 +29,7 @@ namespace MundiAPI.Standard.Models
         private Models.GetSubscriptionResponse subscription;
         private int? cycles;
         private DateTime? deletedAt;
+        private string description;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -165,6 +166,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.deletedAt = value;
                 onPropertyChanged("DeletedAt");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("description")]
+        public string Description 
+        { 
+            get 
+            {
+                return this.description; 
+            } 
+            set 
+            {
+                this.description = value;
+                onPropertyChanged("Description");
             }
         }
     }

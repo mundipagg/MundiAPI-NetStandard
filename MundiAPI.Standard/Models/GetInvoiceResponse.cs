@@ -41,6 +41,8 @@ namespace MundiAPI.Standard.Models
         private DateTime? canceledAt;
         private DateTime? billingAt;
         private DateTime? seenAt;
+        private int? totalDiscount;
+        private int? totalIncrement;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -384,6 +386,40 @@ namespace MundiAPI.Standard.Models
             {
                 this.seenAt = value;
                 onPropertyChanged("SeenAt");
+            }
+        }
+
+        /// <summary>
+        /// Total discounted value
+        /// </summary>
+        [JsonProperty("total_discount")]
+        public int? TotalDiscount 
+        { 
+            get 
+            {
+                return this.totalDiscount; 
+            } 
+            set 
+            {
+                this.totalDiscount = value;
+                onPropertyChanged("TotalDiscount");
+            }
+        }
+
+        /// <summary>
+        /// Total discounted value
+        /// </summary>
+        [JsonProperty("total_increment")]
+        public int? TotalIncrement 
+        { 
+            get 
+            {
+                return this.totalIncrement; 
+            } 
+            set 
+            {
+                this.totalIncrement = value;
+                onPropertyChanged("TotalIncrement");
             }
         }
     }

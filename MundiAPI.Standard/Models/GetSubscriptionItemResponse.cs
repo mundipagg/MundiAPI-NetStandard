@@ -28,6 +28,7 @@ namespace MundiAPI.Standard.Models
         private DateTime updatedAt;
         private Models.GetPricingSchemeResponse pricingScheme;
         private List<Models.GetDiscountResponse> discounts;
+        private List<Models.GetIncrementResponse> increments;
         private Models.GetSubscriptionResponse subscription;
         private string name;
         private int? quantity;
@@ -152,6 +153,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.discounts = value;
                 onPropertyChanged("Discounts");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("increments")]
+        public List<Models.GetIncrementResponse> Increments 
+        { 
+            get 
+            {
+                return this.increments; 
+            } 
+            set 
+            {
+                this.increments = value;
+                onPropertyChanged("Increments");
             }
         }
 
