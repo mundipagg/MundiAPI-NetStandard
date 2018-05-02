@@ -231,34 +231,6 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.GetUsageResponse> DeleteUsageAsync(string subscriptionId, string itemId, string usageId);
 
         /// <summary>
-        /// Lists all usages from a subscription item
-        /// </summary>
-        /// <param name="subscriptionId">Required parameter: The subscription id</param>
-        /// <param name="itemId">Required parameter: The subscription item id</param>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListUsagesResponse response from the API call</return>
-        Models.ListUsagesResponse GetUsages(
-                string subscriptionId,
-                string itemId,
-                int? page = null,
-                int? size = null);
-
-        /// <summary>
-        /// Lists all usages from a subscription item
-        /// </summary>
-        /// <param name="subscriptionId">Required parameter: The subscription id</param>
-        /// <param name="itemId">Required parameter: The subscription item id</param>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListUsagesResponse response from the API call</return>
-        Task<Models.ListUsagesResponse> GetUsagesAsync(
-                string subscriptionId,
-                string itemId,
-                int? page = null,
-                int? size = null);
-
-        /// <summary>
         /// Updates the metadata from a subscription
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The subscription id</param>
@@ -499,6 +471,38 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="incrementId">Required parameter: Increment id</param>
         /// <return>Returns the Models.GetIncrementResponse response from the API call</return>
         Task<Models.GetIncrementResponse> DeleteIncrementAsync(string subscriptionId, string incrementId);
+
+        /// <summary>
+        /// Lists all usages from a subscription item
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The subscription id</param>
+        /// <param name="itemId">Required parameter: The subscription item id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="code">Optional parameter: Identification code in the client system</param>
+        /// <return>Returns the Models.ListUsagesResponse response from the API call</return>
+        Models.ListUsagesResponse GetUsages(
+                string subscriptionId,
+                string itemId,
+                int? page = null,
+                int? size = null,
+                string code = null);
+
+        /// <summary>
+        /// Lists all usages from a subscription item
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The subscription id</param>
+        /// <param name="itemId">Required parameter: The subscription item id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="code">Optional parameter: Identification code in the client system</param>
+        /// <return>Returns the Models.ListUsagesResponse response from the API call</return>
+        Task<Models.ListUsagesResponse> GetUsagesAsync(
+                string subscriptionId,
+                string itemId,
+                int? page = null,
+                int? size = null,
+                string code = null);
 
     }
 } 
