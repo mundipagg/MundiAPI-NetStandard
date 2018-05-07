@@ -18,13 +18,13 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class GetSubscriptionUsagesDetailsResponse : BaseModel 
+    public class GetUsagesDetailsResponse : BaseModel 
     {
         // These fields hold the values for the public properties.
         private string subscriptionId;
         private int totalAmount;
         private Models.GetPeriodResponse period;
-        private List<Models.GetUsageResponse> usages;
+        private Models.ListUsagesDetailsResponse usages;
         private int? totalDiscount;
         private int? totalIncrement;
 
@@ -83,7 +83,7 @@ namespace MundiAPI.Standard.Models
         /// Usages Details
         /// </summary>
         [JsonProperty("Usages")]
-        public List<Models.GetUsageResponse> Usages 
+        public Models.ListUsagesDetailsResponse Usages 
         { 
             get 
             {

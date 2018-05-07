@@ -407,22 +407,6 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.ListDiscountsResponse> GetDiscountsAsync(string subscriptionId, int page, int size);
 
         /// <summary>
-        /// TODO: type endpoint description here
-        /// </summary>
-        /// <param name="subscriptionId">Required parameter: Subscription Identifier</param>
-        /// <param name="cycleId">Optional parameter: Cycle id</param>
-        /// <return>Returns the Models.GetSubscriptionUsagesDetailsResponse response from the API call</return>
-        Models.GetSubscriptionUsagesDetailsResponse GetSubscriptionUsagesDetails(string subscriptionId, string cycleId = null);
-
-        /// <summary>
-        /// TODO: type endpoint description here
-        /// </summary>
-        /// <param name="subscriptionId">Required parameter: Subscription Identifier</param>
-        /// <param name="cycleId">Optional parameter: Cycle id</param>
-        /// <return>Returns the Models.GetSubscriptionUsagesDetailsResponse response from the API call</return>
-        Task<Models.GetSubscriptionUsagesDetailsResponse> GetSubscriptionUsagesDetailsAsync(string subscriptionId, string cycleId = null);
-
-        /// <summary>
         /// Creates a increment
         /// </summary>
         /// <param name="subscriptionId">Required parameter: Subscription id</param>
@@ -442,19 +426,19 @@ namespace MundiAPI.Standard.Controllers
         /// TODO: type endpoint description here
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The subscription id</param>
-        /// <param name="page">Required parameter: Page number</param>
-        /// <param name="size">Required parameter: Page size</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
         /// <return>Returns the Models.ListIncrementsResponse response from the API call</return>
-        Models.ListIncrementsResponse GetIncrements(string subscriptionId, int page, int size);
+        Models.ListIncrementsResponse GetIncrements(string subscriptionId, int? page = null, int? size = null);
 
         /// <summary>
         /// TODO: type endpoint description here
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The subscription id</param>
-        /// <param name="page">Required parameter: Page number</param>
-        /// <param name="size">Required parameter: Page size</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
         /// <return>Returns the Models.ListIncrementsResponse response from the API call</return>
-        Task<Models.ListIncrementsResponse> GetIncrementsAsync(string subscriptionId, int page, int size);
+        Task<Models.ListIncrementsResponse> GetIncrementsAsync(string subscriptionId, int? page = null, int? size = null);
 
         /// <summary>
         /// Deletes a increment
@@ -471,6 +455,34 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="incrementId">Required parameter: Increment id</param>
         /// <return>Returns the Models.GetIncrementResponse response from the API call</return>
         Task<Models.GetIncrementResponse> DeleteIncrementAsync(string subscriptionId, string incrementId);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Identifier</param>
+        /// <param name="cycleId">Optional parameter: Cycle id</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <return>Returns the Models.GetUsagesDetailsResponse response from the API call</return>
+        Models.GetUsagesDetailsResponse GetUsagesDetails(
+                string subscriptionId,
+                string cycleId = null,
+                int? size = null,
+                int? page = null);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Identifier</param>
+        /// <param name="cycleId">Optional parameter: Cycle id</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <return>Returns the Models.GetUsagesDetailsResponse response from the API call</return>
+        Task<Models.GetUsagesDetailsResponse> GetUsagesDetailsAsync(
+                string subscriptionId,
+                string cycleId = null,
+                int? size = null,
+                int? page = null);
 
         /// <summary>
         /// Lists all usages from a subscription item
