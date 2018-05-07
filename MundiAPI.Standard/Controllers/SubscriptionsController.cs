@@ -1516,76 +1516,6 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// TODO: type endpoint description here
-        /// </summary>
-        /// <param name="subscriptionId">Required parameter: Subscription Identifier</param>
-        /// <param name="cycleId">Optional parameter: Cycle id</param>
-        /// <return>Returns the Models.GetSubscriptionUsagesDetailsResponse response from the API call</return>
-        public Models.GetSubscriptionUsagesDetailsResponse GetSubscriptionUsagesDetails(string subscriptionId, string cycleId = null)
-        {
-            Task<Models.GetSubscriptionUsagesDetailsResponse> t = GetSubscriptionUsagesDetailsAsync(subscriptionId, cycleId);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// TODO: type endpoint description here
-        /// </summary>
-        /// <param name="subscriptionId">Required parameter: Subscription Identifier</param>
-        /// <param name="cycleId">Optional parameter: Cycle id</param>
-        /// <return>Returns the Models.GetSubscriptionUsagesDetailsResponse response from the API call</return>
-        public async Task<Models.GetSubscriptionUsagesDetailsResponse> GetSubscriptionUsagesDetailsAsync(string subscriptionId, string cycleId = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/subscriptions/{subscription_id}/usages-details/");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "subscription_id", subscriptionId }
-            });
-
-            //process optional query parameters
-            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "cycle_id", cycleId }
-            },ArrayDeserializationFormat,ParameterSeparator);
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK" },
-                { "accept", "application/json" }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetSubscriptionUsagesDetailsResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
         /// Creates a increment
         /// </summary>
         /// <param name="subscriptionId">Required parameter: Subscription id</param>
@@ -1657,10 +1587,10 @@ namespace MundiAPI.Standard.Controllers
         /// TODO: type endpoint description here
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The subscription id</param>
-        /// <param name="page">Required parameter: Page number</param>
-        /// <param name="size">Required parameter: Page size</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
         /// <return>Returns the Models.ListIncrementsResponse response from the API call</return>
-        public Models.ListIncrementsResponse GetIncrements(string subscriptionId, int page, int size)
+        public Models.ListIncrementsResponse GetIncrements(string subscriptionId, int? page = null, int? size = null)
         {
             Task<Models.ListIncrementsResponse> t = GetIncrementsAsync(subscriptionId, page, size);
             APIHelper.RunTaskSynchronously(t);
@@ -1671,10 +1601,10 @@ namespace MundiAPI.Standard.Controllers
         /// TODO: type endpoint description here
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The subscription id</param>
-        /// <param name="page">Required parameter: Page number</param>
-        /// <param name="size">Required parameter: Page size</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
         /// <return>Returns the Models.ListIncrementsResponse response from the API call</return>
-        public async Task<Models.ListIncrementsResponse> GetIncrementsAsync(string subscriptionId, int page, int size)
+        public async Task<Models.ListIncrementsResponse> GetIncrementsAsync(string subscriptionId, int? page = null, int? size = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -1784,6 +1714,90 @@ namespace MundiAPI.Standard.Controllers
             try
             {
                 return APIHelper.JsonDeserialize<Models.GetIncrementResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Identifier</param>
+        /// <param name="cycleId">Optional parameter: Cycle id</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <return>Returns the Models.GetUsagesDetailsResponse response from the API call</return>
+        public Models.GetUsagesDetailsResponse GetUsagesDetails(
+                string subscriptionId,
+                string cycleId = null,
+                int? size = null,
+                int? page = null)
+        {
+            Task<Models.GetUsagesDetailsResponse> t = GetUsagesDetailsAsync(subscriptionId, cycleId, size, page);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Identifier</param>
+        /// <param name="cycleId">Optional parameter: Cycle id</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <return>Returns the Models.GetUsagesDetailsResponse response from the API call</return>
+        public async Task<Models.GetUsagesDetailsResponse> GetUsagesDetailsAsync(
+                string subscriptionId,
+                string cycleId = null,
+                int? size = null,
+                int? page = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/subscriptions/{subscription_id}/usages-details/");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "subscription_id", subscriptionId }
+            });
+
+            //process optional query parameters
+            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "cycle_id", cycleId },
+                { "size", size },
+                { "page", page }
+            },ArrayDeserializationFormat,ParameterSeparator);
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.GetUsagesDetailsResponse>(_response.Body);
             }
             catch (Exception _ex)
             {

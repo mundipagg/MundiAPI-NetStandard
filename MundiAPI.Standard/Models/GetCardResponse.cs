@@ -35,6 +35,7 @@ namespace MundiAPI.Standard.Models
         private Dictionary<string, string> metadata;
         private string type;
         private string holderDocument;
+        private string firstSixDigits;
         private DateTime? deletedAt;
 
         /// <summary>
@@ -274,6 +275,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.holderDocument = value;
                 onPropertyChanged("HolderDocument");
+            }
+        }
+
+        /// <summary>
+        /// First six digits
+        /// </summary>
+        [JsonProperty("first_six_digits")]
+        public string FirstSixDigits 
+        { 
+            get 
+            {
+                return this.firstSixDigits; 
+            } 
+            set 
+            {
+                this.firstSixDigits = value;
+                onPropertyChanged("FirstSixDigits");
             }
         }
 
