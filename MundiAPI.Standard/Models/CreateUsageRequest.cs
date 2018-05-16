@@ -25,6 +25,7 @@ namespace MundiAPI.Standard.Models
         private string description;
         private DateTime usedAt;
         private string code;
+        private string mgroup;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -92,6 +93,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.code = value;
                 onPropertyChanged("Code");
+            }
+        }
+
+        /// <summary>
+        /// identification group in the client system
+        /// </summary>
+        [JsonProperty("group")]
+        public string Group 
+        { 
+            get 
+            {
+                return this.mgroup; 
+            } 
+            set 
+            {
+                this.mgroup = value;
+                onPropertyChanged("Group");
             }
         }
     }

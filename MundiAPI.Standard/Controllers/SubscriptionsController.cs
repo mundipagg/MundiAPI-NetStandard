@@ -1237,79 +1237,6 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// Get Subscription Itens
-        /// </summary>
-        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
-        /// <param name="status">Required parameter: Status</param>
-        /// <param name="description">Required parameter: Description</param>
-        /// <return>Returns the Models.ListSubscriptionsResponse response from the API call</return>
-        public Models.ListSubscriptionsResponse GetSubscriptionItems(string subscriptionId, string status, string description)
-        {
-            Task<Models.ListSubscriptionsResponse> t = GetSubscriptionItemsAsync(subscriptionId, status, description);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Get Subscription Itens
-        /// </summary>
-        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
-        /// <param name="status">Required parameter: Status</param>
-        /// <param name="description">Required parameter: Description</param>
-        /// <return>Returns the Models.ListSubscriptionsResponse response from the API call</return>
-        public async Task<Models.ListSubscriptionsResponse> GetSubscriptionItemsAsync(string subscriptionId, string status, string description)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/subscriptions/{subscription_id}/items");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "subscription_id", subscriptionId }
-            });
-
-            //process optional query parameters
-            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "status", status },
-                { "description", description }
-            },ArrayDeserializationFormat,ParameterSeparator);
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK" },
-                { "accept", "application/json" }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.ListSubscriptionsResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
         /// TODO: type endpoint description here
         /// </summary>
         /// <param name="subscriptionId">Required parameter: Example: </param>
@@ -1728,14 +1655,16 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="cycleId">Optional parameter: Cycle id</param>
         /// <param name="size">Optional parameter: Page size</param>
         /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="itemId">Optional parameter: Identificador do item</param>
         /// <return>Returns the Models.GetUsagesDetailsResponse response from the API call</return>
         public Models.GetUsagesDetailsResponse GetUsagesDetails(
                 string subscriptionId,
                 string cycleId = null,
                 int? size = null,
-                int? page = null)
+                int? page = null,
+                string itemId = null)
         {
-            Task<Models.GetUsagesDetailsResponse> t = GetUsagesDetailsAsync(subscriptionId, cycleId, size, page);
+            Task<Models.GetUsagesDetailsResponse> t = GetUsagesDetailsAsync(subscriptionId, cycleId, size, page, itemId);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -1747,12 +1676,14 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="cycleId">Optional parameter: Cycle id</param>
         /// <param name="size">Optional parameter: Page size</param>
         /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="itemId">Optional parameter: Identificador do item</param>
         /// <return>Returns the Models.GetUsagesDetailsResponse response from the API call</return>
         public async Task<Models.GetUsagesDetailsResponse> GetUsagesDetailsAsync(
                 string subscriptionId,
                 string cycleId = null,
                 int? size = null,
-                int? page = null)
+                int? page = null,
+                string itemId = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -1772,7 +1703,8 @@ namespace MundiAPI.Standard.Controllers
             {
                 { "cycle_id", cycleId },
                 { "size", size },
-                { "page", page }
+                { "page", page },
+                { "item_id", itemId }
             },ArrayDeserializationFormat,ParameterSeparator);
 
 
@@ -1813,15 +1745,17 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="page">Optional parameter: Page number</param>
         /// <param name="size">Optional parameter: Page size</param>
         /// <param name="code">Optional parameter: Identification code in the client system</param>
+        /// <param name="mgroup">Optional parameter: Identification group in the client system</param>
         /// <return>Returns the Models.ListUsagesResponse response from the API call</return>
         public Models.ListUsagesResponse GetUsages(
                 string subscriptionId,
                 string itemId,
                 int? page = null,
                 int? size = null,
-                string code = null)
+                string code = null,
+                string mgroup = null)
         {
-            Task<Models.ListUsagesResponse> t = GetUsagesAsync(subscriptionId, itemId, page, size, code);
+            Task<Models.ListUsagesResponse> t = GetUsagesAsync(subscriptionId, itemId, page, size, code, mgroup);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -1834,13 +1768,15 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="page">Optional parameter: Page number</param>
         /// <param name="size">Optional parameter: Page size</param>
         /// <param name="code">Optional parameter: Identification code in the client system</param>
+        /// <param name="mgroup">Optional parameter: Identification group in the client system</param>
         /// <return>Returns the Models.ListUsagesResponse response from the API call</return>
         public async Task<Models.ListUsagesResponse> GetUsagesAsync(
                 string subscriptionId,
                 string itemId,
                 int? page = null,
                 int? size = null,
-                string code = null)
+                string code = null,
+                string mgroup = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -1861,7 +1797,8 @@ namespace MundiAPI.Standard.Controllers
             {
                 { "page", page },
                 { "size", size },
-                { "code", code }
+                { "code", code },
+                { "group", mgroup }
             },ArrayDeserializationFormat,ParameterSeparator);
 
 
