@@ -30,6 +30,7 @@ namespace MundiAPI.Standard.Models
         private Models.GetSubscriptionItemResponse subscriptionItem;
         private DateTime? deletedAt;
         private string code;
+        private string mgroup;
 
         /// <summary>
         /// Id
@@ -184,6 +185,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.code = value;
                 onPropertyChanged("Code");
+            }
+        }
+
+        /// <summary>
+        /// Identification group in the client system
+        /// </summary>
+        [JsonProperty("group")]
+        public string Group 
+        { 
+            get 
+            {
+                return this.mgroup; 
+            } 
+            set 
+            {
+                this.mgroup = value;
+                onPropertyChanged("Group");
             }
         }
     }
