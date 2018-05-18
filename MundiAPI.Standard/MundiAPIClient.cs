@@ -14,6 +14,17 @@ namespace MundiAPI.Standard
     {
 
         /// <summary>
+        /// Singleton access to Subscriptions controller
+        /// </summary>
+        public ISubscriptionsController Subscriptions
+        {
+            get
+            {
+                return SubscriptionsController.Instance;
+            }
+        }
+
+        /// <summary>
         /// Singleton access to Charges controller
         /// </summary>
         public IChargesController Charges
@@ -54,17 +65,6 @@ namespace MundiAPI.Standard
             get
             {
                 return PlansController.Instance;
-            }
-        }
-
-        /// <summary>
-        /// Singleton access to Subscriptions controller
-        /// </summary>
-        public ISubscriptionsController Subscriptions
-        {
-            get
-            {
-                return SubscriptionsController.Instance;
             }
         }
 
