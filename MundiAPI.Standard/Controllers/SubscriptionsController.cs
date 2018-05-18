@@ -50,6 +50,71 @@ namespace MundiAPI.Standard.Controllers
         #endregion Singleton Pattern
 
         /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The subscription Id</param>
+        /// <param name="incrementId">Required parameter: The increment Id</param>
+        /// <return>Returns the Models.GetIncrementResponse response from the API call</return>
+        public Models.GetIncrementResponse GetIncrementById(string subscriptionId, string incrementId)
+        {
+            Task<Models.GetIncrementResponse> t = GetIncrementByIdAsync(subscriptionId, incrementId);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The subscription Id</param>
+        /// <param name="incrementId">Required parameter: The increment Id</param>
+        /// <return>Returns the Models.GetIncrementResponse response from the API call</return>
+        public async Task<Models.GetIncrementResponse> GetIncrementByIdAsync(string subscriptionId, string incrementId)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/subscriptions/{subscription_id}/increments/{increment_id}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "subscription_id", subscriptionId },
+                { "increment_id", incrementId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.GetIncrementResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
         /// Updates a subscription item
         /// </summary>
         /// <param name="subscriptionId">Required parameter: Subscription Id</param>
@@ -1307,7 +1372,7 @@ namespace MundiAPI.Standard.Controllers
         /// <summary>
         /// TODO: type endpoint description here
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: Example: </param>
+        /// <param name="subscriptionId">Required parameter: The subscription id</param>
         /// <param name="discountId">Required parameter: Example: </param>
         /// <return>Returns the Models.GetDiscountResponse response from the API call</return>
         public Models.GetDiscountResponse GetDiscountById(string subscriptionId, string discountId)
@@ -1320,7 +1385,7 @@ namespace MundiAPI.Standard.Controllers
         /// <summary>
         /// TODO: type endpoint description here
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: Example: </param>
+        /// <param name="subscriptionId">Required parameter: The subscription id</param>
         /// <param name="discountId">Required parameter: Example: </param>
         /// <return>Returns the Models.GetDiscountResponse response from the API call</return>
         public async Task<Models.GetDiscountResponse> GetDiscountByIdAsync(string subscriptionId, string discountId)
@@ -1824,6 +1889,115 @@ namespace MundiAPI.Standard.Controllers
             try
             {
                 return APIHelper.JsonDeserialize<Models.ListUsagesResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Get Subscription Items
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The subscription id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="name">Optional parameter: The item name</param>
+        /// <param name="code">Optional parameter: Identification code in the client system</param>
+        /// <param name="status">Optional parameter: The item statis</param>
+        /// <param name="description">Optional parameter: The item description</param>
+        /// <param name="createdSince">Optional parameter: Filter for item's creation date start range</param>
+        /// <param name="createdUntil">Optional parameter: Filter for item's creation date end range</param>
+        /// <return>Returns the Models.ListSubscriptionItemsResponse response from the API call</return>
+        public Models.ListSubscriptionItemsResponse GetSubscriptionItems(
+                string subscriptionId,
+                int? page = null,
+                int? size = null,
+                string name = null,
+                string code = null,
+                string status = null,
+                string description = null,
+                string createdSince = null,
+                string createdUntil = null)
+        {
+            Task<Models.ListSubscriptionItemsResponse> t = GetSubscriptionItemsAsync(subscriptionId, page, size, name, code, status, description, createdSince, createdUntil);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Get Subscription Items
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The subscription id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="name">Optional parameter: The item name</param>
+        /// <param name="code">Optional parameter: Identification code in the client system</param>
+        /// <param name="status">Optional parameter: The item statis</param>
+        /// <param name="description">Optional parameter: The item description</param>
+        /// <param name="createdSince">Optional parameter: Filter for item's creation date start range</param>
+        /// <param name="createdUntil">Optional parameter: Filter for item's creation date end range</param>
+        /// <return>Returns the Models.ListSubscriptionItemsResponse response from the API call</return>
+        public async Task<Models.ListSubscriptionItemsResponse> GetSubscriptionItemsAsync(
+                string subscriptionId,
+                int? page = null,
+                int? size = null,
+                string name = null,
+                string code = null,
+                string status = null,
+                string description = null,
+                string createdSince = null,
+                string createdUntil = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/subscriptions/{subscription_id}/items");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "subscription_id", subscriptionId }
+            });
+
+            //process optional query parameters
+            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "page", page },
+                { "size", size },
+                { "name", name },
+                { "code", code },
+                { "status", status },
+                { "description", description },
+                { "created_since", createdSince },
+                { "created_until", createdUntil }
+            },ArrayDeserializationFormat,ParameterSeparator);
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.ListSubscriptionItemsResponse>(_response.Body);
             }
             catch (Exception _ex)
             {

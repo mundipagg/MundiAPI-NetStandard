@@ -21,6 +21,22 @@ namespace MundiAPI.Standard.Controllers
     public partial interface ISubscriptionsController
     {
         /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The subscription Id</param>
+        /// <param name="incrementId">Required parameter: The increment Id</param>
+        /// <return>Returns the Models.GetIncrementResponse response from the API call</return>
+        Models.GetIncrementResponse GetIncrementById(string subscriptionId, string incrementId);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The subscription Id</param>
+        /// <param name="incrementId">Required parameter: The increment Id</param>
+        /// <return>Returns the Models.GetIncrementResponse response from the API call</return>
+        Task<Models.GetIncrementResponse> GetIncrementByIdAsync(string subscriptionId, string incrementId);
+
+        /// <summary>
         /// Updates a subscription item
         /// </summary>
         /// <param name="subscriptionId">Required parameter: Subscription Id</param>
@@ -357,7 +373,7 @@ namespace MundiAPI.Standard.Controllers
         /// <summary>
         /// TODO: type endpoint description here
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: Example: </param>
+        /// <param name="subscriptionId">Required parameter: The subscription id</param>
         /// <param name="discountId">Required parameter: Example: </param>
         /// <return>Returns the Models.GetDiscountResponse response from the API call</return>
         Models.GetDiscountResponse GetDiscountById(string subscriptionId, string discountId);
@@ -365,7 +381,7 @@ namespace MundiAPI.Standard.Controllers
         /// <summary>
         /// TODO: type endpoint description here
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: Example: </param>
+        /// <param name="subscriptionId">Required parameter: The subscription id</param>
         /// <param name="discountId">Required parameter: Example: </param>
         /// <return>Returns the Models.GetDiscountResponse response from the API call</return>
         Task<Models.GetDiscountResponse> GetDiscountByIdAsync(string subscriptionId, string discountId);
@@ -505,6 +521,54 @@ namespace MundiAPI.Standard.Controllers
                 int? size = null,
                 string code = null,
                 string mgroup = null);
+
+        /// <summary>
+        /// Get Subscription Items
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The subscription id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="name">Optional parameter: The item name</param>
+        /// <param name="code">Optional parameter: Identification code in the client system</param>
+        /// <param name="status">Optional parameter: The item statis</param>
+        /// <param name="description">Optional parameter: The item description</param>
+        /// <param name="createdSince">Optional parameter: Filter for item's creation date start range</param>
+        /// <param name="createdUntil">Optional parameter: Filter for item's creation date end range</param>
+        /// <return>Returns the Models.ListSubscriptionItemsResponse response from the API call</return>
+        Models.ListSubscriptionItemsResponse GetSubscriptionItems(
+                string subscriptionId,
+                int? page = null,
+                int? size = null,
+                string name = null,
+                string code = null,
+                string status = null,
+                string description = null,
+                string createdSince = null,
+                string createdUntil = null);
+
+        /// <summary>
+        /// Get Subscription Items
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The subscription id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="name">Optional parameter: The item name</param>
+        /// <param name="code">Optional parameter: Identification code in the client system</param>
+        /// <param name="status">Optional parameter: The item statis</param>
+        /// <param name="description">Optional parameter: The item description</param>
+        /// <param name="createdSince">Optional parameter: Filter for item's creation date start range</param>
+        /// <param name="createdUntil">Optional parameter: Filter for item's creation date end range</param>
+        /// <return>Returns the Models.ListSubscriptionItemsResponse response from the API call</return>
+        Task<Models.ListSubscriptionItemsResponse> GetSubscriptionItemsAsync(
+                string subscriptionId,
+                int? page = null,
+                int? size = null,
+                string name = null,
+                string code = null,
+                string status = null,
+                string description = null,
+                string createdSince = null,
+                string createdUntil = null);
 
     }
 } 

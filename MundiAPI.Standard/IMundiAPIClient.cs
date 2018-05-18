@@ -12,6 +12,11 @@ namespace MundiAPI.Standard
     {
 
         /// <summary>
+        /// Singleton access to Subscriptions controller
+        /// </summary>
+        ISubscriptionsController Subscriptions { get;}
+
+        /// <summary>
         /// Singleton access to Charges controller
         /// </summary>
         IChargesController Charges { get;}
@@ -30,11 +35,6 @@ namespace MundiAPI.Standard
         /// Singleton access to Plans controller
         /// </summary>
         IPlansController Plans { get;}
-
-        /// <summary>
-        /// Singleton access to Subscriptions controller
-        /// </summary>
-        ISubscriptionsController Subscriptions { get;}
 
         /// <summary>
         /// Singleton access to Orders controller
