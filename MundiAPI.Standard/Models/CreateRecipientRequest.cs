@@ -28,6 +28,7 @@ namespace MundiAPI.Standard.Models
         private string type;
         private Models.CreateBankAccountRequest defaultBankAccount;
         private Dictionary<string, string> metadata;
+        private Models.CreateTransferSettingsRequest transferSettings;
 
         /// <summary>
         /// Recipient name
@@ -145,6 +146,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.metadata = value;
                 onPropertyChanged("Metadata");
+            }
+        }
+
+        /// <summary>
+        /// Receiver Transfer Information
+        /// </summary>
+        [JsonProperty("transfer_settings")]
+        public Models.CreateTransferSettingsRequest TransferSettings 
+        { 
+            get 
+            {
+                return this.transferSettings; 
+            } 
+            set 
+            {
+                this.transferSettings = value;
+                onPropertyChanged("TransferSettings");
             }
         }
     }
