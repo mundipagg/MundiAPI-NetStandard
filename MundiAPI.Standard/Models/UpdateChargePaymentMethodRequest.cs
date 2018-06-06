@@ -24,6 +24,7 @@ namespace MundiAPI.Standard.Models
         private bool updateSubscription;
         private string paymentMethod;
         private Models.CreateCreditCardPaymentRequest creditCard;
+        private Models.CreateDebitCardPaymentRequest debitCard;
         private Models.CreateBoletoPaymentRequest boleto;
         private Models.CreateVoucherPaymentRequest voucher;
 
@@ -75,6 +76,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.creditCard = value;
                 onPropertyChanged("CreditCard");
+            }
+        }
+
+        /// <summary>
+        /// Debit card data
+        /// </summary>
+        [JsonProperty("debit_card")]
+        public Models.CreateDebitCardPaymentRequest DebitCard 
+        { 
+            get 
+            {
+                return this.debitCard; 
+            } 
+            set 
+            {
+                this.debitCard = value;
+                onPropertyChanged("DebitCard");
             }
         }
 

@@ -18,16 +18,19 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class CreateVoucherPaymentRequest : BaseModel 
+    public class CreateDebitCardPaymentRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
         private string statementDescriptor;
+        private Models.CreateCardRequest card;
         private string cardId;
         private string cardToken;
-        private Models.CreateCardRequest card;
+        private bool? recurrence;
+        private Models.CreatePaymentAuthentiticationRequest authentication;
+        private Models.CreateCardPaymentTokenRequest token;
 
         /// <summary>
-        /// The text that will be shown on the voucher's statement
+        /// The text that will be shown on the debit card's statement
         /// </summary>
         [JsonProperty("statement_descriptor")]
         public string StatementDescriptor 
@@ -44,7 +47,24 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Card id
+        /// Debit card data
+        /// </summary>
+        [JsonProperty("card")]
+        public Models.CreateCardRequest Card 
+        { 
+            get 
+            {
+                return this.card; 
+            } 
+            set 
+            {
+                this.card = value;
+                onPropertyChanged("Card");
+            }
+        }
+
+        /// <summary>
+        /// The debit card id
         /// </summary>
         [JsonProperty("card_id")]
         public string CardId 
@@ -61,7 +81,7 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Card token
+        /// The debit card token
         /// </summary>
         [JsonProperty("card_token")]
         public string CardToken 
@@ -78,19 +98,53 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Card info
+        /// Indicates a recurrence
         /// </summary>
-        [JsonProperty("Card")]
-        public Models.CreateCardRequest Card 
+        [JsonProperty("recurrence")]
+        public bool? Recurrence 
         { 
             get 
             {
-                return this.card; 
+                return this.recurrence; 
             } 
             set 
             {
-                this.card = value;
-                onPropertyChanged("Card");
+                this.recurrence = value;
+                onPropertyChanged("Recurrence");
+            }
+        }
+
+        /// <summary>
+        /// The payment authentication request
+        /// </summary>
+        [JsonProperty("authentication")]
+        public Models.CreatePaymentAuthentiticationRequest Authentication 
+        { 
+            get 
+            {
+                return this.authentication; 
+            } 
+            set 
+            {
+                this.authentication = value;
+                onPropertyChanged("Authentication");
+            }
+        }
+
+        /// <summary>
+        /// The Debit card payment token request
+        /// </summary>
+        [JsonProperty("token")]
+        public Models.CreateCardPaymentTokenRequest Token 
+        { 
+            get 
+            {
+                return this.token; 
+            } 
+            set 
+            {
+                this.token = value;
+                onPropertyChanged("Token");
             }
         }
     }

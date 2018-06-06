@@ -292,5 +292,21 @@ namespace MundiAPI.Standard.Controllers
         /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
         Task<Models.GetRecipientResponse> UpdateRecipientMetadataAsync(string recipientId, Models.UpdateMetadataRequest request);
 
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Recipient Identificator</param>
+        /// <param name="request">Required parameter: Example: </param>
+        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
+        Models.GetRecipientResponse UpdateRecipientTransferSettings(string recipientId, Models.UpdateTransferSettingsRequest request);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Recipient Identificator</param>
+        /// <param name="request">Required parameter: Example: </param>
+        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
+        Task<Models.GetRecipientResponse> UpdateRecipientTransferSettingsAsync(string recipientId, Models.UpdateTransferSettingsRequest request);
+
     }
 } 

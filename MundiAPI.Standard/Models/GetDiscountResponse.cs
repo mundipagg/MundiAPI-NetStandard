@@ -26,10 +26,11 @@ namespace MundiAPI.Standard.Models
         private string discountType;
         private string status;
         private DateTime createdAt;
-        private Models.GetSubscriptionResponse subscription;
         private int? cycles;
         private DateTime? deletedAt;
         private string description;
+        private Models.GetSubscriptionResponse subscription;
+        private Models.GetSubscriptionItemResponse subscriptionItem;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -120,23 +121,6 @@ namespace MundiAPI.Standard.Models
         /// <summary>
         /// TODO: Write general description for this method
         /// </summary>
-        [JsonProperty("subscription")]
-        public Models.GetSubscriptionResponse Subscription 
-        { 
-            get 
-            {
-                return this.subscription; 
-            } 
-            set 
-            {
-                this.subscription = value;
-                onPropertyChanged("Subscription");
-            }
-        }
-
-        /// <summary>
-        /// TODO: Write general description for this method
-        /// </summary>
         [JsonProperty("cycles")]
         public int? Cycles 
         { 
@@ -183,6 +167,40 @@ namespace MundiAPI.Standard.Models
             {
                 this.description = value;
                 onPropertyChanged("Description");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("subscription")]
+        public Models.GetSubscriptionResponse Subscription 
+        { 
+            get 
+            {
+                return this.subscription; 
+            } 
+            set 
+            {
+                this.subscription = value;
+                onPropertyChanged("Subscription");
+            }
+        }
+
+        /// <summary>
+        /// The subscription item
+        /// </summary>
+        [JsonProperty("subscription_item")]
+        public Models.GetSubscriptionItemResponse SubscriptionItem 
+        { 
+            get 
+            {
+                return this.subscriptionItem; 
+            } 
+            set 
+            {
+                this.subscriptionItem = value;
+                onPropertyChanged("SubscriptionItem");
             }
         }
     }

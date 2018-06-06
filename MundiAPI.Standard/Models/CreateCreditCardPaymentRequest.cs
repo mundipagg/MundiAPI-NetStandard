@@ -21,24 +21,24 @@ namespace MundiAPI.Standard.Models
     public class CreateCreditCardPaymentRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
-        private int installments = 1;
+        private int? installments = 1;
         private string statementDescriptor;
         private Models.CreateCardRequest card;
-        private int retries;
-        private bool updateSubscriptionCard;
         private string cardId;
         private string cardToken;
-        private bool recurrence;
-        private bool extendedLimitEnabled;
-        private string extendedLimitCode;
+        private bool? recurrence;
         private bool? capture = true;
+        private bool? extendedLimitEnabled;
+        private string extendedLimitCode;
         private long? merchantCategoryCode;
+        private Models.CreatePaymentAuthentiticationRequest authentication;
+        private Models.CreateCardPaymentTokenRequest token;
 
         /// <summary>
         /// Number of installments
         /// </summary>
         [JsonProperty("installments")]
-        public int Installments 
+        public int? Installments 
         { 
             get 
             {
@@ -86,40 +86,6 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Number of retries
-        /// </summary>
-        [JsonProperty("retries")]
-        public int Retries 
-        { 
-            get 
-            {
-                return this.retries; 
-            } 
-            set 
-            {
-                this.retries = value;
-                onPropertyChanged("Retries");
-            }
-        }
-
-        /// <summary>
-        /// Indicates if the card from the subscription must be updated
-        /// </summary>
-        [JsonProperty("update_subscription_card")]
-        public bool UpdateSubscriptionCard 
-        { 
-            get 
-            {
-                return this.updateSubscriptionCard; 
-            } 
-            set 
-            {
-                this.updateSubscriptionCard = value;
-                onPropertyChanged("UpdateSubscriptionCard");
-            }
-        }
-
-        /// <summary>
         /// The credit card id
         /// </summary>
         [JsonProperty("card_id")]
@@ -157,7 +123,7 @@ namespace MundiAPI.Standard.Models
         /// Indicates a recurrence
         /// </summary>
         [JsonProperty("recurrence")]
-        public bool Recurrence 
+        public bool? Recurrence 
         { 
             get 
             {
@@ -171,10 +137,27 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
+        /// Indicates if the operation should be only authorization or auth and capture.
+        /// </summary>
+        [JsonProperty("capture")]
+        public bool? Capture 
+        { 
+            get 
+            {
+                return this.capture; 
+            } 
+            set 
+            {
+                this.capture = value;
+                onPropertyChanged("Capture");
+            }
+        }
+
+        /// <summary>
         /// Indicates whether the extended label (private label) is enabled
         /// </summary>
         [JsonProperty("extended_limit_enabled")]
-        public bool ExtendedLimitEnabled 
+        public bool? ExtendedLimitEnabled 
         { 
             get 
             {
@@ -205,23 +188,6 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Indicates if the operation should be only authorization or auth and capture.
-        /// </summary>
-        [JsonProperty("capture")]
-        public bool? Capture 
-        { 
-            get 
-            {
-                return this.capture; 
-            } 
-            set 
-            {
-                this.capture = value;
-                onPropertyChanged("Capture");
-            }
-        }
-
-        /// <summary>
         /// Customer business segment code
         /// </summary>
         [JsonProperty("merchant_category_code")]
@@ -235,6 +201,40 @@ namespace MundiAPI.Standard.Models
             {
                 this.merchantCategoryCode = value;
                 onPropertyChanged("MerchantCategoryCode");
+            }
+        }
+
+        /// <summary>
+        /// The payment authentication request
+        /// </summary>
+        [JsonProperty("authentication")]
+        public Models.CreatePaymentAuthentiticationRequest Authentication 
+        { 
+            get 
+            {
+                return this.authentication; 
+            } 
+            set 
+            {
+                this.authentication = value;
+                onPropertyChanged("Authentication");
+            }
+        }
+
+        /// <summary>
+        /// The Credit card payment token request
+        /// </summary>
+        [JsonProperty("token")]
+        public Models.CreateCardPaymentTokenRequest Token 
+        { 
+            get 
+            {
+                return this.token; 
+            } 
+            set 
+            {
+                this.token = value;
+                onPropertyChanged("Token");
             }
         }
     }
