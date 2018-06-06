@@ -23,17 +23,18 @@ namespace MundiAPI.Standard.Models
         // These fields hold the values for the public properties.
         private string paymentMethod;
         private Models.CreateCreditCardPaymentRequest creditCard;
+        private Models.CreateDebitCardPaymentRequest debitCard;
         private Models.CreateBoletoPaymentRequest boleto;
         private string currency;
         private Models.CreateVoucherPaymentRequest voucher;
-        private Dictionary<string, string> metadata;
         private List<Models.CreateSplitRequest> split;
-        private string customerId;
-        private Models.CreateCustomerRequest customer;
         private Models.CreateBankTransferPaymentRequest bankTransfer;
         private string gatewayAffiliationId;
         private int? amount;
         private Models.CreateCheckoutPaymentRequest checkout;
+        private string customerId;
+        private Models.CreateCustomerRequest customer;
+        private Dictionary<string, string> metadata;
 
         /// <summary>
         /// Payment method
@@ -66,6 +67,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.creditCard = value;
                 onPropertyChanged("CreditCard");
+            }
+        }
+
+        /// <summary>
+        /// Settings for debit card payment
+        /// </summary>
+        [JsonProperty("debit_card")]
+        public Models.CreateDebitCardPaymentRequest DebitCard 
+        { 
+            get 
+            {
+                return this.debitCard; 
+            } 
+            set 
+            {
+                this.debitCard = value;
+                onPropertyChanged("DebitCard");
             }
         }
 
@@ -121,23 +139,6 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Metadata
-        /// </summary>
-        [JsonProperty("metadata")]
-        public Dictionary<string, string> Metadata 
-        { 
-            get 
-            {
-                return this.metadata; 
-            } 
-            set 
-            {
-                this.metadata = value;
-                onPropertyChanged("Metadata");
-            }
-        }
-
-        /// <summary>
         /// Splits
         /// </summary>
         [JsonProperty("split")]
@@ -151,40 +152,6 @@ namespace MundiAPI.Standard.Models
             {
                 this.split = value;
                 onPropertyChanged("Split");
-            }
-        }
-
-        /// <summary>
-        /// Customer Id
-        /// </summary>
-        [JsonProperty("customer_id")]
-        public string CustomerId 
-        { 
-            get 
-            {
-                return this.customerId; 
-            } 
-            set 
-            {
-                this.customerId = value;
-                onPropertyChanged("CustomerId");
-            }
-        }
-
-        /// <summary>
-        /// Customer
-        /// </summary>
-        [JsonProperty("customer")]
-        public Models.CreateCustomerRequest Customer 
-        { 
-            get 
-            {
-                return this.customer; 
-            } 
-            set 
-            {
-                this.customer = value;
-                onPropertyChanged("Customer");
             }
         }
 
@@ -253,6 +220,57 @@ namespace MundiAPI.Standard.Models
             {
                 this.checkout = value;
                 onPropertyChanged("Checkout");
+            }
+        }
+
+        /// <summary>
+        /// Customer Id
+        /// </summary>
+        [JsonProperty("customer_id")]
+        public string CustomerId 
+        { 
+            get 
+            {
+                return this.customerId; 
+            } 
+            set 
+            {
+                this.customerId = value;
+                onPropertyChanged("CustomerId");
+            }
+        }
+
+        /// <summary>
+        /// Customer
+        /// </summary>
+        [JsonProperty("customer")]
+        public Models.CreateCustomerRequest Customer 
+        { 
+            get 
+            {
+                return this.customer; 
+            } 
+            set 
+            {
+                this.customer = value;
+                onPropertyChanged("Customer");
+            }
+        }
+
+        /// <summary>
+        /// Metadata
+        /// </summary>
+        [JsonProperty("metadata")]
+        public Dictionary<string, string> Metadata 
+        { 
+            get 
+            {
+                return this.metadata; 
+            } 
+            set 
+            {
+                this.metadata = value;
+                onPropertyChanged("Metadata");
             }
         }
     }

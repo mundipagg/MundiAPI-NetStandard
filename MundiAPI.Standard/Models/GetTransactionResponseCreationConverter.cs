@@ -22,6 +22,7 @@ namespace MundiAPI.Standard.Models
                 { "bank_transfer",typeof(GetBankTransferTransactionResponse)},
                 { "safetypay",typeof(GetSafetyPayTransactionResponse)},
                 { "boleto",typeof(GetBoletoTransactionResponse)},
+                { "debit_card",typeof(GetDebitCardTransactionResponse)},
             };
         }
     }

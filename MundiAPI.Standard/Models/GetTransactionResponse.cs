@@ -32,6 +32,7 @@ namespace MundiAPI.Standard.Models
         private int maxAttempts;
         private List<Models.GetSplitResponse> splits;
         private string id;
+        private Models.GetGatewayResponseResponse gatewayResponse;
         private DateTime? nextAttempt;
         private string transactionType;
 
@@ -204,6 +205,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.id = value;
                 onPropertyChanged("Id");
+            }
+        }
+
+        /// <summary>
+        /// The Gateway Response
+        /// </summary>
+        [JsonProperty("gateway_response")]
+        public Models.GetGatewayResponseResponse GatewayResponse 
+        { 
+            get 
+            {
+                return this.gatewayResponse; 
+            } 
+            set 
+            {
+                this.gatewayResponse = value;
+                onPropertyChanged("GatewayResponse");
             }
         }
 
