@@ -206,5 +206,21 @@ namespace MundiAPI.Standard.Controllers
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
         Task<Models.GetChargeResponse> UpdateChargeDueDateAsync(string chargeId, Models.UpdateChargeDueDateRequest request);
 
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="chargeId">Required parameter: Example: </param>
+        /// <param name="request">Optional parameter: Request for confirm payment</param>
+        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
+        Models.GetChargeResponse ConfirmPayment(string chargeId, Models.CreateConfirmPaymentRequest request = null);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="chargeId">Required parameter: Example: </param>
+        /// <param name="request">Optional parameter: Request for confirm payment</param>
+        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
+        Task<Models.GetChargeResponse> ConfirmPaymentAsync(string chargeId, Models.CreateConfirmPaymentRequest request = null);
+
     }
 } 

@@ -1413,5 +1413,70 @@ namespace MundiAPI.Standard.Controllers
             }
         }
 
+        /// <summary>
+        /// Renew a card
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer id</param>
+        /// <param name="cardId">Required parameter: Card Id</param>
+        /// <return>Returns the Models.GetCardResponse response from the API call</return>
+        public Models.GetCardResponse RenewCard(string customerId, string cardId)
+        {
+            Task<Models.GetCardResponse> t = RenewCardAsync(customerId, cardId);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Renew a card
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer id</param>
+        /// <param name="cardId">Required parameter: Card Id</param>
+        /// <return>Returns the Models.GetCardResponse response from the API call</return>
+        public async Task<Models.GetCardResponse> RenewCardAsync(string customerId, string cardId)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/customers/{customer_id}/cards/{card_id}/renew");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "customer_id", customerId },
+                { "card_id", cardId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Post(_queryUrl, _headers, null, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.GetCardResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
     }
 } 

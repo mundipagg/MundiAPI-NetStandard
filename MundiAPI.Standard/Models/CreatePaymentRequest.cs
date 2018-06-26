@@ -35,6 +35,7 @@ namespace MundiAPI.Standard.Models
         private string customerId;
         private Models.CreateCustomerRequest customer;
         private Dictionary<string, string> metadata;
+        private Models.CreateCashPaymentRequest cash;
 
         /// <summary>
         /// Payment method
@@ -271,6 +272,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.metadata = value;
                 onPropertyChanged("Metadata");
+            }
+        }
+
+        /// <summary>
+        /// Settings for cash payment
+        /// </summary>
+        [JsonProperty("cash")]
+        public Models.CreateCashPaymentRequest Cash 
+        { 
+            get 
+            {
+                return this.cash; 
+            } 
+            set 
+            {
+                this.cash = value;
+                onPropertyChanged("Cash");
             }
         }
     }
