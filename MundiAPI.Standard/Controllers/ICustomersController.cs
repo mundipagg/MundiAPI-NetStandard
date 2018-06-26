@@ -364,5 +364,21 @@ namespace MundiAPI.Standard.Controllers
                 string email = null,
                 string code = null);
 
+        /// <summary>
+        /// Renew a card
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer id</param>
+        /// <param name="cardId">Required parameter: Card Id</param>
+        /// <return>Returns the Models.GetCardResponse response from the API call</return>
+        Models.GetCardResponse RenewCard(string customerId, string cardId);
+
+        /// <summary>
+        /// Renew a card
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer id</param>
+        /// <param name="cardId">Required parameter: Card Id</param>
+        /// <return>Returns the Models.GetCardResponse response from the API call</return>
+        Task<Models.GetCardResponse> RenewCardAsync(string customerId, string cardId);
+
     }
 } 
