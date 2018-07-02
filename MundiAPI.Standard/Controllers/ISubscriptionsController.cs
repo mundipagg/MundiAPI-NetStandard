@@ -570,5 +570,37 @@ namespace MundiAPI.Standard.Controllers
                 string createdSince = null,
                 string createdUntil = null);
 
+        /// <summary>
+        /// Updates the boleto due days from a subscription
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <param name="request">Required parameter: Example: </param>
+        /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
+        Models.GetSubscriptionResponse UpdateSubscriptionDueDays(string subscriptionId, Models.UpdateSubscriptionDueDaysRequest request);
+
+        /// <summary>
+        /// Updates the boleto due days from a subscription
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <param name="request">Required parameter: Example: </param>
+        /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
+        Task<Models.GetSubscriptionResponse> UpdateSubscriptionDueDaysAsync(string subscriptionId, Models.UpdateSubscriptionDueDaysRequest request);
+
+        /// <summary>
+        /// Atualização do valor mínimo da assinatura
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <param name="request">Required parameter: Request da requisição com o valor mínimo que será configurado</param>
+        /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
+        Models.GetSubscriptionResponse UpdateSubscriptionMiniumPrice(string subscriptionId, Models.UpdateSubscriptionMinimumPriceRequest request);
+
+        /// <summary>
+        /// Atualização do valor mínimo da assinatura
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <param name="request">Required parameter: Request da requisição com o valor mínimo que será configurado</param>
+        /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
+        Task<Models.GetSubscriptionResponse> UpdateSubscriptionMiniumPriceAsync(string subscriptionId, Models.UpdateSubscriptionMinimumPriceRequest request);
+
     }
 } 
