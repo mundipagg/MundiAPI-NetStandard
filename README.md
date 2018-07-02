@@ -1826,7 +1826,6 @@ Task<Models.ListAccessTokensResponse> GetAccessTokens(string customerId, int? pa
 string customerId = "customer_id";
 int? page = 107;
 int? size = 107;
-
 Models.ListAccessTokensResponse result = await customers.GetAccessTokens(customerId, page, size);
 
 ```
