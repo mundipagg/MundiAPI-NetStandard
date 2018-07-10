@@ -27,6 +27,7 @@ namespace MundiAPI.Standard.Models
         private string category;
         private Models.CreateSellerRequest seller;
         private string sellerId;
+        private string code;
 
         /// <summary>
         /// Amount
@@ -127,6 +128,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.sellerId = value;
                 onPropertyChanged("SellerId");
+            }
+        }
+
+        /// <summary>
+        /// The item code passed by the client
+        /// </summary>
+        [JsonProperty("code")]
+        public string Code 
+        { 
+            get 
+            {
+                return this.code; 
+            } 
+            set 
+            {
+                this.code = value;
+                onPropertyChanged("Code");
             }
         }
     }
