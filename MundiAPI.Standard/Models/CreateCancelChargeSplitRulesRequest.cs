@@ -18,35 +18,34 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class GetSplitResponse : BaseModel 
+    public class CreateCancelChargeSplitRulesRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
-        private string type;
+        private string id;
         private int amount;
-        private Models.GetRecipientResponse recipient;
-        private string gatewayId;
+        private string type;
 
         /// <summary>
-        /// Type
+        /// The split rule gateway id
         /// </summary>
-        [JsonProperty("type")]
-        public string Type 
+        [JsonProperty("id")]
+        public string Id 
         { 
             get 
             {
-                return this.type; 
+                return this.id; 
             } 
             set 
             {
-                this.type = value;
-                onPropertyChanged("Type");
+                this.id = value;
+                onPropertyChanged("Id");
             }
         }
 
         /// <summary>
-        /// Amount
+        /// The split rule amount
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonProperty("Amount")]
         public int Amount 
         { 
             get 
@@ -61,36 +60,19 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Recipient
+        /// The amount type (flat ou percentage)
         /// </summary>
-        [JsonProperty("recipient")]
-        public Models.GetRecipientResponse Recipient 
+        [JsonProperty("type")]
+        public string Type 
         { 
             get 
             {
-                return this.recipient; 
+                return this.type; 
             } 
             set 
             {
-                this.recipient = value;
-                onPropertyChanged("Recipient");
-            }
-        }
-
-        /// <summary>
-        /// The split rule gateway id
-        /// </summary>
-        [JsonProperty("gateway_id")]
-        public string GatewayId 
-        { 
-            get 
-            {
-                return this.gatewayId; 
-            } 
-            set 
-            {
-                this.gatewayId = value;
-                onPropertyChanged("GatewayId");
+                this.type = value;
+                onPropertyChanged("Type");
             }
         }
     }
