@@ -21,20 +21,6 @@ namespace MundiAPI.Standard.Controllers
     public partial interface IInvoicesController
     {
         /// <summary>
-        /// Gets an invoice
-        /// </summary>
-        /// <param name="invoiceId">Required parameter: Invoice Id</param>
-        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Models.GetInvoiceResponse GetInvoice(string invoiceId);
-
-        /// <summary>
-        /// Gets an invoice
-        /// </summary>
-        /// <param name="invoiceId">Required parameter: Invoice Id</param>
-        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Task<Models.GetInvoiceResponse> GetInvoiceAsync(string invoiceId);
-
-        /// <summary>
         /// Cancels an invoice
         /// </summary>
         /// <param name="invoiceId">Required parameter: Invoice id</param>
@@ -49,20 +35,50 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.GetInvoiceResponse> CancelInvoiceAsync(string invoiceId);
 
         /// <summary>
-        /// Updates the metadata from an invoice
+        /// Gets an invoice
         /// </summary>
-        /// <param name="invoiceId">Required parameter: The invoice id</param>
-        /// <param name="request">Required parameter: Request for updating the invoice metadata</param>
+        /// <param name="invoiceId">Required parameter: Invoice Id</param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Models.GetInvoiceResponse UpdateInvoiceMetadata(string invoiceId, Models.UpdateMetadataRequest request);
+        Models.GetInvoiceResponse GetInvoice(string invoiceId);
 
         /// <summary>
-        /// Updates the metadata from an invoice
+        /// Gets an invoice
         /// </summary>
-        /// <param name="invoiceId">Required parameter: The invoice id</param>
-        /// <param name="request">Required parameter: Request for updating the invoice metadata</param>
+        /// <param name="invoiceId">Required parameter: Invoice Id</param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Task<Models.GetInvoiceResponse> UpdateInvoiceMetadataAsync(string invoiceId, Models.UpdateMetadataRequest request);
+        Task<Models.GetInvoiceResponse> GetInvoiceAsync(string invoiceId);
+
+        /// <summary>
+        /// Create an Invoice
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <param name="cycleId">Required parameter: Cycle Id</param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        Models.GetInvoiceResponse CreateInvoice(string subscriptionId, string cycleId);
+
+        /// <summary>
+        /// Create an Invoice
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <param name="cycleId">Required parameter: Cycle Id</param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        Task<Models.GetInvoiceResponse> CreateInvoiceAsync(string subscriptionId, string cycleId);
+
+        /// <summary>
+        /// Updates the status from an invoice
+        /// </summary>
+        /// <param name="invoiceId">Required parameter: Invoice Id</param>
+        /// <param name="request">Required parameter: Request for updating an invoice's status</param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        Models.GetInvoiceResponse UpdateInvoiceStatus(string invoiceId, Models.UpdateInvoiceStatusRequest request);
+
+        /// <summary>
+        /// Updates the status from an invoice
+        /// </summary>
+        /// <param name="invoiceId">Required parameter: Invoice Id</param>
+        /// <param name="request">Required parameter: Request for updating an invoice's status</param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        Task<Models.GetInvoiceResponse> UpdateInvoiceStatusAsync(string invoiceId, Models.UpdateInvoiceStatusRequest request);
 
         /// <summary>
         /// Gets all invoices
@@ -117,36 +133,20 @@ namespace MundiAPI.Standard.Controllers
                 DateTime? dueUntil = null);
 
         /// <summary>
-        /// Create an Invoice
+        /// Updates the metadata from an invoice
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
-        /// <param name="cycleId">Required parameter: Cycle Id</param>
+        /// <param name="invoiceId">Required parameter: The invoice id</param>
+        /// <param name="request">Required parameter: Request for updating the invoice metadata</param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Models.GetInvoiceResponse CreateInvoice(string subscriptionId, string cycleId);
+        Models.GetInvoiceResponse UpdateInvoiceMetadata(string invoiceId, Models.UpdateMetadataRequest request);
 
         /// <summary>
-        /// Create an Invoice
+        /// Updates the metadata from an invoice
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
-        /// <param name="cycleId">Required parameter: Cycle Id</param>
+        /// <param name="invoiceId">Required parameter: The invoice id</param>
+        /// <param name="request">Required parameter: Request for updating the invoice metadata</param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Task<Models.GetInvoiceResponse> CreateInvoiceAsync(string subscriptionId, string cycleId);
-
-        /// <summary>
-        /// Updates the status from an invoice
-        /// </summary>
-        /// <param name="invoiceId">Required parameter: Invoice Id</param>
-        /// <param name="request">Required parameter: Request for updating an invoice's status</param>
-        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Models.GetInvoiceResponse UpdateInvoiceStatus(string invoiceId, Models.UpdateInvoiceStatusRequest request);
-
-        /// <summary>
-        /// Updates the status from an invoice
-        /// </summary>
-        /// <param name="invoiceId">Required parameter: Invoice Id</param>
-        /// <param name="request">Required parameter: Request for updating an invoice's status</param>
-        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Task<Models.GetInvoiceResponse> UpdateInvoiceStatusAsync(string invoiceId, Models.UpdateInvoiceStatusRequest request);
+        Task<Models.GetInvoiceResponse> UpdateInvoiceMetadataAsync(string invoiceId, Models.UpdateMetadataRequest request);
 
     }
 } 

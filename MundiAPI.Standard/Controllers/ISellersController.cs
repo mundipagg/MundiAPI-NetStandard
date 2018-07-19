@@ -23,16 +23,16 @@ namespace MundiAPI.Standard.Controllers
         /// <summary>
         /// TODO: type endpoint description here
         /// </summary>
-        /// <param name="request">Required parameter: Seller Model</param>
+        /// <param name="id">Required parameter: Seller Id</param>
         /// <return>Returns the Models.GetSellerResponse response from the API call</return>
-        Models.GetSellerResponse CreateSeller(Models.CreateSellerRequest request);
+        Models.GetSellerResponse GetSellerById(string id);
 
         /// <summary>
         /// TODO: type endpoint description here
         /// </summary>
-        /// <param name="request">Required parameter: Seller Model</param>
+        /// <param name="id">Required parameter: Seller Id</param>
         /// <return>Returns the Models.GetSellerResponse response from the API call</return>
-        Task<Models.GetSellerResponse> CreateSellerAsync(Models.CreateSellerRequest request);
+        Task<Models.GetSellerResponse> GetSellerByIdAsync(string id);
 
         /// <summary>
         /// TODO: type endpoint description here
@@ -51,16 +51,16 @@ namespace MundiAPI.Standard.Controllers
         /// <summary>
         /// TODO: type endpoint description here
         /// </summary>
-        /// <param name="id">Required parameter: Seller Id</param>
+        /// <param name="request">Required parameter: Seller Model</param>
         /// <return>Returns the Models.GetSellerResponse response from the API call</return>
-        Models.GetSellerResponse GetSellerById(string id);
+        Models.GetSellerResponse CreateSeller(Models.CreateSellerRequest request);
 
         /// <summary>
         /// TODO: type endpoint description here
         /// </summary>
-        /// <param name="id">Required parameter: Seller Id</param>
+        /// <param name="request">Required parameter: Seller Model</param>
         /// <return>Returns the Models.GetSellerResponse response from the API call</return>
-        Task<Models.GetSellerResponse> GetSellerByIdAsync(string id);
+        Task<Models.GetSellerResponse> CreateSellerAsync(Models.CreateSellerRequest request);
 
         /// <summary>
         /// TODO: type endpoint description here
