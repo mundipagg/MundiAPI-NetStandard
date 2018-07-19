@@ -21,110 +21,20 @@ namespace MundiAPI.Standard.Controllers
     public partial interface IRecipientsController
     {
         /// <summary>
-        /// Creates a new recipient
-        /// </summary>
-        /// <param name="request">Required parameter: Recipient data</param>
-        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        Models.GetRecipientResponse CreateRecipient(Models.CreateRecipientRequest request);
-
-        /// <summary>
-        /// Creates a new recipient
-        /// </summary>
-        /// <param name="request">Required parameter: Recipient data</param>
-        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        Task<Models.GetRecipientResponse> CreateRecipientAsync(Models.CreateRecipientRequest request);
-
-        /// <summary>
-        /// Updates a recipient
+        /// Updates recipient metadata
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="request">Required parameter: Recipient data</param>
+        /// <param name="request">Required parameter: Metadata</param>
         /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        Models.GetRecipientResponse UpdateRecipient(string recipientId, Models.UpdateRecipientRequest request);
+        Models.GetRecipientResponse UpdateRecipientMetadata(string recipientId, Models.UpdateMetadataRequest request);
 
         /// <summary>
-        /// Updates a recipient
+        /// Updates recipient metadata
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="request">Required parameter: Recipient data</param>
+        /// <param name="request">Required parameter: Metadata</param>
         /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        Task<Models.GetRecipientResponse> UpdateRecipientAsync(string recipientId, Models.UpdateRecipientRequest request);
-
-        /// <summary>
-        /// Updates the default bank account from a recipient
-        /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="request">Required parameter: Bank account data</param>
-        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        Models.GetRecipientResponse UpdateRecipientDefaultBankAccount(string recipientId, Models.UpdateRecipientBankAccountRequest request);
-
-        /// <summary>
-        /// Updates the default bank account from a recipient
-        /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="request">Required parameter: Bank account data</param>
-        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        Task<Models.GetRecipientResponse> UpdateRecipientDefaultBankAccountAsync(string recipientId, Models.UpdateRecipientBankAccountRequest request);
-
-        /// <summary>
-        /// Retrieves recipient information
-        /// </summary>
-        /// <param name="recipientId">Required parameter: Recipiend id</param>
-        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        Models.GetRecipientResponse GetRecipient(string recipientId);
-
-        /// <summary>
-        /// Retrieves recipient information
-        /// </summary>
-        /// <param name="recipientId">Required parameter: Recipiend id</param>
-        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        Task<Models.GetRecipientResponse> GetRecipientAsync(string recipientId);
-
-        /// <summary>
-        /// Retrieves paginated recipients information
-        /// </summary>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListRecipientResponse response from the API call</return>
-        Models.ListRecipientResponse GetRecipients(int? page = null, int? size = null);
-
-        /// <summary>
-        /// Retrieves paginated recipients information
-        /// </summary>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListRecipientResponse response from the API call</return>
-        Task<Models.ListRecipientResponse> GetRecipientsAsync(int? page = null, int? size = null);
-
-        /// <summary>
-        /// Get balance information for a recipient
-        /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <return>Returns the Models.GetBalanceResponse response from the API call</return>
-        Models.GetBalanceResponse GetBalance(string recipientId);
-
-        /// <summary>
-        /// Get balance information for a recipient
-        /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <return>Returns the Models.GetBalanceResponse response from the API call</return>
-        Task<Models.GetBalanceResponse> GetBalanceAsync(string recipientId);
-
-        /// <summary>
-        /// Creates a transfer for a recipient
-        /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient Id</param>
-        /// <param name="request">Required parameter: Transfer data</param>
-        /// <return>Returns the Models.GetTransferResponse response from the API call</return>
-        Models.GetTransferResponse CreateTransfer(string recipientId, Models.CreateTransferRequest request);
-
-        /// <summary>
-        /// Creates a transfer for a recipient
-        /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient Id</param>
-        /// <param name="request">Required parameter: Transfer data</param>
-        /// <return>Returns the Models.GetTransferResponse response from the API call</return>
-        Task<Models.GetTransferResponse> CreateTransferAsync(string recipientId, Models.CreateTransferRequest request);
+        Task<Models.GetRecipientResponse> UpdateRecipientMetadataAsync(string recipientId, Models.UpdateMetadataRequest request);
 
         /// <summary>
         /// Gets a transfer
@@ -277,20 +187,110 @@ namespace MundiAPI.Standard.Controllers
                 DateTime? createdUntil = null);
 
         /// <summary>
-        /// Updates recipient metadata
+        /// Updates a recipient
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="request">Required parameter: Metadata</param>
+        /// <param name="request">Required parameter: Recipient data</param>
         /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        Models.GetRecipientResponse UpdateRecipientMetadata(string recipientId, Models.UpdateMetadataRequest request);
+        Models.GetRecipientResponse UpdateRecipient(string recipientId, Models.UpdateRecipientRequest request);
 
         /// <summary>
-        /// Updates recipient metadata
+        /// Updates a recipient
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="request">Required parameter: Metadata</param>
+        /// <param name="request">Required parameter: Recipient data</param>
         /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        Task<Models.GetRecipientResponse> UpdateRecipientMetadataAsync(string recipientId, Models.UpdateMetadataRequest request);
+        Task<Models.GetRecipientResponse> UpdateRecipientAsync(string recipientId, Models.UpdateRecipientRequest request);
+
+        /// <summary>
+        /// Updates the default bank account from a recipient
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Recipient id</param>
+        /// <param name="request">Required parameter: Bank account data</param>
+        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
+        Models.GetRecipientResponse UpdateRecipientDefaultBankAccount(string recipientId, Models.UpdateRecipientBankAccountRequest request);
+
+        /// <summary>
+        /// Updates the default bank account from a recipient
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Recipient id</param>
+        /// <param name="request">Required parameter: Bank account data</param>
+        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
+        Task<Models.GetRecipientResponse> UpdateRecipientDefaultBankAccountAsync(string recipientId, Models.UpdateRecipientBankAccountRequest request);
+
+        /// <summary>
+        /// Retrieves recipient information
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Recipiend id</param>
+        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
+        Models.GetRecipientResponse GetRecipient(string recipientId);
+
+        /// <summary>
+        /// Retrieves recipient information
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Recipiend id</param>
+        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
+        Task<Models.GetRecipientResponse> GetRecipientAsync(string recipientId);
+
+        /// <summary>
+        /// Retrieves paginated recipients information
+        /// </summary>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.ListRecipientResponse response from the API call</return>
+        Models.ListRecipientResponse GetRecipients(int? page = null, int? size = null);
+
+        /// <summary>
+        /// Retrieves paginated recipients information
+        /// </summary>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.ListRecipientResponse response from the API call</return>
+        Task<Models.ListRecipientResponse> GetRecipientsAsync(int? page = null, int? size = null);
+
+        /// <summary>
+        /// Get balance information for a recipient
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Recipient id</param>
+        /// <return>Returns the Models.GetBalanceResponse response from the API call</return>
+        Models.GetBalanceResponse GetBalance(string recipientId);
+
+        /// <summary>
+        /// Get balance information for a recipient
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Recipient id</param>
+        /// <return>Returns the Models.GetBalanceResponse response from the API call</return>
+        Task<Models.GetBalanceResponse> GetBalanceAsync(string recipientId);
+
+        /// <summary>
+        /// Creates a transfer for a recipient
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Recipient Id</param>
+        /// <param name="request">Required parameter: Transfer data</param>
+        /// <return>Returns the Models.GetTransferResponse response from the API call</return>
+        Models.GetTransferResponse CreateTransfer(string recipientId, Models.CreateTransferRequest request);
+
+        /// <summary>
+        /// Creates a transfer for a recipient
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Recipient Id</param>
+        /// <param name="request">Required parameter: Transfer data</param>
+        /// <return>Returns the Models.GetTransferResponse response from the API call</return>
+        Task<Models.GetTransferResponse> CreateTransferAsync(string recipientId, Models.CreateTransferRequest request);
+
+        /// <summary>
+        /// Creates a new recipient
+        /// </summary>
+        /// <param name="request">Required parameter: Recipient data</param>
+        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
+        Models.GetRecipientResponse CreateRecipient(Models.CreateRecipientRequest request);
+
+        /// <summary>
+        /// Creates a new recipient
+        /// </summary>
+        /// <param name="request">Required parameter: Recipient data</param>
+        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
+        Task<Models.GetRecipientResponse> CreateRecipientAsync(Models.CreateRecipientRequest request);
 
         /// <summary>
         /// TODO: type endpoint description here

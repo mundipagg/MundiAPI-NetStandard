@@ -52,11 +52,11 @@ namespace MundiAPI.Standard.Controllers
         /// <summary>
         /// TODO: type endpoint description here
         /// </summary>
-        /// <param name="request">Required parameter: Seller Model</param>
+        /// <param name="id">Required parameter: Seller Id</param>
         /// <return>Returns the Models.GetSellerResponse response from the API call</return>
-        public Models.GetSellerResponse CreateSeller(Models.CreateSellerRequest request)
+        public Models.GetSellerResponse GetSellerById(string id)
         {
-            Task<Models.GetSellerResponse> t = CreateSellerAsync(request);
+            Task<Models.GetSellerResponse> t = GetSellerByIdAsync(id);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -64,16 +64,22 @@ namespace MundiAPI.Standard.Controllers
         /// <summary>
         /// TODO: type endpoint description here
         /// </summary>
-        /// <param name="request">Required parameter: Seller Model</param>
+        /// <param name="id">Required parameter: Seller Id</param>
         /// <return>Returns the Models.GetSellerResponse response from the API call</return>
-        public async Task<Models.GetSellerResponse> CreateSellerAsync(Models.CreateSellerRequest request)
+        public async Task<Models.GetSellerResponse> GetSellerByIdAsync(string id)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/sellers/");
+            _queryBuilder.Append("/sellers/{id}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "id", id }
+            });
 
 
             //validate and preprocess url
@@ -83,15 +89,11 @@ namespace MundiAPI.Standard.Controllers
             var _headers = new Dictionary<string,string>()
             {
                 { "user-agent", "MundiSDK" },
-                { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "accept", "application/json" }
             };
 
-            //append body params
-            var _body = APIHelper.JsonSerialize(request);
-
             //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
 
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
@@ -174,11 +176,11 @@ namespace MundiAPI.Standard.Controllers
         /// <summary>
         /// TODO: type endpoint description here
         /// </summary>
-        /// <param name="id">Required parameter: Seller Id</param>
+        /// <param name="request">Required parameter: Seller Model</param>
         /// <return>Returns the Models.GetSellerResponse response from the API call</return>
-        public Models.GetSellerResponse GetSellerById(string id)
+        public Models.GetSellerResponse CreateSeller(Models.CreateSellerRequest request)
         {
-            Task<Models.GetSellerResponse> t = GetSellerByIdAsync(id);
+            Task<Models.GetSellerResponse> t = CreateSellerAsync(request);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -186,22 +188,16 @@ namespace MundiAPI.Standard.Controllers
         /// <summary>
         /// TODO: type endpoint description here
         /// </summary>
-        /// <param name="id">Required parameter: Seller Id</param>
+        /// <param name="request">Required parameter: Seller Model</param>
         /// <return>Returns the Models.GetSellerResponse response from the API call</return>
-        public async Task<Models.GetSellerResponse> GetSellerByIdAsync(string id)
+        public async Task<Models.GetSellerResponse> CreateSellerAsync(Models.CreateSellerRequest request)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/sellers/{id}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "id", id }
-            });
+            _queryBuilder.Append("/sellers/");
 
 
             //validate and preprocess url
@@ -211,11 +207,15 @@ namespace MundiAPI.Standard.Controllers
             var _headers = new Dictionary<string,string>()
             {
                 { "user-agent", "MundiSDK" },
-                { "accept", "application/json" }
+                { "accept", "application/json" },
+                { "content-type", "application/json; charset=utf-8" }
             };
 
+            //append body params
+            var _body = APIHelper.JsonSerialize(request);
+
             //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
 
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
