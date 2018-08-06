@@ -26,6 +26,8 @@ namespace MundiAPI.Standard.Models
         private string recipientName;
         private string recipientPhone;
         private Models.GetAddressResponse address;
+        private DateTime? maxDeliveryDate;
+        private DateTime? estimatedDeliveryDate;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -109,6 +111,42 @@ namespace MundiAPI.Standard.Models
             {
                 this.address = value;
                 onPropertyChanged("Address");
+            }
+        }
+
+        /// <summary>
+        /// Data máxima de entrega
+        /// </summary>
+        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [JsonProperty("max_delivery_date")]
+        public DateTime? MaxDeliveryDate 
+        { 
+            get 
+            {
+                return this.maxDeliveryDate; 
+            } 
+            set 
+            {
+                this.maxDeliveryDate = value;
+                onPropertyChanged("MaxDeliveryDate");
+            }
+        }
+
+        /// <summary>
+        /// Prazo estimado de entrega
+        /// </summary>
+        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [JsonProperty("estimated_delivery_date")]
+        public DateTime? EstimatedDeliveryDate 
+        { 
+            get 
+            {
+                return this.estimatedDeliveryDate; 
+            } 
+            set 
+            {
+                this.estimatedDeliveryDate = value;
+                onPropertyChanged("EstimatedDeliveryDate");
             }
         }
     }
