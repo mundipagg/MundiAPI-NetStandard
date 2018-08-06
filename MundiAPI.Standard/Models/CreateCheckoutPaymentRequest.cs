@@ -22,6 +22,7 @@ namespace MundiAPI.Standard.Models
     {
         // These fields hold the values for the public properties.
         private List<string> acceptedPaymentMethods;
+        private object acceptedMultiPaymentMethods;
         private string successUrl;
         private bool skipCheckoutSuccessPage;
         private bool billingAddressEditable;
@@ -47,6 +48,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.acceptedPaymentMethods = value;
                 onPropertyChanged("AcceptedPaymentMethods");
+            }
+        }
+
+        /// <summary>
+        /// Accepted Multi Payment Methods
+        /// </summary>
+        [JsonProperty("accepted_multi_payment_methods")]
+        public object AcceptedMultiPaymentMethods 
+        { 
+            get 
+            {
+                return this.acceptedMultiPaymentMethods; 
+            } 
+            set 
+            {
+                this.acceptedMultiPaymentMethods = value;
+                onPropertyChanged("AcceptedMultiPaymentMethods");
             }
         }
 
