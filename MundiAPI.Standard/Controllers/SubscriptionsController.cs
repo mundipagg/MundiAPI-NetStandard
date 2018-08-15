@@ -115,32 +115,32 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// Updates the billing date from a subscription
+        /// Updates the start at date from a subscription
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The subscription id</param>
-        /// <param name="request">Required parameter: Request for updating the subscription billing date</param>
+        /// <param name="request">Required parameter: Request for updating the subscription start date</param>
         /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
-        public Models.GetSubscriptionResponse UpdateSubscriptionBillingDate(string subscriptionId, Models.UpdateSubscriptionBillingDateRequest request)
+        public Models.GetSubscriptionResponse UpdateSubscriptionStartAt(string subscriptionId, Models.UpdateSubscriptionStartDateRequest request)
         {
-            Task<Models.GetSubscriptionResponse> t = UpdateSubscriptionBillingDateAsync(subscriptionId, request);
+            Task<Models.GetSubscriptionResponse> t = UpdateSubscriptionStartAtAsync(subscriptionId, request);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Updates the billing date from a subscription
+        /// Updates the start at date from a subscription
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The subscription id</param>
-        /// <param name="request">Required parameter: Request for updating the subscription billing date</param>
+        /// <param name="request">Required parameter: Request for updating the subscription start date</param>
         /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
-        public async Task<Models.GetSubscriptionResponse> UpdateSubscriptionBillingDateAsync(string subscriptionId, Models.UpdateSubscriptionBillingDateRequest request)
+        public async Task<Models.GetSubscriptionResponse> UpdateSubscriptionStartAtAsync(string subscriptionId, Models.UpdateSubscriptionStartDateRequest request)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/subscriptions/{subscription_id}/billing-date");
+            _queryBuilder.Append("/subscriptions/{subscription_id}/start-at");
 
             //process optional template parameters
             APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()

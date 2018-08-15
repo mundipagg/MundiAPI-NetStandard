@@ -37,20 +37,20 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.GetIncrementResponse> GetIncrementByIdAsync(string subscriptionId, string incrementId);
 
         /// <summary>
-        /// Updates the billing date from a subscription
+        /// Updates the start at date from a subscription
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The subscription id</param>
-        /// <param name="request">Required parameter: Request for updating the subscription billing date</param>
+        /// <param name="request">Required parameter: Request for updating the subscription start date</param>
         /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
-        Models.GetSubscriptionResponse UpdateSubscriptionBillingDate(string subscriptionId, Models.UpdateSubscriptionBillingDateRequest request);
+        Models.GetSubscriptionResponse UpdateSubscriptionStartAt(string subscriptionId, Models.UpdateSubscriptionStartDateRequest request);
 
         /// <summary>
-        /// Updates the billing date from a subscription
+        /// Updates the start at date from a subscription
         /// </summary>
         /// <param name="subscriptionId">Required parameter: The subscription id</param>
-        /// <param name="request">Required parameter: Request for updating the subscription billing date</param>
+        /// <param name="request">Required parameter: Request for updating the subscription start date</param>
         /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
-        Task<Models.GetSubscriptionResponse> UpdateSubscriptionBillingDateAsync(string subscriptionId, Models.UpdateSubscriptionBillingDateRequest request);
+        Task<Models.GetSubscriptionResponse> UpdateSubscriptionStartAtAsync(string subscriptionId, Models.UpdateSubscriptionStartDateRequest request);
 
         /// <summary>
         /// Updates the credit card from a subscription

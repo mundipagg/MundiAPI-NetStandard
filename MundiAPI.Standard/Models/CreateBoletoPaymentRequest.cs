@@ -26,6 +26,7 @@ namespace MundiAPI.Standard.Models
         private string instructions;
         private Models.CreateAddressRequest billingAddress;
         private string billingAddressId;
+        private string documentNumber;
         private DateTime? dueAt;
         private string nossoNumero;
 
@@ -115,6 +116,23 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
+        /// Boleto identification
+        /// </summary>
+        [JsonProperty("document_number")]
+        public string DocumentNumber 
+        { 
+            get 
+            {
+                return this.documentNumber; 
+            } 
+            set 
+            {
+                this.documentNumber = value;
+                onPropertyChanged("DocumentNumber");
+            }
+        }
+
+        /// <summary>
         /// Boleto due date
         /// </summary>
         [JsonConverter(typeof(IsoDateTimeConverter))]
@@ -133,7 +151,7 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Número de identificação do cliente com o banco
+        /// Customer identification number with the bank
         /// </summary>
         [JsonProperty("nosso_numero")]
         public string NossoNumero 
