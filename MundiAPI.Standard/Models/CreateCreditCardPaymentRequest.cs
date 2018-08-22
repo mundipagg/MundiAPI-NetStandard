@@ -31,7 +31,7 @@ namespace MundiAPI.Standard.Models
         private bool? extendedLimitEnabled;
         private string extendedLimitCode;
         private long? merchantCategoryCode;
-        private Models.CreatePaymentAuthentiticationRequest authentication;
+        private Models.CreatePaymentAuthenticationRequest authentication;
         private Models.CreateCardPaymentTokenRequest token;
 
         /// <summary>
@@ -208,7 +208,7 @@ namespace MundiAPI.Standard.Models
         /// The payment authentication request
         /// </summary>
         [JsonProperty("authentication")]
-        public Models.CreatePaymentAuthentiticationRequest Authentication 
+        public Models.CreatePaymentAuthenticationRequest Authentication 
         { 
             get 
             {

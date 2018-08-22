@@ -42,7 +42,7 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="subscriptionId">Required parameter: The subscription id</param>
         /// <param name="request">Required parameter: Request for updating the subscription start date</param>
         /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
-        Models.GetSubscriptionResponse UpdateSubscriptionStartAt(string subscriptionId, Models.UpdateSubscriptionStartDateRequest request);
+        Models.GetSubscriptionResponse UpdateSubscriptionStartAt(string subscriptionId, Models.UpdateSubscriptionStartAtRequest request);
 
         /// <summary>
         /// Updates the start at date from a subscription
@@ -50,7 +50,7 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="subscriptionId">Required parameter: The subscription id</param>
         /// <param name="request">Required parameter: Request for updating the subscription start date</param>
         /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
-        Task<Models.GetSubscriptionResponse> UpdateSubscriptionStartAtAsync(string subscriptionId, Models.UpdateSubscriptionStartDateRequest request);
+        Task<Models.GetSubscriptionResponse> UpdateSubscriptionStartAtAsync(string subscriptionId, Models.UpdateSubscriptionStartAtRequest request);
 
         /// <summary>
         /// Updates the credit card from a subscription
@@ -605,6 +605,22 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="request">Required parameter: Request da requisição com o valor mínimo que será configurado</param>
         /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
         Task<Models.GetSubscriptionResponse> UpdateSubscriptionMiniumPriceAsync(string subscriptionId, Models.UpdateSubscriptionMinimumPriceRequest request);
+
+        /// <summary>
+        /// Updates the billing date from a subscription
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The subscription id</param>
+        /// <param name="request">Required parameter: Request for updating the subscription billing date</param>
+        /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
+        Models.GetSubscriptionResponse UpdateSubscriptionBillingDate(string subscriptionId, Models.UpdateSubscriptionBillingDateRequest request);
+
+        /// <summary>
+        /// Updates the billing date from a subscription
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The subscription id</param>
+        /// <param name="request">Required parameter: Request for updating the subscription billing date</param>
+        /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
+        Task<Models.GetSubscriptionResponse> UpdateSubscriptionBillingDateAsync(string subscriptionId, Models.UpdateSubscriptionBillingDateRequest request);
 
     }
 } 

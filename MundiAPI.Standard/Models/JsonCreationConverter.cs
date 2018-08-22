@@ -16,8 +16,8 @@ namespace MundiAPI.Standard.Models
     public abstract class JsonCreationConverter<T> : JsonConverter
     {
         public string typeName;
-        public Dictionary<string, Type> dic;
-        protected T Create(Type objectType, JObject jsonObject)
+        public Dictionary<string, System.Type> dic;
+        protected T Create(System.Type objectType, JObject jsonObject)
         {
             JToken token;
             if (!jsonObject.TryGetValue(typeName, out token))
@@ -28,7 +28,7 @@ namespace MundiAPI.Standard.Models
             return (T)Activator.CreateInstance(objectType);
         }
 
-        public override bool CanConvert(Type objectType)
+        public override bool CanConvert(System.Type objectType)
         {
 #if  NETSTANDARD1_3
             return typeof(T).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
@@ -37,7 +37,7 @@ namespace MundiAPI.Standard.Models
 #endif
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType,
+        public override object ReadJson(JsonReader reader, System.Type objectType,
           object existingValue, JsonSerializer serializer)
         {
             var jsonObject = JObject.Load(reader);

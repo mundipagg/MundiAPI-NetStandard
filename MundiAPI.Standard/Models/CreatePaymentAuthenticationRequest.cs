@@ -18,11 +18,11 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class CreatePaymentAuthentiticationRequest : BaseModel 
+    public class CreatePaymentAuthenticationRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
         private string type;
-        private Models.Create3DSAuthentiticationRequest threedSecure;
+        private Models.CreateThreeDSecureRequest threedSecure;
 
         /// <summary>
         /// The Authentication type
@@ -45,7 +45,7 @@ namespace MundiAPI.Standard.Models
         /// The 3D-S authentication object
         /// </summary>
         [JsonProperty("threed_secure")]
-        public Models.Create3DSAuthentiticationRequest ThreedSecure 
+        public Models.CreateThreeDSecureRequest ThreedSecure 
         { 
             get 
             {

@@ -290,17 +290,31 @@ namespace MundiAPI.Standard.Utilities
             }
             else if (value is IList)
             {
-                int i = 0;
                 var enumerator = ((IEnumerable) value).GetEnumerator();
+
+                var hasNested = false;
                 while (enumerator.MoveNext())
                 {
                     var subValue = enumerator.Current;
-                    if (subValue == null) continue;
+                    if (subValue != null && (subValue is JObject || subValue is IList || subValue is IDictionary || !(subValue.GetType().Namespace.StartsWith("System"))))
+                    {
+                        hasNested = true;
+                        break;
+                    }
+                }
+
+                int i = 0;
+                enumerator.Reset();
+                while (enumerator.MoveNext())
+                {
                     var fullSubName = name + '[' + i + ']';
-                    if (arrayDeserializationFormat == ArrayDeserialization.UnIndexed)
+                    if (!hasNested && arrayDeserializationFormat == ArrayDeserialization.UnIndexed)
                         fullSubName = name + "[]";
-                    else if (arrayDeserializationFormat == ArrayDeserialization.Plain)
+                    else if (!hasNested && arrayDeserializationFormat == ArrayDeserialization.Plain)
                         fullSubName = name;
+                    
+                    var subValue = enumerator.Current;
+                    if (subValue == null) continue;
                     PrepareFormFieldsFromObject(fullSubName, subValue, keys, propInfo,arrayDeserializationFormat);
                     i++;
                 }

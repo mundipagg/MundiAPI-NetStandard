@@ -29,7 +29,8 @@ namespace MundiAPI.Standard.Models
         private Models.CreateAddressRequest billingAddress;
         private string defaultPaymentMethod;
         private string gatewayAffiliationId;
-        private Models.CreateCheckoutCardPaymentRequest creditCard;
+        private Models.CreateCheckoutCreditCardPaymentRequest creditCard;
+        private Models.CreateCheckoutDebitCardPaymentRequest debitCard;
         private Models.CreateCheckoutBoletoPaymentRequest boleto;
         private bool? customerEditable;
         private int? expiresIn;
@@ -171,10 +172,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Card payment request
+        /// Credit Card payment request
         /// </summary>
         [JsonProperty("credit_card")]
-        public Models.CreateCheckoutCardPaymentRequest CreditCard 
+        public Models.CreateCheckoutCreditCardPaymentRequest CreditCard 
         { 
             get 
             {
@@ -184,6 +185,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.creditCard = value;
                 onPropertyChanged("CreditCard");
+            }
+        }
+
+        /// <summary>
+        /// Debit Card payment request
+        /// </summary>
+        [JsonProperty("debit_card")]
+        public Models.CreateCheckoutDebitCardPaymentRequest DebitCard 
+        { 
+            get 
+            {
+                return this.debitCard; 
+            } 
+            set 
+            {
+                this.debitCard = value;
+                onPropertyChanged("DebitCard");
             }
         }
 

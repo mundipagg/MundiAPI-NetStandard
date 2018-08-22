@@ -18,7 +18,7 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class Create3DSAuthentiticationRequest : BaseModel 
+    public class CreateThreeDSecureRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
         private string mpi;

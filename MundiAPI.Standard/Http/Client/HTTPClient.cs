@@ -45,7 +45,7 @@ namespace MundiAPI.Standard.Http.Client
 
             HttpResponse response = new HttpStringResponse
             {
-                Headers = responseMessage.Headers.ToDictionary(l => l.Key, k => k.Value.First()),
+                Headers = GetCombinedResponseHeaders(responseMessage),
                 RawBody = await responseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false),
                 Body = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false),
                 StatusCode = (int)responseMessage.StatusCode
@@ -72,7 +72,7 @@ namespace MundiAPI.Standard.Http.Client
 
             HttpResponse response = new HttpResponse
             {
-                Headers = responseMessage.Headers.ToDictionary(l => l.Key, k => k.Value.First()),
+                Headers = GetCombinedResponseHeaders(responseMessage),
                 RawBody = await responseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false),
                 StatusCode = (int)responseMessage.StatusCode
             };
@@ -222,6 +222,19 @@ namespace MundiAPI.Standard.Http.Client
                     else if (request.Headers.Any(f => f.Key == "content-type" && f.Value == "application/json; charset=utf-8"))
                         requestMessage.Content = new StringContent((string)request.Body ?? string.Empty, Encoding.UTF8,
                             "application/json");
+                    else if (request.Headers.ContainsKey("content-type"))
+                    {
+                        requestMessage.Content = new ByteArrayContent(
+                            request.Body == null ? new byte[] { } : Encoding.UTF8.GetBytes((string)request.Body));
+
+                        try
+                        {
+                            requestMessage.Content.Headers.ContentType = MediaTypeHeaderValue.Parse(request.Headers["content-type"]);
+                        } catch(Exception)
+                        {
+                            requestMessage.Content.Headers.TryAddWithoutValidation("content-type", request.Headers["content-type"]);
+                        }
+                    }
                     else
                         requestMessage.Content = new StringContent(request.Body.ToString() ?? string.Empty, Encoding.UTF8,
                             "text/plain");
@@ -264,6 +277,20 @@ namespace MundiAPI.Standard.Http.Client
                 }
             }
             return await _client.SendAsync(requestMessage).ConfigureAwait(false);
+        }
+
+        private static Dictionary<string, string> GetCombinedResponseHeaders(HttpResponseMessage responseMessage)
+        {
+            var headers = responseMessage.Headers.ToDictionary(l => l.Key, k => k.Value.First());
+            if (responseMessage.Content != null)
+            {
+                foreach (var contentHeader in responseMessage.Content.Headers)
+                {
+                    if (headers.ContainsKey(contentHeader.Key)) continue;
+                    headers.Add(contentHeader.Key, contentHeader.Value.First());
+                }
+            }
+            return headers;
         }
 
         #endregion

@@ -34,7 +34,7 @@ namespace MundiAPI.Standard.Models
         private string mpi;
         private string eci;
         private string authenticationType;
-        private string authenticationUrl;
+        private string threedAuthenticationUrl;
 
         /// <summary>
         /// Text that will appear on the debit card's statement
@@ -258,19 +258,19 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Authentication Url
+        /// 3D-S Authentication Url
         /// </summary>
-        [JsonProperty("authentication_url")]
-        public string AuthenticationUrl 
+        [JsonProperty("threed_authentication_url")]
+        public string ThreedAuthenticationUrl 
         { 
             get 
             {
-                return this.authenticationUrl; 
+                return this.threedAuthenticationUrl; 
             } 
             set 
             {
-                this.authenticationUrl = value;
-                onPropertyChanged("AuthenticationUrl");
+                this.threedAuthenticationUrl = value;
+                onPropertyChanged("ThreedAuthenticationUrl");
             }
         }
     }
