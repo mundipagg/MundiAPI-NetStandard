@@ -120,7 +120,7 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="subscriptionId">Required parameter: The subscription id</param>
         /// <param name="request">Required parameter: Request for updating the subscription start date</param>
         /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
-        public Models.GetSubscriptionResponse UpdateSubscriptionStartAt(string subscriptionId, Models.UpdateSubscriptionStartDateRequest request)
+        public Models.GetSubscriptionResponse UpdateSubscriptionStartAt(string subscriptionId, Models.UpdateSubscriptionStartAtRequest request)
         {
             Task<Models.GetSubscriptionResponse> t = UpdateSubscriptionStartAtAsync(subscriptionId, request);
             APIHelper.RunTaskSynchronously(t);
@@ -133,7 +133,7 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="subscriptionId">Required parameter: The subscription id</param>
         /// <param name="request">Required parameter: Request for updating the subscription start date</param>
         /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
-        public async Task<Models.GetSubscriptionResponse> UpdateSubscriptionStartAtAsync(string subscriptionId, Models.UpdateSubscriptionStartDateRequest request)
+        public async Task<Models.GetSubscriptionResponse> UpdateSubscriptionStartAtAsync(string subscriptionId, Models.UpdateSubscriptionStartAtRequest request)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;

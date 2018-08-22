@@ -18,7 +18,7 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class UpdateSubscriptionStartDateRequest : BaseModel 
+    public class UpdateSubscriptionStartAtRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
         private DateTime startAt;

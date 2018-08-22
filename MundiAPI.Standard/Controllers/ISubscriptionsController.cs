@@ -42,7 +42,7 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="subscriptionId">Required parameter: The subscription id</param>
         /// <param name="request">Required parameter: Request for updating the subscription start date</param>
         /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
-        Models.GetSubscriptionResponse UpdateSubscriptionStartAt(string subscriptionId, Models.UpdateSubscriptionStartDateRequest request);
+        Models.GetSubscriptionResponse UpdateSubscriptionStartAt(string subscriptionId, Models.UpdateSubscriptionStartAtRequest request);
 
         /// <summary>
         /// Updates the start at date from a subscription
@@ -50,7 +50,7 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="subscriptionId">Required parameter: The subscription id</param>
         /// <param name="request">Required parameter: Request for updating the subscription start date</param>
         /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
-        Task<Models.GetSubscriptionResponse> UpdateSubscriptionStartAtAsync(string subscriptionId, Models.UpdateSubscriptionStartDateRequest request);
+        Task<Models.GetSubscriptionResponse> UpdateSubscriptionStartAtAsync(string subscriptionId, Models.UpdateSubscriptionStartAtRequest request);
 
         /// <summary>
         /// Updates the credit card from a subscription
