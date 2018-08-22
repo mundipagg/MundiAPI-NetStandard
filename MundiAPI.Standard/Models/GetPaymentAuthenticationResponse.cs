@@ -18,43 +18,43 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class CreateCheckoutCardPaymentRequest : BaseModel 
+    public class GetPaymentAuthenticationResponse : BaseModel 
     {
         // These fields hold the values for the public properties.
-        private string statementDescriptor;
-        private List<Models.CreateCheckoutCardInstallmentOptionRequest> installments;
+        private string type;
+        private Models.GetThreeDSecureResponse threedSecure;
 
         /// <summary>
-        /// Card invoice text descriptor
+        /// TODO: Write general description for this method
         /// </summary>
-        [JsonProperty("statement_descriptor")]
-        public string StatementDescriptor 
+        [JsonProperty("type")]
+        public string Type 
         { 
             get 
             {
-                return this.statementDescriptor; 
+                return this.type; 
             } 
             set 
             {
-                this.statementDescriptor = value;
-                onPropertyChanged("StatementDescriptor");
+                this.type = value;
+                onPropertyChanged("Type");
             }
         }
 
         /// <summary>
-        /// Payment installment options
+        /// 3D-S payment authentication response
         /// </summary>
-        [JsonProperty("installments")]
-        public List<Models.CreateCheckoutCardInstallmentOptionRequest> Installments 
+        [JsonProperty("threed_secure")]
+        public Models.GetThreeDSecureResponse ThreedSecure 
         { 
             get 
             {
-                return this.installments; 
+                return this.threedSecure; 
             } 
             set 
             {
-                this.installments = value;
-                onPropertyChanged("Installments");
+                this.threedSecure = value;
+                onPropertyChanged("ThreedSecure");
             }
         }
     }

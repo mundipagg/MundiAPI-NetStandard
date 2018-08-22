@@ -31,6 +31,7 @@ namespace MundiAPI.Standard.Models
         private Models.GetCardResponse card;
         private string acquirerMessage;
         private string acquirerReturnCode;
+        private string threedAuthenticationUrl;
         private int? installments;
 
         /// <summary>
@@ -200,6 +201,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.acquirerReturnCode = value;
                 onPropertyChanged("AcquirerReturnCode");
+            }
+        }
+
+        /// <summary>
+        /// 3D-S authentication Url
+        /// </summary>
+        [JsonProperty("threed_authentication_url")]
+        public string ThreedAuthenticationUrl 
+        { 
+            get 
+            {
+                return this.threedAuthenticationUrl; 
+            } 
+            set 
+            {
+                this.threedAuthenticationUrl = value;
+                onPropertyChanged("ThreedAuthenticationUrl");
             }
         }
 

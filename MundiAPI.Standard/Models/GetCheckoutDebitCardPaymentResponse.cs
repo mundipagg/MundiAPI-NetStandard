@@ -18,16 +18,16 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class GetCheckoutCardPaymentResponse : BaseModel 
+    public class GetCheckoutDebitCardPaymentResponse : BaseModel 
     {
         // These fields hold the values for the public properties.
         private string statementDescriptor;
-        private List<Models.GetCheckoutCardInstallmentOptionsResponse> installments;
+        private Models.GetPaymentAuthenticationResponse authentication;
 
         /// <summary>
         /// Descrição na fatura
         /// </summary>
-        [JsonProperty("statementDescriptor")]
+        [JsonProperty("statement_descriptor")]
         public string StatementDescriptor 
         { 
             get 
@@ -42,19 +42,19 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Parcelas
+        /// Payment Authentication response object data
         /// </summary>
-        [JsonProperty("installments")]
-        public List<Models.GetCheckoutCardInstallmentOptionsResponse> Installments 
+        [JsonProperty("authentication")]
+        public Models.GetPaymentAuthenticationResponse Authentication 
         { 
             get 
             {
-                return this.installments; 
+                return this.authentication; 
             } 
             set 
             {
-                this.installments = value;
-                onPropertyChanged("Installments");
+                this.authentication = value;
+                onPropertyChanged("Authentication");
             }
         }
     }

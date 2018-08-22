@@ -34,7 +34,7 @@ namespace MundiAPI.Standard.Models
         private bool customerEditable;
         private Models.GetCustomerResponse customer;
         private Models.GetAddressResponse billingaddress;
-        private Models.GetCheckoutCardPaymentResponse creditCard;
+        private Models.GetCheckoutCreditCardPaymentResponse creditCard;
         private Models.GetCheckoutBoletoPaymentResponse boleto;
         private bool billingAddressEditable;
         private Models.GetShippingResponse shipping;
@@ -44,6 +44,7 @@ namespace MundiAPI.Standard.Models
         private DateTime? canceledAt;
         private DateTime? closedAt;
         private DateTime? expiresAt;
+        private Models.GetCheckoutDebitCardPaymentResponse debitCard;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -272,7 +273,7 @@ namespace MundiAPI.Standard.Models
         /// Configurações de cartão de crédito
         /// </summary>
         [JsonProperty("credit_Card")]
-        public Models.GetCheckoutCardPaymentResponse CreditCard 
+        public Models.GetCheckoutCreditCardPaymentResponse CreditCard 
         { 
             get 
             {
@@ -438,6 +439,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.expiresAt = value;
                 onPropertyChanged("ExpiresAt");
+            }
+        }
+
+        /// <summary>
+        /// Configurações de cartão de débito
+        /// </summary>
+        [JsonProperty("debit_card")]
+        public Models.GetCheckoutDebitCardPaymentResponse DebitCard 
+        { 
+            get 
+            {
+                return this.debitCard; 
+            } 
+            set 
+            {
+                this.debitCard = value;
+                onPropertyChanged("DebitCard");
             }
         }
     }

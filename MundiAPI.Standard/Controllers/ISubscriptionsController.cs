@@ -606,5 +606,21 @@ namespace MundiAPI.Standard.Controllers
         /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
         Task<Models.GetSubscriptionResponse> UpdateSubscriptionMiniumPriceAsync(string subscriptionId, Models.UpdateSubscriptionMinimumPriceRequest request);
 
+        /// <summary>
+        /// Updates the billing date from a subscription
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The subscription id</param>
+        /// <param name="request">Required parameter: Request for updating the subscription billing date</param>
+        /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
+        Models.GetSubscriptionResponse UpdateSubscriptionBillingDate(string subscriptionId, Models.UpdateSubscriptionBillingDateRequest request);
+
+        /// <summary>
+        /// Updates the billing date from a subscription
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The subscription id</param>
+        /// <param name="request">Required parameter: Request for updating the subscription billing date</param>
+        /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
+        Task<Models.GetSubscriptionResponse> UpdateSubscriptionBillingDateAsync(string subscriptionId, Models.UpdateSubscriptionBillingDateRequest request);
+
     }
 } 
