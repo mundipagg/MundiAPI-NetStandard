@@ -16,6 +16,8 @@ namespace MundiAPI.Standard.Http.Client
     {
         public static IHttpClient SharedClient { get; set; }
         private readonly HttpClient _client = new HttpClient();
+		
+
         static HTTPClient()
         {
             SharedClient = new HTTPClient();
