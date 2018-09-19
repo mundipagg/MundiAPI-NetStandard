@@ -18,25 +18,26 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class GetDeviceResponse : BaseModel 
+    public class UpdateCurrentCycleEndDateRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
-        private string platform;
+        private DateTime endAt;
 
         /// <summary>
-        /// Device's platform name
+        /// Current cycle end date
         /// </summary>
-        [JsonProperty("platform")]
-        public string Platform 
+        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [JsonProperty("end_at")]
+        public DateTime EndAt 
         { 
             get 
             {
-                return this.platform; 
+                return this.endAt; 
             } 
             set 
             {
-                this.platform = value;
-                onPropertyChanged("Platform");
+                this.endAt = value;
+                onPropertyChanged("EndAt");
             }
         }
     }

@@ -9,11 +9,11 @@ namespace MundiAPI.Standard
 
         //The username to use with basic authentication
         //TODO: Replace the BasicAuthUserName with an appropriate value
-        public static string BasicAuthUserName = "TODO: Replace";
+        public static string BasicAuthUserName = "";
 
         //The password to use with basic authentication
         //TODO: Replace the BasicAuthPassword with an appropriate value
-        public static string BasicAuthPassword = "TODO: Replace";
+        public static string BasicAuthPassword = "";
 
     }
 }
