@@ -24,6 +24,7 @@ namespace MundiAPI.Standard.Models
         private string type;
         private int amount;
         private string recipientId;
+        private Models.CreateSplitOptionsRequest options;
 
         /// <summary>
         /// Split type
@@ -73,6 +74,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.recipientId = value;
                 onPropertyChanged("RecipientId");
+            }
+        }
+
+        /// <summary>
+        /// The split options request
+        /// </summary>
+        [JsonProperty("options")]
+        public Models.CreateSplitOptionsRequest Options 
+        { 
+            get 
+            {
+                return this.options; 
+            } 
+            set 
+            {
+                this.options = value;
+                onPropertyChanged("Options");
             }
         }
     }
