@@ -45,6 +45,7 @@ namespace MundiAPI.Standard.Models
         /// Charge processing fee
         /// </summary>
         [JsonProperty("charge_processing_fee")]
+
         public bool? ChargeProcessingFee 
         { 
             get 

@@ -8,11 +8,10 @@ The generated code uses the Newtonsoft Json.NET NuGet Package. If the automatic 
 is enabled, these dependencies will be installed automatically. Therefore,
 you will need internet access for build.
 
-"This library requires Visual Studio 2017 for compilation."
 1. Open the solution (MundiAPI.sln) file.
 2. Invoke the build process using `Ctrl+Shift+B` shortcut key or using the `Build` menu as shown below.
 
-![Building SDK using Visual Studio](https://apidocs.io/illustration/cs?step=buildSDK&workspaceFolder=MundiAPI-CSharp&workspaceName=MundiAPI&projectName=MundiAPI.Standard)
+![Building SDK using Visual Studio](https://apidocs.io/illustration/cs?step=buildSDK&workspaceFolder=MundiAPI-CSharp&workspaceName=MundiAPI&projectName=MundiAPI.PCL)
 
 ## How to Use
 
@@ -25,34 +24,34 @@ The following section explains how to use the MundiAPI library in a new console 
 
 For starting a new project, right click on the current solution from the *solution explorer* and choose  ``` Add -> New Project ```.
 
-![Add a new project in the existing solution using Visual Studio](https://apidocs.io/illustration/cs?step=addProject&workspaceFolder=MundiAPI-CSharp&workspaceName=MundiAPI&projectName=MundiAPI.Standard)
+![Add a new project in the existing solution using Visual Studio](https://apidocs.io/illustration/cs?step=addProject&workspaceFolder=MundiAPI-CSharp&workspaceName=MundiAPI&projectName=MundiAPI.PCL)
 
 Next, choose "Console Application", provide a ``` TestConsoleProject ``` as the project name and click ``` OK ```.
 
-![Create a new console project using Visual Studio](https://apidocs.io/illustration/cs?step=createProject&workspaceFolder=MundiAPI-CSharp&workspaceName=MundiAPI&projectName=MundiAPI.Standard)
+![Create a new console project using Visual Studio](https://apidocs.io/illustration/cs?step=createProject&workspaceFolder=MundiAPI-CSharp&workspaceName=MundiAPI&projectName=MundiAPI.PCL)
 
 ### 2. Set as startup project
 
 The new console project is the entry point for the eventual execution. This requires us to set the ``` TestConsoleProject ``` as the start-up project. To do this, right-click on the  ``` TestConsoleProject ``` and choose  ``` Set as StartUp Project ``` form the context menu.
 
-![Set the new cosole project as the start up project](https://apidocs.io/illustration/cs?step=setStartup&workspaceFolder=MundiAPI-CSharp&workspaceName=MundiAPI&projectName=MundiAPI.Standard)
+![Set the new cosole project as the start up project](https://apidocs.io/illustration/cs?step=setStartup&workspaceFolder=MundiAPI-CSharp&workspaceName=MundiAPI&projectName=MundiAPI.PCL)
 
 ### 3. Add reference of the library project
 
 In order to use the MundiAPI library in the new project, first we must add a projet reference to the ``` TestConsoleProject ```. First, right click on the ``` References ``` node in the *solution explorer* and click ``` Add Reference... ```.
 
-![Open references of the TestConsoleProject](https://apidocs.io/illustration/cs?step=addReference&workspaceFolder=MundiAPI-CSharp&workspaceName=MundiAPI&projectName=MundiAPI.Standard)
+![Open references of the TestConsoleProject](https://apidocs.io/illustration/cs?step=addReference&workspaceFolder=MundiAPI-CSharp&workspaceName=MundiAPI&projectName=MundiAPI.PCL)
 
-Next, a window will be displayed where we must set the ``` checkbox ``` on ``` MundiAPI.Standard ``` and click ``` OK ```. By doing this, we have added a reference of the ```MundiAPI.Standard``` project into the new ``` TestConsoleProject ```.
+Next, a window will be displayed where we must set the ``` checkbox ``` on ``` MundiAPI.PCL ``` and click ``` OK ```. By doing this, we have added a reference of the ```MundiAPI.PCL``` project into the new ``` TestConsoleProject ```.
 
-![Add a reference to the TestConsoleProject](https://apidocs.io/illustration/cs?step=createReference&workspaceFolder=MundiAPI-CSharp&workspaceName=MundiAPI&projectName=MundiAPI.Standard)
+![Add a reference to the TestConsoleProject](https://apidocs.io/illustration/cs?step=createReference&workspaceFolder=MundiAPI-CSharp&workspaceName=MundiAPI&projectName=MundiAPI.PCL)
 
 ### 4. Write sample code
 
 Once the ``` TestConsoleProject ``` is created, a file named ``` Program.cs ``` will be visible in the *solution explorer* with an empty ``` Main ``` method. This is the entry point for the execution of the entire solution.
 Here, you can add code to initialize the client library and acquire the instance of a *Controller* class. Sample code to initialize the client library and using controller methods is given in the subsequent sections.
 
-![Add a reference to the TestConsoleProject](https://apidocs.io/illustration/cs?step=addCode&workspaceFolder=MundiAPI-CSharp&workspaceName=MundiAPI&projectName=MundiAPI.Standard)
+![Add a reference to the TestConsoleProject](https://apidocs.io/illustration/cs?step=addCode&workspaceFolder=MundiAPI-CSharp&workspaceName=MundiAPI&projectName=MundiAPI.PCL)
 
 ## How to Test
 
@@ -99,7 +98,7 @@ MundiAPIClient client = new MundiAPIClient(basicAuthUserName, basicAuthPassword)
 * [TokensController](#tokens_controller)
 * [SellersController](#sellers_controller)
 
-## <a name="subscriptions_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.SubscriptionsController") SubscriptionsController
+## <a name="subscriptions_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.PCL.Controllers.SubscriptionsController") SubscriptionsController
 
 ### Get singleton instance
 
@@ -109,7 +108,7 @@ The singleton instance of the ``` SubscriptionsController ``` class can be acces
 ISubscriptionsController subscriptions = client.Subscriptions;
 ```
 
-### <a name="get_increment_by_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetIncrementById") GetIncrementById
+### <a name="get_increment_by_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.GetIncrementById") GetIncrementById
 
 > TODO: Add a method description
 
@@ -137,7 +136,7 @@ Models.GetIncrementResponse result = await subscriptions.GetIncrementById(subscr
 ```
 
 
-### <a name="update_subscription_start_at"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionStartAt") UpdateSubscriptionStartAt
+### <a name="update_subscription_start_at"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.UpdateSubscriptionStartAt") UpdateSubscriptionStartAt
 
 > Updates the start at date from a subscription
 
@@ -165,7 +164,7 @@ Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionSt
 ```
 
 
-### <a name="update_subscription_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionCard") UpdateSubscriptionCard
+### <a name="update_subscription_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.UpdateSubscriptionCard") UpdateSubscriptionCard
 
 > Updates the credit card from a subscription
 
@@ -193,7 +192,7 @@ Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionCa
 ```
 
 
-### <a name="update_subscription_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionItem") UpdateSubscriptionItem
+### <a name="update_subscription_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.UpdateSubscriptionItem") UpdateSubscriptionItem
 
 > Updates a subscription item
 
@@ -223,7 +222,7 @@ Models.GetSubscriptionItemResponse result = await subscriptions.UpdateSubscripti
 ```
 
 
-### <a name="create_usage"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.CreateUsage") CreateUsage
+### <a name="create_usage"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.CreateUsage") CreateUsage
 
 > Creates a usage
 
@@ -253,7 +252,7 @@ Models.GetUsageResponse result = await subscriptions.CreateUsage(subscriptionId,
 ```
 
 
-### <a name="get_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetSubscription") GetSubscription
+### <a name="get_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.GetSubscription") GetSubscription
 
 > Gets a subscription
 
@@ -279,7 +278,7 @@ Models.GetSubscriptionResponse result = await subscriptions.GetSubscription(subs
 ```
 
 
-### <a name="update_subscription_payment_method"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionPaymentMethod") UpdateSubscriptionPaymentMethod
+### <a name="update_subscription_payment_method"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.UpdateSubscriptionPaymentMethod") UpdateSubscriptionPaymentMethod
 
 > Updates the payment method from a subscription
 
@@ -307,7 +306,7 @@ Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionPa
 ```
 
 
-### <a name="create_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.CreateSubscription") CreateSubscription
+### <a name="create_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.CreateSubscription") CreateSubscription
 
 > Creates a new subscription
 
@@ -333,7 +332,7 @@ Models.GetSubscriptionResponse result = await subscriptions.CreateSubscription(b
 ```
 
 
-### <a name="create_subscription_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.CreateSubscriptionItem") CreateSubscriptionItem
+### <a name="create_subscription_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.CreateSubscriptionItem") CreateSubscriptionItem
 
 > Creates a new Subscription item
 
@@ -361,7 +360,7 @@ Models.GetSubscriptionItemResponse result = await subscriptions.CreateSubscripti
 ```
 
 
-### <a name="create_discount"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.CreateDiscount") CreateDiscount
+### <a name="create_discount"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.CreateDiscount") CreateDiscount
 
 > Creates a discount
 
@@ -389,7 +388,7 @@ Models.GetDiscountResponse result = await subscriptions.CreateDiscount(subscript
 ```
 
 
-### <a name="get_subscription_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetSubscriptionItem") GetSubscriptionItem
+### <a name="get_subscription_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.GetSubscriptionItem") GetSubscriptionItem
 
 > Get Subscription Item
 
@@ -417,7 +416,7 @@ Models.GetSubscriptionItemResponse result = await subscriptions.GetSubscriptionI
 ```
 
 
-### <a name="update_subscription_affiliation_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionAffiliationId") UpdateSubscriptionAffiliationId
+### <a name="update_subscription_affiliation_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.UpdateSubscriptionAffiliationId") UpdateSubscriptionAffiliationId
 
 > TODO: Add a method description
 
@@ -445,7 +444,7 @@ Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionAf
 ```
 
 
-### <a name="create_an_usage"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.CreateAnUsage") CreateAnUsage
+### <a name="create_an_usage"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.CreateAnUsage") CreateAnUsage
 
 > Create Usage
 
@@ -473,7 +472,7 @@ Models.GetUsageResponse result = await subscriptions.CreateAnUsage(subscriptionI
 ```
 
 
-### <a name="get_subscriptions"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetSubscriptions") GetSubscriptions
+### <a name="get_subscriptions"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.GetSubscriptions") GetSubscriptions
 
 > Gets all subscriptions
 
@@ -515,8 +514,8 @@ Task<Models.ListSubscriptionsResponse> GetSubscriptions(
 #### Example Usage
 
 ```csharp
-int? page = 45;
-int? size = 45;
+int? page = 207;
+int? size = 207;
 string code = "code";
 string billingType = "billing_type";
 string customerId = "customer_id";
@@ -533,7 +532,7 @@ Models.ListSubscriptionsResponse result = await subscriptions.GetSubscriptions(p
 ```
 
 
-### <a name="update_subscription_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionMetadata") UpdateSubscriptionMetadata
+### <a name="update_subscription_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.UpdateSubscriptionMetadata") UpdateSubscriptionMetadata
 
 > Updates the metadata from a subscription
 
@@ -561,7 +560,7 @@ Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionMe
 ```
 
 
-### <a name="delete_subscription_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.DeleteSubscriptionItem") DeleteSubscriptionItem
+### <a name="delete_subscription_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.DeleteSubscriptionItem") DeleteSubscriptionItem
 
 > Deletes a subscription item
 
@@ -589,7 +588,7 @@ Models.GetSubscriptionItemResponse result = await subscriptions.DeleteSubscripti
 ```
 
 
-### <a name="delete_usage"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.DeleteUsage") DeleteUsage
+### <a name="delete_usage"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.DeleteUsage") DeleteUsage
 
 > Deletes a usage
 
@@ -619,7 +618,7 @@ Models.GetUsageResponse result = await subscriptions.DeleteUsage(subscriptionId,
 ```
 
 
-### <a name="delete_discount"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.DeleteDiscount") DeleteDiscount
+### <a name="delete_discount"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.DeleteDiscount") DeleteDiscount
 
 > Deletes a discount
 
@@ -647,7 +646,7 @@ Models.GetDiscountResponse result = await subscriptions.DeleteDiscount(subscript
 ```
 
 
-### <a name="cancel_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.CancelSubscription") CancelSubscription
+### <a name="cancel_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.CancelSubscription") CancelSubscription
 
 > Cancels a subscription
 
@@ -675,7 +674,7 @@ Models.GetSubscriptionResponse result = await subscriptions.CancelSubscription(s
 ```
 
 
-### <a name="get_discount_by_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetDiscountById") GetDiscountById
+### <a name="get_discount_by_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.GetDiscountById") GetDiscountById
 
 > TODO: Add a method description
 
@@ -703,7 +702,7 @@ Models.GetDiscountResponse result = await subscriptions.GetDiscountById(subscrip
 ```
 
 
-### <a name="get_discounts"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetDiscounts") GetDiscounts
+### <a name="get_discounts"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.GetDiscounts") GetDiscounts
 
 > TODO: Add a method description
 
@@ -725,15 +724,15 @@ Task<Models.ListDiscountsResponse> GetDiscounts(string subscriptionId, int page,
 
 ```csharp
 string subscriptionId = "subscription_id";
-int page = 45;
-int size = 45;
+int page = 44;
+int size = 44;
 
 Models.ListDiscountsResponse result = await subscriptions.GetDiscounts(subscriptionId, page, size);
 
 ```
 
 
-### <a name="create_increment"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.CreateIncrement") CreateIncrement
+### <a name="create_increment"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.CreateIncrement") CreateIncrement
 
 > Creates a increment
 
@@ -761,7 +760,7 @@ Models.GetIncrementResponse result = await subscriptions.CreateIncrement(subscri
 ```
 
 
-### <a name="get_increments"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetIncrements") GetIncrements
+### <a name="get_increments"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.GetIncrements") GetIncrements
 
 > TODO: Add a method description
 
@@ -783,15 +782,15 @@ Task<Models.ListIncrementsResponse> GetIncrements(string subscriptionId, int? pa
 
 ```csharp
 string subscriptionId = "subscription_id";
-int? page = 45;
-int? size = 45;
+int? page = 44;
+int? size = 44;
 
 Models.ListIncrementsResponse result = await subscriptions.GetIncrements(subscriptionId, page, size);
 
 ```
 
 
-### <a name="delete_increment"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.DeleteIncrement") DeleteIncrement
+### <a name="delete_increment"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.DeleteIncrement") DeleteIncrement
 
 > Deletes a increment
 
@@ -819,7 +818,7 @@ Models.GetIncrementResponse result = await subscriptions.DeleteIncrement(subscri
 ```
 
 
-### <a name="get_usages_details"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetUsagesDetails") GetUsagesDetails
+### <a name="get_usages_details"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.GetUsagesDetails") GetUsagesDetails
 
 > TODO: Add a method description
 
@@ -851,8 +850,8 @@ Task<Models.GetUsagesDetailsResponse> GetUsagesDetails(
 ```csharp
 string subscriptionId = "subscription_id";
 string cycleId = "cycle_id";
-int? size = 45;
-int? page = 45;
+int? size = 44;
+int? page = 44;
 string itemId = "item_id";
 string mgroup = "group";
 
@@ -861,7 +860,7 @@ Models.GetUsagesDetailsResponse result = await subscriptions.GetUsagesDetails(su
 ```
 
 
-### <a name="get_usages"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetUsages") GetUsages
+### <a name="get_usages"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.GetUsages") GetUsages
 
 > Lists all usages from a subscription item
 
@@ -893,8 +892,8 @@ Task<Models.ListUsagesResponse> GetUsages(
 ```csharp
 string subscriptionId = "subscription_id";
 string itemId = "item_id";
-int? page = 45;
-int? size = 45;
+int? page = 44;
+int? size = 44;
 string code = "code";
 string mgroup = "group";
 
@@ -903,7 +902,7 @@ Models.ListUsagesResponse result = await subscriptions.GetUsages(subscriptionId,
 ```
 
 
-### <a name="get_subscription_items"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetSubscriptionItems") GetSubscriptionItems
+### <a name="get_subscription_items"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.GetSubscriptionItems") GetSubscriptionItems
 
 > Get Subscription Items
 
@@ -940,8 +939,8 @@ Task<Models.ListSubscriptionItemsResponse> GetSubscriptionItems(
 
 ```csharp
 string subscriptionId = "subscription_id";
-int? page = 45;
-int? size = 45;
+int? page = 44;
+int? size = 44;
 string name = "name";
 string code = "code";
 string status = "status";
@@ -954,7 +953,7 @@ Models.ListSubscriptionItemsResponse result = await subscriptions.GetSubscriptio
 ```
 
 
-### <a name="update_subscription_due_days"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionDueDays") UpdateSubscriptionDueDays
+### <a name="update_subscription_due_days"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.UpdateSubscriptionDueDays") UpdateSubscriptionDueDays
 
 > Updates the boleto due days from a subscription
 
@@ -982,7 +981,7 @@ Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionDu
 ```
 
 
-### <a name="update_subscription_minium_price"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionMiniumPrice") UpdateSubscriptionMiniumPrice
+### <a name="update_subscription_minium_price"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.UpdateSubscriptionMiniumPrice") UpdateSubscriptionMiniumPrice
 
 > Atualização do valor mínimo da assinatura
 
@@ -1010,7 +1009,7 @@ Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionMi
 ```
 
 
-### <a name="update_subscription_billing_date"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionBillingDate") UpdateSubscriptionBillingDate
+### <a name="update_subscription_billing_date"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.UpdateSubscriptionBillingDate") UpdateSubscriptionBillingDate
 
 > Updates the billing date from a subscription
 
@@ -1038,7 +1037,7 @@ Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionBi
 ```
 
 
-### <a name="update_current_cycle_end_date"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateCurrentCycleEndDate") UpdateCurrentCycleEndDate
+### <a name="update_current_cycle_end_date"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SubscriptionsController.UpdateCurrentCycleEndDate") UpdateCurrentCycleEndDate
 
 > TODO: Add a method description
 
@@ -1068,7 +1067,7 @@ Models.GetSubscriptionItemResponse result = await subscriptions.UpdateCurrentCyc
 
 [Back to List of Controllers](#list_of_controllers)
 
-## <a name="orders_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.OrdersController") OrdersController
+## <a name="orders_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.PCL.Controllers.OrdersController") OrdersController
 
 ### Get singleton instance
 
@@ -1078,7 +1077,7 @@ The singleton instance of the ``` OrdersController ``` class can be accessed fro
 IOrdersController orders = client.Orders;
 ```
 
-### <a name="get_order"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.GetOrder") GetOrder
+### <a name="get_order"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.OrdersController.GetOrder") GetOrder
 
 > Gets an order
 
@@ -1104,7 +1103,7 @@ Models.GetOrderResponse result = await orders.GetOrder(orderId);
 ```
 
 
-### <a name="create_order"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.CreateOrder") CreateOrder
+### <a name="create_order"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.OrdersController.CreateOrder") CreateOrder
 
 > Creates a new Order
 
@@ -1130,7 +1129,7 @@ Models.GetOrderResponse result = await orders.CreateOrder(body);
 ```
 
 
-### <a name="get_orders"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.GetOrders") GetOrders
+### <a name="get_orders"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.OrdersController.GetOrders") GetOrders
 
 > Gets all orders
 
@@ -1162,8 +1161,8 @@ Task<Models.ListOrderResponse> GetOrders(
 #### Example Usage
 
 ```csharp
-int? page = 45;
-int? size = 45;
+int? page = 44;
+int? size = 44;
 string code = "code";
 string status = "status";
 DateTime? createdSince = DateTime.Now();
@@ -1175,7 +1174,7 @@ Models.ListOrderResponse result = await orders.GetOrders(page, size, code, statu
 ```
 
 
-### <a name="update_order_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.UpdateOrderMetadata") UpdateOrderMetadata
+### <a name="update_order_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.OrdersController.UpdateOrderMetadata") UpdateOrderMetadata
 
 > Updates the metadata from an order
 
@@ -1203,7 +1202,7 @@ Models.GetOrderResponse result = await orders.UpdateOrderMetadata(orderId, reque
 ```
 
 
-### <a name="delete_all_order_items"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.DeleteAllOrderItems") DeleteAllOrderItems
+### <a name="delete_all_order_items"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.OrdersController.DeleteAllOrderItems") DeleteAllOrderItems
 
 > TODO: Add a method description
 
@@ -1229,7 +1228,7 @@ Models.GetOrderResponse result = await orders.DeleteAllOrderItems(orderId);
 ```
 
 
-### <a name="update_order_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.UpdateOrderItem") UpdateOrderItem
+### <a name="update_order_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.OrdersController.UpdateOrderItem") UpdateOrderItem
 
 > TODO: Add a method description
 
@@ -1259,7 +1258,7 @@ Models.GetOrderItemResponse result = await orders.UpdateOrderItem(orderId, itemI
 ```
 
 
-### <a name="delete_order_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.DeleteOrderItem") DeleteOrderItem
+### <a name="delete_order_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.OrdersController.DeleteOrderItem") DeleteOrderItem
 
 > TODO: Add a method description
 
@@ -1287,7 +1286,7 @@ Models.GetOrderItemResponse result = await orders.DeleteOrderItem(orderId, itemI
 ```
 
 
-### <a name="create_order_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.CreateOrderItem") CreateOrderItem
+### <a name="create_order_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.OrdersController.CreateOrderItem") CreateOrderItem
 
 > TODO: Add a method description
 
@@ -1315,7 +1314,7 @@ Models.GetOrderItemResponse result = await orders.CreateOrderItem(orderId, reque
 ```
 
 
-### <a name="get_order_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.GetOrderItem") GetOrderItem
+### <a name="get_order_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.OrdersController.GetOrderItem") GetOrderItem
 
 > TODO: Add a method description
 
@@ -1343,7 +1342,7 @@ Models.GetOrderItemResponse result = await orders.GetOrderItem(orderId, itemId);
 ```
 
 
-### <a name="update_order_status"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.UpdateOrderStatus") UpdateOrderStatus
+### <a name="update_order_status"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.OrdersController.UpdateOrderStatus") UpdateOrderStatus
 
 > TODO: Add a method description
 
@@ -1373,7 +1372,7 @@ Models.GetOrderResponse result = await orders.UpdateOrderStatus(id, request);
 
 [Back to List of Controllers](#list_of_controllers)
 
-## <a name="plans_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.PlansController") PlansController
+## <a name="plans_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.PCL.Controllers.PlansController") PlansController
 
 ### Get singleton instance
 
@@ -1383,7 +1382,7 @@ The singleton instance of the ``` PlansController ``` class can be accessed from
 IPlansController plans = client.Plans;
 ```
 
-### <a name="create_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.CreatePlanItem") CreatePlanItem
+### <a name="create_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.PlansController.CreatePlanItem") CreatePlanItem
 
 > Adds a new item to a plan
 
@@ -1411,7 +1410,7 @@ Models.GetPlanItemResponse result = await plans.CreatePlanItem(planId, request);
 ```
 
 
-### <a name="update_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.UpdatePlanItem") UpdatePlanItem
+### <a name="update_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.PlansController.UpdatePlanItem") UpdatePlanItem
 
 > Updates a plan item
 
@@ -1441,7 +1440,7 @@ Models.GetPlanItemResponse result = await plans.UpdatePlanItem(planId, planItemI
 ```
 
 
-### <a name="get_plan"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.GetPlan") GetPlan
+### <a name="get_plan"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.PlansController.GetPlan") GetPlan
 
 > Gets a plan
 
@@ -1467,7 +1466,7 @@ Models.GetPlanResponse result = await plans.GetPlan(planId);
 ```
 
 
-### <a name="delete_plan"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.DeletePlan") DeletePlan
+### <a name="delete_plan"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.PlansController.DeletePlan") DeletePlan
 
 > Deletes a plan
 
@@ -1493,7 +1492,7 @@ Models.GetPlanResponse result = await plans.DeletePlan(planId);
 ```
 
 
-### <a name="update_plan"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.UpdatePlan") UpdatePlan
+### <a name="update_plan"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.PlansController.UpdatePlan") UpdatePlan
 
 > Updates a plan
 
@@ -1521,7 +1520,7 @@ Models.GetPlanResponse result = await plans.UpdatePlan(planId, request);
 ```
 
 
-### <a name="create_plan"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.CreatePlan") CreatePlan
+### <a name="create_plan"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.PlansController.CreatePlan") CreatePlan
 
 > Creates a new plan
 
@@ -1547,7 +1546,7 @@ Models.GetPlanResponse result = await plans.CreatePlan(body);
 ```
 
 
-### <a name="get_plans"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.GetPlans") GetPlans
+### <a name="get_plans"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.PlansController.GetPlans") GetPlans
 
 > Gets all plans
 
@@ -1579,8 +1578,8 @@ Task<Models.ListPlansResponse> GetPlans(
 #### Example Usage
 
 ```csharp
-int? page = 45;
-int? size = 45;
+int? page = 44;
+int? size = 44;
 string name = "name";
 string status = "status";
 string billingType = "billing_type";
@@ -1592,7 +1591,7 @@ Models.ListPlansResponse result = await plans.GetPlans(page, size, name, status,
 ```
 
 
-### <a name="update_plan_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.UpdatePlanMetadata") UpdatePlanMetadata
+### <a name="update_plan_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.PlansController.UpdatePlanMetadata") UpdatePlanMetadata
 
 > Updates the metadata from a plan
 
@@ -1620,7 +1619,7 @@ Models.GetPlanResponse result = await plans.UpdatePlanMetadata(planId, request);
 ```
 
 
-### <a name="get_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.GetPlanItem") GetPlanItem
+### <a name="get_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.PlansController.GetPlanItem") GetPlanItem
 
 > Gets a plan item
 
@@ -1648,7 +1647,7 @@ Models.GetPlanItemResponse result = await plans.GetPlanItem(planId, planItemId);
 ```
 
 
-### <a name="delete_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.PlansController.DeletePlanItem") DeletePlanItem
+### <a name="delete_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.PlansController.DeletePlanItem") DeletePlanItem
 
 > Removes an item from a plan
 
@@ -1678,7 +1677,7 @@ Models.GetPlanItemResponse result = await plans.DeletePlanItem(planId, planItemI
 
 [Back to List of Controllers](#list_of_controllers)
 
-## <a name="invoices_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.InvoicesController") InvoicesController
+## <a name="invoices_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.PCL.Controllers.InvoicesController") InvoicesController
 
 ### Get singleton instance
 
@@ -1688,7 +1687,7 @@ The singleton instance of the ``` InvoicesController ``` class can be accessed f
 IInvoicesController invoices = client.Invoices;
 ```
 
-### <a name="cancel_invoice"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.InvoicesController.CancelInvoice") CancelInvoice
+### <a name="cancel_invoice"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.InvoicesController.CancelInvoice") CancelInvoice
 
 > Cancels an invoice
 
@@ -1714,7 +1713,7 @@ Models.GetInvoiceResponse result = await invoices.CancelInvoice(invoiceId);
 ```
 
 
-### <a name="get_invoice"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.InvoicesController.GetInvoice") GetInvoice
+### <a name="get_invoice"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.InvoicesController.GetInvoice") GetInvoice
 
 > Gets an invoice
 
@@ -1740,7 +1739,7 @@ Models.GetInvoiceResponse result = await invoices.GetInvoice(invoiceId);
 ```
 
 
-### <a name="create_invoice"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.InvoicesController.CreateInvoice") CreateInvoice
+### <a name="create_invoice"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.InvoicesController.CreateInvoice") CreateInvoice
 
 > Create an Invoice
 
@@ -1768,7 +1767,7 @@ Models.GetInvoiceResponse result = await invoices.CreateInvoice(subscriptionId, 
 ```
 
 
-### <a name="update_invoice_status"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.InvoicesController.UpdateInvoiceStatus") UpdateInvoiceStatus
+### <a name="update_invoice_status"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.InvoicesController.UpdateInvoiceStatus") UpdateInvoiceStatus
 
 > Updates the status from an invoice
 
@@ -1796,7 +1795,7 @@ Models.GetInvoiceResponse result = await invoices.UpdateInvoiceStatus(invoiceId,
 ```
 
 
-### <a name="get_invoices"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.InvoicesController.GetInvoices") GetInvoices
+### <a name="get_invoices"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.InvoicesController.GetInvoices") GetInvoices
 
 > Gets all invoices
 
@@ -1834,8 +1833,8 @@ Task<Models.ListInvoicesResponse> GetInvoices(
 #### Example Usage
 
 ```csharp
-int? page = 136;
-int? size = 136;
+int? page = 44;
+int? size = 44;
 string code = "code";
 string customerId = "customer_id";
 string subscriptionId = "subscription_id";
@@ -1850,7 +1849,7 @@ Models.ListInvoicesResponse result = await invoices.GetInvoices(page, size, code
 ```
 
 
-### <a name="update_invoice_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.InvoicesController.UpdateInvoiceMetadata") UpdateInvoiceMetadata
+### <a name="update_invoice_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.InvoicesController.UpdateInvoiceMetadata") UpdateInvoiceMetadata
 
 > Updates the metadata from an invoice
 
@@ -1880,7 +1879,7 @@ Models.GetInvoiceResponse result = await invoices.UpdateInvoiceMetadata(invoiceI
 
 [Back to List of Controllers](#list_of_controllers)
 
-## <a name="customers_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.CustomersController") CustomersController
+## <a name="customers_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.PCL.Controllers.CustomersController") CustomersController
 
 ### Get singleton instance
 
@@ -1890,7 +1889,7 @@ The singleton instance of the ``` CustomersController ``` class can be accessed 
 ICustomersController customers = client.Customers;
 ```
 
-### <a name="update_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.UpdateCard") UpdateCard
+### <a name="update_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.UpdateCard") UpdateCard
 
 > Updates a card
 
@@ -1920,7 +1919,7 @@ Models.GetCardResponse result = await customers.UpdateCard(customerId, cardId, r
 ```
 
 
-### <a name="update_address"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.UpdateAddress") UpdateAddress
+### <a name="update_address"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.UpdateAddress") UpdateAddress
 
 > Updates an address
 
@@ -1950,7 +1949,7 @@ Models.GetAddressResponse result = await customers.UpdateAddress(customerId, add
 ```
 
 
-### <a name="create_customer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.CreateCustomer") CreateCustomer
+### <a name="create_customer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.CreateCustomer") CreateCustomer
 
 > Creates a new customer
 
@@ -1976,7 +1975,7 @@ Models.GetCustomerResponse result = await customers.CreateCustomer(request);
 ```
 
 
-### <a name="get_customer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.GetCustomer") GetCustomer
+### <a name="get_customer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.GetCustomer") GetCustomer
 
 > Get a customer
 
@@ -2002,7 +2001,7 @@ Models.GetCustomerResponse result = await customers.GetCustomer(customerId);
 ```
 
 
-### <a name="get_access_tokens"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.GetAccessTokens") GetAccessTokens
+### <a name="get_access_tokens"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.GetAccessTokens") GetAccessTokens
 
 > Get all access tokens from a customer
 
@@ -2024,15 +2023,15 @@ Task<Models.ListAccessTokensResponse> GetAccessTokens(string customerId, int? pa
 
 ```csharp
 string customerId = "customer_id";
-int? page = 136;
-int? size = 136;
+int? page = 44;
+int? size = 44;
 
 Models.ListAccessTokensResponse result = await customers.GetAccessTokens(customerId, page, size);
 
 ```
 
 
-### <a name="get_addresses"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.GetAddresses") GetAddresses
+### <a name="get_addresses"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.GetAddresses") GetAddresses
 
 > Gets all adressess from a customer
 
@@ -2054,15 +2053,15 @@ Task<Models.ListAddressesResponse> GetAddresses(string customerId, int? page = n
 
 ```csharp
 string customerId = "customer_id";
-int? page = 136;
-int? size = 136;
+int? page = 44;
+int? size = 44;
 
 Models.ListAddressesResponse result = await customers.GetAddresses(customerId, page, size);
 
 ```
 
 
-### <a name="get_cards"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.GetCards") GetCards
+### <a name="get_cards"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.GetCards") GetCards
 
 > Get all cards from a customer
 
@@ -2084,15 +2083,15 @@ Task<Models.ListCardsResponse> GetCards(string customerId, int? page = null, int
 
 ```csharp
 string customerId = "customer_id";
-int? page = 136;
-int? size = 136;
+int? page = 44;
+int? size = 44;
 
 Models.ListCardsResponse result = await customers.GetCards(customerId, page, size);
 
 ```
 
 
-### <a name="delete_access_tokens"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.DeleteAccessTokens") DeleteAccessTokens
+### <a name="delete_access_tokens"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.DeleteAccessTokens") DeleteAccessTokens
 
 > Delete a Customer's access tokens
 
@@ -2118,7 +2117,7 @@ Models.ListAccessTokensResponse result = await customers.DeleteAccessTokens(cust
 ```
 
 
-### <a name="get_access_token"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.GetAccessToken") GetAccessToken
+### <a name="get_access_token"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.GetAccessToken") GetAccessToken
 
 > Get a Customer's access token
 
@@ -2146,7 +2145,7 @@ Models.GetAccessTokenResponse result = await customers.GetAccessToken(customerId
 ```
 
 
-### <a name="create_access_token"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.CreateAccessToken") CreateAccessToken
+### <a name="create_access_token"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.CreateAccessToken") CreateAccessToken
 
 > Creates a access token for a customer
 
@@ -2174,7 +2173,7 @@ Models.GetAccessTokenResponse result = await customers.CreateAccessToken(custome
 ```
 
 
-### <a name="delete_access_token"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.DeleteAccessToken") DeleteAccessToken
+### <a name="delete_access_token"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.DeleteAccessToken") DeleteAccessToken
 
 > Delete a customer's access token
 
@@ -2202,7 +2201,7 @@ Models.GetAccessTokenResponse result = await customers.DeleteAccessToken(custome
 ```
 
 
-### <a name="update_customer_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.UpdateCustomerMetadata") UpdateCustomerMetadata
+### <a name="update_customer_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.UpdateCustomerMetadata") UpdateCustomerMetadata
 
 > Updates the metadata a customer
 
@@ -2230,7 +2229,7 @@ Models.GetCustomerResponse result = await customers.UpdateCustomerMetadata(custo
 ```
 
 
-### <a name="update_customer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.UpdateCustomer") UpdateCustomer
+### <a name="update_customer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.UpdateCustomer") UpdateCustomer
 
 > Updates a customer
 
@@ -2258,7 +2257,7 @@ Models.GetCustomerResponse result = await customers.UpdateCustomer(customerId, r
 ```
 
 
-### <a name="get_address"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.GetAddress") GetAddress
+### <a name="get_address"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.GetAddress") GetAddress
 
 > Get a customer's address
 
@@ -2286,7 +2285,7 @@ Models.GetAddressResponse result = await customers.GetAddress(customerId, addres
 ```
 
 
-### <a name="delete_address"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.DeleteAddress") DeleteAddress
+### <a name="delete_address"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.DeleteAddress") DeleteAddress
 
 > Delete a Customer's address
 
@@ -2314,7 +2313,7 @@ Models.GetAddressResponse result = await customers.DeleteAddress(customerId, add
 ```
 
 
-### <a name="delete_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.DeleteCard") DeleteCard
+### <a name="delete_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.DeleteCard") DeleteCard
 
 > Delete a customer's card
 
@@ -2342,7 +2341,7 @@ Models.GetCardResponse result = await customers.DeleteCard(customerId, cardId);
 ```
 
 
-### <a name="create_address"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.CreateAddress") CreateAddress
+### <a name="create_address"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.CreateAddress") CreateAddress
 
 > Creates a new address for a customer
 
@@ -2370,7 +2369,7 @@ Models.GetAddressResponse result = await customers.CreateAddress(customerId, req
 ```
 
 
-### <a name="get_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.GetCard") GetCard
+### <a name="get_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.GetCard") GetCard
 
 > Get a customer's card
 
@@ -2398,7 +2397,7 @@ Models.GetCardResponse result = await customers.GetCard(customerId, cardId);
 ```
 
 
-### <a name="create_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.CreateCard") CreateCard
+### <a name="create_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.CreateCard") CreateCard
 
 > Creates a new card for a customer
 
@@ -2426,7 +2425,7 @@ Models.GetCardResponse result = await customers.CreateCard(customerId, request);
 ```
 
 
-### <a name="get_customers"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.GetCustomers") GetCustomers
+### <a name="get_customers"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.GetCustomers") GetCustomers
 
 > Get all Customers
 
@@ -2468,7 +2467,7 @@ Models.ListCustomersResponse result = await customers.GetCustomers(name, documen
 ```
 
 
-### <a name="renew_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.CustomersController.RenewCard") RenewCard
+### <a name="renew_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.CustomersController.RenewCard") RenewCard
 
 > Renew a card
 
@@ -2498,7 +2497,7 @@ Models.GetCardResponse result = await customers.RenewCard(customerId, cardId);
 
 [Back to List of Controllers](#list_of_controllers)
 
-## <a name="charges_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.ChargesController") ChargesController
+## <a name="charges_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.PCL.Controllers.ChargesController") ChargesController
 
 ### Get singleton instance
 
@@ -2508,7 +2507,7 @@ The singleton instance of the ``` ChargesController ``` class can be accessed fr
 IChargesController charges = client.Charges;
 ```
 
-### <a name="update_charge_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.ChargesController.UpdateChargeCard") UpdateChargeCard
+### <a name="update_charge_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.ChargesController.UpdateChargeCard") UpdateChargeCard
 
 > Updates the card from a charge
 
@@ -2536,7 +2535,7 @@ Models.GetChargeResponse result = await charges.UpdateChargeCard(chargeId, reque
 ```
 
 
-### <a name="update_charge_payment_method"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.ChargesController.UpdateChargePaymentMethod") UpdateChargePaymentMethod
+### <a name="update_charge_payment_method"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.ChargesController.UpdateChargePaymentMethod") UpdateChargePaymentMethod
 
 > Updates a charge's payment method
 
@@ -2564,7 +2563,7 @@ Models.GetChargeResponse result = await charges.UpdateChargePaymentMethod(charge
 ```
 
 
-### <a name="create_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.ChargesController.CreateCharge") CreateCharge
+### <a name="create_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.ChargesController.CreateCharge") CreateCharge
 
 > Creates a new charge
 
@@ -2590,7 +2589,7 @@ Models.GetChargeResponse result = await charges.CreateCharge(request);
 ```
 
 
-### <a name="get_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.ChargesController.GetCharge") GetCharge
+### <a name="get_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.ChargesController.GetCharge") GetCharge
 
 > Get a charge from its id
 
@@ -2616,7 +2615,7 @@ Models.GetChargeResponse result = await charges.GetCharge(chargeId);
 ```
 
 
-### <a name="retry_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.ChargesController.RetryCharge") RetryCharge
+### <a name="retry_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.ChargesController.RetryCharge") RetryCharge
 
 > Retries a charge
 
@@ -2642,7 +2641,7 @@ Models.GetChargeResponse result = await charges.RetryCharge(chargeId);
 ```
 
 
-### <a name="get_charges"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.ChargesController.GetCharges") GetCharges
+### <a name="get_charges"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.ChargesController.GetCharges") GetCharges
 
 > Lists all charges
 
@@ -2678,8 +2677,8 @@ Task<Models.ListChargesResponse> GetCharges(
 #### Example Usage
 
 ```csharp
-int? page = 136;
-int? size = 136;
+int? page = 135;
+int? size = 135;
 string code = "code";
 string status = "status";
 string paymentMethod = "payment_method";
@@ -2693,7 +2692,7 @@ Models.ListChargesResponse result = await charges.GetCharges(page, size, code, s
 ```
 
 
-### <a name="update_charge_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.ChargesController.UpdateChargeMetadata") UpdateChargeMetadata
+### <a name="update_charge_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.ChargesController.UpdateChargeMetadata") UpdateChargeMetadata
 
 > Updates the metadata from a charge
 
@@ -2721,7 +2720,7 @@ Models.GetChargeResponse result = await charges.UpdateChargeMetadata(chargeId, r
 ```
 
 
-### <a name="cancel_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.ChargesController.CancelCharge") CancelCharge
+### <a name="cancel_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.ChargesController.CancelCharge") CancelCharge
 
 > Cancel a charge
 
@@ -2749,7 +2748,7 @@ Models.GetChargeResponse result = await charges.CancelCharge(chargeId, request);
 ```
 
 
-### <a name="capture_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.ChargesController.CaptureCharge") CaptureCharge
+### <a name="capture_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.ChargesController.CaptureCharge") CaptureCharge
 
 > Captures a charge
 
@@ -2777,7 +2776,7 @@ Models.GetChargeResponse result = await charges.CaptureCharge(chargeId, request)
 ```
 
 
-### <a name="update_charge_due_date"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.ChargesController.UpdateChargeDueDate") UpdateChargeDueDate
+### <a name="update_charge_due_date"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.ChargesController.UpdateChargeDueDate") UpdateChargeDueDate
 
 > Updates the due date from a charge
 
@@ -2805,7 +2804,7 @@ Models.GetChargeResponse result = await charges.UpdateChargeDueDate(chargeId, re
 ```
 
 
-### <a name="confirm_payment"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.ChargesController.ConfirmPayment") ConfirmPayment
+### <a name="confirm_payment"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.ChargesController.ConfirmPayment") ConfirmPayment
 
 > TODO: Add a method description
 
@@ -2835,7 +2834,7 @@ Models.GetChargeResponse result = await charges.ConfirmPayment(chargeId, request
 
 [Back to List of Controllers](#list_of_controllers)
 
-## <a name="recipients_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.RecipientsController") RecipientsController
+## <a name="recipients_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.PCL.Controllers.RecipientsController") RecipientsController
 
 ### Get singleton instance
 
@@ -2845,7 +2844,7 @@ The singleton instance of the ``` RecipientsController ``` class can be accessed
 IRecipientsController recipients = client.Recipients;
 ```
 
-### <a name="update_recipient_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.RecipientsController.UpdateRecipientMetadata") UpdateRecipientMetadata
+### <a name="update_recipient_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.RecipientsController.UpdateRecipientMetadata") UpdateRecipientMetadata
 
 > Updates recipient metadata
 
@@ -2873,7 +2872,7 @@ Models.GetRecipientResponse result = await recipients.UpdateRecipientMetadata(re
 ```
 
 
-### <a name="get_transfer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.RecipientsController.GetTransfer") GetTransfer
+### <a name="get_transfer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.RecipientsController.GetTransfer") GetTransfer
 
 > Gets a transfer
 
@@ -2901,7 +2900,7 @@ Models.GetTransferResponse result = await recipients.GetTransfer(recipientId, tr
 ```
 
 
-### <a name="get_transfers"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.RecipientsController.GetTransfers") GetTransfers
+### <a name="get_transfers"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.RecipientsController.GetTransfers") GetTransfers
 
 > Gets a paginated list of transfers for the recipient
 
@@ -2932,8 +2931,8 @@ Task<Models.ListTransferResponse> GetTransfers(
 
 ```csharp
 string recipientId = "recipient_id";
-int? page = 136;
-int? size = 136;
+int? page = 135;
+int? size = 135;
 string status = "status";
 DateTime? createdSince = DateTime.Now();
 DateTime? createdUntil = DateTime.Now();
@@ -2943,7 +2942,7 @@ Models.ListTransferResponse result = await recipients.GetTransfers(recipientId, 
 ```
 
 
-### <a name="create_anticipation"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.RecipientsController.CreateAnticipation") CreateAnticipation
+### <a name="create_anticipation"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.RecipientsController.CreateAnticipation") CreateAnticipation
 
 > Creates an anticipation
 
@@ -2971,7 +2970,7 @@ Models.GetAnticipationResponse result = await recipients.CreateAnticipation(reci
 ```
 
 
-### <a name="get_anticipation"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.RecipientsController.GetAnticipation") GetAnticipation
+### <a name="get_anticipation"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.RecipientsController.GetAnticipation") GetAnticipation
 
 > Gets an anticipation
 
@@ -2999,7 +2998,7 @@ Models.GetAnticipationResponse result = await recipients.GetAnticipation(recipie
 ```
 
 
-### <a name="get_anticipation_limits"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.RecipientsController.GetAnticipationLimits") GetAnticipationLimits
+### <a name="get_anticipation_limits"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.RecipientsController.GetAnticipationLimits") GetAnticipationLimits
 
 > Gets the anticipation limits for a recipient
 
@@ -3029,7 +3028,7 @@ Models.GetAnticipationLimitResponse result = await recipients.GetAnticipationLim
 ```
 
 
-### <a name="get_anticipations"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.RecipientsController.GetAnticipations") GetAnticipations
+### <a name="get_anticipations"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.RecipientsController.GetAnticipations") GetAnticipations
 
 > Retrieves a paginated list of anticipations from a recipient
 
@@ -3066,8 +3065,8 @@ Task<Models.ListAnticipationResponse> GetAnticipations(
 
 ```csharp
 string recipientId = "recipient_id";
-int? page = 95;
-int? size = 95;
+int? page = 135;
+int? size = 135;
 string status = "status";
 string timeframe = "timeframe";
 DateTime? paymentDateSince = DateTime.Now();
@@ -3080,7 +3079,7 @@ Models.ListAnticipationResponse result = await recipients.GetAnticipations(recip
 ```
 
 
-### <a name="update_recipient"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.RecipientsController.UpdateRecipient") UpdateRecipient
+### <a name="update_recipient"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.RecipientsController.UpdateRecipient") UpdateRecipient
 
 > Updates a recipient
 
@@ -3108,7 +3107,7 @@ Models.GetRecipientResponse result = await recipients.UpdateRecipient(recipientI
 ```
 
 
-### <a name="update_recipient_default_bank_account"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.RecipientsController.UpdateRecipientDefaultBankAccount") UpdateRecipientDefaultBankAccount
+### <a name="update_recipient_default_bank_account"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.RecipientsController.UpdateRecipientDefaultBankAccount") UpdateRecipientDefaultBankAccount
 
 > Updates the default bank account from a recipient
 
@@ -3136,7 +3135,7 @@ Models.GetRecipientResponse result = await recipients.UpdateRecipientDefaultBank
 ```
 
 
-### <a name="get_recipient"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.RecipientsController.GetRecipient") GetRecipient
+### <a name="get_recipient"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.RecipientsController.GetRecipient") GetRecipient
 
 > Retrieves recipient information
 
@@ -3162,7 +3161,7 @@ Models.GetRecipientResponse result = await recipients.GetRecipient(recipientId);
 ```
 
 
-### <a name="get_recipients"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.RecipientsController.GetRecipients") GetRecipients
+### <a name="get_recipients"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.RecipientsController.GetRecipients") GetRecipients
 
 > Retrieves paginated recipients information
 
@@ -3182,15 +3181,15 @@ Task<Models.ListRecipientResponse> GetRecipients(int? page = null, int? size = n
 #### Example Usage
 
 ```csharp
-int? page = 95;
-int? size = 95;
+int? page = 185;
+int? size = 185;
 
 Models.ListRecipientResponse result = await recipients.GetRecipients(page, size);
 
 ```
 
 
-### <a name="get_balance"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.RecipientsController.GetBalance") GetBalance
+### <a name="get_balance"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.RecipientsController.GetBalance") GetBalance
 
 > Get balance information for a recipient
 
@@ -3216,7 +3215,7 @@ Models.GetBalanceResponse result = await recipients.GetBalance(recipientId);
 ```
 
 
-### <a name="create_transfer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.RecipientsController.CreateTransfer") CreateTransfer
+### <a name="create_transfer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.RecipientsController.CreateTransfer") CreateTransfer
 
 > Creates a transfer for a recipient
 
@@ -3244,7 +3243,7 @@ Models.GetTransferResponse result = await recipients.CreateTransfer(recipientId,
 ```
 
 
-### <a name="create_recipient"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.RecipientsController.CreateRecipient") CreateRecipient
+### <a name="create_recipient"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.RecipientsController.CreateRecipient") CreateRecipient
 
 > Creates a new recipient
 
@@ -3270,7 +3269,7 @@ Models.GetRecipientResponse result = await recipients.CreateRecipient(request);
 ```
 
 
-### <a name="update_recipient_transfer_settings"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.RecipientsController.UpdateRecipientTransferSettings") UpdateRecipientTransferSettings
+### <a name="update_recipient_transfer_settings"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.RecipientsController.UpdateRecipientTransferSettings") UpdateRecipientTransferSettings
 
 > TODO: Add a method description
 
@@ -3300,7 +3299,7 @@ Models.GetRecipientResponse result = await recipients.UpdateRecipientTransferSet
 
 [Back to List of Controllers](#list_of_controllers)
 
-## <a name="tokens_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.TokensController") TokensController
+## <a name="tokens_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.PCL.Controllers.TokensController") TokensController
 
 ### Get singleton instance
 
@@ -3310,7 +3309,7 @@ The singleton instance of the ``` TokensController ``` class can be accessed fro
 ITokensController tokens = client.Tokens;
 ```
 
-### <a name="get_token"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.TokensController.GetToken") GetToken
+### <a name="get_token"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.TokensController.GetToken") GetToken
 
 > *Tags:*  ``` Skips Authentication ``` 
 
@@ -3340,7 +3339,7 @@ Models.GetTokenResponse result = await tokens.GetToken(id, publicKey);
 ```
 
 
-### <a name="create_token"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.TokensController.CreateToken") CreateToken
+### <a name="create_token"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.TokensController.CreateToken") CreateToken
 
 > *Tags:*  ``` Skips Authentication ``` 
 
@@ -3372,7 +3371,7 @@ Models.GetTokenResponse result = await tokens.CreateToken(publicKey, request);
 
 [Back to List of Controllers](#list_of_controllers)
 
-## <a name="sellers_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.SellersController") SellersController
+## <a name="sellers_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.PCL.Controllers.SellersController") SellersController
 
 ### Get singleton instance
 
@@ -3382,7 +3381,7 @@ The singleton instance of the ``` SellersController ``` class can be accessed fr
 ISellersController sellers = client.Sellers;
 ```
 
-### <a name="get_seller_by_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SellersController.GetSellerById") GetSellerById
+### <a name="get_seller_by_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SellersController.GetSellerById") GetSellerById
 
 > TODO: Add a method description
 
@@ -3408,7 +3407,7 @@ Models.GetSellerResponse result = await sellers.GetSellerById(id);
 ```
 
 
-### <a name="delete_seller"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SellersController.DeleteSeller") DeleteSeller
+### <a name="delete_seller"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SellersController.DeleteSeller") DeleteSeller
 
 > TODO: Add a method description
 
@@ -3434,7 +3433,7 @@ Models.GetSellerResponse result = await sellers.DeleteSeller(sellerId);
 ```
 
 
-### <a name="create_seller"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SellersController.CreateSeller") CreateSeller
+### <a name="create_seller"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SellersController.CreateSeller") CreateSeller
 
 > TODO: Add a method description
 
@@ -3460,7 +3459,7 @@ Models.GetSellerResponse result = await sellers.CreateSeller(request);
 ```
 
 
-### <a name="get_sellers"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SellersController.GetSellers") GetSellers
+### <a name="get_sellers"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SellersController.GetSellers") GetSellers
 
 > TODO: Add a method description
 
@@ -3496,8 +3495,8 @@ Task<Models.ListSellerResponse> GetSellers(
 #### Example Usage
 
 ```csharp
-int? page = 95;
-int? size = 95;
+int? page = 185;
+int? size = 185;
 string name = "name";
 string document = "document";
 string code = "code";
@@ -3511,7 +3510,7 @@ Models.ListSellerResponse result = await sellers.GetSellers(page, size, name, do
 ```
 
 
-### <a name="update_seller"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SellersController.UpdateSeller") UpdateSeller
+### <a name="update_seller"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SellersController.UpdateSeller") UpdateSeller
 
 > TODO: Add a method description
 
@@ -3539,7 +3538,7 @@ Models.GetSellerResponse result = await sellers.UpdateSeller(id, request);
 ```
 
 
-### <a name="update_seller_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SellersController.UpdateSellerMetadata") UpdateSellerMetadata
+### <a name="update_seller_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.PCL.Controllers.SellersController.UpdateSellerMetadata") UpdateSellerMetadata
 
 > TODO: Add a method description
 
