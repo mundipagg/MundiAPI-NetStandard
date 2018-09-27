@@ -22,7 +22,7 @@ namespace MundiAPI.Standard.Models
     {
         // These fields hold the values for the public properties.
         private bool? liable;
-        private string chargeProcessingFee;
+        private bool? chargeProcessingFee;
 
         /// <summary>
         /// Liable options
@@ -45,7 +45,7 @@ namespace MundiAPI.Standard.Models
         /// Charge processing fee
         /// </summary>
         [JsonProperty("charge_processing_fee")]
-        public string ChargeProcessingFee 
+        public bool? ChargeProcessingFee 
         { 
             get 
             {
