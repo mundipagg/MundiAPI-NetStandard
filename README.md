@@ -725,6 +725,7 @@ Task<Models.ListDiscountsResponse> GetDiscounts(string subscriptionId, int page,
 
 ```csharp
 string subscriptionId = "subscription_id";
+
 int page = 139;
 int size = 139;
 
@@ -783,6 +784,7 @@ Task<Models.ListIncrementsResponse> GetIncrements(string subscriptionId, int? pa
 
 ```csharp
 string subscriptionId = "subscription_id";
+
 int? page = 139;
 int? size = 139;
 
@@ -895,6 +897,7 @@ string subscriptionId = "subscription_id";
 string itemId = "item_id";
 int? page = 139;
 int? size = 139;
+
 string code = "code";
 string mgroup = "group";
 
@@ -942,6 +945,7 @@ Task<Models.ListSubscriptionItemsResponse> GetSubscriptionItems(
 string subscriptionId = "subscription_id";
 int? page = 139;
 int? size = 139;
+
 string name = "name";
 string code = "code";
 string status = "status";
@@ -1164,6 +1168,7 @@ Task<Models.ListOrderResponse> GetOrders(
 ```csharp
 int? page = 139;
 int? size = 139;
+
 string code = "code";
 string status = "status";
 DateTime? createdSince = DateTime.Now();
