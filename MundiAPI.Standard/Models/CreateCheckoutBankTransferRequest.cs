@@ -18,43 +18,43 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class CreateSplitOptionsRequest : BaseModel 
+    public class CreateCheckoutBankTransferRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
-        private bool? liable;
-        private bool? chargeProcessingFee;
+        private List<string> bank;
+        private int retries;
 
         /// <summary>
-        /// Liable options
+        /// Bank
         /// </summary>
-        [JsonProperty("liable")]
-        public bool? Liable 
+        [JsonProperty("bank")]
+        public List<string> Bank 
         { 
             get 
             {
-                return this.liable; 
+                return this.bank; 
             } 
             set 
             {
-                this.liable = value;
-                onPropertyChanged("Liable");
+                this.bank = value;
+                onPropertyChanged("Bank");
             }
         }
 
         /// <summary>
-        /// Charge processing fee
+        /// Number of retries for processing
         /// </summary>
-        [JsonProperty("charge_processing_fee")]
-        public bool? ChargeProcessingFee 
+        [JsonProperty("retries")]
+        public int Retries 
         { 
             get 
             {
-                return this.chargeProcessingFee; 
+                return this.retries; 
             } 
             set 
             {
-                this.chargeProcessingFee = value;
-                onPropertyChanged("ChargeProcessingFee");
+                this.retries = value;
+                onPropertyChanged("Retries");
             }
         }
     }

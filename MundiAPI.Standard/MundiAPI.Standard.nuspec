@@ -7,9 +7,9 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>MundiAPI.Standard</id>
-    <version>0.13.36</version>
+    <version>0.13.38</version>
     <title>MundiAPI.Standard</title>
-    <authors>APIMATIC 2.0</authors>
+    <authors>APIMATIC SDK Generator</authors>
     <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Mundipagg API</description>

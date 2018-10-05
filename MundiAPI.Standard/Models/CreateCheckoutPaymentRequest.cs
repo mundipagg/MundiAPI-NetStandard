@@ -34,6 +34,7 @@ namespace MundiAPI.Standard.Models
         private bool skipCheckoutSuccessPage;
         private bool billingAddressEditable;
         private Models.CreateAddressRequest billingAddress;
+        private Models.CreateCheckoutBankTransferRequest bankTransfer;
 
         /// <summary>
         /// Accepted Payment Methods
@@ -172,7 +173,7 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Torna o objeto editável
+        /// Customer is editable?
         /// </summary>
         [JsonProperty("customer_editable")]
         public bool? CustomerEditable 
@@ -189,7 +190,7 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Tempo em minutos para a expiração
+        /// Time in minutes for expiration
         /// </summary>
         [JsonProperty("expires_in")]
         public int? ExpiresIn 
@@ -206,7 +207,7 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Pular tela de sucesso pós-pagamento?
+        /// Skip postpay success screen?
         /// </summary>
         [JsonProperty("skip_checkout_success_page")]
         public bool SkipCheckoutSuccessPage 
@@ -223,7 +224,7 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Torna o objeto billing address editável
+        /// Billing Address is editable?
         /// </summary>
         [JsonProperty("billing_address_editable")]
         public bool BillingAddressEditable 
@@ -240,7 +241,7 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Endereço de cobrança
+        /// Billing Address
         /// </summary>
         [JsonProperty("billing_address")]
         public Models.CreateAddressRequest BillingAddress 
@@ -253,6 +254,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.billingAddress = value;
                 onPropertyChanged("BillingAddress");
+            }
+        }
+
+        /// <summary>
+        /// Bank Transfer payment request
+        /// </summary>
+        [JsonProperty("bank_transfer")]
+        public Models.CreateCheckoutBankTransferRequest BankTransfer 
+        { 
+            get 
+            {
+                return this.bankTransfer; 
+            } 
+            set 
+            {
+                this.bankTransfer = value;
+                onPropertyChanged("BankTransfer");
             }
         }
     }
