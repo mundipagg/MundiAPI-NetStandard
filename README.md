@@ -515,8 +515,8 @@ Task<Models.ListSubscriptionsResponse> GetSubscriptions(
 #### Example Usage
 
 ```csharp
-int? page = 55;
-int? size = 55;
+int? page = 199;
+int? size = 199;
 string code = "code";
 string billingType = "billing_type";
 string customerId = "customer_id";
@@ -725,8 +725,8 @@ Task<Models.ListDiscountsResponse> GetDiscounts(string subscriptionId, int page,
 
 ```csharp
 string subscriptionId = "subscription_id";
-int page = 55;
-int size = 55;
+int page = 199;
+int size = 199;
 
 Models.ListDiscountsResponse result = await subscriptions.GetDiscounts(subscriptionId, page, size);
 
@@ -783,8 +783,8 @@ Task<Models.ListIncrementsResponse> GetIncrements(string subscriptionId, int? pa
 
 ```csharp
 string subscriptionId = "subscription_id";
-int? page = 55;
-int? size = 55;
+int? page = 199;
+int? size = 199;
 
 Models.ListIncrementsResponse result = await subscriptions.GetIncrements(subscriptionId, page, size);
 
@@ -851,8 +851,8 @@ Task<Models.GetUsagesDetailsResponse> GetUsagesDetails(
 ```csharp
 string subscriptionId = "subscription_id";
 string cycleId = "cycle_id";
-int? size = 55;
-int? page = 55;
+int? size = 199;
+int? page = 199;
 string itemId = "item_id";
 string mgroup = "group";
 
@@ -893,8 +893,8 @@ Task<Models.ListUsagesResponse> GetUsages(
 ```csharp
 string subscriptionId = "subscription_id";
 string itemId = "item_id";
-int? page = 55;
-int? size = 55;
+int? page = 199;
+int? size = 199;
 string code = "code";
 string mgroup = "group";
 
@@ -940,8 +940,8 @@ Task<Models.ListSubscriptionItemsResponse> GetSubscriptionItems(
 
 ```csharp
 string subscriptionId = "subscription_id";
-int? page = 55;
-int? size = 55;
+int? page = 199;
+int? size = 199;
 string name = "name";
 string code = "code";
 string status = "status";
@@ -1162,8 +1162,8 @@ Task<Models.ListOrderResponse> GetOrders(
 #### Example Usage
 
 ```csharp
-int? page = 55;
-int? size = 55;
+int? page = 199;
+int? size = 199;
 string code = "code";
 string status = "status";
 DateTime? createdSince = DateTime.Now();
@@ -1579,8 +1579,8 @@ Task<Models.ListPlansResponse> GetPlans(
 #### Example Usage
 
 ```csharp
-int? page = 147;
-int? size = 147;
+int? page = 199;
+int? size = 199;
 string name = "name";
 string status = "status";
 string billingType = "billing_type";
@@ -1834,8 +1834,8 @@ Task<Models.ListInvoicesResponse> GetInvoices(
 #### Example Usage
 
 ```csharp
-int? page = 147;
-int? size = 147;
+int? page = 241;
+int? size = 241;
 string code = "code";
 string customerId = "customer_id";
 string subscriptionId = "subscription_id";
@@ -2024,8 +2024,8 @@ Task<Models.ListAccessTokensResponse> GetAccessTokens(string customerId, int? pa
 
 ```csharp
 string customerId = "customer_id";
-int? page = 147;
-int? size = 147;
+int? page = 241;
+int? size = 241;
 
 Models.ListAccessTokensResponse result = await customers.GetAccessTokens(customerId, page, size);
 
@@ -2054,8 +2054,8 @@ Task<Models.ListAddressesResponse> GetAddresses(string customerId, int? page = n
 
 ```csharp
 string customerId = "customer_id";
-int? page = 147;
-int? size = 147;
+int? page = 241;
+int? size = 241;
 
 Models.ListAddressesResponse result = await customers.GetAddresses(customerId, page, size);
 
@@ -2084,8 +2084,8 @@ Task<Models.ListCardsResponse> GetCards(string customerId, int? page = null, int
 
 ```csharp
 string customerId = "customer_id";
-int? page = 147;
-int? size = 147;
+int? page = 241;
+int? size = 241;
 
 Models.ListCardsResponse result = await customers.GetCards(customerId, page, size);
 
@@ -2678,8 +2678,8 @@ Task<Models.ListChargesResponse> GetCharges(
 #### Example Usage
 
 ```csharp
-int? page = 147;
-int? size = 147;
+int? page = 241;
+int? size = 241;
 string code = "code";
 string status = "status";
 string paymentMethod = "payment_method";
@@ -2932,8 +2932,8 @@ Task<Models.ListTransferResponse> GetTransfers(
 
 ```csharp
 string recipientId = "recipient_id";
-int? page = 105;
-int? size = 105;
+int? page = 150;
+int? size = 150;
 string status = "status";
 DateTime? createdSince = DateTime.Now();
 DateTime? createdUntil = DateTime.Now();
@@ -3066,8 +3066,8 @@ Task<Models.ListAnticipationResponse> GetAnticipations(
 
 ```csharp
 string recipientId = "recipient_id";
-int? page = 105;
-int? size = 105;
+int? page = 150;
+int? size = 150;
 string status = "status";
 string timeframe = "timeframe";
 DateTime? paymentDateSince = DateTime.Now();
@@ -3182,8 +3182,8 @@ Task<Models.ListRecipientResponse> GetRecipients(int? page = null, int? size = n
 #### Example Usage
 
 ```csharp
-int? page = 105;
-int? size = 105;
+int? page = 150;
+int? size = 150;
 
 Models.ListRecipientResponse result = await recipients.GetRecipients(page, size);
 
@@ -3496,8 +3496,8 @@ Task<Models.ListSellerResponse> GetSellers(
 #### Example Usage
 
 ```csharp
-int? page = 105;
-int? size = 105;
+int? page = 150;
+int? size = 150;
 string name = "name";
 string document = "document";
 string code = "code";

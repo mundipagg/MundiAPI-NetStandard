@@ -36,6 +36,7 @@ namespace MundiAPI.Standard.Models
         private DateTime? paidAt;
         private string paidAmount;
         private string type;
+        private DateTime? creditAt;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -291,6 +292,24 @@ namespace MundiAPI.Standard.Models
             {
                 this.type = value;
                 onPropertyChanged("Type");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [JsonProperty("credit_at")]
+        public DateTime? CreditAt 
+        { 
+            get 
+            {
+                return this.creditAt; 
+            } 
+            set 
+            {
+                this.creditAt = value;
+                onPropertyChanged("CreditAt");
             }
         }
     }
