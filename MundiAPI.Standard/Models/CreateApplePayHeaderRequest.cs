@@ -18,7 +18,7 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class ApplePayHeaderRequest : BaseModel 
+    public class CreateApplePayHeaderRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
         private string publicKeyHash;

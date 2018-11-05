@@ -148,5 +148,35 @@ namespace MundiAPI.Standard.Controllers
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
         Task<Models.GetInvoiceResponse> UpdateInvoiceMetadataAsync(string invoiceId, Models.UpdateMetadataRequest request);
 
+        /// <summary>
+        /// Remove a usage from an invoice
+        /// </summary>
+        /// <param name="invoiceId">Required parameter: Invoice Id</param>
+        /// <param name="usageId">Required parameter: Usage Id</param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        Models.GetInvoiceResponse RemoveInvoiceUsage(string invoiceId, string usageId);
+
+        /// <summary>
+        /// Remove a usage from an invoice
+        /// </summary>
+        /// <param name="invoiceId">Required parameter: Invoice Id</param>
+        /// <param name="usageId">Required parameter: Usage Id</param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        Task<Models.GetInvoiceResponse> RemoveInvoiceUsageAsync(string invoiceId, string usageId);
+
+        /// <summary>
+        /// Remove usages from an invoice
+        /// </summary>
+        /// <param name="invoiceId">Required parameter: Invoice Id</param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        Models.GetInvoiceResponse RemoveInvoiceUsages(string invoiceId);
+
+        /// <summary>
+        /// Remove usages from an invoice
+        /// </summary>
+        /// <param name="invoiceId">Required parameter: Invoice Id</param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        Task<Models.GetInvoiceResponse> RemoveInvoiceUsagesAsync(string invoiceId);
+
     }
 } 

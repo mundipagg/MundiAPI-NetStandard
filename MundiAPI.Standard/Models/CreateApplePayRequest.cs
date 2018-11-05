@@ -18,12 +18,12 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class ApplePayRequest : BaseModel 
+    public class CreateApplePayRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
         private string version;
         private string data;
-        private Models.ApplePayHeaderRequest header;
+        private Models.CreateApplePayHeaderRequest header;
         private string signature;
         private string merchantIdentifier;
 
@@ -62,10 +62,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// The apple pay header request
+        /// The ApplePay header request
         /// </summary>
         [JsonProperty("header")]
-        public Models.ApplePayHeaderRequest Header 
+        public Models.CreateApplePayHeaderRequest Header 
         { 
             get 
             {

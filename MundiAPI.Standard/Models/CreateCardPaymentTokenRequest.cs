@@ -22,7 +22,8 @@ namespace MundiAPI.Standard.Models
     {
         // These fields hold the values for the public properties.
         private string type;
-        private Models.ApplePayRequest applePay;
+        private Models.CreateApplePayRequest applePay;
+        private Models.CreateGooglePayRequest googlePay;
 
         /// <summary>
         /// The authentication type
@@ -42,10 +43,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// The apple pay authentication request
+        /// The ApplePay authentication request
         /// </summary>
         [JsonProperty("apple_pay")]
-        public Models.ApplePayRequest ApplePay 
+        public Models.CreateApplePayRequest ApplePay 
         { 
             get 
             {
@@ -55,6 +56,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.applePay = value;
                 onPropertyChanged("ApplePay");
+            }
+        }
+
+        /// <summary>
+        /// The GooglePay authentication request
+        /// </summary>
+        [JsonProperty("google_pay")]
+        public Models.CreateGooglePayRequest GooglePay 
+        { 
+            get 
+            {
+                return this.googlePay; 
+            } 
+            set 
+            {
+                this.googlePay = value;
+                onPropertyChanged("GooglePay");
             }
         }
     }

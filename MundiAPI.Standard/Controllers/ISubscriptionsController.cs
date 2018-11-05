@@ -638,5 +638,21 @@ namespace MundiAPI.Standard.Controllers
         /// <return>Returns the Models.GetSubscriptionItemResponse response from the API call</return>
         Task<Models.GetSubscriptionItemResponse> UpdateCurrentCycleEndDateAsync(string subscriptionId, Models.UpdateCurrentCycleEndDateRequest request);
 
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <param name="request">Required parameter: Request for updating the end date of the subscription current status</param>
+        /// <return>Returns the void response from the API call</return>
+        void UpdateCurrentCycleStatus(string subscriptionId, Models.UpdateCurrentCycleStatusRequest request);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <param name="request">Required parameter: Request for updating the end date of the subscription current status</param>
+        /// <return>Returns the void response from the API call</return>
+        Task UpdateCurrentCycleStatusAsync(string subscriptionId, Models.UpdateCurrentCycleStatusRequest request);
+
     }
 } 
