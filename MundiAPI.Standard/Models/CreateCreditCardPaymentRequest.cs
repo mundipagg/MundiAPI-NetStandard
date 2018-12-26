@@ -33,6 +33,7 @@ namespace MundiAPI.Standard.Models
         private long? merchantCategoryCode;
         private Models.CreatePaymentAuthenticationRequest authentication;
         private Models.CreateCardPaymentTokenRequest token;
+        private bool? autoRecovery;
 
         /// <summary>
         /// Number of installments
@@ -235,6 +236,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.token = value;
                 onPropertyChanged("Token");
+            }
+        }
+
+        /// <summary>
+        /// Indicates whether a particular payment will enter the offline retry flow
+        /// </summary>
+        [JsonProperty("auto_recovery")]
+        public bool? AutoRecovery 
+        { 
+            get 
+            {
+                return this.autoRecovery; 
+            } 
+            set 
+            {
+                this.autoRecovery = value;
+                onPropertyChanged("AutoRecovery");
             }
         }
     }

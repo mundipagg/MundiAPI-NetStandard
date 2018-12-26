@@ -111,6 +111,17 @@ namespace MundiAPI.Standard
                 return SellersController.Instance;
             }
         }
+
+        /// <summary>
+        /// Singleton access to Transactions controller
+        /// </summary>
+        public ITransactionsController Transactions
+        {
+            get
+            {
+                return TransactionsController.Instance;
+            }
+        }
         /// <summary>
         /// The shared http client to use for all API calls
         /// </summary>

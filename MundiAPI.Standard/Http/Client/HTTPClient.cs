@@ -209,7 +209,6 @@ namespace MundiAPI.Standard.Http.Client
 
             if (request.HttpMethod.Equals(HttpMethod.Delete) || request.HttpMethod.Equals(HttpMethod.Post) || request.HttpMethod.Equals(HttpMethod.Put) || request.HttpMethod.Equals(new HttpMethod("PATCH")))
             {
-                requestMessage.Content = new StringContent(string.Empty);
                 if (request.Body != null)
                 {
                     if (request.Body is FileStreamInfo)

@@ -39,6 +39,7 @@ namespace MundiAPI.Standard.Models
         private DateTime? paidAt;
         private DateTime? canceledAt;
         private int canceledAmount;
+        private int paidAmount;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -348,6 +349,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.canceledAmount = value;
                 onPropertyChanged("CanceledAmount");
+            }
+        }
+
+        /// <summary>
+        /// Paid amount
+        /// </summary>
+        [JsonProperty("paid_amount")]
+        public int PaidAmount 
+        { 
+            get 
+            {
+                return this.paidAmount; 
+            } 
+            set 
+            {
+                this.paidAmount = value;
+                onPropertyChanged("PaidAmount");
             }
         }
     }

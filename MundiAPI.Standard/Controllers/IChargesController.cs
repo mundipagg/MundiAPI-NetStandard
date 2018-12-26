@@ -222,5 +222,23 @@ namespace MundiAPI.Standard.Controllers
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
         Task<Models.GetChargeResponse> ConfirmPaymentAsync(string chargeId, Models.CreateConfirmPaymentRequest request = null);
 
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="chargeId">Required parameter: Charge Id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.ListChargeTransactionsResponse response from the API call</return>
+        Models.ListChargeTransactionsResponse GetChargeTransactions(string chargeId, int? page = null, int? size = null);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="chargeId">Required parameter: Charge Id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.ListChargeTransactionsResponse response from the API call</return>
+        Task<Models.ListChargeTransactionsResponse> GetChargeTransactionsAsync(string chargeId, int? page = null, int? size = null);
+
     }
 } 
