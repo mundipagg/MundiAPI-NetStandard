@@ -24,6 +24,7 @@ namespace MundiAPI.Standard.Models
         private string paymentMethod;
         private string cardId;
         private Models.CreateCardRequest card;
+        private string cardToken;
 
         /// <summary>
         /// The new payment method
@@ -73,6 +74,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.card = value;
                 onPropertyChanged("Card");
+            }
+        }
+
+        /// <summary>
+        /// The Card Token
+        /// </summary>
+        [JsonProperty("card_token")]
+        public string CardToken 
+        { 
+            get 
+            {
+                return this.cardToken; 
+            } 
+            set 
+            {
+                this.cardToken = value;
+                onPropertyChanged("CardToken");
             }
         }
     }

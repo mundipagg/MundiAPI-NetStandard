@@ -4,6 +4,7 @@ namespace MundiAPI.Standard
     public partial class Configuration
     {
 
+
         //The base Uri for API calls
         public static string BaseUri = "https://api.mundipagg.com/core/v1";
 
