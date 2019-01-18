@@ -43,6 +43,7 @@ namespace MundiAPI.Standard.Models
         private DateTime? seenAt;
         private int? totalDiscount;
         private int? totalIncrement;
+        private string subscriptionId;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -420,6 +421,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.totalIncrement = value;
                 onPropertyChanged("TotalIncrement");
+            }
+        }
+
+        /// <summary>
+        /// Subscription Id
+        /// </summary>
+        [JsonProperty("subscription_id")]
+        public string SubscriptionId 
+        { 
+            get 
+            {
+                return this.subscriptionId; 
+            } 
+            set 
+            {
+                this.subscriptionId = value;
+                onPropertyChanged("SubscriptionId");
             }
         }
     }
