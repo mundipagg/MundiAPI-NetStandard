@@ -53,16 +53,18 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="subscriptionId">Required parameter: Subscription Id</param>
         /// <param name="cycleId">Required parameter: Cycle Id</param>
+        /// <param name="request">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Models.GetInvoiceResponse CreateInvoice(string subscriptionId, string cycleId);
+        Models.GetInvoiceResponse CreateInvoice(string subscriptionId, string cycleId, Models.CreateInvoiceRequest request = null);
 
         /// <summary>
         /// Create an Invoice
         /// </summary>
         /// <param name="subscriptionId">Required parameter: Subscription Id</param>
         /// <param name="cycleId">Required parameter: Cycle Id</param>
+        /// <param name="request">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Task<Models.GetInvoiceResponse> CreateInvoiceAsync(string subscriptionId, string cycleId);
+        Task<Models.GetInvoiceResponse> CreateInvoiceAsync(string subscriptionId, string cycleId, Models.CreateInvoiceRequest request = null);
 
         /// <summary>
         /// Updates the status from an invoice
@@ -147,36 +149,6 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="request">Required parameter: Request for updating the invoice metadata</param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
         Task<Models.GetInvoiceResponse> UpdateInvoiceMetadataAsync(string invoiceId, Models.UpdateMetadataRequest request);
-
-        /// <summary>
-        /// Remove a usage from an invoice
-        /// </summary>
-        /// <param name="invoiceId">Required parameter: Invoice Id</param>
-        /// <param name="usageId">Required parameter: Usage Id</param>
-        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Models.GetInvoiceResponse RemoveInvoiceUsage(string invoiceId, string usageId);
-
-        /// <summary>
-        /// Remove a usage from an invoice
-        /// </summary>
-        /// <param name="invoiceId">Required parameter: Invoice Id</param>
-        /// <param name="usageId">Required parameter: Usage Id</param>
-        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Task<Models.GetInvoiceResponse> RemoveInvoiceUsageAsync(string invoiceId, string usageId);
-
-        /// <summary>
-        /// Remove usages from an invoice
-        /// </summary>
-        /// <param name="invoiceId">Required parameter: Invoice Id</param>
-        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Models.GetInvoiceResponse RemoveInvoiceUsages(string invoiceId);
-
-        /// <summary>
-        /// Remove usages from an invoice
-        /// </summary>
-        /// <param name="invoiceId">Required parameter: Invoice Id</param>
-        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Task<Models.GetInvoiceResponse> RemoveInvoiceUsagesAsync(string invoiceId);
 
     }
 } 
