@@ -34,10 +34,18 @@ namespace MundiAPI.Standard.Utilities
         {
             if (null == obj)
                 return null;
+
+            var settings = new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            };
+
             if (converter == null)
-                return JsonConvert.SerializeObject(obj, Formatting.None, new IsoDateTimeConverter());
+                settings.Converters.Add(new IsoDateTimeConverter());
             else
-                return JsonConvert.SerializeObject(obj, Formatting.None, converter);
+                settings.Converters.Add(converter);
+
+            return JsonConvert.SerializeObject(obj, Formatting.None, settings);
         }
 
         /// <summary>
