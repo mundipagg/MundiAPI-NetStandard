@@ -29,6 +29,7 @@ namespace MundiAPI.Standard.Models
         private Models.CreateAddressRequest address;
         private DateTime? maxDeliveryDate;
         private DateTime? estimatedDeliveryDate;
+        private string type;
 
         /// <summary>
         /// Shipping amount
@@ -165,6 +166,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.estimatedDeliveryDate = value;
                 onPropertyChanged("EstimatedDeliveryDate");
+            }
+        }
+
+        /// <summary>
+        /// Shipping type
+        /// </summary>
+        [JsonProperty("type")]
+        public string Type 
+        { 
+            get 
+            {
+                return this.type; 
+            } 
+            set 
+            {
+                this.type = value;
+                onPropertyChanged("Type");
             }
         }
     }

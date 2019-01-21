@@ -27,6 +27,8 @@ namespace MundiAPI.Standard.Models
         private Models.CreateDebitCardPaymentRequest debitCard;
         private Models.CreateBoletoPaymentRequest boleto;
         private Models.CreateVoucherPaymentRequest voucher;
+        private Models.CreateCashPaymentRequest cash;
+        private Models.CreateBankTransferPaymentRequest bankTransfer;
 
         /// <summary>
         /// Indicates if the payment method from the subscription must also be updated
@@ -127,6 +129,40 @@ namespace MundiAPI.Standard.Models
             {
                 this.voucher = value;
                 onPropertyChanged("Voucher");
+            }
+        }
+
+        /// <summary>
+        /// Cash data
+        /// </summary>
+        [JsonProperty("cash")]
+        public Models.CreateCashPaymentRequest Cash 
+        { 
+            get 
+            {
+                return this.cash; 
+            } 
+            set 
+            {
+                this.cash = value;
+                onPropertyChanged("Cash");
+            }
+        }
+
+        /// <summary>
+        /// Bank Transfer data
+        /// </summary>
+        [JsonProperty("bank_transfer")]
+        public Models.CreateBankTransferPaymentRequest BankTransfer 
+        { 
+            get 
+            {
+                return this.bankTransfer; 
+            } 
+            set 
+            {
+                this.bankTransfer = value;
+                onPropertyChanged("BankTransfer");
             }
         }
     }

@@ -28,6 +28,7 @@ namespace MundiAPI.Standard.Models
         private Models.GetAddressResponse address;
         private DateTime? maxDeliveryDate;
         private DateTime? estimatedDeliveryDate;
+        private string type;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -147,6 +148,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.estimatedDeliveryDate = value;
                 onPropertyChanged("EstimatedDeliveryDate");
+            }
+        }
+
+        /// <summary>
+        /// Shipping Type
+        /// </summary>
+        [JsonProperty("type")]
+        public string Type 
+        { 
+            get 
+            {
+                return this.type; 
+            } 
+            set 
+            {
+                this.type = value;
+                onPropertyChanged("Type");
             }
         }
     }
