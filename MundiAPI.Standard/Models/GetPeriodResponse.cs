@@ -26,6 +26,11 @@ namespace MundiAPI.Standard.Models
         private string id;
         private DateTime billingAt;
         private Models.GetSubscriptionResponse subscription;
+        private string status;
+        private int duration;
+        private string createdAt;
+        private string updatedAt;
+        private int cycle;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -112,6 +117,91 @@ namespace MundiAPI.Standard.Models
             {
                 this.subscription = value;
                 onPropertyChanged("Subscription");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("status")]
+        public string Status 
+        { 
+            get 
+            {
+                return this.status; 
+            } 
+            set 
+            {
+                this.status = value;
+                onPropertyChanged("Status");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("duration")]
+        public int Duration 
+        { 
+            get 
+            {
+                return this.duration; 
+            } 
+            set 
+            {
+                this.duration = value;
+                onPropertyChanged("Duration");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("created_at")]
+        public string CreatedAt 
+        { 
+            get 
+            {
+                return this.createdAt; 
+            } 
+            set 
+            {
+                this.createdAt = value;
+                onPropertyChanged("CreatedAt");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("updated_at")]
+        public string UpdatedAt 
+        { 
+            get 
+            {
+                return this.updatedAt; 
+            } 
+            set 
+            {
+                this.updatedAt = value;
+                onPropertyChanged("UpdatedAt");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("cycle")]
+        public int Cycle 
+        { 
+            get 
+            {
+                return this.cycle; 
+            } 
+            set 
+            {
+                this.cycle = value;
+                onPropertyChanged("Cycle");
             }
         }
     }
