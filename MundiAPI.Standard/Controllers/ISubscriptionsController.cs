@@ -627,16 +627,16 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="subscriptionId">Required parameter: Example: </param>
         /// <param name="request">Required parameter: Request for updating the end date of the current signature cycle</param>
-        /// <return>Returns the Models.GetSubscriptionItemResponse response from the API call</return>
-        Models.GetSubscriptionItemResponse UpdateCurrentCycleEndDate(string subscriptionId, Models.UpdateCurrentCycleEndDateRequest request);
+        /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
+        Models.GetSubscriptionResponse UpdateLatestPeriodEndAt(string subscriptionId, Models.UpdateCurrentCycleEndDateRequest request);
 
         /// <summary>
         /// TODO: type endpoint description here
         /// </summary>
         /// <param name="subscriptionId">Required parameter: Example: </param>
         /// <param name="request">Required parameter: Request for updating the end date of the current signature cycle</param>
-        /// <return>Returns the Models.GetSubscriptionItemResponse response from the API call</return>
-        Task<Models.GetSubscriptionItemResponse> UpdateCurrentCycleEndDateAsync(string subscriptionId, Models.UpdateCurrentCycleEndDateRequest request);
+        /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
+        Task<Models.GetSubscriptionResponse> UpdateLatestPeriodEndAtAsync(string subscriptionId, Models.UpdateCurrentCycleEndDateRequest request);
 
         /// <summary>
         /// TODO: type endpoint description here
