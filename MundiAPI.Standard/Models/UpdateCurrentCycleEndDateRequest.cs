@@ -21,14 +21,14 @@ namespace MundiAPI.Standard.Models
     public class UpdateCurrentCycleEndDateRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
-        private DateTime endAt;
+        private DateTime? endAt;
 
         /// <summary>
         /// Current cycle end date
         /// </summary>
         [JsonConverter(typeof(IsoDateTimeConverter))]
         [JsonProperty("end_at")]
-        public DateTime EndAt 
+        public DateTime? EndAt 
         { 
             get 
             {

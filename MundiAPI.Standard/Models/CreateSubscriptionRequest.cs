@@ -50,7 +50,7 @@ namespace MundiAPI.Standard.Models
         private int? quantity;
         private int? boletoDueDays;
         private List<Models.CreateIncrementRequest> increments;
-        private Models.CreatePeriodRequest cycle;
+        private Models.CreatePeriodRequest period;
 
         /// <summary>
         /// Customer
@@ -549,17 +549,17 @@ namespace MundiAPI.Standard.Models
         /// <summary>
         /// TODO: Write general description for this method
         /// </summary>
-        [JsonProperty("cycle")]
-        public Models.CreatePeriodRequest Cycle 
+        [JsonProperty("period")]
+        public Models.CreatePeriodRequest Period 
         { 
             get 
             {
-                return this.cycle; 
+                return this.period; 
             } 
             set 
             {
-                this.cycle = value;
-                onPropertyChanged("Cycle");
+                this.period = value;
+                onPropertyChanged("Period");
             }
         }
     }

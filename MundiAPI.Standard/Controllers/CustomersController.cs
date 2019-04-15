@@ -93,7 +93,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" }
             };
@@ -164,7 +164,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" }
             };
@@ -224,7 +224,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" }
             };
@@ -290,7 +290,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" }
             };
 
@@ -363,7 +363,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" }
             };
 
@@ -436,7 +436,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" }
             };
 
@@ -509,7 +509,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" }
             };
 
@@ -571,7 +571,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" }
             };
 
@@ -636,7 +636,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" }
             };
 
@@ -700,7 +700,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" }
             };
@@ -769,7 +769,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" }
             };
 
@@ -833,7 +833,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" }
             };
@@ -901,7 +901,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" }
             };
@@ -970,7 +970,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" }
             };
 
@@ -1035,7 +1035,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" }
             };
 
@@ -1100,7 +1100,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" }
             };
 
@@ -1164,7 +1164,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" }
             };
@@ -1233,7 +1233,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" }
             };
 
@@ -1297,7 +1297,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" }
             };
@@ -1390,7 +1390,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" }
             };
 
@@ -1455,7 +1455,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.14.6" },
+                { "user-agent", "MundiSDK - DotNet 0.15.0" },
                 { "accept", "application/json" }
             };
 
