@@ -688,5 +688,19 @@ namespace MundiAPI.Standard.Controllers
         /// <return>Returns the Models.GetPeriodResponse response from the API call</return>
         Task<Models.GetPeriodResponse> GetSubscriptionCycleByIdAsync(string subscriptionId, string cycleId);
 
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Example: </param>
+        /// <return>Returns the Models.GetPeriodResponse response from the API call</return>
+        Models.GetPeriodResponse RenewSubscription(string subscriptionId);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Example: </param>
+        /// <return>Returns the Models.GetPeriodResponse response from the API call</return>
+        Task<Models.GetPeriodResponse> RenewSubscriptionAsync(string subscriptionId);
+
     }
 } 

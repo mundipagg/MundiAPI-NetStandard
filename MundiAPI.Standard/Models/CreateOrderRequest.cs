@@ -35,6 +35,7 @@ namespace MundiAPI.Standard.Models
         private Models.CreateDeviceRequest device;
         private bool closed = true;
         private string currency;
+        private Models.CreateAntifraudRequest antifraud;
 
         /// <summary>
         /// Items
@@ -271,6 +272,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.currency = value;
                 onPropertyChanged("Currency");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("antifraud")]
+        public Models.CreateAntifraudRequest Antifraud 
+        { 
+            get 
+            {
+                return this.antifraud; 
+            } 
+            set 
+            {
+                this.antifraud = value;
+                onPropertyChanged("Antifraud");
             }
         }
     }
