@@ -28,6 +28,7 @@ namespace MundiAPI.Standard.Models
         private Models.CreatePaymentRequest payment;
         private Dictionary<string, string> metadata;
         private DateTime? dueAt;
+        private Models.CreateAntifraudRequest antifraud;
 
         /// <summary>
         /// Code
@@ -146,6 +147,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.dueAt = value;
                 onPropertyChanged("DueAt");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("antifraud")]
+        public Models.CreateAntifraudRequest Antifraud 
+        { 
+            get 
+            {
+                return this.antifraud; 
+            } 
+            set 
+            {
+                this.antifraud = value;
+                onPropertyChanged("Antifraud");
             }
         }
     }
