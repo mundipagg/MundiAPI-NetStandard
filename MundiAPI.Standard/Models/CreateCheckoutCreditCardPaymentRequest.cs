@@ -24,6 +24,7 @@ namespace MundiAPI.Standard.Models
         private string statementDescriptor;
         private List<Models.CreateCheckoutCardInstallmentOptionRequest> installments;
         private Models.CreatePaymentAuthenticationRequest authentication;
+        private bool? capture;
 
         /// <summary>
         /// Card invoice text descriptor
@@ -73,6 +74,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.authentication = value;
                 onPropertyChanged("Authentication");
+            }
+        }
+
+        /// <summary>
+        /// Authorize and capture?
+        /// </summary>
+        [JsonProperty("capture")]
+        public bool? Capture 
+        { 
+            get 
+            {
+                return this.capture; 
+            } 
+            set 
+            {
+                this.capture = value;
+                onPropertyChanged("Capture");
             }
         }
     }

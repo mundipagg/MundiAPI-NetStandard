@@ -22,7 +22,7 @@ namespace MundiAPI.Standard.Models
     {
         // These fields hold the values for the public properties.
         private string type;
-        private Models.ClearSaleRequest clearsale;
+        private Models.CreateClearSaleRequest clearsale;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -45,7 +45,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("clearsale")]
-        public Models.ClearSaleRequest Clearsale 
+        public Models.CreateClearSaleRequest Clearsale 
         { 
             get 
             {
