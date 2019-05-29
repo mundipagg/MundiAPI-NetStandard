@@ -192,66 +192,6 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// Creates a new customer
-        /// </summary>
-        /// <param name="request">Required parameter: Request for creating a customer</param>
-        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
-        public Models.GetCustomerResponse CreateCustomer(Models.CreateCustomerRequest request)
-        {
-            Task<Models.GetCustomerResponse> t = CreateCustomerAsync(request);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Creates a new customer
-        /// </summary>
-        /// <param name="request">Required parameter: Request for creating a customer</param>
-        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
-        public async Task<Models.GetCustomerResponse> CreateCustomerAsync(Models.CreateCustomerRequest request)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/customers");
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
-                { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
-            };
-
-            //append body params
-            var _body = APIHelper.JsonSerialize(request);
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetCustomerResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
         /// Get a customer
         /// </summary>
         /// <param name="customerId">Required parameter: Customer Id</param>
@@ -1471,6 +1411,66 @@ namespace MundiAPI.Standard.Controllers
             try
             {
                 return APIHelper.JsonDeserialize<Models.GetCardResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Creates a new customer
+        /// </summary>
+        /// <param name="request">Required parameter: Request for creating a customer</param>
+        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
+        public Models.GetCustomerResponse CreateCustomer(Models.CreateCustomerRequest request)
+        {
+            Task<Models.GetCustomerResponse> t = CreateCustomerAsync(request);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Creates a new customer
+        /// </summary>
+        /// <param name="request">Required parameter: Request for creating a customer</param>
+        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
+        public async Task<Models.GetCustomerResponse> CreateCustomerAsync(Models.CreateCustomerRequest request)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/customers");
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "accept", "application/json" },
+                { "content-type", "application/json; charset=utf-8" }
+            };
+
+            //append body params
+            var _body = APIHelper.JsonSerialize(request);
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.GetCustomerResponse>(_response.Body);
             }
             catch (Exception _ex)
             {

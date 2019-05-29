@@ -45,6 +45,7 @@ namespace MundiAPI.Standard.Models
         private DateTime? expiresAt;
         private string currency;
         private Models.GetCheckoutDebitCardPaymentResponse debitCard;
+        private Models.GetCheckoutBankTransferPaymentResponse bankTransfer;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -307,7 +308,7 @@ namespace MundiAPI.Standard.Models
         /// <summary>
         /// Configurações de cartão de crédito
         /// </summary>
-        [JsonProperty("credit_Card")]
+        [JsonProperty("credit_card")]
         public Models.GetCheckoutCreditCardPaymentResponse CreditCard 
         { 
             get 
@@ -456,6 +457,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.debitCard = value;
                 onPropertyChanged("DebitCard");
+            }
+        }
+
+        /// <summary>
+        /// Bank transfer payment response
+        /// </summary>
+        [JsonProperty("bank_transfer")]
+        public Models.GetCheckoutBankTransferPaymentResponse BankTransfer 
+        { 
+            get 
+            {
+                return this.bankTransfer; 
+            } 
+            set 
+            {
+                this.bankTransfer = value;
+                onPropertyChanged("BankTransfer");
             }
         }
     }

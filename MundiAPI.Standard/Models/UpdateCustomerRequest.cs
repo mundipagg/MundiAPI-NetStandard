@@ -29,6 +29,7 @@ namespace MundiAPI.Standard.Models
         private Dictionary<string, string> metadata;
         private Models.CreatePhonesRequest phones;
         private string code;
+        private string gender;
 
         /// <summary>
         /// Name
@@ -163,6 +164,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.code = value;
                 onPropertyChanged("Code");
+            }
+        }
+
+        /// <summary>
+        /// Gênero do cliente
+        /// </summary>
+        [JsonProperty("gender")]
+        public string Gender 
+        { 
+            get 
+            {
+                return this.gender; 
+            } 
+            set 
+            {
+                this.gender = value;
+                onPropertyChanged("Gender");
             }
         }
     }
