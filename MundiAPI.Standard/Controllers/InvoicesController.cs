@@ -53,10 +53,11 @@ namespace MundiAPI.Standard.Controllers
         /// Cancels an invoice
         /// </summary>
         /// <param name="invoiceId">Required parameter: Invoice id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        public Models.GetInvoiceResponse CancelInvoice(string invoiceId)
+        public Models.GetInvoiceResponse CancelInvoice(string invoiceId, string idempotencyKey = null)
         {
-            Task<Models.GetInvoiceResponse> t = CancelInvoiceAsync(invoiceId);
+            Task<Models.GetInvoiceResponse> t = CancelInvoiceAsync(invoiceId, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -65,8 +66,9 @@ namespace MundiAPI.Standard.Controllers
         /// Cancels an invoice
         /// </summary>
         /// <param name="invoiceId">Required parameter: Invoice id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        public async Task<Models.GetInvoiceResponse> CancelInvoiceAsync(string invoiceId)
+        public async Task<Models.GetInvoiceResponse> CancelInvoiceAsync(string invoiceId, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -88,8 +90,9 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
-                { "accept", "application/json" }
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
+                { "accept", "application/json" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //prepare the API call request to fetch the response
@@ -150,7 +153,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 
@@ -179,10 +182,15 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="subscriptionId">Required parameter: Subscription Id</param>
         /// <param name="cycleId">Required parameter: Cycle Id</param>
         /// <param name="request">Optional parameter: Example: </param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        public Models.GetInvoiceResponse CreateInvoice(string subscriptionId, string cycleId, Models.CreateInvoiceRequest request = null)
+        public Models.GetInvoiceResponse CreateInvoice(
+                string subscriptionId,
+                string cycleId,
+                Models.CreateInvoiceRequest request = null,
+                string idempotencyKey = null)
         {
-            Task<Models.GetInvoiceResponse> t = CreateInvoiceAsync(subscriptionId, cycleId, request);
+            Task<Models.GetInvoiceResponse> t = CreateInvoiceAsync(subscriptionId, cycleId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -193,8 +201,13 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="subscriptionId">Required parameter: Subscription Id</param>
         /// <param name="cycleId">Required parameter: Cycle Id</param>
         /// <param name="request">Optional parameter: Example: </param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        public async Task<Models.GetInvoiceResponse> CreateInvoiceAsync(string subscriptionId, string cycleId, Models.CreateInvoiceRequest request = null)
+        public async Task<Models.GetInvoiceResponse> CreateInvoiceAsync(
+                string subscriptionId,
+                string cycleId,
+                Models.CreateInvoiceRequest request = null,
+                string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -217,9 +230,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -249,10 +263,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="invoiceId">Required parameter: Invoice Id</param>
         /// <param name="request">Required parameter: Request for updating an invoice's status</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        public Models.GetInvoiceResponse UpdateInvoiceStatus(string invoiceId, Models.UpdateInvoiceStatusRequest request)
+        public Models.GetInvoiceResponse UpdateInvoiceStatus(string invoiceId, Models.UpdateInvoiceStatusRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetInvoiceResponse> t = UpdateInvoiceStatusAsync(invoiceId, request);
+            Task<Models.GetInvoiceResponse> t = UpdateInvoiceStatusAsync(invoiceId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -262,8 +277,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="invoiceId">Required parameter: Invoice Id</param>
         /// <param name="request">Required parameter: Request for updating an invoice's status</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        public async Task<Models.GetInvoiceResponse> UpdateInvoiceStatusAsync(string invoiceId, Models.UpdateInvoiceStatusRequest request)
+        public async Task<Models.GetInvoiceResponse> UpdateInvoiceStatusAsync(string invoiceId, Models.UpdateInvoiceStatusRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -285,9 +301,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -398,7 +415,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 
@@ -426,10 +443,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="invoiceId">Required parameter: The invoice id</param>
         /// <param name="request">Required parameter: Request for updating the invoice metadata</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        public Models.GetInvoiceResponse UpdateInvoiceMetadata(string invoiceId, Models.UpdateMetadataRequest request)
+        public Models.GetInvoiceResponse UpdateInvoiceMetadata(string invoiceId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetInvoiceResponse> t = UpdateInvoiceMetadataAsync(invoiceId, request);
+            Task<Models.GetInvoiceResponse> t = UpdateInvoiceMetadataAsync(invoiceId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -439,8 +457,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="invoiceId">Required parameter: The invoice id</param>
         /// <param name="request">Required parameter: Request for updating the invoice metadata</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        public async Task<Models.GetInvoiceResponse> UpdateInvoiceMetadataAsync(string invoiceId, Models.UpdateMetadataRequest request)
+        public async Task<Models.GetInvoiceResponse> UpdateInvoiceMetadataAsync(string invoiceId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -462,9 +481,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -528,7 +548,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 

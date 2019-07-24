@@ -54,10 +54,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient id</param>
         /// <param name="request">Required parameter: Metadata</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        public Models.GetRecipientResponse UpdateRecipientMetadata(string recipientId, Models.UpdateMetadataRequest request)
+        public Models.GetRecipientResponse UpdateRecipientMetadata(string recipientId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetRecipientResponse> t = UpdateRecipientMetadataAsync(recipientId, request);
+            Task<Models.GetRecipientResponse> t = UpdateRecipientMetadataAsync(recipientId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -67,8 +68,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient id</param>
         /// <param name="request">Required parameter: Metadata</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        public async Task<Models.GetRecipientResponse> UpdateRecipientMetadataAsync(string recipientId, Models.UpdateMetadataRequest request)
+        public async Task<Models.GetRecipientResponse> UpdateRecipientMetadataAsync(string recipientId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -90,9 +92,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -159,7 +162,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 
@@ -253,7 +256,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 
@@ -281,10 +284,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient id</param>
         /// <param name="request">Required parameter: Anticipation data</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetAnticipationResponse response from the API call</return>
-        public Models.GetAnticipationResponse CreateAnticipation(string recipientId, Models.CreateAnticipationRequest request)
+        public Models.GetAnticipationResponse CreateAnticipation(string recipientId, Models.CreateAnticipationRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetAnticipationResponse> t = CreateAnticipationAsync(recipientId, request);
+            Task<Models.GetAnticipationResponse> t = CreateAnticipationAsync(recipientId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -294,8 +298,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient id</param>
         /// <param name="request">Required parameter: Anticipation data</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetAnticipationResponse response from the API call</return>
-        public async Task<Models.GetAnticipationResponse> CreateAnticipationAsync(string recipientId, Models.CreateAnticipationRequest request)
+        public async Task<Models.GetAnticipationResponse> CreateAnticipationAsync(string recipientId, Models.CreateAnticipationRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -317,9 +322,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -386,7 +392,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 
@@ -459,7 +465,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 
@@ -568,7 +574,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 
@@ -596,10 +602,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient id</param>
         /// <param name="request">Required parameter: Recipient data</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        public Models.GetRecipientResponse UpdateRecipient(string recipientId, Models.UpdateRecipientRequest request)
+        public Models.GetRecipientResponse UpdateRecipient(string recipientId, Models.UpdateRecipientRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetRecipientResponse> t = UpdateRecipientAsync(recipientId, request);
+            Task<Models.GetRecipientResponse> t = UpdateRecipientAsync(recipientId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -609,8 +616,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient id</param>
         /// <param name="request">Required parameter: Recipient data</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        public async Task<Models.GetRecipientResponse> UpdateRecipientAsync(string recipientId, Models.UpdateRecipientRequest request)
+        public async Task<Models.GetRecipientResponse> UpdateRecipientAsync(string recipientId, Models.UpdateRecipientRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -632,9 +640,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -664,10 +673,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient id</param>
         /// <param name="request">Required parameter: Bank account data</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        public Models.GetRecipientResponse UpdateRecipientDefaultBankAccount(string recipientId, Models.UpdateRecipientBankAccountRequest request)
+        public Models.GetRecipientResponse UpdateRecipientDefaultBankAccount(string recipientId, Models.UpdateRecipientBankAccountRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetRecipientResponse> t = UpdateRecipientDefaultBankAccountAsync(recipientId, request);
+            Task<Models.GetRecipientResponse> t = UpdateRecipientDefaultBankAccountAsync(recipientId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -677,8 +687,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient id</param>
         /// <param name="request">Required parameter: Bank account data</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        public async Task<Models.GetRecipientResponse> UpdateRecipientDefaultBankAccountAsync(string recipientId, Models.UpdateRecipientBankAccountRequest request)
+        public async Task<Models.GetRecipientResponse> UpdateRecipientDefaultBankAccountAsync(string recipientId, Models.UpdateRecipientBankAccountRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -700,9 +711,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -766,7 +778,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 
@@ -831,7 +843,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 
@@ -893,7 +905,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 
@@ -921,10 +933,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient Id</param>
         /// <param name="request">Required parameter: Transfer data</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetTransferResponse response from the API call</return>
-        public Models.GetTransferResponse CreateTransfer(string recipientId, Models.CreateTransferRequest request)
+        public Models.GetTransferResponse CreateTransfer(string recipientId, Models.CreateTransferRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetTransferResponse> t = CreateTransferAsync(recipientId, request);
+            Task<Models.GetTransferResponse> t = CreateTransferAsync(recipientId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -934,8 +947,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient Id</param>
         /// <param name="request">Required parameter: Transfer data</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetTransferResponse response from the API call</return>
-        public async Task<Models.GetTransferResponse> CreateTransferAsync(string recipientId, Models.CreateTransferRequest request)
+        public async Task<Models.GetTransferResponse> CreateTransferAsync(string recipientId, Models.CreateTransferRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -957,9 +971,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -988,10 +1003,11 @@ namespace MundiAPI.Standard.Controllers
         /// Creates a new recipient
         /// </summary>
         /// <param name="request">Required parameter: Recipient data</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        public Models.GetRecipientResponse CreateRecipient(Models.CreateRecipientRequest request)
+        public Models.GetRecipientResponse CreateRecipient(Models.CreateRecipientRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetRecipientResponse> t = CreateRecipientAsync(request);
+            Task<Models.GetRecipientResponse> t = CreateRecipientAsync(request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -1000,8 +1016,9 @@ namespace MundiAPI.Standard.Controllers
         /// Creates a new recipient
         /// </summary>
         /// <param name="request">Required parameter: Recipient data</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        public async Task<Models.GetRecipientResponse> CreateRecipientAsync(Models.CreateRecipientRequest request)
+        public async Task<Models.GetRecipientResponse> CreateRecipientAsync(Models.CreateRecipientRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -1017,9 +1034,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -1049,10 +1067,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient Identificator</param>
         /// <param name="request">Required parameter: Example: </param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        public Models.GetRecipientResponse UpdateRecipientTransferSettings(string recipientId, Models.UpdateTransferSettingsRequest request)
+        public Models.GetRecipientResponse UpdateRecipientTransferSettings(string recipientId, Models.UpdateTransferSettingsRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetRecipientResponse> t = UpdateRecipientTransferSettingsAsync(recipientId, request);
+            Task<Models.GetRecipientResponse> t = UpdateRecipientTransferSettingsAsync(recipientId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -1062,8 +1081,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient Identificator</param>
         /// <param name="request">Required parameter: Example: </param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        public async Task<Models.GetRecipientResponse> UpdateRecipientTransferSettingsAsync(string recipientId, Models.UpdateTransferSettingsRequest request)
+        public async Task<Models.GetRecipientResponse> UpdateRecipientTransferSettingsAsync(string recipientId, Models.UpdateTransferSettingsRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -1085,9 +1105,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params

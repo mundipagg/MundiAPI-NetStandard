@@ -27,6 +27,7 @@ namespace MundiAPI.Standard.Models
         private int quantity;
         private Models.GetSellerResponse getSellerResponse;
         private string category;
+        private string code;
 
         /// <summary>
         /// Id
@@ -127,6 +128,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.category = value;
                 onPropertyChanged("Category");
+            }
+        }
+
+        /// <summary>
+        /// Code
+        /// </summary>
+        [JsonProperty("code")]
+        public string Code 
+        { 
+            get 
+            {
+                return this.code; 
+            } 
+            set 
+            {
+                this.code = value;
+                onPropertyChanged("Code");
             }
         }
     }

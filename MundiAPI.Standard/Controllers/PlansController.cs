@@ -54,10 +54,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="planId">Required parameter: Plan id</param>
         /// <param name="request">Required parameter: Request for creating a plan item</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetPlanItemResponse response from the API call</return>
-        public Models.GetPlanItemResponse CreatePlanItem(string planId, Models.CreatePlanItemRequest request)
+        public Models.GetPlanItemResponse CreatePlanItem(string planId, Models.CreatePlanItemRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetPlanItemResponse> t = CreatePlanItemAsync(planId, request);
+            Task<Models.GetPlanItemResponse> t = CreatePlanItemAsync(planId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -67,8 +68,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="planId">Required parameter: Plan id</param>
         /// <param name="request">Required parameter: Request for creating a plan item</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetPlanItemResponse response from the API call</return>
-        public async Task<Models.GetPlanItemResponse> CreatePlanItemAsync(string planId, Models.CreatePlanItemRequest request)
+        public async Task<Models.GetPlanItemResponse> CreatePlanItemAsync(string planId, Models.CreatePlanItemRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -90,9 +92,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -123,10 +126,15 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="planId">Required parameter: Plan id</param>
         /// <param name="planItemId">Required parameter: Plan item id</param>
         /// <param name="body">Required parameter: Request for updating the plan item</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetPlanItemResponse response from the API call</return>
-        public Models.GetPlanItemResponse UpdatePlanItem(string planId, string planItemId, Models.UpdatePlanItemRequest body)
+        public Models.GetPlanItemResponse UpdatePlanItem(
+                string planId,
+                string planItemId,
+                Models.UpdatePlanItemRequest body,
+                string idempotencyKey = null)
         {
-            Task<Models.GetPlanItemResponse> t = UpdatePlanItemAsync(planId, planItemId, body);
+            Task<Models.GetPlanItemResponse> t = UpdatePlanItemAsync(planId, planItemId, body, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -137,8 +145,13 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="planId">Required parameter: Plan id</param>
         /// <param name="planItemId">Required parameter: Plan item id</param>
         /// <param name="body">Required parameter: Request for updating the plan item</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetPlanItemResponse response from the API call</return>
-        public async Task<Models.GetPlanItemResponse> UpdatePlanItemAsync(string planId, string planItemId, Models.UpdatePlanItemRequest body)
+        public async Task<Models.GetPlanItemResponse> UpdatePlanItemAsync(
+                string planId,
+                string planItemId,
+                Models.UpdatePlanItemRequest body,
+                string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -161,9 +174,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -227,7 +241,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 
@@ -254,10 +268,11 @@ namespace MundiAPI.Standard.Controllers
         /// Deletes a plan
         /// </summary>
         /// <param name="planId">Required parameter: Plan id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetPlanResponse response from the API call</return>
-        public Models.GetPlanResponse DeletePlan(string planId)
+        public Models.GetPlanResponse DeletePlan(string planId, string idempotencyKey = null)
         {
-            Task<Models.GetPlanResponse> t = DeletePlanAsync(planId);
+            Task<Models.GetPlanResponse> t = DeletePlanAsync(planId, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -266,8 +281,9 @@ namespace MundiAPI.Standard.Controllers
         /// Deletes a plan
         /// </summary>
         /// <param name="planId">Required parameter: Plan id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetPlanResponse response from the API call</return>
-        public async Task<Models.GetPlanResponse> DeletePlanAsync(string planId)
+        public async Task<Models.GetPlanResponse> DeletePlanAsync(string planId, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -289,8 +305,9 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
-                { "accept", "application/json" }
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
+                { "accept", "application/json" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //prepare the API call request to fetch the response
@@ -317,10 +334,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="planId">Required parameter: Plan id</param>
         /// <param name="request">Required parameter: Request for updating a plan</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetPlanResponse response from the API call</return>
-        public Models.GetPlanResponse UpdatePlan(string planId, Models.UpdatePlanRequest request)
+        public Models.GetPlanResponse UpdatePlan(string planId, Models.UpdatePlanRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetPlanResponse> t = UpdatePlanAsync(planId, request);
+            Task<Models.GetPlanResponse> t = UpdatePlanAsync(planId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -330,8 +348,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="planId">Required parameter: Plan id</param>
         /// <param name="request">Required parameter: Request for updating a plan</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetPlanResponse response from the API call</return>
-        public async Task<Models.GetPlanResponse> UpdatePlanAsync(string planId, Models.UpdatePlanRequest request)
+        public async Task<Models.GetPlanResponse> UpdatePlanAsync(string planId, Models.UpdatePlanRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -353,9 +372,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -384,10 +404,11 @@ namespace MundiAPI.Standard.Controllers
         /// Creates a new plan
         /// </summary>
         /// <param name="body">Required parameter: Request for creating a plan</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetPlanResponse response from the API call</return>
-        public Models.GetPlanResponse CreatePlan(Models.CreatePlanRequest body)
+        public Models.GetPlanResponse CreatePlan(Models.CreatePlanRequest body, string idempotencyKey = null)
         {
-            Task<Models.GetPlanResponse> t = CreatePlanAsync(body);
+            Task<Models.GetPlanResponse> t = CreatePlanAsync(body, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -396,8 +417,9 @@ namespace MundiAPI.Standard.Controllers
         /// Creates a new plan
         /// </summary>
         /// <param name="body">Required parameter: Request for creating a plan</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetPlanResponse response from the API call</return>
-        public async Task<Models.GetPlanResponse> CreatePlanAsync(Models.CreatePlanRequest body)
+        public async Task<Models.GetPlanResponse> CreatePlanAsync(Models.CreatePlanRequest body, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -413,9 +435,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -511,7 +534,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 
@@ -539,10 +562,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="planId">Required parameter: The plan id</param>
         /// <param name="request">Required parameter: Request for updating the plan metadata</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetPlanResponse response from the API call</return>
-        public Models.GetPlanResponse UpdatePlanMetadata(string planId, Models.UpdateMetadataRequest request)
+        public Models.GetPlanResponse UpdatePlanMetadata(string planId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetPlanResponse> t = UpdatePlanMetadataAsync(planId, request);
+            Task<Models.GetPlanResponse> t = UpdatePlanMetadataAsync(planId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -552,8 +576,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="planId">Required parameter: The plan id</param>
         /// <param name="request">Required parameter: Request for updating the plan metadata</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetPlanResponse response from the API call</return>
-        public async Task<Models.GetPlanResponse> UpdatePlanMetadataAsync(string planId, Models.UpdateMetadataRequest request)
+        public async Task<Models.GetPlanResponse> UpdatePlanMetadataAsync(string planId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -575,9 +600,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -644,7 +670,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 
@@ -672,10 +698,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="planId">Required parameter: Plan id</param>
         /// <param name="planItemId">Required parameter: Plan item id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetPlanItemResponse response from the API call</return>
-        public Models.GetPlanItemResponse DeletePlanItem(string planId, string planItemId)
+        public Models.GetPlanItemResponse DeletePlanItem(string planId, string planItemId, string idempotencyKey = null)
         {
-            Task<Models.GetPlanItemResponse> t = DeletePlanItemAsync(planId, planItemId);
+            Task<Models.GetPlanItemResponse> t = DeletePlanItemAsync(planId, planItemId, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -685,8 +712,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="planId">Required parameter: Plan id</param>
         /// <param name="planItemId">Required parameter: Plan item id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetPlanItemResponse response from the API call</return>
-        public async Task<Models.GetPlanItemResponse> DeletePlanItemAsync(string planId, string planItemId)
+        public async Task<Models.GetPlanItemResponse> DeletePlanItemAsync(string planId, string planItemId, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -709,8 +737,9 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
-                { "accept", "application/json" }
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
+                { "accept", "application/json" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //prepare the API call request to fetch the response

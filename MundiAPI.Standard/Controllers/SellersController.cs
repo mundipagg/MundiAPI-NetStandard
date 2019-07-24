@@ -88,7 +88,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 
@@ -115,10 +115,11 @@ namespace MundiAPI.Standard.Controllers
         /// TODO: type endpoint description here
         /// </summary>
         /// <param name="sellerId">Required parameter: Seller Id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetSellerResponse response from the API call</return>
-        public Models.GetSellerResponse DeleteSeller(string sellerId)
+        public Models.GetSellerResponse DeleteSeller(string sellerId, string idempotencyKey = null)
         {
-            Task<Models.GetSellerResponse> t = DeleteSellerAsync(sellerId);
+            Task<Models.GetSellerResponse> t = DeleteSellerAsync(sellerId, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -127,8 +128,9 @@ namespace MundiAPI.Standard.Controllers
         /// TODO: type endpoint description here
         /// </summary>
         /// <param name="sellerId">Required parameter: Seller Id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetSellerResponse response from the API call</return>
-        public async Task<Models.GetSellerResponse> DeleteSellerAsync(string sellerId)
+        public async Task<Models.GetSellerResponse> DeleteSellerAsync(string sellerId, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -150,8 +152,9 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
-                { "accept", "application/json" }
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
+                { "accept", "application/json" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //prepare the API call request to fetch the response
@@ -177,10 +180,11 @@ namespace MundiAPI.Standard.Controllers
         /// TODO: type endpoint description here
         /// </summary>
         /// <param name="request">Required parameter: Seller Model</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetSellerResponse response from the API call</return>
-        public Models.GetSellerResponse CreateSeller(Models.CreateSellerRequest request)
+        public Models.GetSellerResponse CreateSeller(Models.CreateSellerRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetSellerResponse> t = CreateSellerAsync(request);
+            Task<Models.GetSellerResponse> t = CreateSellerAsync(request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -189,8 +193,9 @@ namespace MundiAPI.Standard.Controllers
         /// TODO: type endpoint description here
         /// </summary>
         /// <param name="request">Required parameter: Seller Model</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetSellerResponse response from the API call</return>
-        public async Task<Models.GetSellerResponse> CreateSellerAsync(Models.CreateSellerRequest request)
+        public async Task<Models.GetSellerResponse> CreateSellerAsync(Models.CreateSellerRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -206,9 +211,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -314,7 +320,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 
@@ -342,10 +348,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="id">Required parameter: Example: </param>
         /// <param name="request">Required parameter: Update Seller model</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetSellerResponse response from the API call</return>
-        public Models.GetSellerResponse UpdateSeller(string id, Models.UpdateSellerRequest request)
+        public Models.GetSellerResponse UpdateSeller(string id, Models.UpdateSellerRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetSellerResponse> t = UpdateSellerAsync(id, request);
+            Task<Models.GetSellerResponse> t = UpdateSellerAsync(id, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -355,8 +362,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="id">Required parameter: Example: </param>
         /// <param name="request">Required parameter: Update Seller model</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetSellerResponse response from the API call</return>
-        public async Task<Models.GetSellerResponse> UpdateSellerAsync(string id, Models.UpdateSellerRequest request)
+        public async Task<Models.GetSellerResponse> UpdateSellerAsync(string id, Models.UpdateSellerRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -378,9 +386,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -410,10 +419,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="sellerId">Required parameter: Seller Id</param>
         /// <param name="request">Required parameter: Request for updating the charge metadata</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetSellerResponse response from the API call</return>
-        public Models.GetSellerResponse UpdateSellerMetadata(string sellerId, Models.UpdateMetadataRequest request)
+        public Models.GetSellerResponse UpdateSellerMetadata(string sellerId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetSellerResponse> t = UpdateSellerMetadataAsync(sellerId, request);
+            Task<Models.GetSellerResponse> t = UpdateSellerMetadataAsync(sellerId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -423,8 +433,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="sellerId">Required parameter: Seller Id</param>
         /// <param name="request">Required parameter: Request for updating the charge metadata</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetSellerResponse response from the API call</return>
-        public async Task<Models.GetSellerResponse> UpdateSellerMetadataAsync(string sellerId, Models.UpdateMetadataRequest request)
+        public async Task<Models.GetSellerResponse> UpdateSellerMetadataAsync(string sellerId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -446,9 +457,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params

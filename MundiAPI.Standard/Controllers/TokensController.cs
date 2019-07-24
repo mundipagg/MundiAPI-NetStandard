@@ -91,7 +91,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 
@@ -119,10 +119,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="publicKey">Required parameter: Public key</param>
         /// <param name="request">Required parameter: Request for creating a token</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetTokenResponse response from the API call</return>
-        public Models.GetTokenResponse CreateToken(string publicKey, Models.CreateTokenRequest request)
+        public Models.GetTokenResponse CreateToken(string publicKey, Models.CreateTokenRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetTokenResponse> t = CreateTokenAsync(publicKey, request);
+            Task<Models.GetTokenResponse> t = CreateTokenAsync(publicKey, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -132,8 +133,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="publicKey">Required parameter: Public key</param>
         /// <param name="request">Required parameter: Request for creating a token</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetTokenResponse response from the API call</return>
-        public async Task<Models.GetTokenResponse> CreateTokenAsync(string publicKey, Models.CreateTokenRequest request)
+        public async Task<Models.GetTokenResponse> CreateTokenAsync(string publicKey, Models.CreateTokenRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -155,9 +157,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params

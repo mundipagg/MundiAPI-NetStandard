@@ -54,10 +54,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
         /// <param name="request">Required parameter: Request for updating a charge's card</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse UpdateChargeCard(string chargeId, Models.UpdateChargeCardRequest request)
+        public Models.GetChargeResponse UpdateChargeCard(string chargeId, Models.UpdateChargeCardRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetChargeResponse> t = UpdateChargeCardAsync(chargeId, request);
+            Task<Models.GetChargeResponse> t = UpdateChargeCardAsync(chargeId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -67,8 +68,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
         /// <param name="request">Required parameter: Request for updating a charge's card</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> UpdateChargeCardAsync(string chargeId, Models.UpdateChargeCardRequest request)
+        public async Task<Models.GetChargeResponse> UpdateChargeCardAsync(string chargeId, Models.UpdateChargeCardRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -90,9 +92,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -122,10 +125,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
         /// <param name="request">Required parameter: Request for updating the payment method from a charge</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse UpdateChargePaymentMethod(string chargeId, Models.UpdateChargePaymentMethodRequest request)
+        public Models.GetChargeResponse UpdateChargePaymentMethod(string chargeId, Models.UpdateChargePaymentMethodRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetChargeResponse> t = UpdateChargePaymentMethodAsync(chargeId, request);
+            Task<Models.GetChargeResponse> t = UpdateChargePaymentMethodAsync(chargeId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -135,8 +139,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
         /// <param name="request">Required parameter: Request for updating the payment method from a charge</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> UpdateChargePaymentMethodAsync(string chargeId, Models.UpdateChargePaymentMethodRequest request)
+        public async Task<Models.GetChargeResponse> UpdateChargePaymentMethodAsync(string chargeId, Models.UpdateChargePaymentMethodRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -158,9 +163,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -189,10 +195,11 @@ namespace MundiAPI.Standard.Controllers
         /// Creates a new charge
         /// </summary>
         /// <param name="request">Required parameter: Request for creating a charge</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse CreateCharge(Models.CreateChargeRequest request)
+        public Models.GetChargeResponse CreateCharge(Models.CreateChargeRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetChargeResponse> t = CreateChargeAsync(request);
+            Task<Models.GetChargeResponse> t = CreateChargeAsync(request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -201,8 +208,9 @@ namespace MundiAPI.Standard.Controllers
         /// Creates a new charge
         /// </summary>
         /// <param name="request">Required parameter: Request for creating a charge</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> CreateChargeAsync(Models.CreateChargeRequest request)
+        public async Task<Models.GetChargeResponse> CreateChargeAsync(Models.CreateChargeRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -218,9 +226,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -284,7 +293,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 
@@ -311,10 +320,11 @@ namespace MundiAPI.Standard.Controllers
         /// Retries a charge
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse RetryCharge(string chargeId)
+        public Models.GetChargeResponse RetryCharge(string chargeId, string idempotencyKey = null)
         {
-            Task<Models.GetChargeResponse> t = RetryChargeAsync(chargeId);
+            Task<Models.GetChargeResponse> t = RetryChargeAsync(chargeId, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -323,8 +333,9 @@ namespace MundiAPI.Standard.Controllers
         /// Retries a charge
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> RetryChargeAsync(string chargeId)
+        public async Task<Models.GetChargeResponse> RetryChargeAsync(string chargeId, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -346,8 +357,9 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
-                { "accept", "application/json" }
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
+                { "accept", "application/json" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //prepare the API call request to fetch the response
@@ -450,7 +462,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 
@@ -478,10 +490,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="chargeId">Required parameter: The charge id</param>
         /// <param name="request">Required parameter: Request for updating the charge metadata</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse UpdateChargeMetadata(string chargeId, Models.UpdateMetadataRequest request)
+        public Models.GetChargeResponse UpdateChargeMetadata(string chargeId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetChargeResponse> t = UpdateChargeMetadataAsync(chargeId, request);
+            Task<Models.GetChargeResponse> t = UpdateChargeMetadataAsync(chargeId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -491,8 +504,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="chargeId">Required parameter: The charge id</param>
         /// <param name="request">Required parameter: Request for updating the charge metadata</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> UpdateChargeMetadataAsync(string chargeId, Models.UpdateMetadataRequest request)
+        public async Task<Models.GetChargeResponse> UpdateChargeMetadataAsync(string chargeId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -514,9 +528,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -546,10 +561,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
         /// <param name="request">Optional parameter: Request for cancelling a charge</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse CancelCharge(string chargeId, Models.CreateCancelChargeRequest request = null)
+        public Models.GetChargeResponse CancelCharge(string chargeId, Models.CreateCancelChargeRequest request = null, string idempotencyKey = null)
         {
-            Task<Models.GetChargeResponse> t = CancelChargeAsync(chargeId, request);
+            Task<Models.GetChargeResponse> t = CancelChargeAsync(chargeId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -559,8 +575,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
         /// <param name="request">Optional parameter: Request for cancelling a charge</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> CancelChargeAsync(string chargeId, Models.CreateCancelChargeRequest request = null)
+        public async Task<Models.GetChargeResponse> CancelChargeAsync(string chargeId, Models.CreateCancelChargeRequest request = null, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -582,9 +599,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -614,10 +632,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
         /// <param name="request">Optional parameter: Request for capturing a charge</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse CaptureCharge(string chargeId, Models.CreateCaptureChargeRequest request = null)
+        public Models.GetChargeResponse CaptureCharge(string chargeId, Models.CreateCaptureChargeRequest request = null, string idempotencyKey = null)
         {
-            Task<Models.GetChargeResponse> t = CaptureChargeAsync(chargeId, request);
+            Task<Models.GetChargeResponse> t = CaptureChargeAsync(chargeId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -627,8 +646,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
         /// <param name="request">Optional parameter: Request for capturing a charge</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> CaptureChargeAsync(string chargeId, Models.CreateCaptureChargeRequest request = null)
+        public async Task<Models.GetChargeResponse> CaptureChargeAsync(string chargeId, Models.CreateCaptureChargeRequest request = null, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -650,9 +670,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -682,10 +703,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge Id</param>
         /// <param name="request">Required parameter: Request for updating the due date</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse UpdateChargeDueDate(string chargeId, Models.UpdateChargeDueDateRequest request)
+        public Models.GetChargeResponse UpdateChargeDueDate(string chargeId, Models.UpdateChargeDueDateRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetChargeResponse> t = UpdateChargeDueDateAsync(chargeId, request);
+            Task<Models.GetChargeResponse> t = UpdateChargeDueDateAsync(chargeId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -695,8 +717,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge Id</param>
         /// <param name="request">Required parameter: Request for updating the due date</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> UpdateChargeDueDateAsync(string chargeId, Models.UpdateChargeDueDateRequest request)
+        public async Task<Models.GetChargeResponse> UpdateChargeDueDateAsync(string chargeId, Models.UpdateChargeDueDateRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -718,9 +741,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -750,10 +774,11 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="chargeId">Required parameter: Example: </param>
         /// <param name="request">Optional parameter: Request for confirm payment</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse ConfirmPayment(string chargeId, Models.CreateConfirmPaymentRequest request = null)
+        public Models.GetChargeResponse ConfirmPayment(string chargeId, Models.CreateConfirmPaymentRequest request = null, string idempotencyKey = null)
         {
-            Task<Models.GetChargeResponse> t = ConfirmPaymentAsync(chargeId, request);
+            Task<Models.GetChargeResponse> t = ConfirmPaymentAsync(chargeId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -763,8 +788,9 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="chargeId">Required parameter: Example: </param>
         /// <param name="request">Optional parameter: Request for confirm payment</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> ConfirmPaymentAsync(string chargeId, Models.CreateConfirmPaymentRequest request = null)
+        public async Task<Models.GetChargeResponse> ConfirmPaymentAsync(string chargeId, Models.CreateConfirmPaymentRequest request = null, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -786,9 +812,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" }
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
             //append body params
@@ -863,7 +890,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.15.1" },
+                { "user-agent", "MundiSDK - DotNet 0.16.0-beta.0" },
                 { "accept", "application/json" }
             };
 

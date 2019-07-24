@@ -41,16 +41,18 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="publicKey">Required parameter: Public key</param>
         /// <param name="request">Required parameter: Request for creating a token</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetTokenResponse response from the API call</return>
-        Models.GetTokenResponse CreateToken(string publicKey, Models.CreateTokenRequest request);
+        Models.GetTokenResponse CreateToken(string publicKey, Models.CreateTokenRequest request, string idempotencyKey = null);
 
         /// <summary>
         /// TODO: type endpoint description here
         /// </summary>
         /// <param name="publicKey">Required parameter: Public key</param>
         /// <param name="request">Required parameter: Request for creating a token</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetTokenResponse response from the API call</return>
-        Task<Models.GetTokenResponse> CreateTokenAsync(string publicKey, Models.CreateTokenRequest request);
+        Task<Models.GetTokenResponse> CreateTokenAsync(string publicKey, Models.CreateTokenRequest request, string idempotencyKey = null);
 
     }
 } 
