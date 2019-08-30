@@ -26,6 +26,8 @@ namespace MundiAPI.Standard.Models
         private string eci;
         private string transactionId;
         private string successUrl;
+        private string dsTransactionId;
+        private string version;
 
         /// <summary>
         /// The MPI Vendor (MerchantPlugin)
@@ -109,6 +111,40 @@ namespace MundiAPI.Standard.Models
             {
                 this.successUrl = value;
                 onPropertyChanged("SuccessUrl");
+            }
+        }
+
+        /// <summary>
+        /// Directory Service Transaction Identifier
+        /// </summary>
+        [JsonProperty("ds_transaction_id")]
+        public string DsTransactionId 
+        { 
+            get 
+            {
+                return this.dsTransactionId; 
+            } 
+            set 
+            {
+                this.dsTransactionId = value;
+                onPropertyChanged("DsTransactionId");
+            }
+        }
+
+        /// <summary>
+        /// ThreeDSecure Version
+        /// </summary>
+        [JsonProperty("version")]
+        public string Version 
+        { 
+            get 
+            {
+                return this.version; 
+            } 
+            set 
+            {
+                this.version = value;
+                onPropertyChanged("Version");
             }
         }
     }

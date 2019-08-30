@@ -27,7 +27,7 @@ namespace MundiAPI.Standard.Models
         private string cardToken;
         private bool? recurrence;
         private Models.CreatePaymentAuthenticationRequest authentication;
-        private Models.CreateCardPaymentTokenRequest token;
+        private Models.CreateCardPaymentContactlessRequest token;
 
         /// <summary>
         /// The text that will be shown on the debit card's statement
@@ -135,7 +135,7 @@ namespace MundiAPI.Standard.Models
         /// The Debit card payment token request
         /// </summary>
         [JsonProperty("token")]
-        public Models.CreateCardPaymentTokenRequest Token 
+        public Models.CreateCardPaymentContactlessRequest Token 
         { 
             get 
             {

@@ -89,8 +89,8 @@ MundiAPIClient client = new MundiAPIClient(basicAuthUserName, basicAuthPassword)
 
 ## <a name="list_of_controllers"></a>List of Controllers
 
-* [OrdersController](#orders_controller)
 * [SubscriptionsController](#subscriptions_controller)
+* [OrdersController](#orders_controller)
 * [PlansController](#plans_controller)
 * [InvoicesController](#invoices_controller)
 * [CustomersController](#customers_controller)
@@ -99,329 +99,6 @@ MundiAPIClient client = new MundiAPIClient(basicAuthUserName, basicAuthPassword)
 * [TokensController](#tokens_controller)
 * [SellersController](#sellers_controller)
 * [TransactionsController](#transactions_controller)
-
-## <a name="orders_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.OrdersController") OrdersController
-
-### Get singleton instance
-
-The singleton instance of the ``` OrdersController ``` class can be accessed from the API Client.
-
-```csharp
-IOrdersController orders = client.Orders;
-```
-
-### <a name="get_order_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.GetOrderItem") GetOrderItem
-
-> TODO: Add a method description
-
-
-```csharp
-Task<Models.GetOrderItemResponse> GetOrderItem(string orderId, string itemId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| orderId |  ``` Required ```  | Order Id |
-| itemId |  ``` Required ```  | Item Id |
-
-
-#### Example Usage
-
-```csharp
-string orderId = "orderId";
-string itemId = "itemId";
-
-Models.GetOrderItemResponse result = await orders.GetOrderItem(orderId, itemId);
-
-```
-
-
-### <a name="update_order_status"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.UpdateOrderStatus") UpdateOrderStatus
-
-> TODO: Add a method description
-
-
-```csharp
-Task<Models.GetOrderResponse> UpdateOrderStatus(string id, Models.UpdateOrderStatusRequest request, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| id |  ``` Required ```  | Order Id |
-| request |  ``` Required ```  | Update Order Model |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string id = "id";
-var request = new Models.UpdateOrderStatusRequest();
-string idempotencyKey = "idempotency-key";
-
-Models.GetOrderResponse result = await orders.UpdateOrderStatus(id, request, idempotencyKey);
-
-```
-
-
-### <a name="delete_order_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.DeleteOrderItem") DeleteOrderItem
-
-> TODO: Add a method description
-
-
-```csharp
-Task<Models.GetOrderItemResponse> DeleteOrderItem(string orderId, string itemId, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| orderId |  ``` Required ```  | Order Id |
-| itemId |  ``` Required ```  | Item Id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string orderId = "orderId";
-string itemId = "itemId";
-string idempotencyKey = "idempotency-key";
-
-Models.GetOrderItemResponse result = await orders.DeleteOrderItem(orderId, itemId, idempotencyKey);
-
-```
-
-
-### <a name="create_order_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.CreateOrderItem") CreateOrderItem
-
-> TODO: Add a method description
-
-
-```csharp
-Task<Models.GetOrderItemResponse> CreateOrderItem(string orderId, Models.CreateOrderItemRequest request, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| orderId |  ``` Required ```  | Order Id |
-| request |  ``` Required ```  | Order Item Model |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string orderId = "orderId";
-var request = new Models.CreateOrderItemRequest();
-string idempotencyKey = "idempotency-key";
-
-Models.GetOrderItemResponse result = await orders.CreateOrderItem(orderId, request, idempotencyKey);
-
-```
-
-
-### <a name="update_order_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.UpdateOrderItem") UpdateOrderItem
-
-> TODO: Add a method description
-
-
-```csharp
-Task<Models.GetOrderItemResponse> UpdateOrderItem(
-        string orderId,
-        string itemId,
-        Models.UpdateOrderItemRequest request,
-        string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| orderId |  ``` Required ```  | Order Id |
-| itemId |  ``` Required ```  | Item Id |
-| request |  ``` Required ```  | Item Model |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string orderId = "orderId";
-string itemId = "itemId";
-var request = new Models.UpdateOrderItemRequest();
-string idempotencyKey = "idempotency-key";
-
-Models.GetOrderItemResponse result = await orders.UpdateOrderItem(orderId, itemId, request, idempotencyKey);
-
-```
-
-
-### <a name="update_order_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.UpdateOrderMetadata") UpdateOrderMetadata
-
-> Updates the metadata from an order
-
-
-```csharp
-Task<Models.GetOrderResponse> UpdateOrderMetadata(string orderId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| orderId |  ``` Required ```  | The order id |
-| request |  ``` Required ```  | Request for updating the order metadata |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string orderId = "order_id";
-var request = new Models.UpdateMetadataRequest();
-string idempotencyKey = "idempotency-key";
-
-Models.GetOrderResponse result = await orders.UpdateOrderMetadata(orderId, request, idempotencyKey);
-
-```
-
-
-### <a name="delete_all_order_items"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.DeleteAllOrderItems") DeleteAllOrderItems
-
-> TODO: Add a method description
-
-
-```csharp
-Task<Models.GetOrderResponse> DeleteAllOrderItems(string orderId, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| orderId |  ``` Required ```  | Order Id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string orderId = "orderId";
-string idempotencyKey = "idempotency-key";
-
-Models.GetOrderResponse result = await orders.DeleteAllOrderItems(orderId, idempotencyKey);
-
-```
-
-
-### <a name="get_orders"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.GetOrders") GetOrders
-
-> Gets all orders
-
-
-```csharp
-Task<Models.ListOrderResponse> GetOrders(
-        int? page = null,
-        int? size = null,
-        string code = null,
-        string status = null,
-        DateTime? createdSince = null,
-        DateTime? createdUntil = null,
-        string customerId = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| page |  ``` Optional ```  | Page number |
-| size |  ``` Optional ```  | Page size |
-| code |  ``` Optional ```  | Filter for order's code |
-| status |  ``` Optional ```  | Filter for order's status |
-| createdSince |  ``` Optional ```  | Filter for order's creation date start range |
-| createdUntil |  ``` Optional ```  | Filter for order's creation date end range |
-| customerId |  ``` Optional ```  | Filter for order's customer id |
-
-
-#### Example Usage
-
-```csharp
-int? page = 77;
-int? size = 77;
-string code = "code";
-string status = "status";
-DateTime? createdSince = DateTime.Now();
-DateTime? createdUntil = DateTime.Now();
-string customerId = "customer_id";
-
-Models.ListOrderResponse result = await orders.GetOrders(page, size, code, status, createdSince, createdUntil, customerId);
-
-```
-
-
-### <a name="get_order"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.GetOrder") GetOrder
-
-> Gets an order
-
-
-```csharp
-Task<Models.GetOrderResponse> GetOrder(string orderId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| orderId |  ``` Required ```  | Order id |
-
-
-#### Example Usage
-
-```csharp
-string orderId = "order_id";
-
-Models.GetOrderResponse result = await orders.GetOrder(orderId);
-
-```
-
-
-### <a name="create_order"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.CreateOrder") CreateOrder
-
-> Creates a new Order
-
-
-```csharp
-Task<Models.GetOrderResponse> CreateOrder(Models.CreateOrderRequest body, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| body |  ``` Required ```  | Request for creating an order |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-var body = new Models.CreateOrderRequest();
-string idempotencyKey = "idempotency-key";
-
-Models.GetOrderResponse result = await orders.CreateOrder(body, idempotencyKey);
-
-```
-
-
-[Back to List of Controllers](#list_of_controllers)
 
 ## <a name="subscriptions_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.SubscriptionsController") SubscriptionsController
 
@@ -433,402 +110,21 @@ The singleton instance of the ``` SubscriptionsController ``` class can be acces
 ISubscriptionsController subscriptions = client.Subscriptions;
 ```
 
-### <a name="get_subscription_cycle_by_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetSubscriptionCycleById") GetSubscriptionCycleById
+### <a name="get_increment_by_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetIncrementById") GetIncrementById
 
 > TODO: Add a method description
 
 
 ```csharp
-Task<Models.GetPeriodResponse> GetSubscriptionCycleById(string subscriptionId, string cycleId)
+Task<Models.GetIncrementResponse> GetIncrementById(string subscriptionId, string incrementId)
 ```
 
 #### Parameters
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | The subscription id |
-| cycleId |  ``` Required ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string cycleId = "cycleId";
-
-Models.GetPeriodResponse result = await subscriptions.GetSubscriptionCycleById(subscriptionId, cycleId);
-
-```
-
-
-### <a name="renew_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.RenewSubscription") RenewSubscription
-
-> TODO: Add a method description
-
-
-```csharp
-Task<Models.GetPeriodResponse> RenewSubscription(string subscriptionId, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | TODO: Add a parameter description |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string idempotencyKey = "idempotency-key";
-
-Models.GetPeriodResponse result = await subscriptions.RenewSubscription(subscriptionId, idempotencyKey);
-
-```
-
-
-### <a name="update_current_cycle_status"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateCurrentCycleStatus") UpdateCurrentCycleStatus
-
-> TODO: Add a method description
-
-
-```csharp
-Task UpdateCurrentCycleStatus(string subscriptionId, Models.UpdateCurrentCycleStatusRequest request, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription Id |
-| request |  ``` Required ```  | Request for updating the end date of the subscription current status |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-var request = new Models.UpdateCurrentCycleStatusRequest();
-string idempotencyKey = "idempotency-key";
-
-await subscriptions.UpdateCurrentCycleStatus(subscriptionId, request, idempotencyKey);
-
-```
-
-
-### <a name="get_subscription_cycles"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetSubscriptionCycles") GetSubscriptionCycles
-
-> TODO: Add a method description
-
-
-```csharp
-Task<Models.ListCyclesResponse> GetSubscriptionCycles(string subscriptionId, string page, string size)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription Id |
-| page |  ``` Required ```  | Page number |
-| size |  ``` Required ```  | Page size |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string page = "page";
-string size = "size";
-
-Models.ListCyclesResponse result = await subscriptions.GetSubscriptionCycles(subscriptionId, page, size);
-
-```
-
-
-### <a name="update_subscription_billing_date"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionBillingDate") UpdateSubscriptionBillingDate
-
-> Updates the billing date from a subscription
-
-
-```csharp
-Task<Models.GetSubscriptionResponse> UpdateSubscriptionBillingDate(string subscriptionId, Models.UpdateSubscriptionBillingDateRequest request, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | The subscription id |
-| request |  ``` Required ```  | Request for updating the subscription billing date |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-var request = new Models.UpdateSubscriptionBillingDateRequest();
-string idempotencyKey = "idempotency-key";
-
-Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionBillingDate(subscriptionId, request, idempotencyKey);
-
-```
-
-
-### <a name="update_latest_period_end_at"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateLatestPeriodEndAt") UpdateLatestPeriodEndAt
-
-> TODO: Add a method description
-
-
-```csharp
-Task<Models.GetSubscriptionResponse> UpdateLatestPeriodEndAt(string subscriptionId, Models.UpdateCurrentCycleEndDateRequest request, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | TODO: Add a parameter description |
-| request |  ``` Required ```  | Request for updating the end date of the current signature cycle |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-var request = new Models.UpdateCurrentCycleEndDateRequest();
-string idempotencyKey = "idempotency-key";
-
-Models.GetSubscriptionResponse result = await subscriptions.UpdateLatestPeriodEndAt(subscriptionId, request, idempotencyKey);
-
-```
-
-
-### <a name="update_subscription_due_days"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionDueDays") UpdateSubscriptionDueDays
-
-> Updates the boleto due days from a subscription
-
-
-```csharp
-Task<Models.GetSubscriptionResponse> UpdateSubscriptionDueDays(string subscriptionId, Models.UpdateSubscriptionDueDaysRequest request, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription Id |
-| request |  ``` Required ```  | TODO: Add a parameter description |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-var request = new Models.UpdateSubscriptionDueDaysRequest();
-string idempotencyKey = "idempotency-key";
-
-Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionDueDays(subscriptionId, request, idempotencyKey);
-
-```
-
-
-### <a name="update_subscription_minium_price"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionMiniumPrice") UpdateSubscriptionMiniumPrice
-
-> Atualização do valor mínimo da assinatura
-
-
-```csharp
-Task<Models.GetSubscriptionResponse> UpdateSubscriptionMiniumPrice(string subscriptionId, Models.UpdateSubscriptionMinimumPriceRequest request, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription Id |
-| request |  ``` Required ```  | Request da requisição com o valor mínimo que será configurado |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-var request = new Models.UpdateSubscriptionMinimumPriceRequest();
-string idempotencyKey = "idempotency-key";
-
-Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionMiniumPrice(subscriptionId, request, idempotencyKey);
-
-```
-
-
-### <a name="get_usages"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetUsages") GetUsages
-
-> Lists all usages from a subscription item
-
-
-```csharp
-Task<Models.ListUsagesResponse> GetUsages(
-        string subscriptionId,
-        string itemId,
-        int? page = null,
-        int? size = null,
-        string code = null,
-        string mgroup = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | The subscription id |
-| itemId |  ``` Required ```  | The subscription item id |
-| page |  ``` Optional ```  | Page number |
-| size |  ``` Optional ```  | Page size |
-| code |  ``` Optional ```  | Identification code in the client system |
-| mgroup |  ``` Optional ```  | Identification group in the client system |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string itemId = "item_id";
-int? page = 77;
-int? size = 77;
-string code = "code";
-string mgroup = "group";
-
-Models.ListUsagesResponse result = await subscriptions.GetUsages(subscriptionId, itemId, page, size, code, mgroup);
-
-```
-
-
-### <a name="get_usages_details"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetUsagesDetails") GetUsagesDetails
-
-> TODO: Add a method description
-
-
-```csharp
-Task<Models.GetUsagesDetailsResponse> GetUsagesDetails(
-        string subscriptionId,
-        string cycleId = null,
-        int? size = null,
-        int? page = null,
-        string itemId = null,
-        string mgroup = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription Identifier |
-| cycleId |  ``` Optional ```  | Cycle id |
-| size |  ``` Optional ```  | Page size |
-| page |  ``` Optional ```  | Page number |
-| itemId |  ``` Optional ```  | Identificador do item |
-| mgroup |  ``` Optional ```  | identificador da loja (account) de cada item |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string cycleId = "cycle_id";
-int? size = 77;
-int? page = 77;
-string itemId = "item_id";
-string mgroup = "group";
-
-Models.GetUsagesDetailsResponse result = await subscriptions.GetUsagesDetails(subscriptionId, cycleId, size, page, itemId, mgroup);
-
-```
-
-
-### <a name="get_increments"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetIncrements") GetIncrements
-
-> TODO: Add a method description
-
-
-```csharp
-Task<Models.ListIncrementsResponse> GetIncrements(string subscriptionId, int? page = null, int? size = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | The subscription id |
-| page |  ``` Optional ```  | Page number |
-| size |  ``` Optional ```  | Page size |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-int? page = 77;
-int? size = 77;
-
-Models.ListIncrementsResponse result = await subscriptions.GetIncrements(subscriptionId, page, size);
-
-```
-
-
-### <a name="create_increment"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.CreateIncrement") CreateIncrement
-
-> Creates a increment
-
-
-```csharp
-Task<Models.GetIncrementResponse> CreateIncrement(string subscriptionId, Models.CreateIncrementRequest request, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription id |
-| request |  ``` Required ```  | Request for creating a increment |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-var request = new Models.CreateIncrementRequest();
-string idempotencyKey = "idempotency-key";
-
-Models.GetIncrementResponse result = await subscriptions.CreateIncrement(subscriptionId, request, idempotencyKey);
-
-```
-
-
-### <a name="delete_increment"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.DeleteIncrement") DeleteIncrement
-
-> Deletes a increment
-
-
-```csharp
-Task<Models.GetIncrementResponse> DeleteIncrement(string subscriptionId, string incrementId, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription id |
-| incrementId |  ``` Required ```  | Increment id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+| subscriptionId |  ``` Required ```  | The subscription Id |
+| incrementId |  ``` Required ```  | The increment Id |
 
 
 #### Example Usage
@@ -836,20 +132,19 @@ Task<Models.GetIncrementResponse> DeleteIncrement(string subscriptionId, string 
 ```csharp
 string subscriptionId = "subscription_id";
 string incrementId = "increment_id";
-string idempotencyKey = "idempotency-key";
 
-Models.GetIncrementResponse result = await subscriptions.DeleteIncrement(subscriptionId, incrementId, idempotencyKey);
+Models.GetIncrementResponse result = await subscriptions.GetIncrementById(subscriptionId, incrementId);
 
 ```
 
 
-### <a name="get_discounts"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetDiscounts") GetDiscounts
+### <a name="update_subscription_start_at"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionStartAt") UpdateSubscriptionStartAt
 
-> TODO: Add a method description
+> Updates the start at date from a subscription
 
 
 ```csharp
-Task<Models.ListDiscountsResponse> GetDiscounts(string subscriptionId, int page, int size)
+Task<Models.GetSubscriptionResponse> UpdateSubscriptionStartAt(string subscriptionId, Models.UpdateSubscriptionStartAtRequest request, string idempotencyKey = null)
 ```
 
 #### Parameters
@@ -857,37 +152,7 @@ Task<Models.ListDiscountsResponse> GetDiscounts(string subscriptionId, int page,
 | Parameter | Tags | Description |
 |-----------|------|-------------|
 | subscriptionId |  ``` Required ```  | The subscription id |
-| page |  ``` Required ```  | Page number |
-| size |  ``` Required ```  | Page size |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-int page = 77;
-int size = 77;
-
-Models.ListDiscountsResponse result = await subscriptions.GetDiscounts(subscriptionId, page, size);
-
-```
-
-
-### <a name="cancel_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.CancelSubscription") CancelSubscription
-
-> Cancels a subscription
-
-
-```csharp
-Task<Models.GetSubscriptionResponse> CancelSubscription(string subscriptionId, Models.CreateCancelSubscriptionRequest request = null, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription id |
-| request |  ``` Optional ```  | Request for cancelling a subscription |
+| request |  ``` Required ```  | Request for updating the subscription start date |
 | idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
 
 
@@ -895,205 +160,55 @@ Task<Models.GetSubscriptionResponse> CancelSubscription(string subscriptionId, M
 
 ```csharp
 string subscriptionId = "subscription_id";
-var request = new Models.CreateCancelSubscriptionRequest();
+var request = new Models.UpdateSubscriptionStartAtRequest();
 string idempotencyKey = "idempotency-key";
 
-Models.GetSubscriptionResponse result = await subscriptions.CancelSubscription(subscriptionId, request, idempotencyKey);
+Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionStartAt(subscriptionId, request, idempotencyKey);
 
 ```
 
 
-### <a name="get_discount_by_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetDiscountById") GetDiscountById
+### <a name="update_subscription_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionCard") UpdateSubscriptionCard
 
-> TODO: Add a method description
+> Updates the credit card from a subscription
 
 
 ```csharp
-Task<Models.GetDiscountResponse> GetDiscountById(string subscriptionId, string discountId)
+Task<Models.GetSubscriptionResponse> UpdateSubscriptionCard(string subscriptionId, Models.UpdateSubscriptionCardRequest request, string idempotencyKey = null)
 ```
 
 #### Parameters
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | The subscription id |
-| discountId |  ``` Required ```  | TODO: Add a parameter description |
+| subscriptionId |  ``` Required ```  | Subscription id |
+| request |  ``` Required ```  | Request for updating a card |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
 
 
 #### Example Usage
 
 ```csharp
 string subscriptionId = "subscription_id";
-string discountId = "discountId";
+var request = new Models.UpdateSubscriptionCardRequest();
+string idempotencyKey = "idempotency-key";
 
-Models.GetDiscountResponse result = await subscriptions.GetDiscountById(subscriptionId, discountId);
+Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionCard(subscriptionId, request, idempotencyKey);
 
 ```
 
 
-### <a name="delete_usage"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.DeleteUsage") DeleteUsage
+### <a name="update_subscription_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionItem") UpdateSubscriptionItem
 
-> Deletes a usage
+> Updates a subscription item
 
 
 ```csharp
-Task<Models.GetUsageResponse> DeleteUsage(
+Task<Models.GetSubscriptionItemResponse> UpdateSubscriptionItem(
         string subscriptionId,
         string itemId,
-        string usageId,
+        Models.UpdateSubscriptionItemRequest body,
         string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | The subscription id |
-| itemId |  ``` Required ```  | The subscription item id |
-| usageId |  ``` Required ```  | The usage id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string itemId = "item_id";
-string usageId = "usage_id";
-string idempotencyKey = "idempotency-key";
-
-Models.GetUsageResponse result = await subscriptions.DeleteUsage(subscriptionId, itemId, usageId, idempotencyKey);
-
-```
-
-
-### <a name="delete_subscription_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.DeleteSubscriptionItem") DeleteSubscriptionItem
-
-> Deletes a subscription item
-
-
-```csharp
-Task<Models.GetSubscriptionItemResponse> DeleteSubscriptionItem(string subscriptionId, string subscriptionItemId, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription id |
-| subscriptionItemId |  ``` Required ```  | Subscription item id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string subscriptionItemId = "subscription_item_id";
-string idempotencyKey = "idempotency-key";
-
-Models.GetSubscriptionItemResponse result = await subscriptions.DeleteSubscriptionItem(subscriptionId, subscriptionItemId, idempotencyKey);
-
-```
-
-
-### <a name="delete_discount"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.DeleteDiscount") DeleteDiscount
-
-> Deletes a discount
-
-
-```csharp
-Task<Models.GetDiscountResponse> DeleteDiscount(string subscriptionId, string discountId, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription id |
-| discountId |  ``` Required ```  | Discount Id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string discountId = "discount_id";
-string idempotencyKey = "idempotency-key";
-
-Models.GetDiscountResponse result = await subscriptions.DeleteDiscount(subscriptionId, discountId, idempotencyKey);
-
-```
-
-
-### <a name="create_an_usage"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.CreateAnUsage") CreateAnUsage
-
-> Create Usage
-
-
-```csharp
-Task<Models.GetUsageResponse> CreateAnUsage(string subscriptionId, string itemId, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription id |
-| itemId |  ``` Required ```  | Item id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string itemId = "item_id";
-string idempotencyKey = "idempotency-key";
-
-Models.GetUsageResponse result = await subscriptions.CreateAnUsage(subscriptionId, itemId, idempotencyKey);
-
-```
-
-
-### <a name="update_subscription_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionMetadata") UpdateSubscriptionMetadata
-
-> Updates the metadata from a subscription
-
-
-```csharp
-Task<Models.GetSubscriptionResponse> UpdateSubscriptionMetadata(string subscriptionId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | The subscription id |
-| request |  ``` Required ```  | Request for updating the subscrption metadata |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-var request = new Models.UpdateMetadataRequest();
-string idempotencyKey = "idempotency-key";
-
-Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionMetadata(subscriptionId, request, idempotencyKey);
-
-```
-
-
-### <a name="get_subscription_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetSubscriptionItem") GetSubscriptionItem
-
-> Get Subscription Item
-
-
-```csharp
-Task<Models.GetSubscriptionItemResponse> GetSubscriptionItem(string subscriptionId, string itemId)
 ```
 
 #### Parameters
@@ -1102,34 +217,7 @@ Task<Models.GetSubscriptionItemResponse> GetSubscriptionItem(string subscription
 |-----------|------|-------------|
 | subscriptionId |  ``` Required ```  | Subscription Id |
 | itemId |  ``` Required ```  | Item id |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string itemId = "item_id";
-
-Models.GetSubscriptionItemResponse result = await subscriptions.GetSubscriptionItem(subscriptionId, itemId);
-
-```
-
-
-### <a name="update_subscription_affiliation_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionAffiliationId") UpdateSubscriptionAffiliationId
-
-> TODO: Add a method description
-
-
-```csharp
-Task<Models.GetSubscriptionResponse> UpdateSubscriptionAffiliationId(string subscriptionId, Models.UpdateSubscriptionAffiliationIdRequest request, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | TODO: Add a parameter description |
-| request |  ``` Required ```  | Request for updating a subscription affiliation id |
+| body |  ``` Required ```  | Request for updating a subscription item |
 | idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
 
 
@@ -1137,10 +225,131 @@ Task<Models.GetSubscriptionResponse> UpdateSubscriptionAffiliationId(string subs
 
 ```csharp
 string subscriptionId = "subscription_id";
-var request = new Models.UpdateSubscriptionAffiliationIdRequest();
+string itemId = "item_id";
+var body = new Models.UpdateSubscriptionItemRequest();
 string idempotencyKey = "idempotency-key";
 
-Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionAffiliationId(subscriptionId, request, idempotencyKey);
+Models.GetSubscriptionItemResponse result = await subscriptions.UpdateSubscriptionItem(subscriptionId, itemId, body, idempotencyKey);
+
+```
+
+
+### <a name="create_usage"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.CreateUsage") CreateUsage
+
+> Creates a usage
+
+
+```csharp
+Task<Models.GetUsageResponse> CreateUsage(
+        string subscriptionId,
+        string itemId,
+        Models.CreateUsageRequest body,
+        string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription Id |
+| itemId |  ``` Required ```  | Item id |
+| body |  ``` Required ```  | Request for creating a usage |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+string itemId = "item_id";
+var body = new Models.CreateUsageRequest();
+string idempotencyKey = "idempotency-key";
+
+Models.GetUsageResponse result = await subscriptions.CreateUsage(subscriptionId, itemId, body, idempotencyKey);
+
+```
+
+
+### <a name="get_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetSubscription") GetSubscription
+
+> Gets a subscription
+
+
+```csharp
+Task<Models.GetSubscriptionResponse> GetSubscription(string subscriptionId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription id |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+
+Models.GetSubscriptionResponse result = await subscriptions.GetSubscription(subscriptionId);
+
+```
+
+
+### <a name="update_subscription_payment_method"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionPaymentMethod") UpdateSubscriptionPaymentMethod
+
+> Updates the payment method from a subscription
+
+
+```csharp
+Task<Models.GetSubscriptionResponse> UpdateSubscriptionPaymentMethod(string subscriptionId, Models.UpdateSubscriptionPaymentMethodRequest request, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription id |
+| request |  ``` Required ```  | Request for updating the paymentmethod from a subscription |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+var request = new Models.UpdateSubscriptionPaymentMethodRequest();
+string idempotencyKey = "idempotency-key";
+
+Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionPaymentMethod(subscriptionId, request, idempotencyKey);
+
+```
+
+
+### <a name="create_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.CreateSubscription") CreateSubscription
+
+> Creates a new subscription
+
+
+```csharp
+Task<Models.GetSubscriptionResponse> CreateSubscription(Models.CreateSubscriptionRequest body, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| body |  ``` Required ```  | Request for creating a subscription |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+var body = new Models.CreateSubscriptionRequest();
+string idempotencyKey = "idempotency-key";
+
+Models.GetSubscriptionResponse result = await subscriptions.CreateSubscription(body, idempotencyKey);
 
 ```
 
@@ -1205,75 +414,13 @@ Models.GetDiscountResponse result = await subscriptions.CreateDiscount(subscript
 ```
 
 
-### <a name="update_subscription_payment_method"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionPaymentMethod") UpdateSubscriptionPaymentMethod
+### <a name="get_subscription_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetSubscriptionItem") GetSubscriptionItem
 
-> Updates the payment method from a subscription
-
-
-```csharp
-Task<Models.GetSubscriptionResponse> UpdateSubscriptionPaymentMethod(string subscriptionId, Models.UpdateSubscriptionPaymentMethodRequest request, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription id |
-| request |  ``` Required ```  | Request for updating the paymentmethod from a subscription |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-var request = new Models.UpdateSubscriptionPaymentMethodRequest();
-string idempotencyKey = "idempotency-key";
-
-Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionPaymentMethod(subscriptionId, request, idempotencyKey);
-
-```
-
-
-### <a name="create_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.CreateSubscription") CreateSubscription
-
-> Creates a new subscription
+> Get Subscription Item
 
 
 ```csharp
-Task<Models.GetSubscriptionResponse> CreateSubscription(Models.CreateSubscriptionRequest body, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| body |  ``` Required ```  | Request for creating a subscription |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-var body = new Models.CreateSubscriptionRequest();
-string idempotencyKey = "idempotency-key";
-
-Models.GetSubscriptionResponse result = await subscriptions.CreateSubscription(body, idempotencyKey);
-
-```
-
-
-### <a name="create_usage"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.CreateUsage") CreateUsage
-
-> Creates a usage
-
-
-```csharp
-Task<Models.GetUsageResponse> CreateUsage(
-        string subscriptionId,
-        string itemId,
-        Models.CreateUsageRequest body,
-        string idempotencyKey = null)
+Task<Models.GetSubscriptionItemResponse> GetSubscriptionItem(string subscriptionId, string itemId)
 ```
 
 #### Parameters
@@ -1282,8 +429,6 @@ Task<Models.GetUsageResponse> CreateUsage(
 |-----------|------|-------------|
 | subscriptionId |  ``` Required ```  | Subscription Id |
 | itemId |  ``` Required ```  | Item id |
-| body |  ``` Required ```  | Request for creating a usage |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
 
 
 #### Example Usage
@@ -1291,149 +436,27 @@ Task<Models.GetUsageResponse> CreateUsage(
 ```csharp
 string subscriptionId = "subscription_id";
 string itemId = "item_id";
-var body = new Models.CreateUsageRequest();
-string idempotencyKey = "idempotency-key";
 
-Models.GetUsageResponse result = await subscriptions.CreateUsage(subscriptionId, itemId, body, idempotencyKey);
+Models.GetSubscriptionItemResponse result = await subscriptions.GetSubscriptionItem(subscriptionId, itemId);
 
 ```
 
 
-### <a name="update_subscription_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionItem") UpdateSubscriptionItem
-
-> Updates a subscription item
-
-
-```csharp
-Task<Models.GetSubscriptionItemResponse> UpdateSubscriptionItem(
-        string subscriptionId,
-        string itemId,
-        Models.UpdateSubscriptionItemRequest body,
-        string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription Id |
-| itemId |  ``` Required ```  | Item id |
-| body |  ``` Required ```  | Request for updating a subscription item |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string itemId = "item_id";
-var body = new Models.UpdateSubscriptionItemRequest();
-string idempotencyKey = "idempotency-key";
-
-Models.GetSubscriptionItemResponse result = await subscriptions.UpdateSubscriptionItem(subscriptionId, itemId, body, idempotencyKey);
-
-```
-
-
-### <a name="update_subscription_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionCard") UpdateSubscriptionCard
-
-> Updates the credit card from a subscription
-
-
-```csharp
-Task<Models.GetSubscriptionResponse> UpdateSubscriptionCard(string subscriptionId, Models.UpdateSubscriptionCardRequest request, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription id |
-| request |  ``` Required ```  | Request for updating a card |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-var request = new Models.UpdateSubscriptionCardRequest();
-string idempotencyKey = "idempotency-key";
-
-Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionCard(subscriptionId, request, idempotencyKey);
-
-```
-
-
-### <a name="get_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetSubscription") GetSubscription
-
-> Gets a subscription
-
-
-```csharp
-Task<Models.GetSubscriptionResponse> GetSubscription(string subscriptionId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription id |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-
-Models.GetSubscriptionResponse result = await subscriptions.GetSubscription(subscriptionId);
-
-```
-
-
-### <a name="get_increment_by_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetIncrementById") GetIncrementById
+### <a name="update_subscription_affiliation_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionAffiliationId") UpdateSubscriptionAffiliationId
 
 > TODO: Add a method description
 
 
 ```csharp
-Task<Models.GetIncrementResponse> GetIncrementById(string subscriptionId, string incrementId)
+Task<Models.GetSubscriptionResponse> UpdateSubscriptionAffiliationId(string subscriptionId, Models.UpdateSubscriptionAffiliationIdRequest request, string idempotencyKey = null)
 ```
 
 #### Parameters
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | The subscription Id |
-| incrementId |  ``` Required ```  | The increment Id |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string incrementId = "increment_id";
-
-Models.GetIncrementResponse result = await subscriptions.GetIncrementById(subscriptionId, incrementId);
-
-```
-
-
-### <a name="update_subscription_start_at"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionStartAt") UpdateSubscriptionStartAt
-
-> Updates the start at date from a subscription
-
-
-```csharp
-Task<Models.GetSubscriptionResponse> UpdateSubscriptionStartAt(string subscriptionId, Models.UpdateSubscriptionStartAtRequest request, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | The subscription id |
-| request |  ``` Required ```  | Request for updating the subscription start date |
+| subscriptionId |  ``` Required ```  | TODO: Add a parameter description |
+| request |  ``` Required ```  | Request for updating a subscription affiliation id |
 | idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
 
 
@@ -1441,10 +464,40 @@ Task<Models.GetSubscriptionResponse> UpdateSubscriptionStartAt(string subscripti
 
 ```csharp
 string subscriptionId = "subscription_id";
-var request = new Models.UpdateSubscriptionStartAtRequest();
+var request = new Models.UpdateSubscriptionAffiliationIdRequest();
 string idempotencyKey = "idempotency-key";
 
-Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionStartAt(subscriptionId, request, idempotencyKey);
+Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionAffiliationId(subscriptionId, request, idempotencyKey);
+
+```
+
+
+### <a name="create_an_usage"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.CreateAnUsage") CreateAnUsage
+
+> Create Usage
+
+
+```csharp
+Task<Models.GetUsageResponse> CreateAnUsage(string subscriptionId, string itemId, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription id |
+| itemId |  ``` Required ```  | Item id |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+string itemId = "item_id";
+string idempotencyKey = "idempotency-key";
+
+Models.GetUsageResponse result = await subscriptions.CreateAnUsage(subscriptionId, itemId, idempotencyKey);
 
 ```
 
@@ -1491,8 +544,8 @@ Task<Models.ListSubscriptionsResponse> GetSubscriptions(
 #### Example Usage
 
 ```csharp
-int? page = 77;
-int? size = 77;
+int? page = 144;
+int? size = 144;
 string code = "code";
 string billingType = "billing_type";
 string customerId = "customer_id";
@@ -1505,6 +558,394 @@ DateTime? createdSince = DateTime.Now();
 DateTime? createdUntil = DateTime.Now();
 
 Models.ListSubscriptionsResponse result = await subscriptions.GetSubscriptions(page, size, code, billingType, customerId, planId, cardId, status, nextBillingSince, nextBillingUntil, createdSince, createdUntil);
+
+```
+
+
+### <a name="update_subscription_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionMetadata") UpdateSubscriptionMetadata
+
+> Updates the metadata from a subscription
+
+
+```csharp
+Task<Models.GetSubscriptionResponse> UpdateSubscriptionMetadata(string subscriptionId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | The subscription id |
+| request |  ``` Required ```  | Request for updating the subscrption metadata |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+var request = new Models.UpdateMetadataRequest();
+string idempotencyKey = "idempotency-key";
+
+Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionMetadata(subscriptionId, request, idempotencyKey);
+
+```
+
+
+### <a name="delete_subscription_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.DeleteSubscriptionItem") DeleteSubscriptionItem
+
+> Deletes a subscription item
+
+
+```csharp
+Task<Models.GetSubscriptionItemResponse> DeleteSubscriptionItem(string subscriptionId, string subscriptionItemId, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription id |
+| subscriptionItemId |  ``` Required ```  | Subscription item id |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+string subscriptionItemId = "subscription_item_id";
+string idempotencyKey = "idempotency-key";
+
+Models.GetSubscriptionItemResponse result = await subscriptions.DeleteSubscriptionItem(subscriptionId, subscriptionItemId, idempotencyKey);
+
+```
+
+
+### <a name="delete_usage"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.DeleteUsage") DeleteUsage
+
+> Deletes a usage
+
+
+```csharp
+Task<Models.GetUsageResponse> DeleteUsage(
+        string subscriptionId,
+        string itemId,
+        string usageId,
+        string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | The subscription id |
+| itemId |  ``` Required ```  | The subscription item id |
+| usageId |  ``` Required ```  | The usage id |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+string itemId = "item_id";
+string usageId = "usage_id";
+string idempotencyKey = "idempotency-key";
+
+Models.GetUsageResponse result = await subscriptions.DeleteUsage(subscriptionId, itemId, usageId, idempotencyKey);
+
+```
+
+
+### <a name="delete_discount"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.DeleteDiscount") DeleteDiscount
+
+> Deletes a discount
+
+
+```csharp
+Task<Models.GetDiscountResponse> DeleteDiscount(string subscriptionId, string discountId, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription id |
+| discountId |  ``` Required ```  | Discount Id |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+string discountId = "discount_id";
+string idempotencyKey = "idempotency-key";
+
+Models.GetDiscountResponse result = await subscriptions.DeleteDiscount(subscriptionId, discountId, idempotencyKey);
+
+```
+
+
+### <a name="cancel_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.CancelSubscription") CancelSubscription
+
+> Cancels a subscription
+
+
+```csharp
+Task<Models.GetSubscriptionResponse> CancelSubscription(string subscriptionId, Models.CreateCancelSubscriptionRequest request = null, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription id |
+| request |  ``` Optional ```  | Request for cancelling a subscription |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+var request = new Models.CreateCancelSubscriptionRequest();
+string idempotencyKey = "idempotency-key";
+
+Models.GetSubscriptionResponse result = await subscriptions.CancelSubscription(subscriptionId, request, idempotencyKey);
+
+```
+
+
+### <a name="get_discount_by_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetDiscountById") GetDiscountById
+
+> TODO: Add a method description
+
+
+```csharp
+Task<Models.GetDiscountResponse> GetDiscountById(string subscriptionId, string discountId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | The subscription id |
+| discountId |  ``` Required ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+string discountId = "discountId";
+
+Models.GetDiscountResponse result = await subscriptions.GetDiscountById(subscriptionId, discountId);
+
+```
+
+
+### <a name="get_discounts"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetDiscounts") GetDiscounts
+
+> TODO: Add a method description
+
+
+```csharp
+Task<Models.ListDiscountsResponse> GetDiscounts(string subscriptionId, int page, int size)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | The subscription id |
+| page |  ``` Required ```  | Page number |
+| size |  ``` Required ```  | Page size |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+int page = 144;
+int size = 144;
+
+Models.ListDiscountsResponse result = await subscriptions.GetDiscounts(subscriptionId, page, size);
+
+```
+
+
+### <a name="create_increment"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.CreateIncrement") CreateIncrement
+
+> Creates a increment
+
+
+```csharp
+Task<Models.GetIncrementResponse> CreateIncrement(string subscriptionId, Models.CreateIncrementRequest request, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription id |
+| request |  ``` Required ```  | Request for creating a increment |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+var request = new Models.CreateIncrementRequest();
+string idempotencyKey = "idempotency-key";
+
+Models.GetIncrementResponse result = await subscriptions.CreateIncrement(subscriptionId, request, idempotencyKey);
+
+```
+
+
+### <a name="get_increments"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetIncrements") GetIncrements
+
+> TODO: Add a method description
+
+
+```csharp
+Task<Models.ListIncrementsResponse> GetIncrements(string subscriptionId, int? page = null, int? size = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | The subscription id |
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+int? page = 144;
+int? size = 144;
+
+Models.ListIncrementsResponse result = await subscriptions.GetIncrements(subscriptionId, page, size);
+
+```
+
+
+### <a name="delete_increment"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.DeleteIncrement") DeleteIncrement
+
+> Deletes a increment
+
+
+```csharp
+Task<Models.GetIncrementResponse> DeleteIncrement(string subscriptionId, string incrementId, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription id |
+| incrementId |  ``` Required ```  | Increment id |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+string incrementId = "increment_id";
+string idempotencyKey = "idempotency-key";
+
+Models.GetIncrementResponse result = await subscriptions.DeleteIncrement(subscriptionId, incrementId, idempotencyKey);
+
+```
+
+
+### <a name="get_usages_details"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetUsagesDetails") GetUsagesDetails
+
+> TODO: Add a method description
+
+
+```csharp
+Task<Models.GetUsagesDetailsResponse> GetUsagesDetails(
+        string subscriptionId,
+        string cycleId = null,
+        int? size = null,
+        int? page = null,
+        string itemId = null,
+        string mgroup = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription Identifier |
+| cycleId |  ``` Optional ```  | Cycle id |
+| size |  ``` Optional ```  | Page size |
+| page |  ``` Optional ```  | Page number |
+| itemId |  ``` Optional ```  | Identificador do item |
+| mgroup |  ``` Optional ```  | identificador da loja (account) de cada item |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+string cycleId = "cycle_id";
+int? size = 144;
+int? page = 144;
+string itemId = "item_id";
+string mgroup = "group";
+
+Models.GetUsagesDetailsResponse result = await subscriptions.GetUsagesDetails(subscriptionId, cycleId, size, page, itemId, mgroup);
+
+```
+
+
+### <a name="get_usages"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetUsages") GetUsages
+
+> Lists all usages from a subscription item
+
+
+```csharp
+Task<Models.ListUsagesResponse> GetUsages(
+        string subscriptionId,
+        string itemId,
+        int? page = null,
+        int? size = null,
+        string code = null,
+        string mgroup = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | The subscription id |
+| itemId |  ``` Required ```  | The subscription item id |
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
+| code |  ``` Optional ```  | Identification code in the client system |
+| mgroup |  ``` Optional ```  | Identification group in the client system |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+string itemId = "item_id";
+int? page = 144;
+int? size = 144;
+string code = "code";
+string mgroup = "group";
+
+Models.ListUsagesResponse result = await subscriptions.GetUsages(subscriptionId, itemId, page, size, code, mgroup);
 
 ```
 
@@ -1546,8 +987,8 @@ Task<Models.ListSubscriptionItemsResponse> GetSubscriptionItems(
 
 ```csharp
 string subscriptionId = "subscription_id";
-int? page = 77;
-int? size = 77;
+int? page = 144;
+int? size = 144;
 string name = "name";
 string code = "code";
 string status = "status";
@@ -1556,6 +997,565 @@ string createdSince = "created_since";
 string createdUntil = "created_until";
 
 Models.ListSubscriptionItemsResponse result = await subscriptions.GetSubscriptionItems(subscriptionId, page, size, name, code, status, description, createdSince, createdUntil);
+
+```
+
+
+### <a name="update_subscription_due_days"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionDueDays") UpdateSubscriptionDueDays
+
+> Updates the boleto due days from a subscription
+
+
+```csharp
+Task<Models.GetSubscriptionResponse> UpdateSubscriptionDueDays(string subscriptionId, Models.UpdateSubscriptionDueDaysRequest request, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription Id |
+| request |  ``` Required ```  | TODO: Add a parameter description |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+var request = new Models.UpdateSubscriptionDueDaysRequest();
+string idempotencyKey = "idempotency-key";
+
+Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionDueDays(subscriptionId, request, idempotencyKey);
+
+```
+
+
+### <a name="update_subscription_minium_price"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionMiniumPrice") UpdateSubscriptionMiniumPrice
+
+> Atualização do valor mínimo da assinatura
+
+
+```csharp
+Task<Models.GetSubscriptionResponse> UpdateSubscriptionMiniumPrice(string subscriptionId, Models.UpdateSubscriptionMinimumPriceRequest request, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription Id |
+| request |  ``` Required ```  | Request da requisição com o valor mínimo que será configurado |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+var request = new Models.UpdateSubscriptionMinimumPriceRequest();
+string idempotencyKey = "idempotency-key";
+
+Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionMiniumPrice(subscriptionId, request, idempotencyKey);
+
+```
+
+
+### <a name="update_subscription_billing_date"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateSubscriptionBillingDate") UpdateSubscriptionBillingDate
+
+> Updates the billing date from a subscription
+
+
+```csharp
+Task<Models.GetSubscriptionResponse> UpdateSubscriptionBillingDate(string subscriptionId, Models.UpdateSubscriptionBillingDateRequest request, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | The subscription id |
+| request |  ``` Required ```  | Request for updating the subscription billing date |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+var request = new Models.UpdateSubscriptionBillingDateRequest();
+string idempotencyKey = "idempotency-key";
+
+Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionBillingDate(subscriptionId, request, idempotencyKey);
+
+```
+
+
+### <a name="update_latest_period_end_at"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateLatestPeriodEndAt") UpdateLatestPeriodEndAt
+
+> TODO: Add a method description
+
+
+```csharp
+Task<Models.GetSubscriptionResponse> UpdateLatestPeriodEndAt(string subscriptionId, Models.UpdateCurrentCycleEndDateRequest request, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | TODO: Add a parameter description |
+| request |  ``` Required ```  | Request for updating the end date of the current signature cycle |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+var request = new Models.UpdateCurrentCycleEndDateRequest();
+string idempotencyKey = "idempotency-key";
+
+Models.GetSubscriptionResponse result = await subscriptions.UpdateLatestPeriodEndAt(subscriptionId, request, idempotencyKey);
+
+```
+
+
+### <a name="update_current_cycle_status"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.UpdateCurrentCycleStatus") UpdateCurrentCycleStatus
+
+> TODO: Add a method description
+
+
+```csharp
+Task UpdateCurrentCycleStatus(string subscriptionId, Models.UpdateCurrentCycleStatusRequest request, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription Id |
+| request |  ``` Required ```  | Request for updating the end date of the subscription current status |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+var request = new Models.UpdateCurrentCycleStatusRequest();
+string idempotencyKey = "idempotency-key";
+
+await subscriptions.UpdateCurrentCycleStatus(subscriptionId, request, idempotencyKey);
+
+```
+
+
+### <a name="get_subscription_cycles"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetSubscriptionCycles") GetSubscriptionCycles
+
+> TODO: Add a method description
+
+
+```csharp
+Task<Models.ListCyclesResponse> GetSubscriptionCycles(string subscriptionId, string page, string size)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription Id |
+| page |  ``` Required ```  | Page number |
+| size |  ``` Required ```  | Page size |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+string page = "page";
+string size = "size";
+
+Models.ListCyclesResponse result = await subscriptions.GetSubscriptionCycles(subscriptionId, page, size);
+
+```
+
+
+### <a name="get_subscription_cycle_by_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.GetSubscriptionCycleById") GetSubscriptionCycleById
+
+> TODO: Add a method description
+
+
+```csharp
+Task<Models.GetPeriodResponse> GetSubscriptionCycleById(string subscriptionId, string cycleId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | The subscription id |
+| cycleId |  ``` Required ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+string cycleId = "cycleId";
+
+Models.GetPeriodResponse result = await subscriptions.GetSubscriptionCycleById(subscriptionId, cycleId);
+
+```
+
+
+### <a name="renew_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SubscriptionsController.RenewSubscription") RenewSubscription
+
+> TODO: Add a method description
+
+
+```csharp
+Task<Models.GetPeriodResponse> RenewSubscription(string subscriptionId, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | TODO: Add a parameter description |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+string idempotencyKey = "idempotency-key";
+
+Models.GetPeriodResponse result = await subscriptions.RenewSubscription(subscriptionId, idempotencyKey);
+
+```
+
+
+[Back to List of Controllers](#list_of_controllers)
+
+## <a name="orders_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.OrdersController") OrdersController
+
+### Get singleton instance
+
+The singleton instance of the ``` OrdersController ``` class can be accessed from the API Client.
+
+```csharp
+IOrdersController orders = client.Orders;
+```
+
+### <a name="get_order"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.GetOrder") GetOrder
+
+> Gets an order
+
+
+```csharp
+Task<Models.GetOrderResponse> GetOrder(string orderId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| orderId |  ``` Required ```  | Order id |
+
+
+#### Example Usage
+
+```csharp
+string orderId = "order_id";
+
+Models.GetOrderResponse result = await orders.GetOrder(orderId);
+
+```
+
+
+### <a name="create_order"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.CreateOrder") CreateOrder
+
+> Creates a new Order
+
+
+```csharp
+Task<Models.GetOrderResponse> CreateOrder(Models.CreateOrderRequest body, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| body |  ``` Required ```  | Request for creating an order |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+var body = new Models.CreateOrderRequest();
+string idempotencyKey = "idempotency-key";
+
+Models.GetOrderResponse result = await orders.CreateOrder(body, idempotencyKey);
+
+```
+
+
+### <a name="get_orders"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.GetOrders") GetOrders
+
+> Gets all orders
+
+
+```csharp
+Task<Models.ListOrderResponse> GetOrders(
+        int? page = null,
+        int? size = null,
+        string code = null,
+        string status = null,
+        DateTime? createdSince = null,
+        DateTime? createdUntil = null,
+        string customerId = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
+| code |  ``` Optional ```  | Filter for order's code |
+| status |  ``` Optional ```  | Filter for order's status |
+| createdSince |  ``` Optional ```  | Filter for order's creation date start range |
+| createdUntil |  ``` Optional ```  | Filter for order's creation date end range |
+| customerId |  ``` Optional ```  | Filter for order's customer id |
+
+
+#### Example Usage
+
+```csharp
+int? page = 144;
+int? size = 144;
+string code = "code";
+string status = "status";
+DateTime? createdSince = DateTime.Now();
+DateTime? createdUntil = DateTime.Now();
+string customerId = "customer_id";
+
+Models.ListOrderResponse result = await orders.GetOrders(page, size, code, status, createdSince, createdUntil, customerId);
+
+```
+
+
+### <a name="update_order_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.UpdateOrderMetadata") UpdateOrderMetadata
+
+> Updates the metadata from an order
+
+
+```csharp
+Task<Models.GetOrderResponse> UpdateOrderMetadata(string orderId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| orderId |  ``` Required ```  | The order id |
+| request |  ``` Required ```  | Request for updating the order metadata |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string orderId = "order_id";
+var request = new Models.UpdateMetadataRequest();
+string idempotencyKey = "idempotency-key";
+
+Models.GetOrderResponse result = await orders.UpdateOrderMetadata(orderId, request, idempotencyKey);
+
+```
+
+
+### <a name="delete_all_order_items"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.DeleteAllOrderItems") DeleteAllOrderItems
+
+> TODO: Add a method description
+
+
+```csharp
+Task<Models.GetOrderResponse> DeleteAllOrderItems(string orderId, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| orderId |  ``` Required ```  | Order Id |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string orderId = "orderId";
+string idempotencyKey = "idempotency-key";
+
+Models.GetOrderResponse result = await orders.DeleteAllOrderItems(orderId, idempotencyKey);
+
+```
+
+
+### <a name="update_order_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.UpdateOrderItem") UpdateOrderItem
+
+> TODO: Add a method description
+
+
+```csharp
+Task<Models.GetOrderItemResponse> UpdateOrderItem(
+        string orderId,
+        string itemId,
+        Models.UpdateOrderItemRequest request,
+        string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| orderId |  ``` Required ```  | Order Id |
+| itemId |  ``` Required ```  | Item Id |
+| request |  ``` Required ```  | Item Model |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string orderId = "orderId";
+string itemId = "itemId";
+var request = new Models.UpdateOrderItemRequest();
+string idempotencyKey = "idempotency-key";
+
+Models.GetOrderItemResponse result = await orders.UpdateOrderItem(orderId, itemId, request, idempotencyKey);
+
+```
+
+
+### <a name="delete_order_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.DeleteOrderItem") DeleteOrderItem
+
+> TODO: Add a method description
+
+
+```csharp
+Task<Models.GetOrderItemResponse> DeleteOrderItem(string orderId, string itemId, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| orderId |  ``` Required ```  | Order Id |
+| itemId |  ``` Required ```  | Item Id |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string orderId = "orderId";
+string itemId = "itemId";
+string idempotencyKey = "idempotency-key";
+
+Models.GetOrderItemResponse result = await orders.DeleteOrderItem(orderId, itemId, idempotencyKey);
+
+```
+
+
+### <a name="create_order_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.CreateOrderItem") CreateOrderItem
+
+> TODO: Add a method description
+
+
+```csharp
+Task<Models.GetOrderItemResponse> CreateOrderItem(string orderId, Models.CreateOrderItemRequest request, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| orderId |  ``` Required ```  | Order Id |
+| request |  ``` Required ```  | Order Item Model |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string orderId = "orderId";
+var request = new Models.CreateOrderItemRequest();
+string idempotencyKey = "idempotency-key";
+
+Models.GetOrderItemResponse result = await orders.CreateOrderItem(orderId, request, idempotencyKey);
+
+```
+
+
+### <a name="get_order_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.GetOrderItem") GetOrderItem
+
+> TODO: Add a method description
+
+
+```csharp
+Task<Models.GetOrderItemResponse> GetOrderItem(string orderId, string itemId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| orderId |  ``` Required ```  | Order Id |
+| itemId |  ``` Required ```  | Item Id |
+
+
+#### Example Usage
+
+```csharp
+string orderId = "orderId";
+string itemId = "itemId";
+
+Models.GetOrderItemResponse result = await orders.GetOrderItem(orderId, itemId);
+
+```
+
+
+### <a name="update_order_status"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.OrdersController.UpdateOrderStatus") UpdateOrderStatus
+
+> TODO: Add a method description
+
+
+```csharp
+Task<Models.GetOrderResponse> UpdateOrderStatus(string id, Models.UpdateOrderStatusRequest request, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| id |  ``` Required ```  | Order Id |
+| request |  ``` Required ```  | Update Order Model |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string id = "id";
+var request = new Models.UpdateOrderStatusRequest();
+string idempotencyKey = "idempotency-key";
+
+Models.GetOrderResponse result = await orders.UpdateOrderStatus(id, request, idempotencyKey);
 
 ```
 
@@ -1782,8 +1782,8 @@ Task<Models.ListPlansResponse> GetPlans(
 #### Example Usage
 
 ```csharp
-int? page = 77;
-int? size = 77;
+int? page = 144;
+int? size = 144;
 string name = "name";
 string status = "status";
 string billingType = "billing_type";
@@ -2053,8 +2053,8 @@ Task<Models.ListInvoicesResponse> GetInvoices(
 #### Example Usage
 
 ```csharp
-int? page = 36;
-int? size = 36;
+int? page = 186;
+int? size = 186;
 string code = "code";
 string customerId = "customer_id";
 string subscriptionId = "subscription_id";
@@ -2257,8 +2257,8 @@ Task<Models.ListAccessTokensResponse> GetAccessTokens(string customerId, int? pa
 
 ```csharp
 string customerId = "customer_id";
-int? page = 36;
-int? size = 36;
+int? page = 186;
+int? size = 186;
 
 Models.ListAccessTokensResponse result = await customers.GetAccessTokens(customerId, page, size);
 
@@ -2287,8 +2287,8 @@ Task<Models.ListAddressesResponse> GetAddresses(string customerId, int? page = n
 
 ```csharp
 string customerId = "customer_id";
-int? page = 36;
-int? size = 36;
+int? page = 186;
+int? size = 186;
 
 Models.ListAddressesResponse result = await customers.GetAddresses(customerId, page, size);
 
@@ -2317,8 +2317,8 @@ Task<Models.ListCardsResponse> GetCards(string customerId, int? page = null, int
 
 ```csharp
 string customerId = "customer_id";
-int? page = 36;
-int? size = 36;
+int? page = 186;
+int? size = 186;
 
 Models.ListCardsResponse result = await customers.GetCards(customerId, page, size);
 
@@ -2965,8 +2965,8 @@ Task<Models.ListChargesResponse> GetCharges(
 #### Example Usage
 
 ```csharp
-int? page = 36;
-int? size = 36;
+int? page = 186;
+int? size = 186;
 string code = "code";
 string status = "status";
 string paymentMethod = "payment_method";
@@ -3152,8 +3152,8 @@ Task<Models.ListChargeTransactionsResponse> GetChargeTransactions(string chargeI
 
 ```csharp
 string chargeId = "charge_id";
-int? page = 36;
-int? size = 36;
+int? page = 186;
+int? size = 186;
 
 Models.ListChargeTransactionsResponse result = await charges.GetChargeTransactions(chargeId, page, size);
 
@@ -3261,8 +3261,8 @@ Task<Models.ListTransferResponse> GetTransfers(
 
 ```csharp
 string recipientId = "recipient_id";
-int? page = 36;
-int? size = 36;
+int? page = 186;
+int? size = 186;
 string status = "status";
 DateTime? createdSince = DateTime.Now();
 DateTime? createdUntil = DateTime.Now();
@@ -3397,8 +3397,8 @@ Task<Models.ListAnticipationResponse> GetAnticipations(
 
 ```csharp
 string recipientId = "recipient_id";
-int? page = 36;
-int? size = 36;
+int? page = 186;
+int? size = 186;
 string status = "status";
 string timeframe = "timeframe";
 DateTime? paymentDateSince = DateTime.Now();
@@ -3517,8 +3517,8 @@ Task<Models.ListRecipientResponse> GetRecipients(int? page = null, int? size = n
 #### Example Usage
 
 ```csharp
-int? page = 36;
-int? size = 36;
+int? page = 186;
+int? size = 186;
 
 Models.ListRecipientResponse result = await recipients.GetRecipients(page, size);
 
@@ -3843,8 +3843,8 @@ Task<Models.ListSellerResponse> GetSellers(
 #### Example Usage
 
 ```csharp
-int? page = 36;
-int? size = 36;
+int? page = 186;
+int? size = 186;
 string name = "name";
 string document = "document";
 string code = "code";

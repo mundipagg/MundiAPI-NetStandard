@@ -12,14 +12,14 @@ namespace MundiAPI.Standard
     {
 
         /// <summary>
-        /// Singleton access to Orders controller
-        /// </summary>
-        IOrdersController Orders { get;}
-
-        /// <summary>
         /// Singleton access to Subscriptions controller
         /// </summary>
         ISubscriptionsController Subscriptions { get;}
+
+        /// <summary>
+        /// Singleton access to Orders controller
+        /// </summary>
+        IOrdersController Orders { get;}
 
         /// <summary>
         /// Singleton access to Plans controller
