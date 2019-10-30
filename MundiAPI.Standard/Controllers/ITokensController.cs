@@ -21,22 +21,6 @@ namespace MundiAPI.Standard.Controllers
     public partial interface ITokensController
     {
         /// <summary>
-        /// Gets a token from its id
-        /// </summary>
-        /// <param name="id">Required parameter: Token id</param>
-        /// <param name="publicKey">Required parameter: Public key</param>
-        /// <return>Returns the Models.GetTokenResponse response from the API call</return>
-        Models.GetTokenResponse GetToken(string id, string publicKey);
-
-        /// <summary>
-        /// Gets a token from its id
-        /// </summary>
-        /// <param name="id">Required parameter: Token id</param>
-        /// <param name="publicKey">Required parameter: Public key</param>
-        /// <return>Returns the Models.GetTokenResponse response from the API call</return>
-        Task<Models.GetTokenResponse> GetTokenAsync(string id, string publicKey);
-
-        /// <summary>
         /// TODO: type endpoint description here
         /// </summary>
         /// <param name="publicKey">Required parameter: Public key</param>
@@ -53,6 +37,22 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetTokenResponse response from the API call</return>
         Task<Models.GetTokenResponse> CreateTokenAsync(string publicKey, Models.CreateTokenRequest request, string idempotencyKey = null);
+
+        /// <summary>
+        /// Gets a token from its id
+        /// </summary>
+        /// <param name="id">Required parameter: Token id</param>
+        /// <param name="publicKey">Required parameter: Public key</param>
+        /// <return>Returns the Models.GetTokenResponse response from the API call</return>
+        Models.GetTokenResponse GetToken(string id, string publicKey);
+
+        /// <summary>
+        /// Gets a token from its id
+        /// </summary>
+        /// <param name="id">Required parameter: Token id</param>
+        /// <param name="publicKey">Required parameter: Public key</param>
+        /// <return>Returns the Models.GetTokenResponse response from the API call</return>
+        Task<Models.GetTokenResponse> GetTokenAsync(string id, string publicKey);
 
     }
 } 
