@@ -122,6 +122,17 @@ namespace MundiAPI.Standard
                 return TransactionsController.Instance;
             }
         }
+
+        /// <summary>
+        /// Singleton access to Transfers controller
+        /// </summary>
+        public ITransfersController Transfers
+        {
+            get
+            {
+                return TransfersController.Instance;
+            }
+        }
         /// <summary>
         /// The shared http client to use for all API calls
         /// </summary>

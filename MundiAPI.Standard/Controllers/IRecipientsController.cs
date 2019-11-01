@@ -322,5 +322,73 @@ namespace MundiAPI.Standard.Controllers
         /// <return>Returns the Models.GetAnticipationLimitResponse response from the API call</return>
         Task<Models.GetAnticipationLimitResponse> GetAnticipationLimitsAsync(string recipientId, string timeframe, DateTime paymentDate);
 
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Example: </param>
+        /// <param name="request">Required parameter: Example: </param>
+        /// <return>Returns the Models.GetWithdrawResponse response from the API call</return>
+        Models.GetWithdrawResponse CreateWithdraw(string recipientId, Models.CreateWithdrawRequest request);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Example: </param>
+        /// <param name="request">Required parameter: Example: </param>
+        /// <return>Returns the Models.GetWithdrawResponse response from the API call</return>
+        Task<Models.GetWithdrawResponse> CreateWithdrawAsync(string recipientId, Models.CreateWithdrawRequest request);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Example: </param>
+        /// <param name="withdrawalId">Required parameter: Example: </param>
+        /// <return>Returns the Models.GetWithdrawResponse response from the API call</return>
+        Models.GetWithdrawResponse GetWithdrawById(string recipientId, string withdrawalId);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Example: </param>
+        /// <param name="withdrawalId">Required parameter: Example: </param>
+        /// <return>Returns the Models.GetWithdrawResponse response from the API call</return>
+        Task<Models.GetWithdrawResponse> GetWithdrawByIdAsync(string recipientId, string withdrawalId);
+
+        /// <summary>
+        /// Gets a paginated list of transfers for the recipient
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Example: </param>
+        /// <param name="page">Optional parameter: Example: </param>
+        /// <param name="size">Optional parameter: Example: </param>
+        /// <param name="status">Optional parameter: Example: </param>
+        /// <param name="createdSince">Optional parameter: Example: </param>
+        /// <param name="createdUntil">Optional parameter: Example: </param>
+        /// <return>Returns the Models.ListWithdrawals response from the API call</return>
+        Models.ListWithdrawals GetWithdrawals(
+                string recipientId,
+                int? page = null,
+                int? size = null,
+                string status = null,
+                DateTime? createdSince = null,
+                DateTime? createdUntil = null);
+
+        /// <summary>
+        /// Gets a paginated list of transfers for the recipient
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Example: </param>
+        /// <param name="page">Optional parameter: Example: </param>
+        /// <param name="size">Optional parameter: Example: </param>
+        /// <param name="status">Optional parameter: Example: </param>
+        /// <param name="createdSince">Optional parameter: Example: </param>
+        /// <param name="createdUntil">Optional parameter: Example: </param>
+        /// <return>Returns the Models.ListWithdrawals response from the API call</return>
+        Task<Models.ListWithdrawals> GetWithdrawalsAsync(
+                string recipientId,
+                int? page = null,
+                int? size = null,
+                string status = null,
+                DateTime? createdSince = null,
+                DateTime? createdUntil = null);
+
     }
 } 
