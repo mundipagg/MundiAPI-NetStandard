@@ -92,7 +92,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.2" },
+                { "user-agent", "MundiSDK - DotNet 0.16.3" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -163,7 +163,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.2" },
+                { "user-agent", "MundiSDK - DotNet 0.16.3" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -233,7 +233,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.2" },
+                { "user-agent", "MundiSDK - DotNet 0.16.3" },
                 { "accept", "application/json" }
             };
 
@@ -298,7 +298,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.2" },
+                { "user-agent", "MundiSDK - DotNet 0.16.3" },
                 { "accept", "application/json" }
             };
 
@@ -360,7 +360,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.2" },
+                { "user-agent", "MundiSDK - DotNet 0.16.3" },
                 { "accept", "application/json" }
             };
 
@@ -469,7 +469,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.2" },
+                { "user-agent", "MundiSDK - DotNet 0.16.3" },
                 { "accept", "application/json" }
             };
 
@@ -535,7 +535,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.2" },
+                { "user-agent", "MundiSDK - DotNet 0.16.3" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -606,7 +606,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.2" },
+                { "user-agent", "MundiSDK - DotNet 0.16.3" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -673,7 +673,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.2" },
+                { "user-agent", "MundiSDK - DotNet 0.16.3" },
                 { "accept", "application/json" }
             };
 
@@ -738,7 +738,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.2" },
+                { "user-agent", "MundiSDK - DotNet 0.16.3" },
                 { "accept", "application/json" }
             };
 
@@ -832,7 +832,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.2" },
+                { "user-agent", "MundiSDK - DotNet 0.16.3" },
                 { "accept", "application/json" }
             };
 
@@ -898,7 +898,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.2" },
+                { "user-agent", "MundiSDK - DotNet 0.16.3" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -961,7 +961,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.2" },
+                { "user-agent", "MundiSDK - DotNet 0.16.3" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -1032,7 +1032,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.2" },
+                { "user-agent", "MundiSDK - DotNet 0.16.3" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -1110,7 +1110,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.2" },
+                { "user-agent", "MundiSDK - DotNet 0.16.3" },
                 { "accept", "application/json" }
             };
 
@@ -1126,6 +1126,233 @@ namespace MundiAPI.Standard.Controllers
             try
             {
                 return APIHelper.JsonDeserialize<Models.GetAnticipationLimitResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Example: </param>
+        /// <param name="request">Required parameter: Example: </param>
+        /// <return>Returns the Models.GetWithdrawResponse response from the API call</return>
+        public Models.GetWithdrawResponse CreateWithdraw(string recipientId, Models.CreateWithdrawRequest request)
+        {
+            Task<Models.GetWithdrawResponse> t = CreateWithdrawAsync(recipientId, request);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Example: </param>
+        /// <param name="request">Required parameter: Example: </param>
+        /// <return>Returns the Models.GetWithdrawResponse response from the API call</return>
+        public async Task<Models.GetWithdrawResponse> CreateWithdrawAsync(string recipientId, Models.CreateWithdrawRequest request)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/recipients/{recipient_id}/withdrawals");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "recipient_id", recipientId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 0.16.3" },
+                { "accept", "application/json" },
+                { "content-type", "application/json; charset=utf-8" }
+            };
+
+            //append body params
+            var _body = APIHelper.JsonSerialize(request);
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.GetWithdrawResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Example: </param>
+        /// <param name="withdrawalId">Required parameter: Example: </param>
+        /// <return>Returns the Models.GetWithdrawResponse response from the API call</return>
+        public Models.GetWithdrawResponse GetWithdrawById(string recipientId, string withdrawalId)
+        {
+            Task<Models.GetWithdrawResponse> t = GetWithdrawByIdAsync(recipientId, withdrawalId);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Example: </param>
+        /// <param name="withdrawalId">Required parameter: Example: </param>
+        /// <return>Returns the Models.GetWithdrawResponse response from the API call</return>
+        public async Task<Models.GetWithdrawResponse> GetWithdrawByIdAsync(string recipientId, string withdrawalId)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/recipients/{recipient_id}/withdrawals/{withdrawal_id}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "recipient_id", recipientId },
+                { "withdrawal_id", withdrawalId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 0.16.3" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.GetWithdrawResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Gets a paginated list of transfers for the recipient
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Example: </param>
+        /// <param name="page">Optional parameter: Example: </param>
+        /// <param name="size">Optional parameter: Example: </param>
+        /// <param name="status">Optional parameter: Example: </param>
+        /// <param name="createdSince">Optional parameter: Example: </param>
+        /// <param name="createdUntil">Optional parameter: Example: </param>
+        /// <return>Returns the Models.ListWithdrawals response from the API call</return>
+        public Models.ListWithdrawals GetWithdrawals(
+                string recipientId,
+                int? page = null,
+                int? size = null,
+                string status = null,
+                DateTime? createdSince = null,
+                DateTime? createdUntil = null)
+        {
+            Task<Models.ListWithdrawals> t = GetWithdrawalsAsync(recipientId, page, size, status, createdSince, createdUntil);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Gets a paginated list of transfers for the recipient
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Example: </param>
+        /// <param name="page">Optional parameter: Example: </param>
+        /// <param name="size">Optional parameter: Example: </param>
+        /// <param name="status">Optional parameter: Example: </param>
+        /// <param name="createdSince">Optional parameter: Example: </param>
+        /// <param name="createdUntil">Optional parameter: Example: </param>
+        /// <return>Returns the Models.ListWithdrawals response from the API call</return>
+        public async Task<Models.ListWithdrawals> GetWithdrawalsAsync(
+                string recipientId,
+                int? page = null,
+                int? size = null,
+                string status = null,
+                DateTime? createdSince = null,
+                DateTime? createdUntil = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/recipients/{recipient_id}/withdrawals");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "recipient_id", recipientId }
+            });
+
+            //process optional query parameters
+            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "page", page },
+                { "size", size },
+                { "status", status },
+                { "created_since", (createdSince.HasValue) ? createdSince.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") : null },
+                { "created_until", (createdUntil.HasValue) ? createdUntil.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") : null }
+            },ArrayDeserializationFormat,ParameterSeparator);
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 0.16.3" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.ListWithdrawals>(_response.Body);
             }
             catch (Exception _ex)
             {
