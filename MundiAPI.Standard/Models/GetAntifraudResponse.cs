@@ -25,6 +25,7 @@ namespace MundiAPI.Standard.Models
         private string returnCode;
         private string returnMessage;
         private string providerName;
+        private string score;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -91,6 +92,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.providerName = value;
                 onPropertyChanged("ProviderName");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("score")]
+        public string Score 
+        { 
+            get 
+            {
+                return this.score; 
+            } 
+            set 
+            {
+                this.score = value;
+                onPropertyChanged("Score");
             }
         }
     }
