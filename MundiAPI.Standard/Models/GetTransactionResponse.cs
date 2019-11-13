@@ -36,6 +36,7 @@ namespace MundiAPI.Standard.Models
         private string id;
         private Models.GetGatewayResponseResponse gatewayResponse;
         private Models.GetAntifraudResponse antifraudResponse;
+        private Dictionary<string, string> metadata;
 
         /// <summary>
         /// Gateway transaction id
@@ -275,6 +276,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.antifraudResponse = value;
                 onPropertyChanged("AntifraudResponse");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("metadata")]
+        public Dictionary<string, string> Metadata 
+        { 
+            get 
+            {
+                return this.metadata; 
+            } 
+            set 
+            {
+                this.metadata = value;
+                onPropertyChanged("Metadata");
             }
         }
     }

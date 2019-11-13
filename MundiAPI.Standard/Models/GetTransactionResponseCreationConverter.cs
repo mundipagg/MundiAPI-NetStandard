@@ -15,12 +15,12 @@ namespace MundiAPI.Standard.Models
             typeName = "transaction_type";
             dic = new System.Collections.Generic.Dictionary<string, System.Type>()
             {
-                { "bank_transfer",typeof(GetBankTransferTransactionResponse)},
-                { "debit_card",typeof(GetDebitCardTransactionResponse)},
                 { "voucher",typeof(GetVoucherTransactionResponse)},
-                { "boleto",typeof(GetBoletoTransactionResponse)},
-                { "cash",typeof(GetCashTransactionResponse)},
+                { "bank_transfer",typeof(GetBankTransferTransactionResponse)},
                 { "safetypay",typeof(GetSafetyPayTransactionResponse)},
+                { "boleto",typeof(GetBoletoTransactionResponse)},
+                { "debit_card",typeof(GetDebitCardTransactionResponse)},
+                { "cash",typeof(GetCashTransactionResponse)},
                 { "credit_card",typeof(GetCreditCardTransactionResponse)},
             };
         }
