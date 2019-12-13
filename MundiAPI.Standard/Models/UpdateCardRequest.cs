@@ -27,6 +27,7 @@ namespace MundiAPI.Standard.Models
         private string billingAddressId;
         private Models.CreateAddressRequest billingAddress;
         private Dictionary<string, string> metadata;
+        private string label;
 
         /// <summary>
         /// Holder name
@@ -127,6 +128,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.metadata = value;
                 onPropertyChanged("Metadata");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("label")]
+        public string Label 
+        { 
+            get 
+            {
+                return this.label; 
+            } 
+            set 
+            {
+                this.label = value;
+                onPropertyChanged("Label");
             }
         }
     }

@@ -34,6 +34,7 @@ namespace MundiAPI.Standard.Models
         private Models.CreateCardOptionsRequest options;
         private string holderDocument;
         private bool privateLabel;
+        private string label;
 
         /// <summary>
         /// Credit card number
@@ -253,6 +254,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.privateLabel = value;
                 onPropertyChanged("PrivateLabel");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("label")]
+        public string Label 
+        { 
+            get 
+            {
+                return this.label; 
+            } 
+            set 
+            {
+                this.label = value;
+                onPropertyChanged("Label");
             }
         }
     }

@@ -27,6 +27,7 @@ namespace MundiAPI.Standard.Models
         private int expYear;
         private string cvv;
         private string brand;
+        private string label;
 
         /// <summary>
         /// Credit card number
@@ -127,6 +128,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.brand = value;
                 onPropertyChanged("Brand");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("label")]
+        public string Label 
+        { 
+            get 
+            {
+                return this.label; 
+            } 
+            set 
+            {
+                this.label = value;
+                onPropertyChanged("Label");
             }
         }
     }

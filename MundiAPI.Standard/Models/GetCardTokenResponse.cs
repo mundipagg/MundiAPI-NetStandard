@@ -28,6 +28,7 @@ namespace MundiAPI.Standard.Models
         private string expYear;
         private string brand;
         private string type;
+        private string label;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -145,6 +146,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.type = value;
                 onPropertyChanged("Type");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("label")]
+        public string Label 
+        { 
+            get 
+            {
+                return this.label; 
+            } 
+            set 
+            {
+                this.label = value;
+                onPropertyChanged("Label");
             }
         }
     }
