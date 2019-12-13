@@ -37,6 +37,7 @@ namespace MundiAPI.Standard.Models
         private string holderDocument;
         private DateTime? deletedAt;
         private string firstSixDigits;
+        private string label;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -310,6 +311,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.firstSixDigits = value;
                 onPropertyChanged("FirstSixDigits");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("label")]
+        public string Label 
+        { 
+            get 
+            {
+                return this.label; 
+            } 
+            set 
+            {
+                this.label = value;
+                onPropertyChanged("Label");
             }
         }
     }

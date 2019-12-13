@@ -36,6 +36,7 @@ namespace MundiAPI.Standard.Models
         private Models.CreateCustomerRequest customer;
         private Dictionary<string, string> metadata;
         private Models.CreateCashPaymentRequest cash;
+        private Models.CreatePrivateLabelPaymentRequest privateLabel;
 
         /// <summary>
         /// Payment method
@@ -289,6 +290,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.cash = value;
                 onPropertyChanged("Cash");
+            }
+        }
+
+        /// <summary>
+        /// Settings for private label payment
+        /// </summary>
+        [JsonProperty("private_label")]
+        public Models.CreatePrivateLabelPaymentRequest PrivateLabel 
+        { 
+            get 
+            {
+                return this.privateLabel; 
+            } 
+            set 
+            {
+                this.privateLabel = value;
+                onPropertyChanged("PrivateLabel");
             }
         }
     }

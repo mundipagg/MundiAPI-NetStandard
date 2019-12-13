@@ -23,7 +23,7 @@ namespace MundiAPI.Standard.Models
         // These fields hold the values for the public properties.
         private bool updateSubscription;
         private string paymentMethod;
-        private Models.CreateCreditCardPaymentRequest creditCard;
+        private Models.CreatePrivateLabelPaymentRequest creditCard;
         private Models.CreateDebitCardPaymentRequest debitCard;
         private Models.CreateBoletoPaymentRequest boleto;
         private Models.CreateVoucherPaymentRequest voucher;
@@ -68,7 +68,7 @@ namespace MundiAPI.Standard.Models
         /// Credit card data
         /// </summary>
         [JsonProperty("credit_card")]
-        public Models.CreateCreditCardPaymentRequest CreditCard 
+        public Models.CreatePrivateLabelPaymentRequest CreditCard 
         { 
             get 
             {
