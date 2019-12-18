@@ -29,6 +29,7 @@ namespace MundiAPI.Standard.Models
         private Models.CreateVoucherPaymentRequest voucher;
         private Models.CreateCashPaymentRequest cash;
         private Models.CreateBankTransferPaymentRequest bankTransfer;
+        private Models.CreatePrivateLabelPaymentRequest privateLabel;
 
         /// <summary>
         /// Indicates if the payment method from the subscription must also be updated
@@ -163,6 +164,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.bankTransfer = value;
                 onPropertyChanged("BankTransfer");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("private_label")]
+        public Models.CreatePrivateLabelPaymentRequest PrivateLabel 
+        { 
+            get 
+            {
+                return this.privateLabel; 
+            } 
+            set 
+            {
+                this.privateLabel = value;
+                onPropertyChanged("PrivateLabel");
             }
         }
     }
