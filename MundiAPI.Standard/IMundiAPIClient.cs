@@ -12,6 +12,26 @@ namespace MundiAPI.Standard
     {
 
         /// <summary>
+        /// Singleton access to Subscriptions controller
+        /// </summary>
+        ISubscriptionsController Subscriptions { get;}
+
+        /// <summary>
+        /// Singleton access to Orders controller
+        /// </summary>
+        IOrdersController Orders { get;}
+
+        /// <summary>
+        /// Singleton access to Plans controller
+        /// </summary>
+        IPlansController Plans { get;}
+
+        /// <summary>
+        /// Singleton access to Invoices controller
+        /// </summary>
+        IInvoicesController Invoices { get;}
+
+        /// <summary>
         /// Singleton access to Customers controller
         /// </summary>
         ICustomersController Customers { get;}
@@ -27,34 +47,14 @@ namespace MundiAPI.Standard
         IRecipientsController Recipients { get;}
 
         /// <summary>
-        /// Singleton access to Subscriptions controller
-        /// </summary>
-        ISubscriptionsController Subscriptions { get;}
-
-        /// <summary>
-        /// Singleton access to Invoices controller
-        /// </summary>
-        IInvoicesController Invoices { get;}
-
-        /// <summary>
-        /// Singleton access to Orders controller
-        /// </summary>
-        IOrdersController Orders { get;}
-
-        /// <summary>
-        /// Singleton access to Sellers controller
-        /// </summary>
-        ISellersController Sellers { get;}
-
-        /// <summary>
         /// Singleton access to Tokens controller
         /// </summary>
         ITokensController Tokens { get;}
 
         /// <summary>
-        /// Singleton access to Plans controller
+        /// Singleton access to Sellers controller
         /// </summary>
-        IPlansController Plans { get;}
+        ISellersController Sellers { get;}
 
         /// <summary>
         /// Singleton access to Transactions controller
