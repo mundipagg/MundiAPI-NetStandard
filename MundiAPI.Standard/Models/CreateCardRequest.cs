@@ -35,6 +35,8 @@ namespace MundiAPI.Standard.Models
         private string holderDocument;
         private bool privateLabel;
         private string label;
+        private string id;
+        private string token;
 
         /// <summary>
         /// Credit card number
@@ -271,6 +273,40 @@ namespace MundiAPI.Standard.Models
             {
                 this.label = value;
                 onPropertyChanged("Label");
+            }
+        }
+
+        /// <summary>
+        /// Identifier
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id 
+        { 
+            get 
+            {
+                return this.id; 
+            } 
+            set 
+            {
+                this.id = value;
+                onPropertyChanged("Id");
+            }
+        }
+
+        /// <summary>
+        /// token identifier
+        /// </summary>
+        [JsonProperty("token")]
+        public string Token 
+        { 
+            get 
+            {
+                return this.token; 
+            } 
+            set 
+            {
+                this.token = value;
+                onPropertyChanged("Token");
             }
         }
     }

@@ -21,38 +21,6 @@ namespace MundiAPI.Standard.Controllers
     public partial interface IChargesController
     {
         /// <summary>
-        /// Get a charge from its id
-        /// </summary>
-        /// <param name="chargeId">Required parameter: Charge id</param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        Models.GetChargeResponse GetCharge(string chargeId);
-
-        /// <summary>
-        /// Get a charge from its id
-        /// </summary>
-        /// <param name="chargeId">Required parameter: Charge id</param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        Task<Models.GetChargeResponse> GetChargeAsync(string chargeId);
-
-        /// <summary>
-        /// TODO: type endpoint description here
-        /// </summary>
-        /// <param name="chargeId">Required parameter: Example: </param>
-        /// <param name="request">Optional parameter: Request for confirm payment</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        Models.GetChargeResponse ConfirmPayment(string chargeId, Models.CreateConfirmPaymentRequest request = null, string idempotencyKey = null);
-
-        /// <summary>
-        /// TODO: type endpoint description here
-        /// </summary>
-        /// <param name="chargeId">Required parameter: Example: </param>
-        /// <param name="request">Optional parameter: Request for confirm payment</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        Task<Models.GetChargeResponse> ConfirmPaymentAsync(string chargeId, Models.CreateConfirmPaymentRequest request = null, string idempotencyKey = null);
-
-        /// <summary>
         /// Updates the card from a charge
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
@@ -69,6 +37,70 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
         Task<Models.GetChargeResponse> UpdateChargeCardAsync(string chargeId, Models.UpdateChargeCardRequest request, string idempotencyKey = null);
+
+        /// <summary>
+        /// Updates a charge's payment method
+        /// </summary>
+        /// <param name="chargeId">Required parameter: Charge id</param>
+        /// <param name="request">Required parameter: Request for updating the payment method from a charge</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
+        Models.GetChargeResponse UpdateChargePaymentMethod(string chargeId, Models.UpdateChargePaymentMethodRequest request, string idempotencyKey = null);
+
+        /// <summary>
+        /// Updates a charge's payment method
+        /// </summary>
+        /// <param name="chargeId">Required parameter: Charge id</param>
+        /// <param name="request">Required parameter: Request for updating the payment method from a charge</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
+        Task<Models.GetChargeResponse> UpdateChargePaymentMethodAsync(string chargeId, Models.UpdateChargePaymentMethodRequest request, string idempotencyKey = null);
+
+        /// <summary>
+        /// Creates a new charge
+        /// </summary>
+        /// <param name="request">Required parameter: Request for creating a charge</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
+        Models.GetChargeResponse CreateCharge(Models.CreateChargeRequest request, string idempotencyKey = null);
+
+        /// <summary>
+        /// Creates a new charge
+        /// </summary>
+        /// <param name="request">Required parameter: Request for creating a charge</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
+        Task<Models.GetChargeResponse> CreateChargeAsync(Models.CreateChargeRequest request, string idempotencyKey = null);
+
+        /// <summary>
+        /// Get a charge from its id
+        /// </summary>
+        /// <param name="chargeId">Required parameter: Charge id</param>
+        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
+        Models.GetChargeResponse GetCharge(string chargeId);
+
+        /// <summary>
+        /// Get a charge from its id
+        /// </summary>
+        /// <param name="chargeId">Required parameter: Charge id</param>
+        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
+        Task<Models.GetChargeResponse> GetChargeAsync(string chargeId);
+
+        /// <summary>
+        /// Retries a charge
+        /// </summary>
+        /// <param name="chargeId">Required parameter: Charge id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
+        Models.GetChargeResponse RetryCharge(string chargeId, string idempotencyKey = null);
+
+        /// <summary>
+        /// Retries a charge
+        /// </summary>
+        /// <param name="chargeId">Required parameter: Charge id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
+        Task<Models.GetChargeResponse> RetryChargeAsync(string chargeId, string idempotencyKey = null);
 
         /// <summary>
         /// Lists all charges
@@ -119,58 +151,6 @@ namespace MundiAPI.Standard.Controllers
                 DateTime? createdUntil = null);
 
         /// <summary>
-        /// Cancel a charge
-        /// </summary>
-        /// <param name="chargeId">Required parameter: Charge id</param>
-        /// <param name="request">Optional parameter: Request for cancelling a charge</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        Models.GetChargeResponse CancelCharge(string chargeId, Models.CreateCancelChargeRequest request = null, string idempotencyKey = null);
-
-        /// <summary>
-        /// Cancel a charge
-        /// </summary>
-        /// <param name="chargeId">Required parameter: Charge id</param>
-        /// <param name="request">Optional parameter: Request for cancelling a charge</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        Task<Models.GetChargeResponse> CancelChargeAsync(string chargeId, Models.CreateCancelChargeRequest request = null, string idempotencyKey = null);
-
-        /// <summary>
-        /// Retries a charge
-        /// </summary>
-        /// <param name="chargeId">Required parameter: Charge id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        Models.GetChargeResponse RetryCharge(string chargeId, string idempotencyKey = null);
-
-        /// <summary>
-        /// Retries a charge
-        /// </summary>
-        /// <param name="chargeId">Required parameter: Charge id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        Task<Models.GetChargeResponse> RetryChargeAsync(string chargeId, string idempotencyKey = null);
-
-        /// <summary>
-        /// Updates a charge's payment method
-        /// </summary>
-        /// <param name="chargeId">Required parameter: Charge id</param>
-        /// <param name="request">Required parameter: Request for updating the payment method from a charge</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        Models.GetChargeResponse UpdateChargePaymentMethod(string chargeId, Models.UpdateChargePaymentMethodRequest request, string idempotencyKey = null);
-
-        /// <summary>
-        /// Updates a charge's payment method
-        /// </summary>
-        /// <param name="chargeId">Required parameter: Charge id</param>
-        /// <param name="request">Required parameter: Request for updating the payment method from a charge</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        Task<Models.GetChargeResponse> UpdateChargePaymentMethodAsync(string chargeId, Models.UpdateChargePaymentMethodRequest request, string idempotencyKey = null);
-
-        /// <summary>
         /// Updates the metadata from a charge
         /// </summary>
         /// <param name="chargeId">Required parameter: The charge id</param>
@@ -187,6 +167,24 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
         Task<Models.GetChargeResponse> UpdateChargeMetadataAsync(string chargeId, Models.UpdateMetadataRequest request, string idempotencyKey = null);
+
+        /// <summary>
+        /// Cancel a charge
+        /// </summary>
+        /// <param name="chargeId">Required parameter: Charge id</param>
+        /// <param name="request">Optional parameter: Request for cancelling a charge</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
+        Models.GetChargeResponse CancelCharge(string chargeId, Models.CreateCancelChargeRequest request = null, string idempotencyKey = null);
+
+        /// <summary>
+        /// Cancel a charge
+        /// </summary>
+        /// <param name="chargeId">Required parameter: Charge id</param>
+        /// <param name="request">Optional parameter: Request for cancelling a charge</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
+        Task<Models.GetChargeResponse> CancelChargeAsync(string chargeId, Models.CreateCancelChargeRequest request = null, string idempotencyKey = null);
 
         /// <summary>
         /// Captures a charge
@@ -225,20 +223,22 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.GetChargeResponse> UpdateChargeDueDateAsync(string chargeId, Models.UpdateChargeDueDateRequest request, string idempotencyKey = null);
 
         /// <summary>
-        /// Creates a new charge
+        /// TODO: type endpoint description here
         /// </summary>
-        /// <param name="request">Required parameter: Request for creating a charge</param>
+        /// <param name="chargeId">Required parameter: Example: </param>
+        /// <param name="request">Optional parameter: Request for confirm payment</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        Models.GetChargeResponse CreateCharge(Models.CreateChargeRequest request, string idempotencyKey = null);
+        Models.GetChargeResponse ConfirmPayment(string chargeId, Models.CreateConfirmPaymentRequest request = null, string idempotencyKey = null);
 
         /// <summary>
-        /// Creates a new charge
+        /// TODO: type endpoint description here
         /// </summary>
-        /// <param name="request">Required parameter: Request for creating a charge</param>
+        /// <param name="chargeId">Required parameter: Example: </param>
+        /// <param name="request">Optional parameter: Request for confirm payment</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        Task<Models.GetChargeResponse> CreateChargeAsync(Models.CreateChargeRequest request, string idempotencyKey = null);
+        Task<Models.GetChargeResponse> ConfirmPaymentAsync(string chargeId, Models.CreateConfirmPaymentRequest request = null, string idempotencyKey = null);
 
         /// <summary>
         /// TODO: type endpoint description here
