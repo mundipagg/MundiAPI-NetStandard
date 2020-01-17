@@ -22,6 +22,8 @@ namespace MundiAPI.Standard.Models
     {
         // These fields hold the values for the public properties.
         private string url;
+        private string usageReportUrl;
+        private string groupedReportUrl;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -37,6 +39,40 @@ namespace MundiAPI.Standard.Models
             {
                 this.url = value;
                 onPropertyChanged("Url");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("usage_report_url")]
+        public string UsageReportUrl 
+        { 
+            get 
+            {
+                return this.usageReportUrl; 
+            } 
+            set 
+            {
+                this.usageReportUrl = value;
+                onPropertyChanged("UsageReportUrl");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("grouped_report_url")]
+        public string GroupedReportUrl 
+        { 
+            get 
+            {
+                return this.groupedReportUrl; 
+            } 
+            set 
+            {
+                this.groupedReportUrl = value;
+                onPropertyChanged("GroupedReportUrl");
             }
         }
     }
