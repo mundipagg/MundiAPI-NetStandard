@@ -21,14 +21,14 @@ namespace MundiAPI.Standard.Models
     public class ListCyclesResponse : BaseModel 
     {
         // These fields hold the values for the public properties.
-        private Models.GetPeriodResponse data;
+        private List<Models.GetPeriodResponse> data;
         private Models.PagingResponse paging;
 
         /// <summary>
         /// The subscription cycles objects
         /// </summary>
         [JsonProperty("data")]
-        public Models.GetPeriodResponse Data 
+        public List<Models.GetPeriodResponse> Data 
         { 
             get 
             {
