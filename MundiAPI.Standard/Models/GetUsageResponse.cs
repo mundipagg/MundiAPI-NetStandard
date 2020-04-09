@@ -31,6 +31,7 @@ namespace MundiAPI.Standard.Models
         private Models.GetSubscriptionItemResponse subscriptionItem;
         private string code;
         private string mgroup;
+        private int? amount;
 
         /// <summary>
         /// Id
@@ -202,6 +203,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.mgroup = value;
                 onPropertyChanged("Group");
+            }
+        }
+
+        /// <summary>
+        /// Identification amount in the client system
+        /// </summary>
+        [JsonProperty("amount")]
+        public int? Amount
+        {
+            get
+            {
+                return this.amount;
+            }
+            set
+            {
+                this.amount = value;
+                onPropertyChanged("Amount");
             }
         }
     }
