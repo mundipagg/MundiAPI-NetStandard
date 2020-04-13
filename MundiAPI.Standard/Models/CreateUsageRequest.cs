@@ -26,6 +26,7 @@ namespace MundiAPI.Standard.Models
         private DateTime usedAt;
         private string code;
         private string mgroup;
+        private int? amount;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -110,6 +111,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.mgroup = value;
                 onPropertyChanged("Group");
+            }
+        }
+
+        /// <summary>
+        /// Field used in item scheme type 'Percent'
+        /// </summary>
+        [JsonProperty("amount")]
+        public int? Amount 
+        { 
+            get 
+            {
+                return this.amount; 
+            } 
+            set 
+            {
+                this.amount = value;
+                onPropertyChanged("Amount");
             }
         }
     }

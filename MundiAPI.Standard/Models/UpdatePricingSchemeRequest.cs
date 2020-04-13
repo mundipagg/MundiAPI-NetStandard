@@ -25,6 +25,7 @@ namespace MundiAPI.Standard.Models
         private List<Models.UpdatePriceBracketRequest> priceBrackets;
         private int? price;
         private int? minimumPrice;
+        private double? percentage;
 
         /// <summary>
         /// Scheme type
@@ -91,6 +92,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.minimumPrice = value;
                 onPropertyChanged("MinimumPrice");
+            }
+        }
+
+        /// <summary>
+        /// percentual value used in pricing_scheme Percent
+        /// </summary>
+        [JsonProperty("percentage")]
+        public double? Percentage 
+        { 
+            get 
+            {
+                return this.percentage; 
+            } 
+            set 
+            {
+                this.percentage = value;
+                onPropertyChanged("Percentage");
             }
         }
     }
