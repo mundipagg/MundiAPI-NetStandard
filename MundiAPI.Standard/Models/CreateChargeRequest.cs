@@ -29,6 +29,7 @@ namespace MundiAPI.Standard.Models
         private Dictionary<string, string> metadata;
         private DateTime? dueAt;
         private Models.CreateAntifraudRequest antifraud;
+        private string orderId;
 
         /// <summary>
         /// Code
@@ -164,6 +165,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.antifraud = value;
                 onPropertyChanged("Antifraud");
+            }
+        }
+
+        /// <summary>
+        /// Order Id
+        /// </summary>
+        [JsonProperty("order_id")]
+        public string OrderId 
+        { 
+            get 
+            {
+                return this.orderId; 
+            } 
+            set 
+            {
+                this.orderId = value;
+                onPropertyChanged("OrderId");
             }
         }
     }
