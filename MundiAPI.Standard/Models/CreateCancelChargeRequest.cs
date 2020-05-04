@@ -23,6 +23,8 @@ namespace MundiAPI.Standard.Models
         // These fields hold the values for the public properties.
         private int? amount;
         private List<Models.CreateCancelChargeSplitRulesRequest> splitRules;
+        private List<Models.CreateSplitRequest> split;
+        private string operationReference;
 
         /// <summary>
         /// The amount that will be canceled.
@@ -55,6 +57,40 @@ namespace MundiAPI.Standard.Models
             {
                 this.splitRules = value;
                 onPropertyChanged("SplitRules");
+            }
+        }
+
+        /// <summary>
+        /// Splits
+        /// </summary>
+        [JsonProperty("split")]
+        public List<Models.CreateSplitRequest> Split 
+        { 
+            get 
+            {
+                return this.split; 
+            } 
+            set 
+            {
+                this.split = value;
+                onPropertyChanged("Split");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("operation_reference")]
+        public string OperationReference 
+        { 
+            get 
+            {
+                return this.operationReference; 
+            } 
+            set 
+            {
+                this.operationReference = value;
+                onPropertyChanged("OperationReference");
             }
         }
     }
