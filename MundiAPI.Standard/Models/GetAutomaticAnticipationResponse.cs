@@ -18,17 +18,34 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class GetSplitResponse : BaseModel 
+    public class GetAutomaticAnticipationResponse : BaseModel 
     {
         // These fields hold the values for the public properties.
+        private bool enabled;
         private string type;
-        private int amount;
-        private Models.GetRecipientResponse recipient;
-        private string gatewayId;
-        private Models.GetSplitOptionsResponse options;
+        private int volumePercentage;
+        private int delay;
+        private List<int> days;
 
         /// <summary>
-        /// Type
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("enabled")]
+        public bool Enabled 
+        { 
+            get 
+            {
+                return this.enabled; 
+            } 
+            set 
+            {
+                this.enabled = value;
+                onPropertyChanged("Enabled");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("type")]
         public string Type 
@@ -45,70 +62,53 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Amount
+        /// TODO: Write general description for this method
         /// </summary>
-        [JsonProperty("amount")]
-        public int Amount 
+        [JsonProperty("volume_percentage")]
+        public int VolumePercentage 
         { 
             get 
             {
-                return this.amount; 
+                return this.volumePercentage; 
             } 
             set 
             {
-                this.amount = value;
-                onPropertyChanged("Amount");
-            }
-        }
-
-        /// <summary>
-        /// Recipient
-        /// </summary>
-        [JsonProperty("recipient")]
-        public Models.GetRecipientResponse Recipient 
-        { 
-            get 
-            {
-                return this.recipient; 
-            } 
-            set 
-            {
-                this.recipient = value;
-                onPropertyChanged("Recipient");
-            }
-        }
-
-        /// <summary>
-        /// The split rule gateway id
-        /// </summary>
-        [JsonProperty("gateway_id")]
-        public string GatewayId 
-        { 
-            get 
-            {
-                return this.gatewayId; 
-            } 
-            set 
-            {
-                this.gatewayId = value;
-                onPropertyChanged("GatewayId");
+                this.volumePercentage = value;
+                onPropertyChanged("VolumePercentage");
             }
         }
 
         /// <summary>
         /// TODO: Write general description for this method
         /// </summary>
-        [JsonProperty("options")]
-        public Models.GetSplitOptionsResponse Options 
+        [JsonProperty("delay")]
+        public int Delay 
         { 
             get 
             {
-                return this.options; 
+                return this.delay; 
             } 
             set 
             {
-                this.options = value;
-                onPropertyChanged("Options");
+                this.delay = value;
+                onPropertyChanged("Delay");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("days")]
+        public List<int> Days 
+        { 
+            get 
+            {
+                return this.days; 
+            } 
+            set 
+            {
+                this.days = value;
+                onPropertyChanged("Days");
             }
         }
     }

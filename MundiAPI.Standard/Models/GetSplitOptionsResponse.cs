@@ -18,18 +18,18 @@ using MundiAPI.Standard.Utilities;
 
 namespace MundiAPI.Standard.Models
 {
-    public class CreateSplitOptionsRequest : BaseModel 
+    public class GetSplitOptionsResponse : BaseModel 
     {
         // These fields hold the values for the public properties.
-        private bool? liable;
-        private bool? chargeProcessingFee;
-        private bool? chargeRemainderFee;
+        private bool liable;
+        private bool chargeProcessingFee;
+        private string chargeRemainderFee;
 
         /// <summary>
-        /// Liable options
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("liable")]
-        public bool? Liable 
+        public bool Liable 
         { 
             get 
             {
@@ -43,10 +43,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Charge processing fee
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("charge_processing_fee")]
-        public bool? ChargeProcessingFee 
+        public bool ChargeProcessingFee 
         { 
             get 
             {
@@ -63,7 +63,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("charge_remainder_fee")]
-        public bool? ChargeRemainderFee 
+        public string ChargeRemainderFee 
         { 
             get 
             {
