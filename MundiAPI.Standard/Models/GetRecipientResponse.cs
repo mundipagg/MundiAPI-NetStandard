@@ -34,6 +34,7 @@ namespace MundiAPI.Standard.Models
         private Models.GetBankAccountResponse defaultBankAccount;
         private List<Models.GetGatewayRecipientResponse> gatewayRecipients;
         private Dictionary<string, string> metadata;
+        private Models.GetAutomaticAnticipationResponse automaticAnticipationSettings;
 
         /// <summary>
         /// Id
@@ -256,6 +257,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.metadata = value;
                 onPropertyChanged("Metadata");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("automatic_anticipation_settings")]
+        public Models.GetAutomaticAnticipationResponse AutomaticAnticipationSettings 
+        { 
+            get 
+            {
+                return this.automaticAnticipationSettings; 
+            } 
+            set 
+            {
+                this.automaticAnticipationSettings = value;
+                onPropertyChanged("AutomaticAnticipationSettings");
             }
         }
     }

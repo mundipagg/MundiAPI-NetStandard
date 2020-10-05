@@ -37,6 +37,7 @@ namespace MundiAPI.Standard.Models
         private Models.GetGatewayResponseResponse gatewayResponse;
         private Models.GetAntifraudResponse antifraudResponse;
         private Dictionary<string, string> metadata;
+        private List<Models.GetSplitResponse> split;
 
         /// <summary>
         /// Gateway transaction id
@@ -293,6 +294,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.metadata = value;
                 onPropertyChanged("Metadata");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("split")]
+        public List<Models.GetSplitResponse> Split 
+        { 
+            get 
+            {
+                return this.split; 
+            } 
+            set 
+            {
+                this.split = value;
+                onPropertyChanged("Split");
             }
         }
     }
