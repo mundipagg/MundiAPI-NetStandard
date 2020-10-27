@@ -51,6 +51,7 @@ namespace MundiAPI.Standard.Models
         private int? boletoDueDays;
         private List<Models.CreateIncrementRequest> increments;
         private Models.CreatePeriodRequest period;
+        private Models.CreateSubMerchantRequest submerchant;
 
         /// <summary>
         /// Customer
@@ -560,6 +561,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.period = value;
                 onPropertyChanged("Period");
+            }
+        }
+
+        /// <summary>
+        /// SubMerchant
+        /// </summary>
+        [JsonProperty("submerchant")]
+        public Models.CreateSubMerchantRequest Submerchant 
+        { 
+            get 
+            {
+                return this.submerchant; 
+            } 
+            set 
+            {
+                this.submerchant = value;
+                onPropertyChanged("Submerchant");
             }
         }
     }
