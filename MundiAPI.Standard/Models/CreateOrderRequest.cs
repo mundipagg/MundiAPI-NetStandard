@@ -36,6 +36,7 @@ namespace MundiAPI.Standard.Models
         private bool closed = true;
         private string currency;
         private Models.CreateAntifraudRequest antifraud;
+        private Models.CreateSubMerchantRequest submerchant;
 
         /// <summary>
         /// Items
@@ -289,6 +290,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.antifraud = value;
                 onPropertyChanged("Antifraud");
+            }
+        }
+
+        /// <summary>
+        /// SubMerchant
+        /// </summary>
+        [JsonProperty("submerchant")]
+        public Models.CreateSubMerchantRequest Submerchant 
+        { 
+            get 
+            {
+                return this.submerchant; 
+            } 
+            set 
+            {
+                this.submerchant = value;
+                onPropertyChanged("Submerchant");
             }
         }
     }
