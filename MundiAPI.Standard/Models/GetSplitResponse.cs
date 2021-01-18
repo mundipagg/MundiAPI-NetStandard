@@ -26,6 +26,7 @@ namespace MundiAPI.Standard.Models
         private Models.GetRecipientResponse recipient;
         private string gatewayId;
         private Models.GetSplitOptionsResponse options;
+        private string id;
 
         /// <summary>
         /// Type
@@ -109,6 +110,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.options = value;
                 onPropertyChanged("Options");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id 
+        { 
+            get 
+            {
+                return this.id; 
+            } 
+            set 
+            {
+                this.id = value;
+                onPropertyChanged("Id");
             }
         }
     }
