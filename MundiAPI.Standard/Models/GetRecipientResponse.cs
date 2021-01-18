@@ -35,6 +35,7 @@ namespace MundiAPI.Standard.Models
         private List<Models.GetGatewayRecipientResponse> gatewayRecipients;
         private Dictionary<string, string> metadata;
         private Models.GetAutomaticAnticipationResponse automaticAnticipationSettings;
+        private Models.GetTransferSettingsResponse transferSettings;
 
         /// <summary>
         /// Id
@@ -274,6 +275,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.automaticAnticipationSettings = value;
                 onPropertyChanged("AutomaticAnticipationSettings");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("transfer_settings")]
+        public Models.GetTransferSettingsResponse TransferSettings 
+        { 
+            get 
+            {
+                return this.transferSettings; 
+            } 
+            set 
+            {
+                this.transferSettings = value;
+                onPropertyChanged("TransferSettings");
             }
         }
     }
