@@ -30,6 +30,7 @@ namespace MundiAPI.Standard.Models
         private Models.CreatePhonesRequest phones;
         private string code;
         private string gender;
+        private string documentType;
 
         /// <summary>
         /// Name
@@ -181,6 +182,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.gender = value;
                 onPropertyChanged("Gender");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("document_type")]
+        public string DocumentType 
+        { 
+            get 
+            {
+                return this.documentType; 
+            } 
+            set 
+            {
+                this.documentType = value;
+                onPropertyChanged("DocumentType");
             }
         }
     }
