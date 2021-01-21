@@ -35,6 +35,7 @@ namespace MundiAPI.Standard.Models
         private Models.GetPhonesResponse phones;
         private long? fbId;
         private string code;
+        private string documentType;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -273,6 +274,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.code = value;
                 onPropertyChanged("Code");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("document_type")]
+        public string DocumentType 
+        { 
+            get 
+            {
+                return this.documentType; 
+            } 
+            set 
+            {
+                this.documentType = value;
+                onPropertyChanged("DocumentType");
             }
         }
     }
