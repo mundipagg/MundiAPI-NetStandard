@@ -24,7 +24,7 @@ namespace MundiAPI.Standard.Models
         private int amount;
         private string sourceId;
         private string targetId;
-        private List<string> metadata;
+        private Dictionary<string, string> metadata;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -81,7 +81,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("metadata")]
-        public List<string> Metadata 
+        public Dictionary<string, string> Metadata 
         { 
             get 
             {

@@ -50,133 +50,6 @@ namespace MundiAPI.Standard.Controllers
         #endregion Singleton Pattern
 
         /// <summary>
-        /// Cancels an invoice
-        /// </summary>
-        /// <param name="invoiceId">Required parameter: Invoice id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        public Models.GetInvoiceResponse CancelInvoice(string invoiceId, string idempotencyKey = null)
-        {
-            Task<Models.GetInvoiceResponse> t = CancelInvoiceAsync(invoiceId, idempotencyKey);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Cancels an invoice
-        /// </summary>
-        /// <param name="invoiceId">Required parameter: Invoice id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        public async Task<Models.GetInvoiceResponse> CancelInvoiceAsync(string invoiceId, string idempotencyKey = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/invoices/{invoice_id}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "invoice_id", invoiceId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
-                { "accept", "application/json" },
-                { "idempotency-key", idempotencyKey }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Delete(_queryUrl, _headers, null, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetInvoiceResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Gets an invoice
-        /// </summary>
-        /// <param name="invoiceId">Required parameter: Invoice Id</param>
-        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        public Models.GetInvoiceResponse GetInvoice(string invoiceId)
-        {
-            Task<Models.GetInvoiceResponse> t = GetInvoiceAsync(invoiceId);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Gets an invoice
-        /// </summary>
-        /// <param name="invoiceId">Required parameter: Invoice Id</param>
-        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        public async Task<Models.GetInvoiceResponse> GetInvoiceAsync(string invoiceId)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/invoices/{invoice_id}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "invoice_id", invoiceId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
-                { "accept", "application/json" }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetInvoiceResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
         /// Create an Invoice
         /// </summary>
         /// <param name="subscriptionId">Required parameter: Subscription Id</param>
@@ -230,7 +103,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -241,6 +114,68 @@ namespace MundiAPI.Standard.Controllers
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.GetInvoiceResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        public Models.GetInvoiceResponse GetPartialInvoice(string subscriptionId)
+        {
+            Task<Models.GetInvoiceResponse> t = GetPartialInvoiceAsync(subscriptionId);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        public async Task<Models.GetInvoiceResponse> GetPartialInvoiceAsync(string subscriptionId)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/subscriptions/{subscription_id}/partial-invoice");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "subscription_id", subscriptionId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
 
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
@@ -301,7 +236,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -330,83 +265,36 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// Gets all invoices
+        /// Gets an invoice
         /// </summary>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <param name="code">Optional parameter: Filter for Invoice's code</param>
-        /// <param name="customerId">Optional parameter: Filter for Invoice's customer id</param>
-        /// <param name="subscriptionId">Optional parameter: Filter for Invoice's subscription id</param>
-        /// <param name="createdSince">Optional parameter: Filter for Invoice's creation date start range</param>
-        /// <param name="createdUntil">Optional parameter: Filter for Invoices creation date end range</param>
-        /// <param name="status">Optional parameter: Filter for Invoice's status</param>
-        /// <param name="dueSince">Optional parameter: Filter for Invoice's due date start range</param>
-        /// <param name="dueUntil">Optional parameter: Filter for Invoice's due date end range</param>
-        /// <return>Returns the Models.ListInvoicesResponse response from the API call</return>
-        public Models.ListInvoicesResponse GetInvoices(
-                int? page = null,
-                int? size = null,
-                string code = null,
-                string customerId = null,
-                string subscriptionId = null,
-                DateTime? createdSince = null,
-                DateTime? createdUntil = null,
-                string status = null,
-                DateTime? dueSince = null,
-                DateTime? dueUntil = null)
+        /// <param name="invoiceId">Required parameter: Invoice Id</param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        public Models.GetInvoiceResponse GetInvoice(string invoiceId)
         {
-            Task<Models.ListInvoicesResponse> t = GetInvoicesAsync(page, size, code, customerId, subscriptionId, createdSince, createdUntil, status, dueSince, dueUntil);
+            Task<Models.GetInvoiceResponse> t = GetInvoiceAsync(invoiceId);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Gets all invoices
+        /// Gets an invoice
         /// </summary>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <param name="code">Optional parameter: Filter for Invoice's code</param>
-        /// <param name="customerId">Optional parameter: Filter for Invoice's customer id</param>
-        /// <param name="subscriptionId">Optional parameter: Filter for Invoice's subscription id</param>
-        /// <param name="createdSince">Optional parameter: Filter for Invoice's creation date start range</param>
-        /// <param name="createdUntil">Optional parameter: Filter for Invoices creation date end range</param>
-        /// <param name="status">Optional parameter: Filter for Invoice's status</param>
-        /// <param name="dueSince">Optional parameter: Filter for Invoice's due date start range</param>
-        /// <param name="dueUntil">Optional parameter: Filter for Invoice's due date end range</param>
-        /// <return>Returns the Models.ListInvoicesResponse response from the API call</return>
-        public async Task<Models.ListInvoicesResponse> GetInvoicesAsync(
-                int? page = null,
-                int? size = null,
-                string code = null,
-                string customerId = null,
-                string subscriptionId = null,
-                DateTime? createdSince = null,
-                DateTime? createdUntil = null,
-                string status = null,
-                DateTime? dueSince = null,
-                DateTime? dueUntil = null)
+        /// <param name="invoiceId">Required parameter: Invoice Id</param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        public async Task<Models.GetInvoiceResponse> GetInvoiceAsync(string invoiceId)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/invoices");
+            _queryBuilder.Append("/invoices/{invoice_id}");
 
-            //process optional query parameters
-            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
             {
-                { "page", page },
-                { "size", size },
-                { "code", code },
-                { "customer_id", customerId },
-                { "subscription_id", subscriptionId },
-                { "created_since", (createdSince.HasValue) ? createdSince.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") : null },
-                { "created_until", (createdUntil.HasValue) ? createdUntil.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") : null },
-                { "status", status },
-                { "due_since", (dueSince.HasValue) ? dueSince.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") : null },
-                { "due_until", (dueUntil.HasValue) ? dueUntil.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") : null }
-            },ArrayDeserializationFormat,ParameterSeparator);
+                { "invoice_id", invoiceId }
+            });
 
 
             //validate and preprocess url
@@ -415,7 +303,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" }
             };
 
@@ -430,7 +318,7 @@ namespace MundiAPI.Standard.Controllers
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.ListInvoicesResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.GetInvoiceResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -481,7 +369,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -510,35 +398,37 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// TODO: type endpoint description here
+        /// Cancels an invoice
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <param name="invoiceId">Required parameter: Invoice id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        public Models.GetInvoiceResponse GetPartialInvoice(string subscriptionId)
+        public Models.GetInvoiceResponse CancelInvoice(string invoiceId, string idempotencyKey = null)
         {
-            Task<Models.GetInvoiceResponse> t = GetPartialInvoiceAsync(subscriptionId);
+            Task<Models.GetInvoiceResponse> t = CancelInvoiceAsync(invoiceId, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// TODO: type endpoint description here
+        /// Cancels an invoice
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <param name="invoiceId">Required parameter: Invoice id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        public async Task<Models.GetInvoiceResponse> GetPartialInvoiceAsync(string subscriptionId)
+        public async Task<Models.GetInvoiceResponse> CancelInvoiceAsync(string invoiceId, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/subscriptions/{subscription_id}/partial-invoice");
+            _queryBuilder.Append("/invoices/{invoice_id}");
 
             //process optional template parameters
             APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
             {
-                { "subscription_id", subscriptionId }
+                { "invoice_id", invoiceId }
             });
 
 
@@ -548,7 +438,122 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
+                { "accept", "application/json" },
+                { "idempotency-key", idempotencyKey }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Delete(_queryUrl, _headers, null, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.GetInvoiceResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Gets all invoices
+        /// </summary>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="code">Optional parameter: Filter for Invoice's code</param>
+        /// <param name="customerId">Optional parameter: Filter for Invoice's customer id</param>
+        /// <param name="subscriptionId">Optional parameter: Filter for Invoice's subscription id</param>
+        /// <param name="createdSince">Optional parameter: Filter for Invoice's creation date start range</param>
+        /// <param name="createdUntil">Optional parameter: Filter for Invoices creation date end range</param>
+        /// <param name="status">Optional parameter: Filter for Invoice's status</param>
+        /// <param name="dueSince">Optional parameter: Filter for Invoice's due date start range</param>
+        /// <param name="dueUntil">Optional parameter: Filter for Invoice's due date end range</param>
+        /// <param name="document">Optional parameter: Fillter for invoice's document</param>
+        /// <return>Returns the Models.ListInvoicesResponse response from the API call</return>
+        public Models.ListInvoicesResponse GetInvoices(
+                int? page = null,
+                int? size = null,
+                string code = null,
+                string customerId = null,
+                string subscriptionId = null,
+                DateTime? createdSince = null,
+                DateTime? createdUntil = null,
+                string status = null,
+                DateTime? dueSince = null,
+                DateTime? dueUntil = null,
+                string document = null)
+        {
+            Task<Models.ListInvoicesResponse> t = GetInvoicesAsync(page, size, code, customerId, subscriptionId, createdSince, createdUntil, status, dueSince, dueUntil, document);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Gets all invoices
+        /// </summary>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="code">Optional parameter: Filter for Invoice's code</param>
+        /// <param name="customerId">Optional parameter: Filter for Invoice's customer id</param>
+        /// <param name="subscriptionId">Optional parameter: Filter for Invoice's subscription id</param>
+        /// <param name="createdSince">Optional parameter: Filter for Invoice's creation date start range</param>
+        /// <param name="createdUntil">Optional parameter: Filter for Invoices creation date end range</param>
+        /// <param name="status">Optional parameter: Filter for Invoice's status</param>
+        /// <param name="dueSince">Optional parameter: Filter for Invoice's due date start range</param>
+        /// <param name="dueUntil">Optional parameter: Filter for Invoice's due date end range</param>
+        /// <param name="document">Optional parameter: Fillter for invoice's document</param>
+        /// <return>Returns the Models.ListInvoicesResponse response from the API call</return>
+        public async Task<Models.ListInvoicesResponse> GetInvoicesAsync(
+                int? page = null,
+                int? size = null,
+                string code = null,
+                string customerId = null,
+                string subscriptionId = null,
+                DateTime? createdSince = null,
+                DateTime? createdUntil = null,
+                string status = null,
+                DateTime? dueSince = null,
+                DateTime? dueUntil = null,
+                string document = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/invoices");
+
+            //process optional query parameters
+            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "page", page },
+                { "size", size },
+                { "code", code },
+                { "customer_id", customerId },
+                { "subscription_id", subscriptionId },
+                { "created_since", (createdSince.HasValue) ? createdSince.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") : null },
+                { "created_until", (createdUntil.HasValue) ? createdUntil.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") : null },
+                { "status", status },
+                { "due_since", (dueSince.HasValue) ? dueSince.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") : null },
+                { "due_until", (dueUntil.HasValue) ? dueUntil.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") : null },
+                { "document", document }
+            },ArrayDeserializationFormat,ParameterSeparator);
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" }
             };
 
@@ -563,7 +568,7 @@ namespace MundiAPI.Standard.Controllers
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetInvoiceResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.ListInvoicesResponse>(_response.Body);
             }
             catch (Exception _ex)
             {

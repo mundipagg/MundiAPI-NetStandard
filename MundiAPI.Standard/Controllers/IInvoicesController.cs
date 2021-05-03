@@ -21,36 +21,6 @@ namespace MundiAPI.Standard.Controllers
     public partial interface IInvoicesController
     {
         /// <summary>
-        /// Cancels an invoice
-        /// </summary>
-        /// <param name="invoiceId">Required parameter: Invoice id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Models.GetInvoiceResponse CancelInvoice(string invoiceId, string idempotencyKey = null);
-
-        /// <summary>
-        /// Cancels an invoice
-        /// </summary>
-        /// <param name="invoiceId">Required parameter: Invoice id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Task<Models.GetInvoiceResponse> CancelInvoiceAsync(string invoiceId, string idempotencyKey = null);
-
-        /// <summary>
-        /// Gets an invoice
-        /// </summary>
-        /// <param name="invoiceId">Required parameter: Invoice Id</param>
-        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Models.GetInvoiceResponse GetInvoice(string invoiceId);
-
-        /// <summary>
-        /// Gets an invoice
-        /// </summary>
-        /// <param name="invoiceId">Required parameter: Invoice Id</param>
-        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Task<Models.GetInvoiceResponse> GetInvoiceAsync(string invoiceId);
-
-        /// <summary>
         /// Create an Invoice
         /// </summary>
         /// <param name="subscriptionId">Required parameter: Subscription Id</param>
@@ -79,6 +49,20 @@ namespace MundiAPI.Standard.Controllers
                 string idempotencyKey = null);
 
         /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        Models.GetInvoiceResponse GetPartialInvoice(string subscriptionId);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        Task<Models.GetInvoiceResponse> GetPartialInvoiceAsync(string subscriptionId);
+
+        /// <summary>
         /// Updates the status from an invoice
         /// </summary>
         /// <param name="invoiceId">Required parameter: Invoice Id</param>
@@ -97,56 +81,18 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.GetInvoiceResponse> UpdateInvoiceStatusAsync(string invoiceId, Models.UpdateInvoiceStatusRequest request, string idempotencyKey = null);
 
         /// <summary>
-        /// Gets all invoices
+        /// Gets an invoice
         /// </summary>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <param name="code">Optional parameter: Filter for Invoice's code</param>
-        /// <param name="customerId">Optional parameter: Filter for Invoice's customer id</param>
-        /// <param name="subscriptionId">Optional parameter: Filter for Invoice's subscription id</param>
-        /// <param name="createdSince">Optional parameter: Filter for Invoice's creation date start range</param>
-        /// <param name="createdUntil">Optional parameter: Filter for Invoices creation date end range</param>
-        /// <param name="status">Optional parameter: Filter for Invoice's status</param>
-        /// <param name="dueSince">Optional parameter: Filter for Invoice's due date start range</param>
-        /// <param name="dueUntil">Optional parameter: Filter for Invoice's due date end range</param>
-        /// <return>Returns the Models.ListInvoicesResponse response from the API call</return>
-        Models.ListInvoicesResponse GetInvoices(
-                int? page = null,
-                int? size = null,
-                string code = null,
-                string customerId = null,
-                string subscriptionId = null,
-                DateTime? createdSince = null,
-                DateTime? createdUntil = null,
-                string status = null,
-                DateTime? dueSince = null,
-                DateTime? dueUntil = null);
+        /// <param name="invoiceId">Required parameter: Invoice Id</param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        Models.GetInvoiceResponse GetInvoice(string invoiceId);
 
         /// <summary>
-        /// Gets all invoices
+        /// Gets an invoice
         /// </summary>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <param name="code">Optional parameter: Filter for Invoice's code</param>
-        /// <param name="customerId">Optional parameter: Filter for Invoice's customer id</param>
-        /// <param name="subscriptionId">Optional parameter: Filter for Invoice's subscription id</param>
-        /// <param name="createdSince">Optional parameter: Filter for Invoice's creation date start range</param>
-        /// <param name="createdUntil">Optional parameter: Filter for Invoices creation date end range</param>
-        /// <param name="status">Optional parameter: Filter for Invoice's status</param>
-        /// <param name="dueSince">Optional parameter: Filter for Invoice's due date start range</param>
-        /// <param name="dueUntil">Optional parameter: Filter for Invoice's due date end range</param>
-        /// <return>Returns the Models.ListInvoicesResponse response from the API call</return>
-        Task<Models.ListInvoicesResponse> GetInvoicesAsync(
-                int? page = null,
-                int? size = null,
-                string code = null,
-                string customerId = null,
-                string subscriptionId = null,
-                DateTime? createdSince = null,
-                DateTime? createdUntil = null,
-                string status = null,
-                DateTime? dueSince = null,
-                DateTime? dueUntil = null);
+        /// <param name="invoiceId">Required parameter: Invoice Id</param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        Task<Models.GetInvoiceResponse> GetInvoiceAsync(string invoiceId);
 
         /// <summary>
         /// Updates the metadata from an invoice
@@ -167,18 +113,76 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.GetInvoiceResponse> UpdateInvoiceMetadataAsync(string invoiceId, Models.UpdateMetadataRequest request, string idempotencyKey = null);
 
         /// <summary>
-        /// TODO: type endpoint description here
+        /// Cancels an invoice
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <param name="invoiceId">Required parameter: Invoice id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Models.GetInvoiceResponse GetPartialInvoice(string subscriptionId);
+        Models.GetInvoiceResponse CancelInvoice(string invoiceId, string idempotencyKey = null);
 
         /// <summary>
-        /// TODO: type endpoint description here
+        /// Cancels an invoice
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: Subscription Id</param>
+        /// <param name="invoiceId">Required parameter: Invoice id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Task<Models.GetInvoiceResponse> GetPartialInvoiceAsync(string subscriptionId);
+        Task<Models.GetInvoiceResponse> CancelInvoiceAsync(string invoiceId, string idempotencyKey = null);
+
+        /// <summary>
+        /// Gets all invoices
+        /// </summary>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="code">Optional parameter: Filter for Invoice's code</param>
+        /// <param name="customerId">Optional parameter: Filter for Invoice's customer id</param>
+        /// <param name="subscriptionId">Optional parameter: Filter for Invoice's subscription id</param>
+        /// <param name="createdSince">Optional parameter: Filter for Invoice's creation date start range</param>
+        /// <param name="createdUntil">Optional parameter: Filter for Invoices creation date end range</param>
+        /// <param name="status">Optional parameter: Filter for Invoice's status</param>
+        /// <param name="dueSince">Optional parameter: Filter for Invoice's due date start range</param>
+        /// <param name="dueUntil">Optional parameter: Filter for Invoice's due date end range</param>
+        /// <param name="document">Optional parameter: Fillter for invoice's document</param>
+        /// <return>Returns the Models.ListInvoicesResponse response from the API call</return>
+        Models.ListInvoicesResponse GetInvoices(
+                int? page = null,
+                int? size = null,
+                string code = null,
+                string customerId = null,
+                string subscriptionId = null,
+                DateTime? createdSince = null,
+                DateTime? createdUntil = null,
+                string status = null,
+                DateTime? dueSince = null,
+                DateTime? dueUntil = null,
+                string document = null);
+
+        /// <summary>
+        /// Gets all invoices
+        /// </summary>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="code">Optional parameter: Filter for Invoice's code</param>
+        /// <param name="customerId">Optional parameter: Filter for Invoice's customer id</param>
+        /// <param name="subscriptionId">Optional parameter: Filter for Invoice's subscription id</param>
+        /// <param name="createdSince">Optional parameter: Filter for Invoice's creation date start range</param>
+        /// <param name="createdUntil">Optional parameter: Filter for Invoices creation date end range</param>
+        /// <param name="status">Optional parameter: Filter for Invoice's status</param>
+        /// <param name="dueSince">Optional parameter: Filter for Invoice's due date start range</param>
+        /// <param name="dueUntil">Optional parameter: Filter for Invoice's due date end range</param>
+        /// <param name="document">Optional parameter: Fillter for invoice's document</param>
+        /// <return>Returns the Models.ListInvoicesResponse response from the API call</return>
+        Task<Models.ListInvoicesResponse> GetInvoicesAsync(
+                int? page = null,
+                int? size = null,
+                string code = null,
+                string customerId = null,
+                string subscriptionId = null,
+                DateTime? createdSince = null,
+                DateTime? createdUntil = null,
+                string status = null,
+                DateTime? dueSince = null,
+                DateTime? dueUntil = null,
+                string document = null);
 
     }
 } 

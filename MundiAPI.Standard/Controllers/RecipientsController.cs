@@ -92,7 +92,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -121,193 +121,34 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// Gets a transfer
+        /// TODO: type endpoint description here
         /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="transferId">Required parameter: Transfer id</param>
-        /// <return>Returns the Models.GetTransferResponse response from the API call</return>
-        public Models.GetTransferResponse GetTransfer(string recipientId, string transferId)
-        {
-            Task<Models.GetTransferResponse> t = GetTransferAsync(recipientId, transferId);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Gets a transfer
-        /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="transferId">Required parameter: Transfer id</param>
-        /// <return>Returns the Models.GetTransferResponse response from the API call</return>
-        public async Task<Models.GetTransferResponse> GetTransferAsync(string recipientId, string transferId)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/recipients/{recipient_id}/transfers/{transfer_id}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "recipient_id", recipientId },
-                { "transfer_id", transferId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
-                { "accept", "application/json" }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetTransferResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Gets a paginated list of transfers for the recipient
-        /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <param name="status">Optional parameter: Filter for transfer status</param>
-        /// <param name="createdSince">Optional parameter: Filter for start range of transfer creation date</param>
-        /// <param name="createdUntil">Optional parameter: Filter for end range of transfer creation date</param>
-        /// <return>Returns the Models.ListTransferResponse response from the API call</return>
-        public Models.ListTransferResponse GetTransfers(
-                string recipientId,
-                int? page = null,
-                int? size = null,
-                string status = null,
-                DateTime? createdSince = null,
-                DateTime? createdUntil = null)
-        {
-            Task<Models.ListTransferResponse> t = GetTransfersAsync(recipientId, page, size, status, createdSince, createdUntil);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Gets a paginated list of transfers for the recipient
-        /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <param name="status">Optional parameter: Filter for transfer status</param>
-        /// <param name="createdSince">Optional parameter: Filter for start range of transfer creation date</param>
-        /// <param name="createdUntil">Optional parameter: Filter for end range of transfer creation date</param>
-        /// <return>Returns the Models.ListTransferResponse response from the API call</return>
-        public async Task<Models.ListTransferResponse> GetTransfersAsync(
-                string recipientId,
-                int? page = null,
-                int? size = null,
-                string status = null,
-                DateTime? createdSince = null,
-                DateTime? createdUntil = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/recipients/{recipient_id}/transfers");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "recipient_id", recipientId }
-            });
-
-            //process optional query parameters
-            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "page", page },
-                { "size", size },
-                { "status", status },
-                { "created_since", (createdSince.HasValue) ? createdSince.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") : null },
-                { "created_until", (createdUntil.HasValue) ? createdUntil.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") : null }
-            },ArrayDeserializationFormat,ParameterSeparator);
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
-                { "accept", "application/json" }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.ListTransferResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Creates an anticipation
-        /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="request">Required parameter: Anticipation data</param>
+        /// <param name="recipientId">Required parameter: Recipient Identificator</param>
+        /// <param name="request">Required parameter: Example: </param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetAnticipationResponse response from the API call</return>
-        public Models.GetAnticipationResponse CreateAnticipation(string recipientId, Models.CreateAnticipationRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
+        public Models.GetRecipientResponse UpdateRecipientTransferSettings(string recipientId, Models.UpdateTransferSettingsRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetAnticipationResponse> t = CreateAnticipationAsync(recipientId, request, idempotencyKey);
+            Task<Models.GetRecipientResponse> t = UpdateRecipientTransferSettingsAsync(recipientId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Creates an anticipation
+        /// TODO: type endpoint description here
         /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="request">Required parameter: Anticipation data</param>
+        /// <param name="recipientId">Required parameter: Recipient Identificator</param>
+        /// <param name="request">Required parameter: Example: </param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetAnticipationResponse response from the API call</return>
-        public async Task<Models.GetAnticipationResponse> CreateAnticipationAsync(string recipientId, Models.CreateAnticipationRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
+        public async Task<Models.GetRecipientResponse> UpdateRecipientTransferSettingsAsync(string recipientId, Models.UpdateTransferSettingsRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/recipients/{recipient_id}/anticipations");
+            _queryBuilder.Append("/recipients/{recipient_id}/transfer-settings");
 
             //process optional template parameters
             APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
@@ -322,7 +163,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -332,7 +173,7 @@ namespace MundiAPI.Standard.Controllers
             var _body = APIHelper.JsonSerialize(request);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+            HttpRequest _request = ClientInstance.PatchBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
 
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
@@ -342,7 +183,7 @@ namespace MundiAPI.Standard.Controllers
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetAnticipationResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.GetRecipientResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -392,7 +233,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" }
             };
 
@@ -416,46 +257,38 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// Gets the anticipation limits for a recipient
+        /// Retrieves paginated recipients information
         /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="timeframe">Required parameter: Timeframe</param>
-        /// <param name="paymentDate">Required parameter: Anticipation payment date</param>
-        /// <return>Returns the Models.GetAnticipationLimitResponse response from the API call</return>
-        public Models.GetAnticipationLimitResponse GetAnticipationLimits(string recipientId, string timeframe, DateTime paymentDate)
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.ListRecipientResponse response from the API call</return>
+        public Models.ListRecipientResponse GetRecipients(int? page = null, int? size = null)
         {
-            Task<Models.GetAnticipationLimitResponse> t = GetAnticipationLimitsAsync(recipientId, timeframe, paymentDate);
+            Task<Models.ListRecipientResponse> t = GetRecipientsAsync(page, size);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Gets the anticipation limits for a recipient
+        /// Retrieves paginated recipients information
         /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="timeframe">Required parameter: Timeframe</param>
-        /// <param name="paymentDate">Required parameter: Anticipation payment date</param>
-        /// <return>Returns the Models.GetAnticipationLimitResponse response from the API call</return>
-        public async Task<Models.GetAnticipationLimitResponse> GetAnticipationLimitsAsync(string recipientId, string timeframe, DateTime paymentDate)
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.ListRecipientResponse response from the API call</return>
+        public async Task<Models.ListRecipientResponse> GetRecipientsAsync(int? page = null, int? size = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/recipients/{recipient_id}/anticipation_limits");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "recipient_id", recipientId }
-            });
+            _queryBuilder.Append("/recipients");
 
             //process optional query parameters
             APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
             {
-                { "timeframe", timeframe },
-                { "payment_date", paymentDate.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") }
+                { "page", page },
+                { "size", size }
             },ArrayDeserializationFormat,ParameterSeparator);
 
 
@@ -465,7 +298,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" }
             };
 
@@ -480,7 +313,69 @@ namespace MundiAPI.Standard.Controllers
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetAnticipationLimitResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.ListRecipientResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Get balance information for a recipient
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Recipient id</param>
+        /// <return>Returns the Models.GetBalanceResponse response from the API call</return>
+        public Models.GetBalanceResponse GetBalance(string recipientId)
+        {
+            Task<Models.GetBalanceResponse> t = GetBalanceAsync(recipientId);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Get balance information for a recipient
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Recipient id</param>
+        /// <return>Returns the Models.GetBalanceResponse response from the API call</return>
+        public async Task<Models.GetBalanceResponse> GetBalanceAsync(string recipientId)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/recipients/{recipient_id}/balance");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "recipient_id", recipientId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.GetBalanceResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -574,7 +469,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" }
             };
 
@@ -598,34 +493,34 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// Updates a recipient
+        /// Creates an anticipation
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="request">Required parameter: Recipient data</param>
+        /// <param name="request">Required parameter: Anticipation data</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        public Models.GetRecipientResponse UpdateRecipient(string recipientId, Models.UpdateRecipientRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.GetAnticipationResponse response from the API call</return>
+        public Models.GetAnticipationResponse CreateAnticipation(string recipientId, Models.CreateAnticipationRequest request, string idempotencyKey = null)
         {
-            Task<Models.GetRecipientResponse> t = UpdateRecipientAsync(recipientId, request, idempotencyKey);
+            Task<Models.GetAnticipationResponse> t = CreateAnticipationAsync(recipientId, request, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Updates a recipient
+        /// Creates an anticipation
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="request">Required parameter: Recipient data</param>
+        /// <param name="request">Required parameter: Anticipation data</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        public async Task<Models.GetRecipientResponse> UpdateRecipientAsync(string recipientId, Models.UpdateRecipientRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.GetAnticipationResponse response from the API call</return>
+        public async Task<Models.GetAnticipationResponse> CreateAnticipationAsync(string recipientId, Models.CreateAnticipationRequest request, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/recipients/{recipient_id}");
+            _queryBuilder.Append("/recipients/{recipient_id}/anticipations");
 
             //process optional template parameters
             APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
@@ -640,7 +535,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -650,7 +545,7 @@ namespace MundiAPI.Standard.Controllers
             var _body = APIHelper.JsonSerialize(request);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.PutBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
 
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
@@ -660,7 +555,7 @@ namespace MundiAPI.Standard.Controllers
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetRecipientResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.GetAnticipationResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -711,7 +606,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -778,7 +673,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" }
             };
 
@@ -802,39 +697,39 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// Retrieves paginated recipients information
+        /// Gets a transfer
         /// </summary>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListRecipientResponse response from the API call</return>
-        public Models.ListRecipientResponse GetRecipients(int? page = null, int? size = null)
+        /// <param name="recipientId">Required parameter: Recipient id</param>
+        /// <param name="transferId">Required parameter: Transfer id</param>
+        /// <return>Returns the Models.GetTransferResponse response from the API call</return>
+        public Models.GetTransferResponse GetTransfer(string recipientId, string transferId)
         {
-            Task<Models.ListRecipientResponse> t = GetRecipientsAsync(page, size);
+            Task<Models.GetTransferResponse> t = GetTransferAsync(recipientId, transferId);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Retrieves paginated recipients information
+        /// Gets a transfer
         /// </summary>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListRecipientResponse response from the API call</return>
-        public async Task<Models.ListRecipientResponse> GetRecipientsAsync(int? page = null, int? size = null)
+        /// <param name="recipientId">Required parameter: Recipient id</param>
+        /// <param name="transferId">Required parameter: Transfer id</param>
+        /// <return>Returns the Models.GetTransferResponse response from the API call</return>
+        public async Task<Models.GetTransferResponse> GetTransferAsync(string recipientId, string transferId)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/recipients");
+            _queryBuilder.Append("/recipients/{recipient_id}/transfers/{transfer_id}");
 
-            //process optional query parameters
-            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
             {
-                { "page", page },
-                { "size", size }
-            },ArrayDeserializationFormat,ParameterSeparator);
+                { "recipient_id", recipientId },
+                { "transfer_id", transferId }
+            });
 
 
             //validate and preprocess url
@@ -843,7 +738,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" }
             };
 
@@ -858,7 +753,7 @@ namespace MundiAPI.Standard.Controllers
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.ListRecipientResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.GetTransferResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -867,30 +762,128 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// Get balance information for a recipient
+        /// Gets a paginated list of transfers for the recipient
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <return>Returns the Models.GetBalanceResponse response from the API call</return>
-        public Models.GetBalanceResponse GetBalance(string recipientId)
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="status">Optional parameter: Filter for transfer status</param>
+        /// <param name="createdSince">Optional parameter: Filter for start range of transfer creation date</param>
+        /// <param name="createdUntil">Optional parameter: Filter for end range of transfer creation date</param>
+        /// <return>Returns the Models.ListTransferResponse response from the API call</return>
+        public Models.ListTransferResponse GetTransfers(
+                string recipientId,
+                int? page = null,
+                int? size = null,
+                string status = null,
+                DateTime? createdSince = null,
+                DateTime? createdUntil = null)
         {
-            Task<Models.GetBalanceResponse> t = GetBalanceAsync(recipientId);
+            Task<Models.ListTransferResponse> t = GetTransfersAsync(recipientId, page, size, status, createdSince, createdUntil);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Get balance information for a recipient
+        /// Gets a paginated list of transfers for the recipient
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <return>Returns the Models.GetBalanceResponse response from the API call</return>
-        public async Task<Models.GetBalanceResponse> GetBalanceAsync(string recipientId)
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <param name="status">Optional parameter: Filter for transfer status</param>
+        /// <param name="createdSince">Optional parameter: Filter for start range of transfer creation date</param>
+        /// <param name="createdUntil">Optional parameter: Filter for end range of transfer creation date</param>
+        /// <return>Returns the Models.ListTransferResponse response from the API call</return>
+        public async Task<Models.ListTransferResponse> GetTransfersAsync(
+                string recipientId,
+                int? page = null,
+                int? size = null,
+                string status = null,
+                DateTime? createdSince = null,
+                DateTime? createdUntil = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/recipients/{recipient_id}/balance");
+            _queryBuilder.Append("/recipients/{recipient_id}/transfers");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "recipient_id", recipientId }
+            });
+
+            //process optional query parameters
+            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "page", page },
+                { "size", size },
+                { "status", status },
+                { "created_since", (createdSince.HasValue) ? createdSince.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") : null },
+                { "created_until", (createdUntil.HasValue) ? createdUntil.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") : null }
+            },ArrayDeserializationFormat,ParameterSeparator);
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.ListTransferResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Updates a recipient
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Recipient id</param>
+        /// <param name="request">Required parameter: Recipient data</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
+        public Models.GetRecipientResponse UpdateRecipient(string recipientId, Models.UpdateRecipientRequest request, string idempotencyKey = null)
+        {
+            Task<Models.GetRecipientResponse> t = UpdateRecipientAsync(recipientId, request, idempotencyKey);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Updates a recipient
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Recipient id</param>
+        /// <param name="request">Required parameter: Recipient data</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
+        public async Task<Models.GetRecipientResponse> UpdateRecipientAsync(string recipientId, Models.UpdateRecipientRequest request, string idempotencyKey = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/recipients/{recipient_id}");
 
             //process optional template parameters
             APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
@@ -905,12 +898,17 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
-                { "accept", "application/json" }
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
+                { "accept", "application/json" },
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
             };
 
+            //append body params
+            var _body = APIHelper.JsonSerialize(request);
+
             //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+            HttpRequest _request = ClientInstance.PutBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
 
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
@@ -920,7 +918,70 @@ namespace MundiAPI.Standard.Controllers
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetBalanceResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.GetRecipientResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Creates a new recipient
+        /// </summary>
+        /// <param name="request">Required parameter: Recipient data</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
+        public Models.GetRecipientResponse CreateRecipient(Models.CreateRecipientRequest request, string idempotencyKey = null)
+        {
+            Task<Models.GetRecipientResponse> t = CreateRecipientAsync(request, idempotencyKey);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Creates a new recipient
+        /// </summary>
+        /// <param name="request">Required parameter: Recipient data</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
+        public async Task<Models.GetRecipientResponse> CreateRecipientAsync(Models.CreateRecipientRequest request, string idempotencyKey = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/recipients");
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
+                { "accept", "application/json" },
+                { "content-type", "application/json; charset=utf-8" },
+                { "idempotency-key", idempotencyKey }
+            };
+
+            //append body params
+            var _body = APIHelper.JsonSerialize(request);
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.GetRecipientResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -971,7 +1032,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -1000,97 +1061,34 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// Creates a new recipient
+        /// Gets the anticipation limits for a recipient
         /// </summary>
-        /// <param name="request">Required parameter: Recipient data</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        public Models.GetRecipientResponse CreateRecipient(Models.CreateRecipientRequest request, string idempotencyKey = null)
+        /// <param name="recipientId">Required parameter: Recipient id</param>
+        /// <param name="timeframe">Required parameter: Timeframe</param>
+        /// <param name="paymentDate">Required parameter: Anticipation payment date</param>
+        /// <return>Returns the Models.GetAnticipationLimitResponse response from the API call</return>
+        public Models.GetAnticipationLimitResponse GetAnticipationLimits(string recipientId, string timeframe, DateTime paymentDate)
         {
-            Task<Models.GetRecipientResponse> t = CreateRecipientAsync(request, idempotencyKey);
+            Task<Models.GetAnticipationLimitResponse> t = GetAnticipationLimitsAsync(recipientId, timeframe, paymentDate);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Creates a new recipient
+        /// Gets the anticipation limits for a recipient
         /// </summary>
-        /// <param name="request">Required parameter: Recipient data</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        public async Task<Models.GetRecipientResponse> CreateRecipientAsync(Models.CreateRecipientRequest request, string idempotencyKey = null)
+        /// <param name="recipientId">Required parameter: Recipient id</param>
+        /// <param name="timeframe">Required parameter: Timeframe</param>
+        /// <param name="paymentDate">Required parameter: Anticipation payment date</param>
+        /// <return>Returns the Models.GetAnticipationLimitResponse response from the API call</return>
+        public async Task<Models.GetAnticipationLimitResponse> GetAnticipationLimitsAsync(string recipientId, string timeframe, DateTime paymentDate)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/recipients");
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
-                { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
-                { "idempotency-key", idempotencyKey }
-            };
-
-            //append body params
-            var _body = APIHelper.JsonSerialize(request);
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetRecipientResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// TODO: type endpoint description here
-        /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient Identificator</param>
-        /// <param name="request">Required parameter: Example: </param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        public Models.GetRecipientResponse UpdateRecipientTransferSettings(string recipientId, Models.UpdateTransferSettingsRequest request, string idempotencyKey = null)
-        {
-            Task<Models.GetRecipientResponse> t = UpdateRecipientTransferSettingsAsync(recipientId, request, idempotencyKey);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// TODO: type endpoint description here
-        /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient Identificator</param>
-        /// <param name="request">Required parameter: Example: </param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetRecipientResponse response from the API call</return>
-        public async Task<Models.GetRecipientResponse> UpdateRecipientTransferSettingsAsync(string recipientId, Models.UpdateTransferSettingsRequest request, string idempotencyKey = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/recipients/{recipient_id}/transfer-settings");
+            _queryBuilder.Append("/recipients/{recipient_id}/anticipation_limits");
 
             //process optional template parameters
             APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
@@ -1098,6 +1096,13 @@ namespace MundiAPI.Standard.Controllers
                 { "recipient_id", recipientId }
             });
 
+            //process optional query parameters
+            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "timeframe", timeframe },
+                { "payment_date", paymentDate.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") }
+            },ArrayDeserializationFormat,ParameterSeparator);
+
 
             //validate and preprocess url
             string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
@@ -1105,17 +1110,12 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
-                { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
-                { "idempotency-key", idempotencyKey }
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
+                { "accept", "application/json" }
             };
 
-            //append body params
-            var _body = APIHelper.JsonSerialize(request);
-
             //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.PatchBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
 
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
@@ -1125,7 +1125,7 @@ namespace MundiAPI.Standard.Controllers
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetRecipientResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.GetAnticipationLimitResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -1174,7 +1174,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" }
             };
@@ -1243,7 +1243,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" }
             };
 
@@ -1337,7 +1337,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" }
             };
 
@@ -1403,7 +1403,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 0.16.21" },
+                { "user-agent", "MundiSDK - DotNet 0.16.23" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
