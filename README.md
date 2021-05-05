@@ -245,8 +245,8 @@ Task<Models.ListAddressesResponse> GetAddresses(string customerId, int? page = n
 
 ```csharp
 string customerId = "customer_id";
-int? page = 19;
-int? size = 19;
+int? page = 20;
+int? size = 20;
 
 Models.ListAddressesResponse result = await customers.GetAddresses(customerId, page, size);
 
@@ -455,8 +455,8 @@ Task<Models.ListAccessTokensResponse> GetAccessTokens(string customerId, int? pa
 
 ```csharp
 string customerId = "customer_id";
-int? page = 19;
-int? size = 19;
+int? page = 20;
+int? size = 20;
 
 Models.ListAccessTokensResponse result = await customers.GetAccessTokens(customerId, page, size);
 
@@ -581,8 +581,8 @@ Task<Models.ListCardsResponse> GetCards(string customerId, int? page = null, int
 
 ```csharp
 string customerId = "customer_id";
-int? page = 19;
-int? size = 19;
+int? page = 20;
+int? size = 20;
 
 Models.ListCardsResponse result = await customers.GetCards(customerId, page, size);
 
@@ -883,8 +883,8 @@ Task<Models.ListChargesResponse> GetCharges(
 #### Example Usage
 
 ```csharp
-int? page = 19;
-int? size = 19;
+int? page = 20;
+int? size = 20;
 string code = "code";
 string status = "status";
 string paymentMethod = "payment_method";
@@ -1126,8 +1126,8 @@ Task<Models.ListChargeTransactionsResponse> GetChargeTransactions(string chargeI
 
 ```csharp
 string chargeId = "charge_id";
-int? page = 19;
-int? size = 19;
+int? page = 20;
+int? size = 20;
 
 Models.ListChargeTransactionsResponse result = await charges.GetChargeTransactions(chargeId, page, size);
 
@@ -1284,8 +1284,8 @@ Task<Models.ListRecipientResponse> GetRecipients(int? page = null, int? size = n
 #### Example Usage
 
 ```csharp
-int? page = 19;
-int? size = 19;
+int? page = 20;
+int? size = 20;
 
 Models.ListRecipientResponse result = await recipients.GetRecipients(page, size);
 
@@ -1355,8 +1355,8 @@ Task<Models.ListAnticipationResponse> GetAnticipations(
 
 ```csharp
 string recipientId = "recipient_id";
-int? page = 19;
-int? size = 19;
+int? page = 20;
+int? size = 20;
 string status = "status";
 string timeframe = "timeframe";
 DateTime? paymentDateSince = DateTime.Now();
@@ -1514,8 +1514,8 @@ Task<Models.ListTransferResponse> GetTransfers(
 
 ```csharp
 string recipientId = "recipient_id";
-int? page = 19;
-int? size = 19;
+int? page = 111;
+int? size = 111;
 string status = "status";
 DateTime? createdSince = DateTime.Now();
 DateTime? createdUntil = DateTime.Now();
@@ -1730,8 +1730,8 @@ Task<Models.ListWithdrawals> GetWithdrawals(
 
 ```csharp
 string recipientId = "recipient_id";
-int? page = 19;
-int? size = 19;
+int? page = 111;
+int? size = 111;
 string status = "status";
 DateTime? createdSince = DateTime.Now();
 DateTime? createdUntil = DateTime.Now();
@@ -2115,8 +2115,8 @@ Task<Models.GetUsagesDetailsResponse> GetUsagesDetails(
 ```csharp
 string subscriptionId = "subscription_id";
 string cycleId = "cycle_id";
-int? size = 19;
-int? page = 19;
+int? size = 111;
+int? page = 111;
 string itemId = "item_id";
 string mgroup = "group";
 
@@ -2299,8 +2299,8 @@ Task<Models.ListIncrementsResponse> GetIncrements(string subscriptionId, int? pa
 
 ```csharp
 string subscriptionId = "subscription_id";
-int? page = 19;
-int? size = 19;
+int? page = 111;
+int? size = 111;
 
 Models.ListIncrementsResponse result = await subscriptions.GetIncrements(subscriptionId, page, size);
 
@@ -2409,8 +2409,8 @@ Task<Models.ListUsagesResponse> GetUsages(
 ```csharp
 string subscriptionId = "subscription_id";
 string itemId = "item_id";
-int? page = 19;
-int? size = 19;
+int? page = 111;
+int? size = 111;
 string code = "code";
 string mgroup = "group";
 DateTime? usedSince = DateTime.Now();
@@ -3149,7 +3149,7 @@ Task<Models.ListInvoicesResponse> GetInvoices(
         string status = null,
         DateTime? dueSince = null,
         DateTime? dueUntil = null,
-        string document = null)
+        string customerDocument = null)
 ```
 
 #### Parameters
@@ -3166,7 +3166,7 @@ Task<Models.ListInvoicesResponse> GetInvoices(
 | status |  ``` Optional ```  | Filter for Invoice's status |
 | dueSince |  ``` Optional ```  | Filter for Invoice's due date start range |
 | dueUntil |  ``` Optional ```  | Filter for Invoice's due date end range |
-| document |  ``` Optional ```  | Fillter for invoice's document |
+| customerDocument |  ``` Optional ```  | Fillter for invoice's document |
 
 
 #### Example Usage
@@ -3182,9 +3182,9 @@ DateTime? createdUntil = DateTime.Now();
 string status = "status";
 DateTime? dueSince = DateTime.Now();
 DateTime? dueUntil = DateTime.Now();
-string document = "document";
+string customerDocument = "customer_document";
 
-Models.ListInvoicesResponse result = await invoices.GetInvoices(page, size, code, customerId, subscriptionId, createdSince, createdUntil, status, dueSince, dueUntil, document);
+Models.ListInvoicesResponse result = await invoices.GetInvoices(page, size, code, customerId, subscriptionId, createdSince, createdUntil, status, dueSince, dueUntil, customerDocument);
 
 ```
 

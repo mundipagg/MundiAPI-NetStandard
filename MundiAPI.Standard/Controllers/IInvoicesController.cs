@@ -141,7 +141,7 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="status">Optional parameter: Filter for Invoice's status</param>
         /// <param name="dueSince">Optional parameter: Filter for Invoice's due date start range</param>
         /// <param name="dueUntil">Optional parameter: Filter for Invoice's due date end range</param>
-        /// <param name="document">Optional parameter: Fillter for invoice's document</param>
+        /// <param name="customerDocument">Optional parameter: Fillter for invoice's document</param>
         /// <return>Returns the Models.ListInvoicesResponse response from the API call</return>
         Models.ListInvoicesResponse GetInvoices(
                 int? page = null,
@@ -154,7 +154,7 @@ namespace MundiAPI.Standard.Controllers
                 string status = null,
                 DateTime? dueSince = null,
                 DateTime? dueUntil = null,
-                string document = null);
+                string customerDocument = null);
 
         /// <summary>
         /// Gets all invoices
@@ -169,7 +169,7 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="status">Optional parameter: Filter for Invoice's status</param>
         /// <param name="dueSince">Optional parameter: Filter for Invoice's due date start range</param>
         /// <param name="dueUntil">Optional parameter: Filter for Invoice's due date end range</param>
-        /// <param name="document">Optional parameter: Fillter for invoice's document</param>
+        /// <param name="customerDocument">Optional parameter: Fillter for invoice's document</param>
         /// <return>Returns the Models.ListInvoicesResponse response from the API call</return>
         Task<Models.ListInvoicesResponse> GetInvoicesAsync(
                 int? page = null,
@@ -182,7 +182,7 @@ namespace MundiAPI.Standard.Controllers
                 string status = null,
                 DateTime? dueSince = null,
                 DateTime? dueUntil = null,
-                string document = null);
+                string customerDocument = null);
 
     }
 } 
