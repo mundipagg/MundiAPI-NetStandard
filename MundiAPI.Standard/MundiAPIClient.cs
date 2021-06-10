@@ -14,6 +14,50 @@ namespace MundiAPI.Standard
     {
 
         /// <summary>
+        /// Singleton access to Subscriptions controller
+        /// </summary>
+        public ISubscriptionsController Subscriptions
+        {
+            get
+            {
+                return SubscriptionsController.Instance;
+            }
+        }
+
+        /// <summary>
+        /// Singleton access to Orders controller
+        /// </summary>
+        public IOrdersController Orders
+        {
+            get
+            {
+                return OrdersController.Instance;
+            }
+        }
+
+        /// <summary>
+        /// Singleton access to Plans controller
+        /// </summary>
+        public IPlansController Plans
+        {
+            get
+            {
+                return PlansController.Instance;
+            }
+        }
+
+        /// <summary>
+        /// Singleton access to Invoices controller
+        /// </summary>
+        public IInvoicesController Invoices
+        {
+            get
+            {
+                return InvoicesController.Instance;
+            }
+        }
+
+        /// <summary>
         /// Singleton access to Customers controller
         /// </summary>
         public ICustomersController Customers
@@ -47,50 +91,6 @@ namespace MundiAPI.Standard
         }
 
         /// <summary>
-        /// Singleton access to Subscriptions controller
-        /// </summary>
-        public ISubscriptionsController Subscriptions
-        {
-            get
-            {
-                return SubscriptionsController.Instance;
-            }
-        }
-
-        /// <summary>
-        /// Singleton access to Invoices controller
-        /// </summary>
-        public IInvoicesController Invoices
-        {
-            get
-            {
-                return InvoicesController.Instance;
-            }
-        }
-
-        /// <summary>
-        /// Singleton access to Orders controller
-        /// </summary>
-        public IOrdersController Orders
-        {
-            get
-            {
-                return OrdersController.Instance;
-            }
-        }
-
-        /// <summary>
-        /// Singleton access to Sellers controller
-        /// </summary>
-        public ISellersController Sellers
-        {
-            get
-            {
-                return SellersController.Instance;
-            }
-        }
-
-        /// <summary>
         /// Singleton access to Tokens controller
         /// </summary>
         public ITokensController Tokens
@@ -102,13 +102,13 @@ namespace MundiAPI.Standard
         }
 
         /// <summary>
-        /// Singleton access to Plans controller
+        /// Singleton access to Sellers controller
         /// </summary>
-        public IPlansController Plans
+        public ISellersController Sellers
         {
             get
             {
-                return PlansController.Instance;
+                return SellersController.Instance;
             }
         }
 
