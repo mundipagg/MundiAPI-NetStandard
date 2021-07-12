@@ -22,6 +22,7 @@ namespace MundiAPI.Standard.Models
     {
         // These fields hold the values for the public properties.
         private Models.CreateBankAccountRequest bankAccount;
+        private string paymentMode = "bank_transfer";
 
         /// <summary>
         /// Bank account
@@ -37,6 +38,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.bankAccount = value;
                 onPropertyChanged("BankAccount");
+            }
+        }
+
+        /// <summary>
+        /// Payment mode
+        /// </summary>
+        [JsonProperty("payment_mode")]
+        public string PaymentMode 
+        { 
+            get 
+            {
+                return this.paymentMode; 
+            } 
+            set 
+            {
+                this.paymentMode = value;
+                onPropertyChanged("PaymentMode");
             }
         }
     }

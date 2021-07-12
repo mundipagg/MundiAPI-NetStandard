@@ -31,6 +31,7 @@ namespace MundiAPI.Standard.Models
         private string accountCheckDigit;
         private string type;
         private Dictionary<string, string> metadata;
+        private string pixKey;
 
         /// <summary>
         /// Bank account holder name
@@ -199,6 +200,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.metadata = value;
                 onPropertyChanged("Metadata");
+            }
+        }
+
+        /// <summary>
+        /// Pix key
+        /// </summary>
+        [JsonProperty("pix_key")]
+        public string PixKey 
+        { 
+            get 
+            {
+                return this.pixKey; 
+            } 
+            set 
+            {
+                this.pixKey = value;
+                onPropertyChanged("PixKey");
             }
         }
     }

@@ -36,6 +36,8 @@ namespace MundiAPI.Standard.Models
         private Dictionary<string, string> metadata;
         private Models.GetAutomaticAnticipationResponse automaticAnticipationSettings;
         private Models.GetTransferSettingsResponse transferSettings;
+        private string code;
+        private string paymentMode = "bank_transfer";
 
         /// <summary>
         /// Id
@@ -292,6 +294,40 @@ namespace MundiAPI.Standard.Models
             {
                 this.transferSettings = value;
                 onPropertyChanged("TransferSettings");
+            }
+        }
+
+        /// <summary>
+        /// Recipient code
+        /// </summary>
+        [JsonProperty("code")]
+        public string Code 
+        { 
+            get 
+            {
+                return this.code; 
+            } 
+            set 
+            {
+                this.code = value;
+                onPropertyChanged("Code");
+            }
+        }
+
+        /// <summary>
+        /// Payment mode
+        /// </summary>
+        [JsonProperty("payment_mode")]
+        public string PaymentMode 
+        { 
+            get 
+            {
+                return this.paymentMode; 
+            } 
+            set 
+            {
+                this.paymentMode = value;
+                onPropertyChanged("PaymentMode");
             }
         }
     }

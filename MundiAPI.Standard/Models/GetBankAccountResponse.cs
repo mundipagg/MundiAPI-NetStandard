@@ -36,6 +36,7 @@ namespace MundiAPI.Standard.Models
         private DateTime deletedAt;
         private Models.GetRecipientResponse recipient;
         private Dictionary<string, string> metadata;
+        private string pixKey;
 
         /// <summary>
         /// Id
@@ -292,6 +293,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.metadata = value;
                 onPropertyChanged("Metadata");
+            }
+        }
+
+        /// <summary>
+        /// Pix Key
+        /// </summary>
+        [JsonProperty("pix_key")]
+        public string PixKey 
+        { 
+            get 
+            {
+                return this.pixKey; 
+            } 
+            set 
+            {
+                this.pixKey = value;
+                onPropertyChanged("PixKey");
             }
         }
     }
