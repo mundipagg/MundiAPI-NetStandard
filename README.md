@@ -1,3 +1,17 @@
+### DEPRECATED | CHECK NEW VERSION > https://github.com/pagarme/pagarme-core-api-dotnet-standard
+
+# Mundipagg agora é Pagar.me
+
+Buscando trazer a melhor experiência para os nossos clientes, a Mundipagg agora é parte do Pagar.me.
+
+Somamos nossas funcionalidades e agora você tem acesso a uma plataforma financeira completa, que oferece o melhor das duas soluções em uma experiência unificada.
+
+Você pode customizar nossos produtos e serviços da forma que for melhor para o seu e-commerce. Ficou curioso para saber o que muda? Preparamos um FAQ completo explicando tudo.
+
+[Saiba mais](https://mundipagg.zendesk.com/hc/pt-br/categories/4404432249876-Incorpora%C3%A7%C3%A3o-Mundipagg-pelo-Pagar-me)
+
+-----------------------------------------------------------------------------------------------------------------------------
+
 # Getting started
 
 Mundipagg API
