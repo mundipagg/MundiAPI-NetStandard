@@ -46,6 +46,7 @@ namespace MundiAPI.Standard.Models
         private string currency;
         private Models.GetCheckoutDebitCardPaymentResponse debitCard;
         private Models.GetCheckoutBankTransferPaymentResponse bankTransfer;
+        private List<string> acceptedBrands;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -474,6 +475,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.bankTransfer = value;
                 onPropertyChanged("BankTransfer");
+            }
+        }
+
+        /// <summary>
+        /// Accepted Brands
+        /// </summary>
+        [JsonProperty("accepted_brands")]
+        public List<string> AcceptedBrands 
+        { 
+            get 
+            {
+                return this.acceptedBrands; 
+            } 
+            set 
+            {
+                this.acceptedBrands = value;
+                onPropertyChanged("AcceptedBrands");
             }
         }
     }

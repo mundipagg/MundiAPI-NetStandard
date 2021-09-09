@@ -35,6 +35,7 @@ namespace MundiAPI.Standard.Models
         private bool billingAddressEditable;
         private Models.CreateAddressRequest billingAddress;
         private Models.CreateCheckoutBankTransferRequest bankTransfer;
+        private List<string> acceptedBrands;
 
         /// <summary>
         /// Accepted Payment Methods
@@ -271,6 +272,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.bankTransfer = value;
                 onPropertyChanged("BankTransfer");
+            }
+        }
+
+        /// <summary>
+        /// Accepted Brands
+        /// </summary>
+        [JsonProperty("accepted_brands")]
+        public List<string> AcceptedBrands 
+        { 
+            get 
+            {
+                return this.acceptedBrands; 
+            } 
+            set 
+            {
+                this.acceptedBrands = value;
+                onPropertyChanged("AcceptedBrands");
             }
         }
     }
