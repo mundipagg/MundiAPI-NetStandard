@@ -88,7 +88,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.1.1" },
+                { "user-agent", "MundiSDK - DotNet 2.2.0" },
                 { "accept", "application/json" }
             };
 

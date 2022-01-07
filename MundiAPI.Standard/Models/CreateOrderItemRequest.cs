@@ -24,8 +24,6 @@ namespace MundiAPI.Standard.Models
         private int amount;
         private string description;
         private int quantity;
-        private Models.CreateSellerRequest seller;
-        private string sellerId;
         private string category;
         private string code;
 
@@ -77,40 +75,6 @@ namespace MundiAPI.Standard.Models
             {
                 this.quantity = value;
                 onPropertyChanged("Quantity");
-            }
-        }
-
-        /// <summary>
-        /// Item seller
-        /// </summary>
-        [JsonProperty("seller")]
-        public Models.CreateSellerRequest Seller 
-        { 
-            get 
-            {
-                return this.seller; 
-            } 
-            set 
-            {
-                this.seller = value;
-                onPropertyChanged("Seller");
-            }
-        }
-
-        /// <summary>
-        /// seller identificator
-        /// </summary>
-        [JsonProperty("seller_id")]
-        public string SellerId 
-        { 
-            get 
-            {
-                return this.sellerId; 
-            } 
-            set 
-            {
-                this.sellerId = value;
-                onPropertyChanged("SellerId");
             }
         }
 
