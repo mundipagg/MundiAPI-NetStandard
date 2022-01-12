@@ -1,17 +1,3 @@
-### DEPRECATED | CHECK NEW VERSION > https://github.com/pagarme/pagarme-core-api-dotnet-standard
-
-# Mundipagg agora é Pagar.me
-
-Buscando trazer a melhor experiência para os nossos clientes, a Mundipagg agora é parte do Pagar.me.
-
-Somamos nossas funcionalidades e agora você tem acesso a uma plataforma financeira completa, que oferece o melhor das duas soluções em uma experiência unificada.
-
-Você pode customizar nossos produtos e serviços da forma que for melhor para o seu e-commerce. Ficou curioso para saber o que muda? Preparamos um FAQ completo explicando tudo.
-
-[Saiba mais](https://mundipagg.zendesk.com/hc/pt-br/categories/4404432249876-Incorpora%C3%A7%C3%A3o-Mundipagg-pelo-Pagar-me)
-
------------------------------------------------------------------------------------------------------------------------------
-
 # Getting started
 
 Mundipagg API
@@ -109,7 +95,6 @@ MundiAPIClient client = new MundiAPIClient(basicAuthUserName, basicAuthPassword)
 * [SubscriptionsController](#subscriptions_controller)
 * [InvoicesController](#invoices_controller)
 * [OrdersController](#orders_controller)
-* [SellersController](#sellers_controller)
 * [TokensController](#tokens_controller)
 * [PlansController](#plans_controller)
 * [TransactionsController](#transactions_controller)
@@ -259,8 +244,8 @@ Task<Models.ListAddressesResponse> GetAddresses(string customerId, int? page = n
 
 ```csharp
 string customerId = "customer_id";
-int? page = 38;
-int? size = 38;
+int? page = 42;
+int? size = 42;
 
 Models.ListAddressesResponse result = await customers.GetAddresses(customerId, page, size);
 
@@ -469,8 +454,8 @@ Task<Models.ListAccessTokensResponse> GetAccessTokens(string customerId, int? pa
 
 ```csharp
 string customerId = "customer_id";
-int? page = 38;
-int? size = 38;
+int? page = 42;
+int? size = 42;
 
 Models.ListAccessTokensResponse result = await customers.GetAccessTokens(customerId, page, size);
 
@@ -595,8 +580,8 @@ Task<Models.ListCardsResponse> GetCards(string customerId, int? page = null, int
 
 ```csharp
 string customerId = "customer_id";
-int? page = 38;
-int? size = 38;
+int? page = 42;
+int? size = 42;
 
 Models.ListCardsResponse result = await customers.GetCards(customerId, page, size);
 
@@ -897,8 +882,8 @@ Task<Models.ListChargesResponse> GetCharges(
 #### Example Usage
 
 ```csharp
-int? page = 38;
-int? size = 38;
+int? page = 42;
+int? size = 42;
 string code = "code";
 string status = "status";
 string paymentMethod = "payment_method";
@@ -1140,8 +1125,8 @@ Task<Models.ListChargeTransactionsResponse> GetChargeTransactions(string chargeI
 
 ```csharp
 string chargeId = "charge_id";
-int? page = 80;
-int? size = 80;
+int? page = 133;
+int? size = 133;
 
 Models.ListChargeTransactionsResponse result = await charges.GetChargeTransactions(chargeId, page, size);
 
@@ -1298,8 +1283,8 @@ Task<Models.ListRecipientResponse> GetRecipients(int? page = null, int? size = n
 #### Example Usage
 
 ```csharp
-int? page = 80;
-int? size = 80;
+int? page = 133;
+int? size = 133;
 
 Models.ListRecipientResponse result = await recipients.GetRecipients(page, size);
 
@@ -1369,8 +1354,8 @@ Task<Models.ListAnticipationResponse> GetAnticipations(
 
 ```csharp
 string recipientId = "recipient_id";
-int? page = 80;
-int? size = 80;
+int? page = 133;
+int? size = 133;
 string status = "status";
 string timeframe = "timeframe";
 DateTime? paymentDateSince = DateTime.Now();
@@ -1528,8 +1513,8 @@ Task<Models.ListTransferResponse> GetTransfers(
 
 ```csharp
 string recipientId = "recipient_id";
-int? page = 80;
-int? size = 80;
+int? page = 133;
+int? size = 133;
 string status = "status";
 DateTime? createdSince = DateTime.Now();
 DateTime? createdUntil = DateTime.Now();
@@ -1744,8 +1729,8 @@ Task<Models.ListWithdrawals> GetWithdrawals(
 
 ```csharp
 string recipientId = "recipient_id";
-int? page = 80;
-int? size = 80;
+int? page = 133;
+int? size = 133;
 string status = "status";
 DateTime? createdSince = DateTime.Now();
 DateTime? createdUntil = DateTime.Now();
@@ -2155,8 +2140,8 @@ Task<Models.GetUsagesDetailsResponse> GetUsagesDetails(
 ```csharp
 string subscriptionId = "subscription_id";
 string cycleId = "cycle_id";
-int? size = 80;
-int? page = 80;
+int? size = 133;
+int? page = 133;
 string itemId = "item_id";
 string mgroup = "group";
 
@@ -2339,8 +2324,8 @@ Task<Models.ListIncrementsResponse> GetIncrements(string subscriptionId, int? pa
 
 ```csharp
 string subscriptionId = "subscription_id";
-int? page = 80;
-int? size = 80;
+int? page = 133;
+int? size = 133;
 
 Models.ListIncrementsResponse result = await subscriptions.GetIncrements(subscriptionId, page, size);
 
@@ -2449,8 +2434,8 @@ Task<Models.ListUsagesResponse> GetUsages(
 ```csharp
 string subscriptionId = "subscription_id";
 string itemId = "item_id";
-int? page = 80;
-int? size = 80;
+int? page = 225;
+int? size = 225;
 string code = "code";
 string mgroup = "group";
 DateTime? usedSince = DateTime.Now();
@@ -2749,8 +2734,8 @@ Task<Models.ListDiscountsResponse> GetDiscounts(string subscriptionId, int page,
 
 ```csharp
 string subscriptionId = "subscription_id";
-int page = 80;
-int size = 80;
+int page = 225;
+int size = 225;
 
 Models.ListDiscountsResponse result = await subscriptions.GetDiscounts(subscriptionId, page, size);
 
@@ -2829,8 +2814,8 @@ Task<Models.ListSubscriptionsResponse> GetSubscriptions(
 #### Example Usage
 
 ```csharp
-int? page = 80;
-int? size = 80;
+int? page = 225;
+int? size = 225;
 string code = "code";
 string billingType = "billing_type";
 string customerId = "customer_id";
@@ -2912,8 +2897,8 @@ Task<Models.ListSubscriptionItemsResponse> GetSubscriptionItems(
 
 ```csharp
 string subscriptionId = "subscription_id";
-int? page = 80;
-int? size = 80;
+int? page = 225;
+int? size = 225;
 string name = "name";
 string code = "code";
 string status = "status";
@@ -3212,8 +3197,8 @@ Task<Models.ListInvoicesResponse> GetInvoices(
 #### Example Usage
 
 ```csharp
-int? page = 80;
-int? size = 80;
+int? page = 225;
+int? size = 225;
 string code = "code";
 string customerId = "customer_id";
 string subscriptionId = "subscription_id";
@@ -3361,8 +3346,8 @@ Task<Models.ListOrderResponse> GetOrders(
 #### Example Usage
 
 ```csharp
-int? page = 80;
-int? size = 80;
+int? page = 225;
+int? size = 225;
 string code = "code";
 string status = "status";
 DateTime? createdSince = DateTime.Now();
@@ -3554,211 +3539,6 @@ Models.GetOrderItemResponse result = await orders.UpdateOrderItem(orderId, itemI
 
 [Back to List of Controllers](#list_of_controllers)
 
-## <a name="sellers_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.SellersController") SellersController
-
-### Get singleton instance
-
-The singleton instance of the ``` SellersController ``` class can be accessed from the API Client.
-
-```csharp
-ISellersController sellers = client.Sellers;
-```
-
-### <a name="create_seller"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SellersController.CreateSeller") CreateSeller
-
-> TODO: Add a method description
-
-
-```csharp
-Task<Models.GetSellerResponse> CreateSeller(Models.CreateSellerRequest request, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| request |  ``` Required ```  | Seller Model |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-var request = new Models.CreateSellerRequest();
-string idempotencyKey = "idempotency-key";
-
-Models.GetSellerResponse result = await sellers.CreateSeller(request, idempotencyKey);
-
-```
-
-
-### <a name="update_seller"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SellersController.UpdateSeller") UpdateSeller
-
-> TODO: Add a method description
-
-
-```csharp
-Task<Models.GetSellerResponse> UpdateSeller(string id, Models.UpdateSellerRequest request, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| id |  ``` Required ```  | TODO: Add a parameter description |
-| request |  ``` Required ```  | Update Seller model |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string id = "id";
-var request = new Models.UpdateSellerRequest();
-string idempotencyKey = "idempotency-key";
-
-Models.GetSellerResponse result = await sellers.UpdateSeller(id, request, idempotencyKey);
-
-```
-
-
-### <a name="get_sellers"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SellersController.GetSellers") GetSellers
-
-> TODO: Add a method description
-
-
-```csharp
-Task<Models.ListSellerResponse> GetSellers(
-        int? page = null,
-        int? size = null,
-        string name = null,
-        string document = null,
-        string code = null,
-        string status = null,
-        string type = null,
-        DateTime? createdSince = null,
-        DateTime? createdUntil = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| page |  ``` Optional ```  | Page number |
-| size |  ``` Optional ```  | Page size |
-| name |  ``` Optional ```  | TODO: Add a parameter description |
-| document |  ``` Optional ```  | TODO: Add a parameter description |
-| code |  ``` Optional ```  | TODO: Add a parameter description |
-| status |  ``` Optional ```  | TODO: Add a parameter description |
-| type |  ``` Optional ```  | TODO: Add a parameter description |
-| createdSince |  ``` Optional ```  | TODO: Add a parameter description |
-| createdUntil |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-int? page = 80;
-int? size = 80;
-string name = "name";
-string document = "document";
-string code = "code";
-string status = "status";
-string type = "type";
-DateTime? createdSince = DateTime.Now();
-DateTime? createdUntil = DateTime.Now();
-
-Models.ListSellerResponse result = await sellers.GetSellers(page, size, name, document, code, status, type, createdSince, createdUntil);
-
-```
-
-
-### <a name="update_seller_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SellersController.UpdateSellerMetadata") UpdateSellerMetadata
-
-> TODO: Add a method description
-
-
-```csharp
-Task<Models.GetSellerResponse> UpdateSellerMetadata(string sellerId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| sellerId |  ``` Required ```  | Seller Id |
-| request |  ``` Required ```  | Request for updating the charge metadata |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string sellerId = "seller_id";
-var request = new Models.UpdateMetadataRequest();
-string idempotencyKey = "idempotency-key";
-
-Models.GetSellerResponse result = await sellers.UpdateSellerMetadata(sellerId, request, idempotencyKey);
-
-```
-
-
-### <a name="delete_seller"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SellersController.DeleteSeller") DeleteSeller
-
-> TODO: Add a method description
-
-
-```csharp
-Task<Models.GetSellerResponse> DeleteSeller(string sellerId, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| sellerId |  ``` Required ```  | Seller Id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string sellerId = "sellerId";
-string idempotencyKey = "idempotency-key";
-
-Models.GetSellerResponse result = await sellers.DeleteSeller(sellerId, idempotencyKey);
-
-```
-
-
-### <a name="get_seller_by_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Standard.Controllers.SellersController.GetSellerById") GetSellerById
-
-> TODO: Add a method description
-
-
-```csharp
-Task<Models.GetSellerResponse> GetSellerById(string id)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| id |  ``` Required ```  | Seller Id |
-
-
-#### Example Usage
-
-```csharp
-string id = "id";
-
-Models.GetSellerResponse result = await sellers.GetSellerById(id);
-
-```
-
-
-[Back to List of Controllers](#list_of_controllers)
-
 ## <a name="tokens_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Standard.Controllers.TokensController") TokensController
 
 ### Get singleton instance
@@ -3941,8 +3721,8 @@ Task<Models.ListPlansResponse> GetPlans(
 #### Example Usage
 
 ```csharp
-int? page = 243;
-int? size = 243;
+int? page = 225;
+int? size = 225;
 string name = "name";
 string status = "status";
 string billingType = "billing_type";

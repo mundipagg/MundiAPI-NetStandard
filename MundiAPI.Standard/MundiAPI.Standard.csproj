@@ -9,13 +9,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
     <AssemblyName>MundiAPI.Standard</AssemblyName>
-    <Version>2.1.1.0</Version>
+    <Version>2.2.0.0</Version>
     <Authors></Authors>
     <Company></Company>
     <Product>MundiAPI.Standard</Product>
     <Copyright>Copyright ©  2017</Copyright>
-    <AssemblyVersion>2.1.1.0</AssemblyVersion>
-    <FileVersion>2.1.1.0</FileVersion>
+    <AssemblyVersion>2.2.0.0</AssemblyVersion>
+    <FileVersion>2.2.0.0</FileVersion>
     <Description>Automatically generated using APIMatic.</Description>
   </PropertyGroup>
 

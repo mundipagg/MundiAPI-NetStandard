@@ -80,17 +80,6 @@ namespace MundiAPI.Standard
         }
 
         /// <summary>
-        /// Singleton access to Sellers controller
-        /// </summary>
-        public ISellersController Sellers
-        {
-            get
-            {
-                return SellersController.Instance;
-            }
-        }
-
-        /// <summary>
         /// Singleton access to Tokens controller
         /// </summary>
         public ITokensController Tokens

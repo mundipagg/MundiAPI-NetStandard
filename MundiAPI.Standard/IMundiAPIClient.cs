@@ -42,11 +42,6 @@ namespace MundiAPI.Standard
         IOrdersController Orders { get;}
 
         /// <summary>
-        /// Singleton access to Sellers controller
-        /// </summary>
-        ISellersController Sellers { get;}
-
-        /// <summary>
         /// Singleton access to Tokens controller
         /// </summary>
         ITokensController Tokens { get;}
