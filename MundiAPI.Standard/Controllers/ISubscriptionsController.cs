@@ -796,5 +796,21 @@ namespace MundiAPI.Standard.Controllers
         /// <return>Returns the Models.GetUsageReportResponse response from the API call</return>
         Task<Models.GetUsageReportResponse> GetUsageReportAsync(string subscriptionId, string periodId);
 
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="id">Required parameter: Subscription's id</param>
+        /// <param name="request">Required parameter: Example: </param>
+        /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
+        Models.GetSubscriptionResponse UpdateSplitSubscription(string id, Models.UpdateSubscriptionSplitRequest request);
+
+        /// <summary>
+        /// TODO: type endpoint description here
+        /// </summary>
+        /// <param name="id">Required parameter: Subscription's id</param>
+        /// <param name="request">Required parameter: Example: </param>
+        /// <return>Returns the Models.GetSubscriptionResponse response from the API call</return>
+        Task<Models.GetSubscriptionResponse> UpdateSplitSubscriptionAsync(string id, Models.UpdateSubscriptionSplitRequest request);
+
     }
 } 

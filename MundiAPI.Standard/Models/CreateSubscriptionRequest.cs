@@ -52,6 +52,7 @@ namespace MundiAPI.Standard.Models
         private List<Models.CreateIncrementRequest> increments;
         private Models.CreatePeriodRequest period;
         private Models.CreateSubMerchantRequest submerchant;
+        private Models.CreateSubscriptionSplitRequest split;
 
         /// <summary>
         /// Customer
@@ -578,6 +579,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.submerchant = value;
                 onPropertyChanged("Submerchant");
+            }
+        }
+
+        /// <summary>
+        /// Subscription's split
+        /// </summary>
+        [JsonProperty("split")]
+        public Models.CreateSubscriptionSplitRequest Split 
+        { 
+            get 
+            {
+                return this.split; 
+            } 
+            set 
+            {
+                this.split = value;
+                onPropertyChanged("Split");
             }
         }
     }

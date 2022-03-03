@@ -48,6 +48,7 @@ namespace MundiAPI.Standard.Models
         private List<Models.GetDiscountResponse> discounts;
         private List<Models.GetIncrementResponse> increments;
         private int? boletoDueDays;
+        private Models.GetSubscriptionSplitResponse split;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -510,6 +511,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.boletoDueDays = value;
                 onPropertyChanged("BoletoDueDays");
+            }
+        }
+
+        /// <summary>
+        /// Subscription's split response
+        /// </summary>
+        [JsonProperty("split")]
+        public Models.GetSubscriptionSplitResponse Split 
+        { 
+            get 
+            {
+                return this.split; 
+            } 
+            set 
+            {
+                this.split = value;
+                onPropertyChanged("Split");
             }
         }
     }

@@ -25,6 +25,7 @@ namespace MundiAPI.Standard.Models
         private string qrCodeUrl;
         private DateTime expiresAt;
         private List<Models.PixAdditionalInformation> additionalInformation;
+        private Models.GetPixPayerResponse payer;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -92,6 +93,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.additionalInformation = value;
                 onPropertyChanged("AdditionalInformation");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("payer")]
+        public Models.GetPixPayerResponse Payer 
+        { 
+            get 
+            {
+                return this.payer; 
+            } 
+            set 
+            {
+                this.payer = value;
+                onPropertyChanged("Payer");
             }
         }
     }
