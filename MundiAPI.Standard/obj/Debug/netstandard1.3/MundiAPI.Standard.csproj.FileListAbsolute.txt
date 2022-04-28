@@ -1,0 +1,10 @@
+C:\Users\alisson.costa\Documents\Codigos\MundiAPI-NetStandard\MundiAPI.Standard\bin\Debug\netstandard1.3\MundiAPI.Standard.deps.json
+C:\Users\alisson.costa\Documents\Codigos\MundiAPI-NetStandard\MundiAPI.Standard\bin\Debug\netstandard1.3\MundiAPI.Standard.dll
+C:\Users\alisson.costa\Documents\Codigos\MundiAPI-NetStandard\MundiAPI.Standard\bin\Debug\netstandard1.3\MundiAPI.Standard.pdb
+C:\Users\alisson.costa\Documents\Codigos\MundiAPI-NetStandard\MundiAPI.Standard\obj\Debug\netstandard1.3\MundiAPI.Standard.csproj.AssemblyReference.cache
+C:\Users\alisson.costa\Documents\Codigos\MundiAPI-NetStandard\MundiAPI.Standard\obj\Debug\netstandard1.3\MundiAPI.Standard.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alisson.costa\Documents\Codigos\MundiAPI-NetStandard\MundiAPI.Standard\obj\Debug\netstandard1.3\MundiAPI.Standard.AssemblyInfoInputs.cache
+C:\Users\alisson.costa\Documents\Codigos\MundiAPI-NetStandard\MundiAPI.Standard\obj\Debug\netstandard1.3\MundiAPI.Standard.AssemblyInfo.cs
+C:\Users\alisson.costa\Documents\Codigos\MundiAPI-NetStandard\MundiAPI.Standard\obj\Debug\netstandard1.3\MundiAPI.Standard.csproj.CoreCompileInputs.cache
+C:\Users\alisson.costa\Documents\Codigos\MundiAPI-NetStandard\MundiAPI.Standard\obj\Debug\netstandard1.3\MundiAPI.Standard.dll
+C:\Users\alisson.costa\Documents\Codigos\MundiAPI-NetStandard\MundiAPI.Standard\obj\Debug\netstandard1.3\MundiAPI.Standard.pdb

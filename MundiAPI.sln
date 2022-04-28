@@ -1,21 +1,24 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MundiAPI.Standard", "MundiAPI.Standard/MundiAPI.Standard.csproj", "{2f83bada-2ab5-4c49-ae7e-35f72e20b7e3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MundiAPI.Standard", "MundiAPI.Standard\MundiAPI.Standard.csproj", "{2F83BADA-2AB5-4C49-AE7E-35F72E20B7E3}"
 EndProject
 Global
-    GlobalSection(SolutionConfigurationPlatforms) = preSolution
-        Debug|Any CPU = Debug|Any CPU
-        Release|Any CPU = Release|Any CPU
-    EndGlobalSection
-    GlobalSection(ProjectConfigurationPlatforms) = postSolution
-        {2f83bada-2ab5-4c49-ae7e-35f72e20b7e3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-        {2f83bada-2ab5-4c49-ae7e-35f72e20b7e3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-        {2f83bada-2ab5-4c49-ae7e-35f72e20b7e3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-        {2f83bada-2ab5-4c49-ae7e-35f72e20b7e3}.Release|Any CPU.Build.0 = Release|Any CPU
-    EndGlobalSection
-    GlobalSection(SolutionProperties) = preSolution
-        HideSolutionNode = FALSE
-    EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F83BADA-2AB5-4C49-AE7E-35F72E20B7E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F83BADA-2AB5-4C49-AE7E-35F72E20B7E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F83BADA-2AB5-4C49-AE7E-35F72E20B7E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F83BADA-2AB5-4C49-AE7E-35F72E20B7E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {85BF3EBE-F32C-4AF9-8089-4EB91A0C77AD}
+	EndGlobalSection
 EndGlobal

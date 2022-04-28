@@ -154,7 +154,9 @@ namespace MundiAPI.Standard.Controllers
                 string status = null,
                 DateTime? dueSince = null,
                 DateTime? dueUntil = null,
-                string customerDocument = null);
+                string customerDocument = null,
+                string Initial_Amount = "0",
+                string Final_Amount = "0");
 
         /// <summary>
         /// Gets all invoices
@@ -182,7 +184,9 @@ namespace MundiAPI.Standard.Controllers
                 string status = null,
                 DateTime? dueSince = null,
                 DateTime? dueUntil = null,
-                string customerDocument = null);
+                string customerDocument = null,
+                string Initial_Amount = "0",
+                string Final_Amount = "0");
 
     }
 } 

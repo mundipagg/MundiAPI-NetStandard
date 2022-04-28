@@ -488,9 +488,11 @@ namespace MundiAPI.Standard.Controllers
                 string status = null,
                 DateTime? dueSince = null,
                 DateTime? dueUntil = null,
-                string customerDocument = null)
+                string customerDocument = null,
+                string Initial_Amount = "0",
+                string Final_Amount = "0")
         {
-            Task<Models.ListInvoicesResponse> t = GetInvoicesAsync(page, size, code, customerId, subscriptionId, createdSince, createdUntil, status, dueSince, dueUntil, customerDocument);
+            Task<Models.ListInvoicesResponse> t = GetInvoicesAsync(page, size, code, customerId, subscriptionId, createdSince, createdUntil, status, dueSince, dueUntil, customerDocument, Initial_Amount, Final_Amount);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -521,7 +523,9 @@ namespace MundiAPI.Standard.Controllers
                 string status = null,
                 DateTime? dueSince = null,
                 DateTime? dueUntil = null,
-                string customerDocument = null)
+                string customerDocument = null,
+                string Initial_Amount = "0",
+                string Final_Amount = "0")
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -543,7 +547,9 @@ namespace MundiAPI.Standard.Controllers
                 { "status", status },
                 { "due_since", (dueSince.HasValue) ? dueSince.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") : null },
                 { "due_until", (dueUntil.HasValue) ? dueUntil.Value.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") : null },
-                { "customer_document", customerDocument }
+                { "customer_document", customerDocument },
+                { "initial_amount", Initial_Amount},
+                { "final_amount", Final_Amount}
             },ArrayDeserializationFormat,ParameterSeparator);
 
 
