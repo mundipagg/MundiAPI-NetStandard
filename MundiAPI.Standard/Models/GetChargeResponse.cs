@@ -40,6 +40,8 @@ namespace MundiAPI.Standard.Models
         private DateTime? canceledAt;
         private int canceledAmount;
         private int paidAmount;
+        private string recurrencyCycle;
+        private int? interestAndFinePaid;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -366,6 +368,40 @@ namespace MundiAPI.Standard.Models
             {
                 this.paidAmount = value;
                 onPropertyChanged("PaidAmount");
+            }
+        }
+
+        /// <summary>
+        /// Defines whether the card has been used one or more times.
+        /// </summary>
+        [JsonProperty("recurrency_cycle")]
+        public string RecurrencyCycle 
+        { 
+            get 
+            {
+                return this.recurrencyCycle; 
+            } 
+            set 
+            {
+                this.recurrencyCycle = value;
+                onPropertyChanged("RecurrencyCycle");
+            }
+        }
+
+        /// <summary>
+        /// interest and fine paid
+        /// </summary>
+        [JsonProperty("interest_and_fine_paid")]
+        public int? InterestAndFinePaid 
+        { 
+            get 
+            {
+                return this.interestAndFinePaid; 
+            } 
+            set 
+            {
+                this.interestAndFinePaid = value;
+                onPropertyChanged("InterestAndFinePaid");
             }
         }
     }

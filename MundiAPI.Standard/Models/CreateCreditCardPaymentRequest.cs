@@ -35,6 +35,7 @@ namespace MundiAPI.Standard.Models
         private Models.CreateCardPaymentContactlessRequest contactless;
         private bool? autoRecovery;
         private string operationType;
+        private string recurrencyCycle;
 
         /// <summary>
         /// Number of installments
@@ -271,6 +272,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.operationType = value;
                 onPropertyChanged("OperationType");
+            }
+        }
+
+        /// <summary>
+        /// Defines whether the card has been used one or more times.
+        /// </summary>
+        [JsonProperty("recurrency_cycle")]
+        public string RecurrencyCycle 
+        { 
+            get 
+            {
+                return this.recurrencyCycle; 
+            } 
+            set 
+            {
+                this.recurrencyCycle = value;
+                onPropertyChanged("RecurrencyCycle");
             }
         }
     }

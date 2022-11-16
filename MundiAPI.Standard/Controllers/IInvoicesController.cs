@@ -113,22 +113,6 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.GetInvoiceResponse> UpdateInvoiceMetadataAsync(string invoiceId, Models.UpdateMetadataRequest request, string idempotencyKey = null);
 
         /// <summary>
-        /// Cancels an invoice
-        /// </summary>
-        /// <param name="invoiceId">Required parameter: Invoice id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Models.GetInvoiceResponse CancelInvoice(string invoiceId, string idempotencyKey = null);
-
-        /// <summary>
-        /// Cancels an invoice
-        /// </summary>
-        /// <param name="invoiceId">Required parameter: Invoice id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
-        Task<Models.GetInvoiceResponse> CancelInvoiceAsync(string invoiceId, string idempotencyKey = null);
-
-        /// <summary>
         /// Gets all invoices
         /// </summary>
         /// <param name="page">Optional parameter: Page number</param>
@@ -183,6 +167,22 @@ namespace MundiAPI.Standard.Controllers
                 DateTime? dueSince = null,
                 DateTime? dueUntil = null,
                 string customerDocument = null);
+
+        /// <summary>
+        /// Cancels an invoice
+        /// </summary>
+        /// <param name="invoiceId">Required parameter: Invoice id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        Models.GetInvoiceResponse CancelInvoice(string invoiceId, string idempotencyKey = null);
+
+        /// <summary>
+        /// Cancels an invoice
+        /// </summary>
+        /// <param name="invoiceId">Required parameter: Invoice id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.GetInvoiceResponse response from the API call</return>
+        Task<Models.GetInvoiceResponse> CancelInvoiceAsync(string invoiceId, string idempotencyKey = null);
 
     }
 } 
