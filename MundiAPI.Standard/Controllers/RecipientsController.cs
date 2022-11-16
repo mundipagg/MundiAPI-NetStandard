@@ -92,7 +92,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -163,7 +163,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -233,7 +233,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" }
             };
 
@@ -298,7 +298,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" }
             };
 
@@ -360,7 +360,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" }
             };
 
@@ -469,7 +469,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" }
             };
 
@@ -535,7 +535,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -606,7 +606,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -673,7 +673,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" }
             };
 
@@ -689,6 +689,79 @@ namespace MundiAPI.Standard.Controllers
             try
             {
                 return APIHelper.JsonDeserialize<Models.GetRecipientResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Gets the anticipation limits for a recipient
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Recipient id</param>
+        /// <param name="timeframe">Required parameter: Timeframe</param>
+        /// <param name="paymentDate">Required parameter: Anticipation payment date</param>
+        /// <return>Returns the Models.GetAnticipationLimitResponse response from the API call</return>
+        public Models.GetAnticipationLimitResponse GetAnticipationLimits(string recipientId, string timeframe, DateTime paymentDate)
+        {
+            Task<Models.GetAnticipationLimitResponse> t = GetAnticipationLimitsAsync(recipientId, timeframe, paymentDate);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Gets the anticipation limits for a recipient
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Recipient id</param>
+        /// <param name="timeframe">Required parameter: Timeframe</param>
+        /// <param name="paymentDate">Required parameter: Anticipation payment date</param>
+        /// <return>Returns the Models.GetAnticipationLimitResponse response from the API call</return>
+        public async Task<Models.GetAnticipationLimitResponse> GetAnticipationLimitsAsync(string recipientId, string timeframe, DateTime paymentDate)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/recipients/{recipient_id}/anticipation_limits");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "recipient_id", recipientId }
+            });
+
+            //process optional query parameters
+            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "timeframe", timeframe },
+                { "payment_date", paymentDate.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") }
+            },ArrayDeserializationFormat,ParameterSeparator);
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.GetAnticipationLimitResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -738,7 +811,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" }
             };
 
@@ -832,7 +905,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" }
             };
 
@@ -898,7 +971,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -961,7 +1034,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -1032,7 +1105,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -1053,79 +1126,6 @@ namespace MundiAPI.Standard.Controllers
             try
             {
                 return APIHelper.JsonDeserialize<Models.GetTransferResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Gets the anticipation limits for a recipient
-        /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="timeframe">Required parameter: Timeframe</param>
-        /// <param name="paymentDate">Required parameter: Anticipation payment date</param>
-        /// <return>Returns the Models.GetAnticipationLimitResponse response from the API call</return>
-        public Models.GetAnticipationLimitResponse GetAnticipationLimits(string recipientId, string timeframe, DateTime paymentDate)
-        {
-            Task<Models.GetAnticipationLimitResponse> t = GetAnticipationLimitsAsync(recipientId, timeframe, paymentDate);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Gets the anticipation limits for a recipient
-        /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="timeframe">Required parameter: Timeframe</param>
-        /// <param name="paymentDate">Required parameter: Anticipation payment date</param>
-        /// <return>Returns the Models.GetAnticipationLimitResponse response from the API call</return>
-        public async Task<Models.GetAnticipationLimitResponse> GetAnticipationLimitsAsync(string recipientId, string timeframe, DateTime paymentDate)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/recipients/{recipient_id}/anticipation_limits");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "recipient_id", recipientId }
-            });
-
-            //process optional query parameters
-            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "timeframe", timeframe },
-                { "payment_date", paymentDate.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK") }
-            },ArrayDeserializationFormat,ParameterSeparator);
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
-                { "accept", "application/json" }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetAnticipationLimitResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -1174,7 +1174,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" }
             };
@@ -1243,7 +1243,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" }
             };
 
@@ -1337,7 +1337,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" }
             };
 
@@ -1403,7 +1403,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" },
                 { "content-type", "application/json; charset=utf-8" },
                 { "idempotency-key", idempotencyKey }
@@ -1470,7 +1470,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.3.0" },
+                { "user-agent", "MundiSDK - DotNet 2.5.0" },
                 { "accept", "application/json" }
             };
 

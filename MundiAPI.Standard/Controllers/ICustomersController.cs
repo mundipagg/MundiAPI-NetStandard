@@ -297,6 +297,58 @@ namespace MundiAPI.Standard.Controllers
                 string idempotencyKey = null);
 
         /// <summary>
+        /// Delete a customer's access token
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="tokenId">Required parameter: Token Id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.GetAccessTokenResponse response from the API call</return>
+        Models.GetAccessTokenResponse DeleteAccessToken(string customerId, string tokenId, string idempotencyKey = null);
+
+        /// <summary>
+        /// Delete a customer's access token
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="tokenId">Required parameter: Token Id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.GetAccessTokenResponse response from the API call</return>
+        Task<Models.GetAccessTokenResponse> DeleteAccessTokenAsync(string customerId, string tokenId, string idempotencyKey = null);
+
+        /// <summary>
+        /// Creates a new address for a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="request">Required parameter: Request for creating an address</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
+        Models.GetAddressResponse CreateAddress(string customerId, Models.CreateAddressRequest request, string idempotencyKey = null);
+
+        /// <summary>
+        /// Creates a new address for a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="request">Required parameter: Request for creating an address</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
+        Task<Models.GetAddressResponse> CreateAddressAsync(string customerId, Models.CreateAddressRequest request, string idempotencyKey = null);
+
+        /// <summary>
+        /// Get a customer's card
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer id</param>
+        /// <param name="cardId">Required parameter: Card id</param>
+        /// <return>Returns the Models.GetCardResponse response from the API call</return>
+        Models.GetCardResponse GetCard(string customerId, string cardId);
+
+        /// <summary>
+        /// Get a customer's card
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer id</param>
+        /// <param name="cardId">Required parameter: Card id</param>
+        /// <return>Returns the Models.GetCardResponse response from the API call</return>
+        Task<Models.GetCardResponse> GetCardAsync(string customerId, string cardId);
+
+        /// <summary>
         /// Get all cards from a customer
         /// </summary>
         /// <param name="customerId">Required parameter: Customer Id</param>
@@ -367,58 +419,6 @@ namespace MundiAPI.Standard.Controllers
                 int? size = 10,
                 string email = null,
                 string code = null);
-
-        /// <summary>
-        /// Delete a customer's access token
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="tokenId">Required parameter: Token Id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetAccessTokenResponse response from the API call</return>
-        Models.GetAccessTokenResponse DeleteAccessToken(string customerId, string tokenId, string idempotencyKey = null);
-
-        /// <summary>
-        /// Delete a customer's access token
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="tokenId">Required parameter: Token Id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetAccessTokenResponse response from the API call</return>
-        Task<Models.GetAccessTokenResponse> DeleteAccessTokenAsync(string customerId, string tokenId, string idempotencyKey = null);
-
-        /// <summary>
-        /// Creates a new address for a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="request">Required parameter: Request for creating an address</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
-        Models.GetAddressResponse CreateAddress(string customerId, Models.CreateAddressRequest request, string idempotencyKey = null);
-
-        /// <summary>
-        /// Creates a new address for a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="request">Required parameter: Request for creating an address</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
-        Task<Models.GetAddressResponse> CreateAddressAsync(string customerId, Models.CreateAddressRequest request, string idempotencyKey = null);
-
-        /// <summary>
-        /// Get a customer's card
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer id</param>
-        /// <param name="cardId">Required parameter: Card id</param>
-        /// <return>Returns the Models.GetCardResponse response from the API call</return>
-        Models.GetCardResponse GetCard(string customerId, string cardId);
-
-        /// <summary>
-        /// Get a customer's card
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer id</param>
-        /// <param name="cardId">Required parameter: Card id</param>
-        /// <return>Returns the Models.GetCardResponse response from the API call</return>
-        Task<Models.GetCardResponse> GetCardAsync(string customerId, string cardId);
 
     }
 } 

@@ -201,6 +201,24 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.GetRecipientResponse> GetRecipientAsync(string recipientId);
 
         /// <summary>
+        /// Gets the anticipation limits for a recipient
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Recipient id</param>
+        /// <param name="timeframe">Required parameter: Timeframe</param>
+        /// <param name="paymentDate">Required parameter: Anticipation payment date</param>
+        /// <return>Returns the Models.GetAnticipationLimitResponse response from the API call</return>
+        Models.GetAnticipationLimitResponse GetAnticipationLimits(string recipientId, string timeframe, DateTime paymentDate);
+
+        /// <summary>
+        /// Gets the anticipation limits for a recipient
+        /// </summary>
+        /// <param name="recipientId">Required parameter: Recipient id</param>
+        /// <param name="timeframe">Required parameter: Timeframe</param>
+        /// <param name="paymentDate">Required parameter: Anticipation payment date</param>
+        /// <return>Returns the Models.GetAnticipationLimitResponse response from the API call</return>
+        Task<Models.GetAnticipationLimitResponse> GetAnticipationLimitsAsync(string recipientId, string timeframe, DateTime paymentDate);
+
+        /// <summary>
         /// Gets a transfer
         /// </summary>
         /// <param name="recipientId">Required parameter: Recipient id</param>
@@ -303,24 +321,6 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetTransferResponse response from the API call</return>
         Task<Models.GetTransferResponse> CreateTransferAsync(string recipientId, Models.CreateTransferRequest request, string idempotencyKey = null);
-
-        /// <summary>
-        /// Gets the anticipation limits for a recipient
-        /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="timeframe">Required parameter: Timeframe</param>
-        /// <param name="paymentDate">Required parameter: Anticipation payment date</param>
-        /// <return>Returns the Models.GetAnticipationLimitResponse response from the API call</return>
-        Models.GetAnticipationLimitResponse GetAnticipationLimits(string recipientId, string timeframe, DateTime paymentDate);
-
-        /// <summary>
-        /// Gets the anticipation limits for a recipient
-        /// </summary>
-        /// <param name="recipientId">Required parameter: Recipient id</param>
-        /// <param name="timeframe">Required parameter: Timeframe</param>
-        /// <param name="paymentDate">Required parameter: Anticipation payment date</param>
-        /// <return>Returns the Models.GetAnticipationLimitResponse response from the API call</return>
-        Task<Models.GetAnticipationLimitResponse> GetAnticipationLimitsAsync(string recipientId, string timeframe, DateTime paymentDate);
 
         /// <summary>
         /// TODO: type endpoint description here

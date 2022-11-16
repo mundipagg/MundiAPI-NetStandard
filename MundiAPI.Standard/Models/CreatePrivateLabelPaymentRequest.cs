@@ -30,6 +30,7 @@ namespace MundiAPI.Standard.Models
         private bool? capture = true;
         private bool? extendedLimitEnabled;
         private string extendedLimitCode;
+        private string recurrencyCycle;
 
         /// <summary>
         /// Number of installments
@@ -181,6 +182,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.extendedLimitCode = value;
                 onPropertyChanged("ExtendedLimitCode");
+            }
+        }
+
+        /// <summary>
+        /// Defines whether the card has been used one or more times.
+        /// </summary>
+        [JsonProperty("recurrency_cycle")]
+        public string RecurrencyCycle 
+        { 
+            get 
+            {
+                return this.recurrencyCycle; 
+            } 
+            set 
+            {
+                this.recurrencyCycle = value;
+                onPropertyChanged("RecurrencyCycle");
             }
         }
     }

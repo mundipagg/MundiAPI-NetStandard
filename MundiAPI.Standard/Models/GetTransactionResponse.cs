@@ -38,6 +38,9 @@ namespace MundiAPI.Standard.Models
         private Models.GetAntifraudResponse antifraudResponse;
         private Dictionary<string, string> metadata;
         private List<Models.GetSplitResponse> split;
+        private Models.GetInterestResponse interest;
+        private Models.GetFineResponse fine;
+        private int? maxDaysToPayPastDue;
 
         /// <summary>
         /// Gateway transaction id
@@ -311,6 +314,57 @@ namespace MundiAPI.Standard.Models
             {
                 this.split = value;
                 onPropertyChanged("Split");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("interest")]
+        public Models.GetInterestResponse Interest 
+        { 
+            get 
+            {
+                return this.interest; 
+            } 
+            set 
+            {
+                this.interest = value;
+                onPropertyChanged("Interest");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("fine")]
+        public Models.GetFineResponse Fine 
+        { 
+            get 
+            {
+                return this.fine; 
+            } 
+            set 
+            {
+                this.fine = value;
+                onPropertyChanged("Fine");
+            }
+        }
+
+        /// <summary>
+        /// TODO: Write general description for this method
+        /// </summary>
+        [JsonProperty("max_days_to_pay_past_due")]
+        public int? MaxDaysToPayPastDue 
+        { 
+            get 
+            {
+                return this.maxDaysToPayPastDue; 
+            } 
+            set 
+            {
+                this.maxDaysToPayPastDue = value;
+                onPropertyChanged("MaxDaysToPayPastDue");
             }
         }
     }

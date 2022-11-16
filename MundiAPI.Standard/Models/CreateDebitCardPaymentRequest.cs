@@ -28,6 +28,7 @@ namespace MundiAPI.Standard.Models
         private bool? recurrence;
         private Models.CreatePaymentAuthenticationRequest authentication;
         private Models.CreateCardPaymentContactlessRequest token;
+        private string recurrencyCycle;
 
         /// <summary>
         /// The text that will be shown on the debit card's statement
@@ -145,6 +146,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.token = value;
                 onPropertyChanged("Token");
+            }
+        }
+
+        /// <summary>
+        /// Defines whether the card has been used one or more times.
+        /// </summary>
+        [JsonProperty("recurrency_cycle")]
+        public string RecurrencyCycle 
+        { 
+            get 
+            {
+                return this.recurrencyCycle; 
+            } 
+            set 
+            {
+                this.recurrencyCycle = value;
+                onPropertyChanged("RecurrencyCycle");
             }
         }
     }
