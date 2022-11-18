@@ -191,22 +191,6 @@ namespace MundiAPI.Standard.Controllers
         Task<Models.GetPlanItemResponse> DeletePlanItemAsync(string planId, string planItemId, string idempotencyKey = null);
 
         /// <summary>
-        /// Gets a plan item
-        /// </summary>
-        /// <param name="planId">Required parameter: Plan id</param>
-        /// <param name="planItemId">Required parameter: Plan item id</param>
-        /// <return>Returns the Models.GetPlanItemResponse response from the API call</return>
-        Models.GetPlanItemResponse GetPlanItem(string planId, string planItemId);
-
-        /// <summary>
-        /// Gets a plan item
-        /// </summary>
-        /// <param name="planId">Required parameter: Plan id</param>
-        /// <param name="planItemId">Required parameter: Plan item id</param>
-        /// <return>Returns the Models.GetPlanItemResponse response from the API call</return>
-        Task<Models.GetPlanItemResponse> GetPlanItemAsync(string planId, string planItemId);
-
-        /// <summary>
         /// Deletes a plan
         /// </summary>
         /// <param name="planId">Required parameter: Plan id</param>
@@ -221,6 +205,22 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
         /// <return>Returns the Models.GetPlanResponse response from the API call</return>
         Task<Models.GetPlanResponse> DeletePlanAsync(string planId, string idempotencyKey = null);
+
+        /// <summary>
+        /// Gets a plan item
+        /// </summary>
+        /// <param name="planId">Required parameter: Plan id</param>
+        /// <param name="planItemId">Required parameter: Plan item id</param>
+        /// <return>Returns the Models.GetPlanItemResponse response from the API call</return>
+        Models.GetPlanItemResponse GetPlanItem(string planId, string planItemId);
+
+        /// <summary>
+        /// Gets a plan item
+        /// </summary>
+        /// <param name="planId">Required parameter: Plan id</param>
+        /// <param name="planItemId">Required parameter: Plan item id</param>
+        /// <return>Returns the Models.GetPlanItemResponse response from the API call</return>
+        Task<Models.GetPlanItemResponse> GetPlanItemAsync(string planId, string planItemId);
 
     }
 } 
