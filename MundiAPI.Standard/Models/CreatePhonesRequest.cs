@@ -21,14 +21,14 @@ namespace MundiAPI.Standard.Models
     public class CreatePhonesRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
-        private Models.CreatePhoneRequest homePhone;
-        private Models.CreatePhoneRequest mobilePhone;
+        private Models.GetPhoneResponse homePhone;
+        private Models.GetPhoneResponse mobilePhone;
 
         /// <summary>
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("home_phone")]
-        public Models.CreatePhoneRequest HomePhone 
+        public Models.GetPhoneResponse HomePhone 
         { 
             get 
             {
@@ -45,7 +45,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("mobile_phone")]
-        public Models.CreatePhoneRequest MobilePhone 
+        public Models.GetPhoneResponse MobilePhone 
         { 
             get 
             {

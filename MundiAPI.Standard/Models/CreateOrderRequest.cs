@@ -22,21 +22,21 @@ namespace MundiAPI.Standard.Models
     {
         // These fields hold the values for the public properties.
         private List<Models.CreateOrderItemRequest> items;
-        private Models.CreateCustomerRequest customer;
+        private Models.Customer8 customer;
         private List<Models.CreatePaymentRequest> payments;
         private string code;
         private string customerId;
-        private Models.CreateShippingRequest shipping;
+        private Models.Shipping3 shipping;
         private Dictionary<string, string> metadata;
         private bool? antifraudEnabled;
         private string ip;
         private string sessionId;
-        private Models.CreateLocationRequest location;
-        private Models.CreateDeviceRequest device;
-        private bool closed = true;
+        private Models.Location location;
+        private Models.Device1 device;
+        private bool closed;
         private string currency;
         private Models.CreateAntifraudRequest antifraud;
-        private Models.CreateSubMerchantRequest submerchant;
+        private Models.Submerchant submerchant;
 
         /// <summary>
         /// Items
@@ -56,10 +56,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Customer
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("customer")]
-        public Models.CreateCustomerRequest Customer 
+        public Models.Customer8 Customer 
         { 
             get 
             {
@@ -124,10 +124,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Shipping data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("shipping")]
-        public Models.CreateShippingRequest Shipping 
+        public Models.Shipping3 Shipping 
         { 
             get 
             {
@@ -209,10 +209,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Request's location
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("location")]
-        public Models.CreateLocationRequest Location 
+        public Models.Location Location 
         { 
             get 
             {
@@ -226,10 +226,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Device's informations
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("device")]
-        public Models.CreateDeviceRequest Device 
+        public Models.Device1 Device 
         { 
             get 
             {
@@ -294,10 +294,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// SubMerchant
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("submerchant")]
-        public Models.CreateSubMerchantRequest Submerchant 
+        public Models.Submerchant Submerchant 
         { 
             get 
             {

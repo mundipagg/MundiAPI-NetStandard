@@ -23,7 +23,7 @@ namespace MundiAPI.Standard.Models
         // These fields hold the values for the public properties.
         private string currency;
         private long availableAmount;
-        private Models.GetRecipientResponse recipient;
+        private Models.Recipient recipient;
         private long waitingFundsAmount;
         private long transferredAmount;
 
@@ -62,10 +62,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Recipient
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("recipient")]
-        public Models.GetRecipientResponse Recipient 
+        public Models.Recipient Recipient 
         { 
             get 
             {

@@ -23,13 +23,13 @@ namespace MundiAPI.Standard.Models
         // These fields hold the values for the public properties.
         private bool updateSubscription;
         private string paymentMethod;
-        private Models.CreateCreditCardPaymentRequest creditCard;
-        private Models.CreateDebitCardPaymentRequest debitCard;
-        private Models.CreateBoletoPaymentRequest boleto;
-        private Models.CreateVoucherPaymentRequest voucher;
+        private Models.CreditCard1 creditCard;
+        private Models.DebitCard1 debitCard;
+        private Models.Boleto1 boleto;
+        private Models.Voucher voucher;
         private Models.CreateCashPaymentRequest cash;
-        private Models.CreateBankTransferPaymentRequest bankTransfer;
-        private Models.CreatePrivateLabelPaymentRequest privateLabel;
+        private Models.BankTransfer1 bankTransfer;
+        private Models.PrivateLabel privateLabel;
 
         /// <summary>
         /// Indicates if the payment method from the subscription must also be updated
@@ -66,10 +66,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Credit card data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("credit_card")]
-        public Models.CreateCreditCardPaymentRequest CreditCard 
+        public Models.CreditCard1 CreditCard 
         { 
             get 
             {
@@ -83,10 +83,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Debit card data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("debit_card")]
-        public Models.CreateDebitCardPaymentRequest DebitCard 
+        public Models.DebitCard1 DebitCard 
         { 
             get 
             {
@@ -100,10 +100,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Boleto data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("boleto")]
-        public Models.CreateBoletoPaymentRequest Boleto 
+        public Models.Boleto1 Boleto 
         { 
             get 
             {
@@ -117,10 +117,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Voucher data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("voucher")]
-        public Models.CreateVoucherPaymentRequest Voucher 
+        public Models.Voucher Voucher 
         { 
             get 
             {
@@ -134,7 +134,7 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Cash data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("cash")]
         public Models.CreateCashPaymentRequest Cash 
@@ -151,10 +151,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Bank Transfer data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("bank_transfer")]
-        public Models.CreateBankTransferPaymentRequest BankTransfer 
+        public Models.BankTransfer1 BankTransfer 
         { 
             get 
             {
@@ -171,7 +171,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("private_label")]
-        public Models.CreatePrivateLabelPaymentRequest PrivateLabel 
+        public Models.PrivateLabel PrivateLabel 
         { 
             get 
             {

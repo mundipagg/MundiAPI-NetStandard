@@ -26,7 +26,7 @@ namespace MundiAPI.Standard.Models
         private string recipientName;
         private string recipientPhone;
         private string addressId;
-        private Models.CreateAddressRequest address;
+        private Models.Address1 address;
         private DateTime? maxDeliveryDate;
         private DateTime? estimatedDeliveryDate;
         private string type;
@@ -117,10 +117,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Address data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("address")]
-        public Models.CreateAddressRequest Address 
+        public Models.Address1 Address 
         { 
             get 
             {

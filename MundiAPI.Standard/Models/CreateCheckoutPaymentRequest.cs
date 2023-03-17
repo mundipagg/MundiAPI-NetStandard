@@ -26,15 +26,15 @@ namespace MundiAPI.Standard.Models
         private string successUrl;
         private string defaultPaymentMethod;
         private string gatewayAffiliationId;
-        private Models.CreateCheckoutCreditCardPaymentRequest creditCard;
-        private Models.CreateCheckoutDebitCardPaymentRequest debitCard;
+        private Models.CreditCard2 creditCard;
+        private Models.DebitCard2 debitCard;
         private Models.CreateCheckoutBoletoPaymentRequest boleto;
         private bool? customerEditable;
         private int? expiresIn;
         private bool skipCheckoutSuccessPage;
         private bool billingAddressEditable;
-        private Models.CreateAddressRequest billingAddress;
-        private Models.CreateCheckoutBankTransferRequest bankTransfer;
+        private Models.BillingAddress1 billingAddress;
+        private Models.BankTransfer2 bankTransfer;
         private List<string> acceptedBrands;
 
         /// <summary>
@@ -123,10 +123,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Credit Card payment request
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("credit_card")]
-        public Models.CreateCheckoutCreditCardPaymentRequest CreditCard 
+        public Models.CreditCard2 CreditCard 
         { 
             get 
             {
@@ -140,10 +140,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Debit Card payment request
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("debit_card")]
-        public Models.CreateCheckoutDebitCardPaymentRequest DebitCard 
+        public Models.DebitCard2 DebitCard 
         { 
             get 
             {
@@ -157,7 +157,7 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Boleto payment request
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("boleto")]
         public Models.CreateCheckoutBoletoPaymentRequest Boleto 
@@ -242,10 +242,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Billing Address
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("billing_address")]
-        public Models.CreateAddressRequest BillingAddress 
+        public Models.BillingAddress1 BillingAddress 
         { 
             get 
             {
@@ -259,10 +259,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Bank Transfer payment request
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("bank_transfer")]
-        public Models.CreateCheckoutBankTransferRequest BankTransfer 
+        public Models.BankTransfer2 BankTransfer 
         { 
             get 
             {

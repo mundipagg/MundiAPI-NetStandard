@@ -21,14 +21,14 @@ namespace MundiAPI.Standard.Models
     public class UpdateRecipientBankAccountRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
-        private Models.CreateBankAccountRequest bankAccount;
-        private string paymentMode = "bank_transfer";
+        private Models.BankAccount1 bankAccount;
+        private string paymentMode;
 
         /// <summary>
-        /// Bank account
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("bank_account")]
-        public Models.CreateBankAccountRequest BankAccount 
+        public Models.BankAccount1 BankAccount 
         { 
             get 
             {

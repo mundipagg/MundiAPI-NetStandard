@@ -22,8 +22,8 @@ namespace MundiAPI.Standard.Models
     {
         // These fields hold the values for the public properties.
         private string type;
-        private Models.CreateApplePayRequest applePay;
-        private Models.CreateGooglePayRequest googlePay;
+        private Models.ApplePay applePay;
+        private Models.GooglePay googlePay;
         private Models.CreateEmvDecryptRequest emv;
 
         /// <summary>
@@ -44,10 +44,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// The ApplePay encrypted request
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("apple_pay")]
-        public Models.CreateApplePayRequest ApplePay 
+        public Models.ApplePay ApplePay 
         { 
             get 
             {
@@ -61,10 +61,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// The GooglePay encrypted request
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("google_pay")]
-        public Models.CreateGooglePayRequest GooglePay 
+        public Models.GooglePay GooglePay 
         { 
             get 
             {
@@ -78,7 +78,7 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// The Emv encrypted request
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("emv")]
         public Models.CreateEmvDecryptRequest Emv 

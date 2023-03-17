@@ -23,7 +23,7 @@ namespace MundiAPI.Standard.Models
         // These fields hold the values for the public properties.
         private int? installments = 1;
         private string statementDescriptor;
-        private Models.CreateCardRequest card;
+        private Models.Card1 card;
         private string cardId;
         private string cardToken;
         private bool? recurrence;
@@ -31,8 +31,8 @@ namespace MundiAPI.Standard.Models
         private bool? extendedLimitEnabled;
         private string extendedLimitCode;
         private long? merchantCategoryCode;
-        private Models.CreatePaymentAuthenticationRequest authentication;
-        private Models.CreateCardPaymentContactlessRequest contactless;
+        private Models.Authentication2 authentication;
+        private Models.Contactless contactless;
         private bool? autoRecovery;
         private string operationType;
         private string recurrencyCycle;
@@ -72,10 +72,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Credit card data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("card")]
-        public Models.CreateCardRequest Card 
+        public Models.Card1 Card 
         { 
             get 
             {
@@ -208,10 +208,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// The payment authentication request
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("authentication")]
-        public Models.CreatePaymentAuthenticationRequest Authentication 
+        public Models.Authentication2 Authentication 
         { 
             get 
             {
@@ -225,10 +225,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// The Credit card payment contactless request
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("contactless")]
-        public Models.CreateCardPaymentContactlessRequest Contactless 
+        public Models.Contactless Contactless 
         { 
             get 
             {

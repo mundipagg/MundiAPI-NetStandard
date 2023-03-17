@@ -25,7 +25,7 @@ namespace MundiAPI.Standard.Models
         private string paymentUrl;
         private List<string> acceptedPaymentMethods;
         private string status;
-        private Models.GetCustomerResponse customer;
+        private Models.Customer customer;
         private int? amount;
         private string defaultPaymentMethod;
         private string gatewayAffiliationId;
@@ -99,10 +99,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Customer
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("customer")]
-        public Models.GetCustomerResponse Customer 
+        public Models.Customer Customer 
         { 
             get 
             {

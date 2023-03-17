@@ -23,8 +23,8 @@ namespace MundiAPI.Standard.Models
         // These fields hold the values for the public properties.
         private string subscriptionId;
         private int totalAmount;
-        private Models.GetPeriodResponse period;
-        private Models.ListUsagesDetailsResponse usages;
+        private Models.Period period;
+        private Models.Usages usages;
         private int? totalDiscount;
         private int? totalIncrement;
 
@@ -63,10 +63,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Period Details
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("Period")]
-        public Models.GetPeriodResponse Period 
+        public Models.Period Period 
         { 
             get 
             {
@@ -80,10 +80,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Usages Details
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("Usages")]
-        public Models.ListUsagesDetailsResponse Usages 
+        public Models.Usages Usages 
         { 
             get 
             {

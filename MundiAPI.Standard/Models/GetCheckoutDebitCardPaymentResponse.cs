@@ -22,7 +22,7 @@ namespace MundiAPI.Standard.Models
     {
         // These fields hold the values for the public properties.
         private string statementDescriptor;
-        private Models.GetPaymentAuthenticationResponse authentication;
+        private Models.Authentication authentication;
 
         /// <summary>
         /// Descrição na fatura
@@ -42,10 +42,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Payment Authentication response object data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("authentication")]
-        public Models.GetPaymentAuthenticationResponse Authentication 
+        public Models.Authentication Authentication 
         { 
             get 
             {

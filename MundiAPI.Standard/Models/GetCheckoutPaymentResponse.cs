@@ -34,18 +34,18 @@ namespace MundiAPI.Standard.Models
         private DateTime updatedAt;
         private DateTime? canceledAt;
         private bool customerEditable;
-        private Models.GetCustomerResponse customer;
-        private Models.GetAddressResponse billingaddress;
+        private Models.Customer customer;
+        private Models.Billingaddress3 billingaddress;
         private Models.GetCheckoutCreditCardPaymentResponse creditCard;
         private Models.GetCheckoutBoletoPaymentResponse boleto;
         private bool billingAddressEditable;
-        private Models.GetShippingResponse shipping;
+        private Models.Shipping shipping;
         private bool shippable;
         private DateTime? closedAt;
         private DateTime? expiresAt;
         private string currency;
         private Models.GetCheckoutDebitCardPaymentResponse debitCard;
-        private Models.GetCheckoutBankTransferPaymentResponse bankTransfer;
+        private Models.BankTransfer bankTransfer;
         private List<string> acceptedBrands;
 
         /// <summary>
@@ -273,10 +273,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Dados do comprador
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("customer")]
-        public Models.GetCustomerResponse Customer 
+        public Models.Customer Customer 
         { 
             get 
             {
@@ -290,10 +290,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Dados do endereço de cobrança
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("billingaddress")]
-        public Models.GetAddressResponse Billingaddress 
+        public Models.Billingaddress3 Billingaddress 
         { 
             get 
             {
@@ -307,7 +307,7 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Configurações de cartão de crédito
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("credit_card")]
         public Models.GetCheckoutCreditCardPaymentResponse CreditCard 
@@ -324,7 +324,7 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Configurações de boleto
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("boleto")]
         public Models.GetCheckoutBoletoPaymentResponse Boleto 
@@ -358,10 +358,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Configurações  de entrega
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("shipping")]
-        public Models.GetShippingResponse Shipping 
+        public Models.Shipping Shipping 
         { 
             get 
             {
@@ -445,7 +445,7 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Configurações de cartão de débito
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("debit_card")]
         public Models.GetCheckoutDebitCardPaymentResponse DebitCard 
@@ -462,10 +462,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Bank transfer payment response
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("bank_transfer")]
-        public Models.GetCheckoutBankTransferPaymentResponse BankTransfer 
+        public Models.BankTransfer BankTransfer 
         { 
             get 
             {

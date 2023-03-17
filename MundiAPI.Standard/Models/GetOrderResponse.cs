@@ -25,19 +25,19 @@ namespace MundiAPI.Standard.Models
         private string code;
         private string currency;
         private List<Models.GetOrderItemResponse> items;
-        private Models.GetCustomerResponse customer;
+        private Models.Customer customer;
         private string status;
         private DateTime createdAt;
         private DateTime updatedAt;
         private List<Models.GetChargeResponse> charges;
         private string invoiceUrl;
-        private Models.GetShippingResponse shipping;
+        private Models.Shipping shipping;
         private Dictionary<string, string> metadata;
         private List<Models.GetCheckoutPaymentResponse> checkouts;
         private string ip;
         private string sessionId;
-        private Models.GetLocationResponse location;
-        private Models.GetDeviceResponse device;
+        private Models.Location location;
+        private Models.Device device;
         private bool closed;
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("customer")]
-        public Models.GetCustomerResponse Customer 
+        public Models.Customer Customer 
         { 
             get 
             {
@@ -216,7 +216,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("shipping")]
-        public Models.GetShippingResponse Shipping 
+        public Models.Shipping Shipping 
         { 
             get 
             {
@@ -298,10 +298,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Location
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("location")]
-        public Models.GetLocationResponse Location 
+        public Models.Location Location 
         { 
             get 
             {
@@ -315,10 +315,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Device's informations
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("device")]
-        public Models.GetDeviceResponse Device 
+        public Models.Device Device 
         { 
             get 
             {

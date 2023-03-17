@@ -27,7 +27,7 @@ namespace MundiAPI.Standard.Models
         private string bank;
         private string documentNumber;
         private string instructions;
-        private Models.GetBillingAddressResponse billingAddress;
+        private Models.BillingAddress billingAddress;
         private DateTime? dueAt;
         private string qrCode;
         private string line;
@@ -144,7 +144,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("billing_address")]
-        public Models.GetBillingAddressResponse BillingAddress 
+        public Models.BillingAddress BillingAddress 
         { 
             get 
             {

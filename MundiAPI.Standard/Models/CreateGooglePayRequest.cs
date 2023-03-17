@@ -23,7 +23,7 @@ namespace MundiAPI.Standard.Models
         // These fields hold the values for the public properties.
         private string version;
         private string data;
-        private Models.CreateGooglePayHeaderRequest header;
+        private Models.Header1 header;
         private string signature;
         private string merchantIdentifier;
 
@@ -62,10 +62,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// The GooglePay header request
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("header")]
-        public Models.CreateGooglePayHeaderRequest Header 
+        public Models.Header1 Header 
         { 
             get 
             {

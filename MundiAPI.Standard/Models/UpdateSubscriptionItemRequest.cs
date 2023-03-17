@@ -23,7 +23,7 @@ namespace MundiAPI.Standard.Models
         // These fields hold the values for the public properties.
         private string description;
         private string status;
-        private Models.UpdatePricingSchemeRequest pricingScheme;
+        private Models.PricingScheme3 pricingScheme;
         private string name;
         private int? cycles;
         private int? quantity;
@@ -64,10 +64,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Pricing scheme
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("pricing_scheme")]
-        public Models.UpdatePricingSchemeRequest PricingScheme 
+        public Models.PricingScheme3 PricingScheme 
         { 
             get 
             {

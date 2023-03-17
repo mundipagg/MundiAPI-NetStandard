@@ -27,19 +27,19 @@ namespace MundiAPI.Standard.Models
         private string interval;
         private int intervalCount;
         private string billingType;
-        private Models.GetPeriodResponse currentCycle;
+        private Models.CurrentCycle currentCycle;
         private string paymentMethod;
         private string currency;
         private int installments;
         private string status;
         private DateTime createdAt;
         private DateTime updatedAt;
-        private Models.GetCustomerResponse customer;
-        private Models.GetCardResponse card;
+        private Models.Customer customer;
+        private Models.Card card;
         private List<Models.GetSubscriptionItemResponse> items;
         private string statementDescriptor;
         private Dictionary<string, string> metadata;
-        private Models.GetSetupResponse setup;
+        private Models.Setup setup;
         private string gatewayAffiliationId;
         private DateTime? nextBillingAt;
         private int? billingDay;
@@ -48,7 +48,7 @@ namespace MundiAPI.Standard.Models
         private List<Models.GetDiscountResponse> discounts;
         private List<Models.GetIncrementResponse> increments;
         private int? boletoDueDays;
-        private Models.GetSubscriptionSplitResponse split;
+        private Models.Split split;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -157,7 +157,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("current_cycle")]
-        public Models.GetPeriodResponse CurrentCycle 
+        public Models.CurrentCycle CurrentCycle 
         { 
             get 
             {
@@ -278,7 +278,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("customer")]
-        public Models.GetCustomerResponse Customer 
+        public Models.Customer Customer 
         { 
             get 
             {
@@ -295,7 +295,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("card")]
-        public Models.GetCardResponse Card 
+        public Models.Card Card 
         { 
             get 
             {
@@ -363,7 +363,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("setup")]
-        public Models.GetSetupResponse Setup 
+        public Models.Setup Setup 
         { 
             get 
             {
@@ -515,10 +515,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Subscription's split response
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("split")]
-        public Models.GetSubscriptionSplitResponse Split 
+        public Models.Split Split 
         { 
             get 
             {

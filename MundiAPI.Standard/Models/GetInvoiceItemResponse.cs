@@ -23,8 +23,8 @@ namespace MundiAPI.Standard.Models
         // These fields hold the values for the public properties.
         private int amount;
         private string description;
-        private Models.GetPricingSchemeResponse pricingScheme;
-        private Models.GetPriceBracketResponse priceBracket;
+        private Models.PricingScheme pricingScheme;
+        private Models.PriceBracket priceBracket;
         private int? quantity;
         private string name;
         private string subscriptionItemId;
@@ -67,7 +67,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("pricing_scheme")]
-        public Models.GetPricingSchemeResponse PricingScheme 
+        public Models.PricingScheme PricingScheme 
         { 
             get 
             {
@@ -84,7 +84,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("price_bracket")]
-        public Models.GetPriceBracketResponse PriceBracket 
+        public Models.PriceBracket PriceBracket 
         { 
             get 
             {

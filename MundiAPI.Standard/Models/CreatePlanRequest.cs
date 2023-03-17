@@ -33,7 +33,7 @@ namespace MundiAPI.Standard.Models
         private int intervalCount;
         private List<int> billingDays;
         private string billingType;
-        private Models.CreatePricingSchemeRequest pricingScheme;
+        private Models.PricingScheme4 pricingScheme;
         private Dictionary<string, string> metadata;
         private int? minimumPrice;
         private int? cycles;
@@ -245,10 +245,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Plan's pricing scheme
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("pricing_scheme")]
-        public Models.CreatePricingSchemeRequest PricingScheme 
+        public Models.PricingScheme4 PricingScheme 
         { 
             get 
             {

@@ -21,7 +21,7 @@ namespace MundiAPI.Standard.Models
     public class CreateCancelSubscriptionRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
-        private bool cancelPendingInvoices = true;
+        private bool cancelPendingInvoices;
 
         /// <summary>
         /// Indicates if the pending invoices must also be canceled.

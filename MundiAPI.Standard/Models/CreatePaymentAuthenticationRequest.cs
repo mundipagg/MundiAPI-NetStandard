@@ -22,7 +22,7 @@ namespace MundiAPI.Standard.Models
     {
         // These fields hold the values for the public properties.
         private string type;
-        private Models.CreateThreeDSecureRequest threedSecure;
+        private Models.ThreedSecure1 threedSecure;
 
         /// <summary>
         /// The Authentication type
@@ -42,10 +42,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// The 3D-S authentication object
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("threed_secure")]
-        public Models.CreateThreeDSecureRequest ThreedSecure 
+        public Models.ThreedSecure1 ThreedSecure 
         { 
             get 
             {

@@ -22,12 +22,12 @@ namespace MundiAPI.Standard.Models
     {
         // These fields hold the values for the public properties.
         private string statementDescriptor;
-        private Models.CreateCardRequest card;
+        private Models.Card1 card;
         private string cardId;
         private string cardToken;
         private bool? recurrence;
-        private Models.CreatePaymentAuthenticationRequest authentication;
-        private Models.CreateCardPaymentContactlessRequest token;
+        private Models.Authentication2 authentication;
+        private Models.Token token;
         private string recurrencyCycle;
 
         /// <summary>
@@ -48,10 +48,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Debit card data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("card")]
-        public Models.CreateCardRequest Card 
+        public Models.Card1 Card 
         { 
             get 
             {
@@ -116,10 +116,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// The payment authentication request
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("authentication")]
-        public Models.CreatePaymentAuthenticationRequest Authentication 
+        public Models.Authentication2 Authentication 
         { 
             get 
             {
@@ -133,10 +133,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// The Debit card payment token request
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("token")]
-        public Models.CreateCardPaymentContactlessRequest Token 
+        public Models.Token Token 
         { 
             get 
             {

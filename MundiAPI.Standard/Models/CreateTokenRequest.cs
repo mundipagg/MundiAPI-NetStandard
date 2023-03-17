@@ -21,8 +21,8 @@ namespace MundiAPI.Standard.Models
     public class CreateTokenRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
-        private string type = "card";
-        private Models.CreateCardTokenRequest card;
+        private string type;
+        private Models.Card11 card;
 
         /// <summary>
         /// Token type
@@ -42,10 +42,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Card data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("card")]
-        public Models.CreateCardTokenRequest Card 
+        public Models.Card11 Card 
         { 
             get 
             {
