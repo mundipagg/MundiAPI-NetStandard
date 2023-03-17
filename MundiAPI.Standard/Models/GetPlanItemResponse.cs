@@ -26,9 +26,9 @@ namespace MundiAPI.Standard.Models
         private string status;
         private DateTime createdAt;
         private DateTime updatedAt;
-        private Models.GetPricingSchemeResponse pricingScheme;
+        private Models.PricingScheme pricingScheme;
         private string description;
-        private Models.GetPlanResponse plan;
+        private Models.Plan plan;
         private int? quantity;
         private int? cycles;
         private DateTime? deletedAt;
@@ -124,7 +124,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("pricing_scheme")]
-        public Models.GetPricingSchemeResponse PricingScheme 
+        public Models.PricingScheme PricingScheme 
         { 
             get 
             {
@@ -158,7 +158,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("plan")]
-        public Models.GetPlanResponse Plan 
+        public Models.Plan Plan 
         { 
             get 
             {

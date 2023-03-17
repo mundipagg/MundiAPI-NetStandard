@@ -25,12 +25,12 @@ namespace MundiAPI.Standard.Models
         private string bank;
         private string instructions;
         private DateTime? dueAt;
-        private Models.CreateAddressRequest billingAddress;
+        private Models.BillingAddress1 billingAddress;
         private string billingAddressId;
         private string nossoNumero;
         private string documentNumber;
-        private Models.CreateInterestRequest interest;
-        private Models.CreateFineRequest fine;
+        private Models.Interest interest;
+        private Models.Fine fine;
         private int? maxDaysToPayPastDue;
 
         /// <summary>
@@ -103,10 +103,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Card's billing address
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("billing_address")]
-        public Models.CreateAddressRequest BillingAddress 
+        public Models.BillingAddress1 BillingAddress 
         { 
             get 
             {
@@ -174,7 +174,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("interest")]
-        public Models.CreateInterestRequest Interest 
+        public Models.Interest Interest 
         { 
             get 
             {
@@ -191,7 +191,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("fine")]
-        public Models.CreateFineRequest Fine 
+        public Models.Fine Fine 
         { 
             get 
             {

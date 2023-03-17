@@ -29,13 +29,13 @@ namespace MundiAPI.Standard.Models
         private string paymentMethod;
         private DateTime createdAt;
         private List<Models.GetInvoiceItemResponse> items;
-        private Models.GetCustomerResponse customer;
-        private Models.GetChargeResponse charge;
+        private Models.Customer customer;
+        private Models.Charge charge;
         private int installments;
-        private Models.GetBillingAddressResponse billingAddress;
+        private Models.BillingAddress billingAddress;
         private Models.GetSubscriptionResponse subscription;
-        private Models.GetPeriodResponse cycle;
-        private Models.GetShippingResponse shipping;
+        private Models.Cycle cycle;
+        private Models.Shipping shipping;
         private Dictionary<string, string> metadata;
         private DateTime? dueAt;
         private DateTime? canceledAt;
@@ -186,7 +186,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("customer")]
-        public Models.GetCustomerResponse Customer 
+        public Models.Customer Customer 
         { 
             get 
             {
@@ -203,7 +203,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("charge")]
-        public Models.GetChargeResponse Charge 
+        public Models.Charge Charge 
         { 
             get 
             {
@@ -237,7 +237,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("billing_address")]
-        public Models.GetBillingAddressResponse BillingAddress 
+        public Models.BillingAddress BillingAddress 
         { 
             get 
             {
@@ -271,7 +271,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("cycle")]
-        public Models.GetPeriodResponse Cycle 
+        public Models.Cycle Cycle 
         { 
             get 
             {
@@ -288,7 +288,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("shipping")]
-        public Models.GetShippingResponse Shipping 
+        public Models.Shipping Shipping 
         { 
             get 
             {

@@ -24,7 +24,7 @@ namespace MundiAPI.Standard.Models
         private string statementDescriptor;
         private string cardId;
         private string cardToken;
-        private Models.CreateCardRequest card;
+        private Models.Card1 card;
         private string recurrencyCycle;
 
         /// <summary>
@@ -79,10 +79,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Card info
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("Card")]
-        public Models.CreateCardRequest Card 
+        public Models.Card1 Card 
         { 
             get 
             {

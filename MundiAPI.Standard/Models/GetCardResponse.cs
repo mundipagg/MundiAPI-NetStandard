@@ -30,8 +30,8 @@ namespace MundiAPI.Standard.Models
         private string status;
         private DateTime createdAt;
         private DateTime updatedAt;
-        private Models.GetBillingAddressResponse billingAddress;
-        private Models.GetCustomerResponse customer;
+        private Models.BillingAddress billingAddress;
+        private Models.Customer customer;
         private Dictionary<string, string> metadata;
         private string type;
         private string holderDocument;
@@ -198,7 +198,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("billing_address")]
-        public Models.GetBillingAddressResponse BillingAddress 
+        public Models.BillingAddress BillingAddress 
         { 
             get 
             {
@@ -215,7 +215,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("customer")]
-        public Models.GetCustomerResponse Customer 
+        public Models.Customer Customer 
         { 
             get 
             {

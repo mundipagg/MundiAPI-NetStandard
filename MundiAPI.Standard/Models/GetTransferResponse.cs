@@ -26,7 +26,7 @@ namespace MundiAPI.Standard.Models
         private string status;
         private DateTime createdAt;
         private DateTime updatedAt;
-        private Models.GetBankAccountResponse bankAccount;
+        private Models.BankAccount bankAccount;
         private Dictionary<string, string> metadata;
 
         /// <summary>
@@ -117,10 +117,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Bank account
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("bank_account")]
-        public Models.GetBankAccountResponse BankAccount 
+        public Models.BankAccount BankAccount 
         { 
             get 
             {

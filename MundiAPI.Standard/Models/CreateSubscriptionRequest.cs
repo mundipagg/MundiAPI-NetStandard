@@ -21,8 +21,8 @@ namespace MundiAPI.Standard.Models
     public class CreateSubscriptionRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
-        private Models.CreateCustomerRequest customer;
-        private Models.CreateCardRequest card;
+        private Models.Customer8 customer;
+        private Models.Card1 card;
         private string code;
         private string paymentMethod;
         private string billingType;
@@ -31,12 +31,12 @@ namespace MundiAPI.Standard.Models
         private string currency;
         private string interval;
         private int intervalCount;
-        private Models.CreatePricingSchemeRequest pricingScheme;
+        private Models.PricingScheme4 pricingScheme;
         private List<Models.CreateSubscriptionItemRequest> items;
-        private Models.CreateShippingRequest shipping;
+        private Models.Shipping3 shipping;
         private List<Models.CreateDiscountRequest> discounts;
         private Dictionary<string, string> metadata;
-        private Models.CreateSetupRequest setup;
+        private Models.Setup1 setup;
         private string planId;
         private string customerId;
         private string cardId;
@@ -51,14 +51,14 @@ namespace MundiAPI.Standard.Models
         private int? boletoDueDays;
         private List<Models.CreateIncrementRequest> increments;
         private Models.CreatePeriodRequest period;
-        private Models.CreateSubMerchantRequest submerchant;
-        private Models.CreateSubscriptionSplitRequest split;
+        private Models.Submerchant submerchant;
+        private Models.UpdateSubscriptionSplitRequest split;
 
         /// <summary>
-        /// Customer
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("customer")]
-        public Models.CreateCustomerRequest Customer 
+        public Models.Customer8 Customer 
         { 
             get 
             {
@@ -72,10 +72,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Card
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("card")]
-        public Models.CreateCardRequest Card 
+        public Models.Card1 Card 
         { 
             get 
             {
@@ -225,10 +225,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Subscription pricing scheme
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("pricing_scheme")]
-        public Models.CreatePricingSchemeRequest PricingScheme 
+        public Models.PricingScheme4 PricingScheme 
         { 
             get 
             {
@@ -259,10 +259,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Shipping
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("shipping")]
-        public Models.CreateShippingRequest Shipping 
+        public Models.Shipping3 Shipping 
         { 
             get 
             {
@@ -310,10 +310,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Setup data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("setup")]
-        public Models.CreateSetupRequest Setup 
+        public Models.Setup1 Setup 
         { 
             get 
             {
@@ -566,10 +566,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// SubMerchant
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("submerchant")]
-        public Models.CreateSubMerchantRequest Submerchant 
+        public Models.Submerchant Submerchant 
         { 
             get 
             {
@@ -583,10 +583,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Subscription's split
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("split")]
-        public Models.CreateSubscriptionSplitRequest Split 
+        public Models.UpdateSubscriptionSplitRequest Split 
         { 
             get 
             {

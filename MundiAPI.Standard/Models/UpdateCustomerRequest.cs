@@ -25,7 +25,7 @@ namespace MundiAPI.Standard.Models
         private string email;
         private string document;
         private string type;
-        private Models.CreateAddressRequest address;
+        private Models.Address1 address;
         private Dictionary<string, string> metadata;
         private Models.CreatePhonesRequest phones;
         private string code;
@@ -101,10 +101,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Address
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("address")]
-        public Models.CreateAddressRequest Address 
+        public Models.Address1 Address 
         { 
             get 
             {

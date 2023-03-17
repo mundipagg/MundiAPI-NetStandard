@@ -22,7 +22,7 @@ namespace MundiAPI.Standard.Models
     {
         // These fields hold the values for the public properties.
         private List<Models.GetTransfer> data;
-        private Models.PagingResponse paging;
+        private Models.Paging paging;
 
         /// <summary>
         /// The Increments response
@@ -42,10 +42,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Paging object
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("paging")]
-        public Models.PagingResponse Paging 
+        public Models.Paging Paging 
         { 
             get 
             {

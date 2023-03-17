@@ -26,7 +26,7 @@ namespace MundiAPI.Standard.Models
         private string status;
         private DateTime createdAt;
         private DateTime updatedAt;
-        private Models.GetPricingSchemeResponse pricingScheme;
+        private Models.PricingScheme pricingScheme;
         private List<Models.GetDiscountResponse> discounts;
         private List<Models.GetIncrementResponse> increments;
         private Models.GetSubscriptionResponse subscription;
@@ -126,7 +126,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("pricing_scheme")]
-        public Models.GetPricingSchemeResponse PricingScheme 
+        public Models.PricingScheme PricingScheme 
         { 
             get 
             {

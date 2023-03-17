@@ -43,7 +43,7 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Dukpt data request
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("dukpt")]
         public Models.CreateEmvDataDukptDecryptRequest Dukpt 

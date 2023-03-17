@@ -23,7 +23,7 @@ namespace MundiAPI.Standard.Models
         // These fields hold the values for the public properties.
         private string type;
         private int amount;
-        private Models.GetRecipientResponse recipient;
+        private Models.Recipient recipient;
         private string gatewayId;
         private Models.GetSplitOptionsResponse options;
         private string id;
@@ -63,10 +63,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Recipient
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("recipient")]
-        public Models.GetRecipientResponse Recipient 
+        public Models.Recipient Recipient 
         { 
             get 
             {

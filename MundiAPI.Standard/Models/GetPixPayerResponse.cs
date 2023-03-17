@@ -24,7 +24,7 @@ namespace MundiAPI.Standard.Models
         private string name;
         private string document;
         private string documentType;
-        private Models.GetPixBankAccountResponse bankAccount;
+        private object bankAccount;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -81,7 +81,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("bank_account")]
-        public Models.GetPixBankAccountResponse BankAccount 
+        public object BankAccount 
         { 
             get 
             {

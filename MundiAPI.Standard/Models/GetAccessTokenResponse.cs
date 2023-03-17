@@ -25,7 +25,7 @@ namespace MundiAPI.Standard.Models
         private string code;
         private string status;
         private DateTime createdAt;
-        private Models.GetCustomerResponse customer;
+        private Models.Customer customer;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -100,7 +100,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("customer")]
-        public Models.GetCustomerResponse Customer 
+        public Models.Customer Customer 
         { 
             get 
             {

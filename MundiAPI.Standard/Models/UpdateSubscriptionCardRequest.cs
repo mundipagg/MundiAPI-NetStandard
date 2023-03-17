@@ -21,14 +21,14 @@ namespace MundiAPI.Standard.Models
     public class UpdateSubscriptionCardRequest : BaseModel 
     {
         // These fields hold the values for the public properties.
-        private Models.CreateCardRequest card;
+        private Models.Card1 card;
         private string cardId;
 
         /// <summary>
-        /// Credit card data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("card")]
-        public Models.CreateCardRequest Card 
+        public Models.Card1 Card 
         { 
             get 
             {

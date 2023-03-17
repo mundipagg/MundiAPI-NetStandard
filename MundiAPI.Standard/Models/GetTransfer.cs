@@ -32,8 +32,8 @@ namespace MundiAPI.Standard.Models
         private DateTime? fundingDate;
         private DateTime? fundingEstimatedDate;
         private string type;
-        private Models.GetTransferSourceResponse source;
-        private Models.GetTransferTargetResponse target;
+        private Models.GetWithdrawSourceResponse source;
+        private Models.GetWithdrawTargetResponse target;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -230,7 +230,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("source")]
-        public Models.GetTransferSourceResponse Source 
+        public Models.GetWithdrawSourceResponse Source 
         { 
             get 
             {
@@ -247,7 +247,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("target")]
-        public Models.GetTransferTargetResponse Target 
+        public Models.GetWithdrawTargetResponse Target 
         { 
             get 
             {

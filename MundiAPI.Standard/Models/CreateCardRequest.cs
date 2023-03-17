@@ -26,12 +26,12 @@ namespace MundiAPI.Standard.Models
         private int expMonth;
         private int expYear;
         private string cvv;
-        private Models.CreateAddressRequest billingAddress;
+        private Models.BillingAddress1 billingAddress;
         private string brand;
         private string billingAddressId;
         private Dictionary<string, string> metadata;
-        private string type = "credit";
-        private Models.CreateCardOptionsRequest options;
+        private string type;
+        private Models.Options1 options;
         private string holderDocument;
         private bool privateLabel;
         private string label;
@@ -124,10 +124,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Card's billing address
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("billing_address")]
-        public Models.CreateAddressRequest BillingAddress 
+        public Models.BillingAddress1 BillingAddress 
         { 
             get 
             {
@@ -209,10 +209,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Options for creating the card
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("options")]
-        public Models.CreateCardOptionsRequest Options 
+        public Models.Options1 Options 
         { 
             get 
             {

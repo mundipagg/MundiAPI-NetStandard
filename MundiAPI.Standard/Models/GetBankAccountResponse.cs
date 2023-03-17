@@ -34,7 +34,7 @@ namespace MundiAPI.Standard.Models
         private DateTime createdAt;
         private DateTime updatedAt;
         private DateTime deletedAt;
-        private Models.GetRecipientResponse recipient;
+        private Models.Recipient recipient;
         private Dictionary<string, string> metadata;
         private string pixKey;
 
@@ -263,10 +263,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Recipient
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("recipient")]
-        public Models.GetRecipientResponse Recipient 
+        public Models.Recipient Recipient 
         { 
             get 
             {

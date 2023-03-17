@@ -24,8 +24,8 @@ namespace MundiAPI.Standard.Models
         private string code;
         private int amount;
         private string customerId;
-        private Models.CreateCustomerRequest customer;
-        private Models.CreatePaymentRequest payment;
+        private Models.Customer8 customer;
+        private Models.Payment payment;
         private Dictionary<string, string> metadata;
         private DateTime? dueAt;
         private Models.CreateAntifraudRequest antifraud;
@@ -83,10 +83,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Customer data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("customer")]
-        public Models.CreateCustomerRequest Customer 
+        public Models.Customer8 Customer 
         { 
             get 
             {
@@ -100,10 +100,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Payment data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("payment")]
-        public Models.CreatePaymentRequest Payment 
+        public Models.Payment Payment 
         { 
             get 
             {

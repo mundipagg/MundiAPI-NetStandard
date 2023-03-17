@@ -23,7 +23,7 @@ namespace MundiAPI.Standard.Models
         // These fields hold the values for the public properties.
         private int? installments = 1;
         private string statementDescriptor;
-        private Models.CreateCardRequest card;
+        private Models.Card1 card;
         private string cardId;
         private string cardToken;
         private bool? recurrence;
@@ -67,10 +67,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Card data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("card")]
-        public Models.CreateCardRequest Card 
+        public Models.Card1 Card 
         { 
             get 
             {

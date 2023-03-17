@@ -23,7 +23,7 @@ namespace MundiAPI.Standard.Models
         // These fields hold the values for the public properties.
         private string statementDescriptor;
         private List<Models.CreateCheckoutCardInstallmentOptionRequest> installments;
-        private Models.CreatePaymentAuthenticationRequest authentication;
+        private Models.Authentication2 authentication;
         private bool? capture;
 
         /// <summary>
@@ -61,10 +61,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Creates payment authentication
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("authentication")]
-        public Models.CreatePaymentAuthenticationRequest Authentication 
+        public Models.Authentication2 Authentication 
         { 
             get 
             {

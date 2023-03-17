@@ -24,7 +24,7 @@ namespace MundiAPI.Standard.Models
         private string id;
         private int requestedAmount;
         private int approvedAmount;
-        private Models.GetRecipientResponse recipient;
+        private Models.Recipient recipient;
         private string pgid;
         private DateTime createdAt;
         private DateTime updatedAt;
@@ -84,10 +84,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Recipient
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("recipient")]
-        public Models.GetRecipientResponse Recipient 
+        public Models.Recipient Recipient 
         { 
             get 
             {

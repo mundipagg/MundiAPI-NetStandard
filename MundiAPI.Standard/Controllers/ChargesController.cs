@@ -21,7 +21,7 @@ using MundiAPI.Standard.Exceptions;
 
 namespace MundiAPI.Standard.Controllers
 {
-    public partial class ChargesController: BaseController, IChargesController
+    public partial class ChargesController: BaseController
     {
         #region Singleton Pattern
 
@@ -53,10 +53,10 @@ namespace MundiAPI.Standard.Controllers
         /// Get a charge from its id
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse GetCharge(string chargeId)
+        /// <return>Returns the Models.ChargesResponse response from the API call</return>
+        public Models.ChargesResponse GetCharge(string chargeId)
         {
-            Task<Models.GetChargeResponse> t = GetChargeAsync(chargeId);
+            Task<Models.ChargesResponse> t = GetChargeAsync(chargeId);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -65,8 +65,8 @@ namespace MundiAPI.Standard.Controllers
         /// Get a charge from its id
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> GetChargeAsync(string chargeId)
+        /// <return>Returns the Models.ChargesResponse response from the API call</return>
+        public async Task<Models.ChargesResponse> GetChargeAsync(string chargeId)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -88,7 +88,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" }
             };
 
@@ -98,12 +98,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetChargeResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.ChargesResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -112,27 +132,118 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// TODO: type endpoint description here
+        /// Cancel a charge
         /// </summary>
-        /// <param name="chargeId">Required parameter: Example: </param>
-        /// <param name="request">Optional parameter: Request for confirm payment</param>
+        /// <param name="chargeId">Required parameter: Charge id</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse ConfirmPayment(string chargeId, Models.CreateConfirmPaymentRequest request = null, string idempotencyKey = null)
+        /// <param name="body">Optional parameter: Request for cancelling a charge</param>
+        /// <return>Returns the Models.ChargesResponse response from the API call</return>
+        public Models.ChargesResponse CancelCharge(string chargeId, string idempotencyKey = null, Models.ChargesRequest body = null)
         {
-            Task<Models.GetChargeResponse> t = ConfirmPaymentAsync(chargeId, request, idempotencyKey);
+            Task<Models.ChargesResponse> t = CancelChargeAsync(chargeId, idempotencyKey, body);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// TODO: type endpoint description here
+        /// Cancel a charge
+        /// </summary>
+        /// <param name="chargeId">Required parameter: Charge id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <param name="body">Optional parameter: Request for cancelling a charge</param>
+        /// <return>Returns the Models.ChargesResponse response from the API call</return>
+        public async Task<Models.ChargesResponse> CancelChargeAsync(string chargeId, string idempotencyKey = null, Models.ChargesRequest body = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/charges/{charge_id}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "charge_id", chargeId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
+                { "accept", "application/json" },
+                { "Content-Type", "application/json" },
+                { "idempotency-key", idempotencyKey }
+            };
+
+            //append body params
+            var _body = APIHelper.JsonSerialize(body);
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.DeleteBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.ChargesResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// ConfirmPayment
         /// </summary>
         /// <param name="chargeId">Required parameter: Example: </param>
-        /// <param name="request">Optional parameter: Request for confirm payment</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> ConfirmPaymentAsync(string chargeId, Models.CreateConfirmPaymentRequest request = null, string idempotencyKey = null)
+        /// <param name="body">Optional parameter: Request for confirm payment</param>
+        /// <return>Returns the Models.ChargesConfirmPaymentResponse response from the API call</return>
+        public Models.ChargesConfirmPaymentResponse ConfirmPayment(string chargeId, string idempotencyKey = null, Models.CreateConfirmPaymentRequest body = null)
+        {
+            Task<Models.ChargesConfirmPaymentResponse> t = ConfirmPaymentAsync(chargeId, idempotencyKey, body);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// ConfirmPayment
+        /// </summary>
+        /// <param name="chargeId">Required parameter: Example: </param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <param name="body">Optional parameter: Request for confirm payment</param>
+        /// <return>Returns the Models.ChargesConfirmPaymentResponse response from the API call</return>
+        public async Task<Models.ChargesConfirmPaymentResponse> ConfirmPaymentAsync(string chargeId, string idempotencyKey = null, Models.CreateConfirmPaymentRequest body = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -154,14 +265,14 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
 
             //append body params
-            var _body = APIHelper.JsonSerialize(request);
+            var _body = APIHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -169,12 +280,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetChargeResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.ChargesConfirmPaymentResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -186,12 +317,12 @@ namespace MundiAPI.Standard.Controllers
         /// Updates the card from a charge
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
-        /// <param name="request">Required parameter: Request for updating a charge's card</param>
+        /// <param name="body">Required parameter: Request for updating a charge's card</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse UpdateChargeCard(string chargeId, Models.UpdateChargeCardRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.ChargesCardResponse response from the API call</return>
+        public Models.ChargesCardResponse UpdateChargeCard(string chargeId, Models.ChargesCardRequest body, string idempotencyKey = null)
         {
-            Task<Models.GetChargeResponse> t = UpdateChargeCardAsync(chargeId, request, idempotencyKey);
+            Task<Models.ChargesCardResponse> t = UpdateChargeCardAsync(chargeId, body, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -200,10 +331,10 @@ namespace MundiAPI.Standard.Controllers
         /// Updates the card from a charge
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
-        /// <param name="request">Required parameter: Request for updating a charge's card</param>
+        /// <param name="body">Required parameter: Request for updating a charge's card</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> UpdateChargeCardAsync(string chargeId, Models.UpdateChargeCardRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.ChargesCardResponse response from the API call</return>
+        public async Task<Models.ChargesCardResponse> UpdateChargeCardAsync(string chargeId, Models.ChargesCardRequest body, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -225,14 +356,14 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
 
             //append body params
-            var _body = APIHelper.JsonSerialize(request);
+            var _body = APIHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.PatchBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -240,12 +371,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetChargeResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.ChargesCardResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -265,8 +416,8 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="orderId">Optional parameter: Filter for charge's order id</param>
         /// <param name="createdSince">Optional parameter: Filter for the beginning of the range for charge's creation</param>
         /// <param name="createdUntil">Optional parameter: Filter for the end of the range for charge's creation</param>
-        /// <return>Returns the Models.ListChargesResponse response from the API call</return>
-        public Models.ListChargesResponse GetCharges(
+        /// <return>Returns the Models.ChargesResponse2 response from the API call</return>
+        public Models.ChargesResponse2 GetCharges(
                 int? page = null,
                 int? size = null,
                 string code = null,
@@ -277,7 +428,7 @@ namespace MundiAPI.Standard.Controllers
                 DateTime? createdSince = null,
                 DateTime? createdUntil = null)
         {
-            Task<Models.ListChargesResponse> t = GetChargesAsync(page, size, code, status, paymentMethod, customerId, orderId, createdSince, createdUntil);
+            Task<Models.ChargesResponse2> t = GetChargesAsync(page, size, code, status, paymentMethod, customerId, orderId, createdSince, createdUntil);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -294,8 +445,8 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="orderId">Optional parameter: Filter for charge's order id</param>
         /// <param name="createdSince">Optional parameter: Filter for the beginning of the range for charge's creation</param>
         /// <param name="createdUntil">Optional parameter: Filter for the end of the range for charge's creation</param>
-        /// <return>Returns the Models.ListChargesResponse response from the API call</return>
-        public async Task<Models.ListChargesResponse> GetChargesAsync(
+        /// <return>Returns the Models.ChargesResponse2 response from the API call</return>
+        public async Task<Models.ChargesResponse2> GetChargesAsync(
                 int? page = null,
                 int? size = null,
                 string code = null,
@@ -334,7 +485,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" }
             };
 
@@ -344,83 +495,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.ListChargesResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Cancel a charge
-        /// </summary>
-        /// <param name="chargeId">Required parameter: Charge id</param>
-        /// <param name="request">Optional parameter: Request for cancelling a charge</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse CancelCharge(string chargeId, Models.CreateCancelChargeRequest request = null, string idempotencyKey = null)
-        {
-            Task<Models.GetChargeResponse> t = CancelChargeAsync(chargeId, request, idempotencyKey);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Cancel a charge
-        /// </summary>
-        /// <param name="chargeId">Required parameter: Charge id</param>
-        /// <param name="request">Optional parameter: Request for cancelling a charge</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> CancelChargeAsync(string chargeId, Models.CreateCancelChargeRequest request = null, string idempotencyKey = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/charges/{charge_id}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "charge_id", chargeId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
-                { "idempotency-key", idempotencyKey }
-            };
-
-            //append body params
-            var _body = APIHelper.JsonSerialize(request);
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.DeleteBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetChargeResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.ChargesResponse2>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -433,10 +533,10 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse RetryCharge(string chargeId, string idempotencyKey = null)
+        /// <return>Returns the Models.ChargesRetryResponse response from the API call</return>
+        public Models.ChargesRetryResponse RetryCharge(string chargeId, string idempotencyKey = null)
         {
-            Task<Models.GetChargeResponse> t = RetryChargeAsync(chargeId, idempotencyKey);
+            Task<Models.ChargesRetryResponse> t = RetryChargeAsync(chargeId, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -446,8 +546,8 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> RetryChargeAsync(string chargeId, string idempotencyKey = null)
+        /// <return>Returns the Models.ChargesRetryResponse response from the API call</return>
+        public async Task<Models.ChargesRetryResponse> RetryChargeAsync(string chargeId, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -469,7 +569,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
@@ -480,12 +580,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetChargeResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.ChargesRetryResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -497,12 +617,12 @@ namespace MundiAPI.Standard.Controllers
         /// Updates a charge's payment method
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
-        /// <param name="request">Required parameter: Request for updating the payment method from a charge</param>
+        /// <param name="body">Required parameter: Request for updating the payment method from a charge</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse UpdateChargePaymentMethod(string chargeId, Models.UpdateChargePaymentMethodRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.ChargesPaymentMethodResponse response from the API call</return>
+        public Models.ChargesPaymentMethodResponse UpdateChargePaymentMethod(string chargeId, Models.ChargesPaymentMethodRequest body, string idempotencyKey = null)
         {
-            Task<Models.GetChargeResponse> t = UpdateChargePaymentMethodAsync(chargeId, request, idempotencyKey);
+            Task<Models.ChargesPaymentMethodResponse> t = UpdateChargePaymentMethodAsync(chargeId, body, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -511,10 +631,10 @@ namespace MundiAPI.Standard.Controllers
         /// Updates a charge's payment method
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
-        /// <param name="request">Required parameter: Request for updating the payment method from a charge</param>
+        /// <param name="body">Required parameter: Request for updating the payment method from a charge</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> UpdateChargePaymentMethodAsync(string chargeId, Models.UpdateChargePaymentMethodRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.ChargesPaymentMethodResponse response from the API call</return>
+        public async Task<Models.ChargesPaymentMethodResponse> UpdateChargePaymentMethodAsync(string chargeId, Models.ChargesPaymentMethodRequest body, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -536,14 +656,14 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
 
             //append body params
-            var _body = APIHelper.JsonSerialize(request);
+            var _body = APIHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.PatchBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -551,12 +671,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetChargeResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.ChargesPaymentMethodResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -568,12 +708,12 @@ namespace MundiAPI.Standard.Controllers
         /// Updates the metadata from a charge
         /// </summary>
         /// <param name="chargeId">Required parameter: The charge id</param>
-        /// <param name="request">Required parameter: Request for updating the charge metadata</param>
+        /// <param name="body">Required parameter: Request for updating the charge metadata</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse UpdateChargeMetadata(string chargeId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.ChargesMetadataResponse response from the API call</return>
+        public Models.ChargesMetadataResponse UpdateChargeMetadata(string chargeId, Models.ChargesMetadataRequest body, string idempotencyKey = null)
         {
-            Task<Models.GetChargeResponse> t = UpdateChargeMetadataAsync(chargeId, request, idempotencyKey);
+            Task<Models.ChargesMetadataResponse> t = UpdateChargeMetadataAsync(chargeId, body, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -582,10 +722,10 @@ namespace MundiAPI.Standard.Controllers
         /// Updates the metadata from a charge
         /// </summary>
         /// <param name="chargeId">Required parameter: The charge id</param>
-        /// <param name="request">Required parameter: Request for updating the charge metadata</param>
+        /// <param name="body">Required parameter: Request for updating the charge metadata</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> UpdateChargeMetadataAsync(string chargeId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.ChargesMetadataResponse response from the API call</return>
+        public async Task<Models.ChargesMetadataResponse> UpdateChargeMetadataAsync(string chargeId, Models.ChargesMetadataRequest body, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -607,14 +747,14 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
 
             //append body params
-            var _body = APIHelper.JsonSerialize(request);
+            var _body = APIHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.PatchBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -622,12 +762,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetChargeResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.ChargesMetadataResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -639,12 +799,12 @@ namespace MundiAPI.Standard.Controllers
         /// Captures a charge
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
-        /// <param name="request">Optional parameter: Request for capturing a charge</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse CaptureCharge(string chargeId, Models.CreateCaptureChargeRequest request = null, string idempotencyKey = null)
+        /// <param name="body">Optional parameter: Request for capturing a charge</param>
+        /// <return>Returns the Models.ChargesCaptureResponse response from the API call</return>
+        public Models.ChargesCaptureResponse CaptureCharge(string chargeId, string idempotencyKey = null, Models.ChargesCaptureRequest body = null)
         {
-            Task<Models.GetChargeResponse> t = CaptureChargeAsync(chargeId, request, idempotencyKey);
+            Task<Models.ChargesCaptureResponse> t = CaptureChargeAsync(chargeId, idempotencyKey, body);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -653,10 +813,10 @@ namespace MundiAPI.Standard.Controllers
         /// Captures a charge
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge id</param>
-        /// <param name="request">Optional parameter: Request for capturing a charge</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> CaptureChargeAsync(string chargeId, Models.CreateCaptureChargeRequest request = null, string idempotencyKey = null)
+        /// <param name="body">Optional parameter: Request for capturing a charge</param>
+        /// <return>Returns the Models.ChargesCaptureResponse response from the API call</return>
+        public async Task<Models.ChargesCaptureResponse> CaptureChargeAsync(string chargeId, string idempotencyKey = null, Models.ChargesCaptureRequest body = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -678,14 +838,14 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
 
             //append body params
-            var _body = APIHelper.JsonSerialize(request);
+            var _body = APIHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -693,12 +853,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetChargeResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.ChargesCaptureResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -710,12 +890,12 @@ namespace MundiAPI.Standard.Controllers
         /// Updates the due date from a charge
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge Id</param>
-        /// <param name="request">Required parameter: Request for updating the due date</param>
+        /// <param name="body">Required parameter: Request for updating the due date</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse UpdateChargeDueDate(string chargeId, Models.UpdateChargeDueDateRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.ChargesDueDateResponse response from the API call</return>
+        public Models.ChargesDueDateResponse UpdateChargeDueDate(string chargeId, Models.ChargesDueDateRequest body, string idempotencyKey = null)
         {
-            Task<Models.GetChargeResponse> t = UpdateChargeDueDateAsync(chargeId, request, idempotencyKey);
+            Task<Models.ChargesDueDateResponse> t = UpdateChargeDueDateAsync(chargeId, body, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -724,10 +904,10 @@ namespace MundiAPI.Standard.Controllers
         /// Updates the due date from a charge
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge Id</param>
-        /// <param name="request">Required parameter: Request for updating the due date</param>
+        /// <param name="body">Required parameter: Request for updating the due date</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> UpdateChargeDueDateAsync(string chargeId, Models.UpdateChargeDueDateRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.ChargesDueDateResponse response from the API call</return>
+        public async Task<Models.ChargesDueDateResponse> UpdateChargeDueDateAsync(string chargeId, Models.ChargesDueDateRequest body, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -749,14 +929,14 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
 
             //append body params
-            var _body = APIHelper.JsonSerialize(request);
+            var _body = APIHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.PatchBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -764,12 +944,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetChargeResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.ChargesDueDateResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -780,12 +980,12 @@ namespace MundiAPI.Standard.Controllers
         /// <summary>
         /// Creates a new charge
         /// </summary>
-        /// <param name="request">Required parameter: Request for creating a charge</param>
+        /// <param name="body">Required parameter: Request for creating a charge</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public Models.GetChargeResponse CreateCharge(Models.CreateChargeRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.ChargesResponse response from the API call</return>
+        public Models.ChargesResponse CreateCharge(Models.ChargesRequest1 body, string idempotencyKey = null)
         {
-            Task<Models.GetChargeResponse> t = CreateChargeAsync(request, idempotencyKey);
+            Task<Models.ChargesResponse> t = CreateChargeAsync(body, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -793,10 +993,10 @@ namespace MundiAPI.Standard.Controllers
         /// <summary>
         /// Creates a new charge
         /// </summary>
-        /// <param name="request">Required parameter: Request for creating a charge</param>
+        /// <param name="body">Required parameter: Request for creating a charge</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetChargeResponse response from the API call</return>
-        public async Task<Models.GetChargeResponse> CreateChargeAsync(Models.CreateChargeRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.ChargesResponse response from the API call</return>
+        public async Task<Models.ChargesResponse> CreateChargeAsync(Models.ChargesRequest1 body, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -812,14 +1012,14 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
 
             //append body params
-            var _body = APIHelper.JsonSerialize(request);
+            var _body = APIHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -827,12 +1027,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetChargeResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.ChargesResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -841,27 +1061,27 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// TODO: type endpoint description here
+        /// GetChargeTransactions
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge Id</param>
         /// <param name="page">Optional parameter: Page number</param>
         /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListChargeTransactionsResponse response from the API call</return>
-        public Models.ListChargeTransactionsResponse GetChargeTransactions(string chargeId, int? page = null, int? size = null)
+        /// <return>Returns the Models.ChargesTransactionsResponse response from the API call</return>
+        public Models.ChargesTransactionsResponse GetChargeTransactions(string chargeId, int? page = null, int? size = null)
         {
-            Task<Models.ListChargeTransactionsResponse> t = GetChargeTransactionsAsync(chargeId, page, size);
+            Task<Models.ChargesTransactionsResponse> t = GetChargeTransactionsAsync(chargeId, page, size);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// TODO: type endpoint description here
+        /// GetChargeTransactions
         /// </summary>
         /// <param name="chargeId">Required parameter: Charge Id</param>
         /// <param name="page">Optional parameter: Page number</param>
         /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListChargeTransactionsResponse response from the API call</return>
-        public async Task<Models.ListChargeTransactionsResponse> GetChargeTransactionsAsync(string chargeId, int? page = null, int? size = null)
+        /// <return>Returns the Models.ChargesTransactionsResponse response from the API call</return>
+        public async Task<Models.ChargesTransactionsResponse> GetChargeTransactionsAsync(string chargeId, int? page = null, int? size = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -890,7 +1110,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" }
             };
 
@@ -900,12 +1120,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.ListChargeTransactionsResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.ChargesTransactionsResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -914,7 +1154,7 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// TODO: type endpoint description here
+        /// GetChargesSummary
         /// </summary>
         /// <param name="status">Required parameter: Example: </param>
         /// <param name="createdSince">Optional parameter: Example: </param>
@@ -928,7 +1168,7 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// TODO: type endpoint description here
+        /// GetChargesSummary
         /// </summary>
         /// <param name="status">Required parameter: Example: </param>
         /// <param name="createdSince">Optional parameter: Example: </param>
@@ -958,7 +1198,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" }
             };
 
@@ -968,6 +1208,26 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 

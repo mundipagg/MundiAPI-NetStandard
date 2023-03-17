@@ -21,7 +21,7 @@ using MundiAPI.Standard.Exceptions;
 
 namespace MundiAPI.Standard.Controllers
 {
-    public partial class CustomersController: BaseController, ICustomersController
+    public partial class CustomersController: BaseController
     {
         #region Singleton Pattern
 
@@ -53,12 +53,12 @@ namespace MundiAPI.Standard.Controllers
         /// Creates a access token for a customer
         /// </summary>
         /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="request">Required parameter: Request for creating a access token</param>
+        /// <param name="body">Required parameter: Request for creating a access token</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetAccessTokenResponse response from the API call</return>
-        public Models.GetAccessTokenResponse CreateAccessToken(string customerId, Models.CreateAccessTokenRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.CustomersAccessTokensResponse response from the API call</return>
+        public Models.CustomersAccessTokensResponse CreateAccessToken(string customerId, Models.CustomersAccessTokensRequest body, string idempotencyKey = null)
         {
-            Task<Models.GetAccessTokenResponse> t = CreateAccessTokenAsync(customerId, request, idempotencyKey);
+            Task<Models.CustomersAccessTokensResponse> t = CreateAccessTokenAsync(customerId, body, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -67,10 +67,10 @@ namespace MundiAPI.Standard.Controllers
         /// Creates a access token for a customer
         /// </summary>
         /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="request">Required parameter: Request for creating a access token</param>
+        /// <param name="body">Required parameter: Request for creating a access token</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetAccessTokenResponse response from the API call</return>
-        public async Task<Models.GetAccessTokenResponse> CreateAccessTokenAsync(string customerId, Models.CreateAccessTokenRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.CustomersAccessTokensResponse response from the API call</return>
+        public async Task<Models.CustomersAccessTokensResponse> CreateAccessTokenAsync(string customerId, Models.CustomersAccessTokensRequest body, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -92,14 +92,14 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
 
             //append body params
-            var _body = APIHelper.JsonSerialize(request);
+            var _body = APIHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -107,12 +107,125 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetAccessTokenResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.CustomersAccessTokensResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Get all access tokens from a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.CustomersAccessTokensResponse1 response from the API call</return>
+        public Models.CustomersAccessTokensResponse1 GetAccessTokens(string customerId, int? page = null, int? size = null)
+        {
+            Task<Models.CustomersAccessTokensResponse1> t = GetAccessTokensAsync(customerId, page, size);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Get all access tokens from a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.CustomersAccessTokensResponse1 response from the API call</return>
+        public async Task<Models.CustomersAccessTokensResponse1> GetAccessTokensAsync(string customerId, int? page = null, int? size = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/customers/{customer_id}/access-tokens");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "customer_id", customerId }
+            });
+
+            //process optional query parameters
+            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "page", page },
+                { "size", size }
+            },ArrayDeserializationFormat,ParameterSeparator);
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.CustomersAccessTokensResponse1>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -124,12 +237,12 @@ namespace MundiAPI.Standard.Controllers
         /// Updates a customer
         /// </summary>
         /// <param name="customerId">Required parameter: Customer id</param>
-        /// <param name="request">Required parameter: Request for updating a customer</param>
+        /// <param name="body">Required parameter: Request for updating a customer</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
-        public Models.GetCustomerResponse UpdateCustomer(string customerId, Models.UpdateCustomerRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.CustomersResponse response from the API call</return>
+        public Models.CustomersResponse UpdateCustomer(string customerId, Models.CustomersRequest body, string idempotencyKey = null)
         {
-            Task<Models.GetCustomerResponse> t = UpdateCustomerAsync(customerId, request, idempotencyKey);
+            Task<Models.CustomersResponse> t = UpdateCustomerAsync(customerId, body, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -138,10 +251,10 @@ namespace MundiAPI.Standard.Controllers
         /// Updates a customer
         /// </summary>
         /// <param name="customerId">Required parameter: Customer id</param>
-        /// <param name="request">Required parameter: Request for updating a customer</param>
+        /// <param name="body">Required parameter: Request for updating a customer</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
-        public async Task<Models.GetCustomerResponse> UpdateCustomerAsync(string customerId, Models.UpdateCustomerRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.CustomersResponse response from the API call</return>
+        public async Task<Models.CustomersResponse> UpdateCustomerAsync(string customerId, Models.CustomersRequest body, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -163,14 +276,14 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
 
             //append body params
-            var _body = APIHelper.JsonSerialize(request);
+            var _body = APIHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.PutBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -178,12 +291,114 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetCustomerResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.CustomersResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Get a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <return>Returns the Models.CustomersResponse response from the API call</return>
+        public Models.CustomersResponse GetCustomer(string customerId)
+        {
+            Task<Models.CustomersResponse> t = GetCustomerAsync(customerId);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Get a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <return>Returns the Models.CustomersResponse response from the API call</return>
+        public async Task<Models.CustomersResponse> GetCustomerAsync(string customerId)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/customers/{customer_id}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "customer_id", customerId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.CustomersResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -195,10 +410,10 @@ namespace MundiAPI.Standard.Controllers
         /// Delete a Customer's access tokens
         /// </summary>
         /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <return>Returns the Models.ListAccessTokensResponse response from the API call</return>
-        public Models.ListAccessTokensResponse DeleteAccessTokens(string customerId)
+        /// <return>Returns the Models.CustomersAccessTokensResponse1 response from the API call</return>
+        public Models.CustomersAccessTokensResponse1 DeleteAccessTokens(string customerId)
         {
-            Task<Models.ListAccessTokensResponse> t = DeleteAccessTokensAsync(customerId);
+            Task<Models.CustomersAccessTokensResponse1> t = DeleteAccessTokensAsync(customerId);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -207,8 +422,8 @@ namespace MundiAPI.Standard.Controllers
         /// Delete a Customer's access tokens
         /// </summary>
         /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <return>Returns the Models.ListAccessTokensResponse response from the API call</return>
-        public async Task<Models.ListAccessTokensResponse> DeleteAccessTokensAsync(string customerId)
+        /// <return>Returns the Models.CustomersAccessTokensResponse1 response from the API call</return>
+        public async Task<Models.CustomersAccessTokensResponse1> DeleteAccessTokensAsync(string customerId)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -230,7 +445,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" }
             };
 
@@ -240,74 +455,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.ListAccessTokensResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Get a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
-        public Models.GetCustomerResponse GetCustomer(string customerId)
-        {
-            Task<Models.GetCustomerResponse> t = GetCustomerAsync(customerId);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Get a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
-        public async Task<Models.GetCustomerResponse> GetCustomerAsync(string customerId)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/customers/{customer_id}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "customer_id", customerId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetCustomerResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.CustomersAccessTokensResponse1>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -321,10 +494,10 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="customerId">Required parameter: Customer id</param>
         /// <param name="page">Optional parameter: Page number</param>
         /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListAddressesResponse response from the API call</return>
-        public Models.ListAddressesResponse GetAddresses(string customerId, int? page = null, int? size = null)
+        /// <return>Returns the Models.CustomersAddressesResponse response from the API call</return>
+        public Models.CustomersAddressesResponse GetAddresses(string customerId, int? page = null, int? size = null)
         {
-            Task<Models.ListAddressesResponse> t = GetAddressesAsync(customerId, page, size);
+            Task<Models.CustomersAddressesResponse> t = GetAddressesAsync(customerId, page, size);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -335,8 +508,8 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="customerId">Required parameter: Customer id</param>
         /// <param name="page">Optional parameter: Page number</param>
         /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListAddressesResponse response from the API call</return>
-        public async Task<Models.ListAddressesResponse> GetAddressesAsync(string customerId, int? page = null, int? size = null)
+        /// <return>Returns the Models.CustomersAddressesResponse response from the API call</return>
+        public async Task<Models.CustomersAddressesResponse> GetAddressesAsync(string customerId, int? page = null, int? size = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -365,7 +538,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" }
             };
 
@@ -375,12 +548,123 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.ListAddressesResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.CustomersAddressesResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Creates a new address for a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="body">Required parameter: Request for creating an address</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.CustomersAddressesResponse1 response from the API call</return>
+        public Models.CustomersAddressesResponse1 CreateAddress(string customerId, Models.CustomersAddressesRequest body, string idempotencyKey = null)
+        {
+            Task<Models.CustomersAddressesResponse1> t = CreateAddressAsync(customerId, body, idempotencyKey);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Creates a new address for a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="body">Required parameter: Request for creating an address</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.CustomersAddressesResponse1 response from the API call</return>
+        public async Task<Models.CustomersAddressesResponse1> CreateAddressAsync(string customerId, Models.CustomersAddressesRequest body, string idempotencyKey = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/customers/{customer_id}/addresses");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "customer_id", customerId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
+                { "accept", "application/json" },
+                { "Content-Type", "application/json" },
+                { "idempotency-key", idempotencyKey }
+            };
+
+            //append body params
+            var _body = APIHelper.JsonSerialize(body);
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.CustomersAddressesResponse1>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -393,10 +677,10 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="customerId">Required parameter: Customer Id</param>
         /// <param name="tokenId">Required parameter: Token Id</param>
-        /// <return>Returns the Models.GetAccessTokenResponse response from the API call</return>
-        public Models.GetAccessTokenResponse GetAccessToken(string customerId, string tokenId)
+        /// <return>Returns the Models.CustomersAccessTokensResponse response from the API call</return>
+        public Models.CustomersAccessTokensResponse GetAccessToken(string customerId, string tokenId)
         {
-            Task<Models.GetAccessTokenResponse> t = GetAccessTokenAsync(customerId, tokenId);
+            Task<Models.CustomersAccessTokensResponse> t = GetAccessTokenAsync(customerId, tokenId);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -406,8 +690,8 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="customerId">Required parameter: Customer Id</param>
         /// <param name="tokenId">Required parameter: Token Id</param>
-        /// <return>Returns the Models.GetAccessTokenResponse response from the API call</return>
-        public async Task<Models.GetAccessTokenResponse> GetAccessTokenAsync(string customerId, string tokenId)
+        /// <return>Returns the Models.CustomersAccessTokensResponse response from the API call</return>
+        public async Task<Models.CustomersAccessTokensResponse> GetAccessTokenAsync(string customerId, string tokenId)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -430,7 +714,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" }
             };
 
@@ -440,12 +724,120 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetAccessTokenResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.CustomersAccessTokensResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Delete a customer's access token
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="tokenId">Required parameter: Token Id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.CustomersAccessTokensResponse response from the API call</return>
+        public Models.CustomersAccessTokensResponse DeleteAccessToken(string customerId, string tokenId, string idempotencyKey = null)
+        {
+            Task<Models.CustomersAccessTokensResponse> t = DeleteAccessTokenAsync(customerId, tokenId, idempotencyKey);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Delete a customer's access token
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="tokenId">Required parameter: Token Id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.CustomersAccessTokensResponse response from the API call</return>
+        public async Task<Models.CustomersAccessTokensResponse> DeleteAccessTokenAsync(string customerId, string tokenId, string idempotencyKey = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/customers/{customer_id}/access-tokens/{token_id}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "customer_id", customerId },
+                { "token_id", tokenId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
+                { "accept", "application/json" },
+                { "idempotency-key", idempotencyKey }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Delete(_queryUrl, _headers, null, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.CustomersAccessTokensResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -458,10 +850,10 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="customerId">Required parameter: Customer id</param>
         /// <param name="addressId">Required parameter: Address Id</param>
-        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
-        public Models.GetAddressResponse GetAddress(string customerId, string addressId)
+        /// <return>Returns the Models.CustomersAddressesResponse1 response from the API call</return>
+        public Models.CustomersAddressesResponse1 GetAddress(string customerId, string addressId)
         {
-            Task<Models.GetAddressResponse> t = GetAddressAsync(customerId, addressId);
+            Task<Models.CustomersAddressesResponse1> t = GetAddressAsync(customerId, addressId);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -471,8 +863,8 @@ namespace MundiAPI.Standard.Controllers
         /// </summary>
         /// <param name="customerId">Required parameter: Customer id</param>
         /// <param name="addressId">Required parameter: Address Id</param>
-        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
-        public async Task<Models.GetAddressResponse> GetAddressAsync(string customerId, string addressId)
+        /// <return>Returns the Models.CustomersAddressesResponse1 response from the API call</return>
+        public async Task<Models.CustomersAddressesResponse1> GetAddressAsync(string customerId, string addressId)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -495,7 +887,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" }
             };
 
@@ -505,12 +897,222 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetAddressResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.CustomersAddressesResponse1>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Updates an address
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="addressId">Required parameter: Address Id</param>
+        /// <param name="body">Required parameter: Request for updating an address</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.CustomersAddressesResponse1 response from the API call</return>
+        public Models.CustomersAddressesResponse1 UpdateAddress(
+                string customerId,
+                string addressId,
+                Models.CustomersAddressesRequest1 body,
+                string idempotencyKey = null)
+        {
+            Task<Models.CustomersAddressesResponse1> t = UpdateAddressAsync(customerId, addressId, body, idempotencyKey);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Updates an address
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="addressId">Required parameter: Address Id</param>
+        /// <param name="body">Required parameter: Request for updating an address</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.CustomersAddressesResponse1 response from the API call</return>
+        public async Task<Models.CustomersAddressesResponse1> UpdateAddressAsync(
+                string customerId,
+                string addressId,
+                Models.CustomersAddressesRequest1 body,
+                string idempotencyKey = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/customers/{customer_id}/addresses/{address_id}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "customer_id", customerId },
+                { "address_id", addressId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
+                { "accept", "application/json" },
+                { "Content-Type", "application/json" },
+                { "idempotency-key", idempotencyKey }
+            };
+
+            //append body params
+            var _body = APIHelper.JsonSerialize(body);
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.PutBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.CustomersAddressesResponse1>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Delete a Customer's address
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="addressId">Required parameter: Address Id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.CustomersAddressesResponse1 response from the API call</return>
+        public Models.CustomersAddressesResponse1 DeleteAddress(string customerId, string addressId, string idempotencyKey = null)
+        {
+            Task<Models.CustomersAddressesResponse1> t = DeleteAddressAsync(customerId, addressId, idempotencyKey);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Delete a Customer's address
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="addressId">Required parameter: Address Id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.CustomersAddressesResponse1 response from the API call</return>
+        public async Task<Models.CustomersAddressesResponse1> DeleteAddressAsync(string customerId, string addressId, string idempotencyKey = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/customers/{customer_id}/addresses/{address_id}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "customer_id", customerId },
+                { "address_id", addressId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
+                { "accept", "application/json" },
+                { "idempotency-key", idempotencyKey }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Delete(_queryUrl, _headers, null, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.CustomersAddressesResponse1>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -522,12 +1124,12 @@ namespace MundiAPI.Standard.Controllers
         /// Creates a new card for a customer
         /// </summary>
         /// <param name="customerId">Required parameter: Customer id</param>
-        /// <param name="request">Required parameter: Request for creating a card</param>
+        /// <param name="body">Required parameter: Request for creating a card</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetCardResponse response from the API call</return>
-        public Models.GetCardResponse CreateCard(string customerId, Models.CreateCardRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.CustomersCardsResponse response from the API call</return>
+        public Models.CustomersCardsResponse CreateCard(string customerId, Models.CustomersCardsRequest body, string idempotencyKey = null)
         {
-            Task<Models.GetCardResponse> t = CreateCardAsync(customerId, request, idempotencyKey);
+            Task<Models.CustomersCardsResponse> t = CreateCardAsync(customerId, body, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -536,10 +1138,10 @@ namespace MundiAPI.Standard.Controllers
         /// Creates a new card for a customer
         /// </summary>
         /// <param name="customerId">Required parameter: Customer id</param>
-        /// <param name="request">Required parameter: Request for creating a card</param>
+        /// <param name="body">Required parameter: Request for creating a card</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetCardResponse response from the API call</return>
-        public async Task<Models.GetCardResponse> CreateCardAsync(string customerId, Models.CreateCardRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.CustomersCardsResponse response from the API call</return>
+        public async Task<Models.CustomersCardsResponse> CreateCardAsync(string customerId, Models.CustomersCardsRequest body, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -561,14 +1163,14 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
 
             //append body params
-            var _body = APIHelper.JsonSerialize(request);
+            var _body = APIHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -576,12 +1178,125 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetCardResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.CustomersCardsResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Get all cards from a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.CustomersCardsResponse1 response from the API call</return>
+        public Models.CustomersCardsResponse1 GetCards(string customerId, int? page = null, int? size = null)
+        {
+            Task<Models.CustomersCardsResponse1> t = GetCardsAsync(customerId, page, size);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Get all cards from a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="page">Optional parameter: Page number</param>
+        /// <param name="size">Optional parameter: Page size</param>
+        /// <return>Returns the Models.CustomersCardsResponse1 response from the API call</return>
+        public async Task<Models.CustomersCardsResponse1> GetCardsAsync(string customerId, int? page = null, int? size = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/customers/{customer_id}/cards");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "customer_id", customerId }
+            });
+
+            //process optional query parameters
+            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "page", page },
+                { "size", size }
+            },ArrayDeserializationFormat,ParameterSeparator);
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.CustomersCardsResponse1>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -595,10 +1310,10 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="customerId">Required parameter: Customer id</param>
         /// <param name="cardId">Required parameter: Card Id</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetCardResponse response from the API call</return>
-        public Models.GetCardResponse RenewCard(string customerId, string cardId, string idempotencyKey = null)
+        /// <return>Returns the Models.CustomersCardsRenewResponse response from the API call</return>
+        public Models.CustomersCardsRenewResponse RenewCard(string customerId, string cardId, string idempotencyKey = null)
         {
-            Task<Models.GetCardResponse> t = RenewCardAsync(customerId, cardId, idempotencyKey);
+            Task<Models.CustomersCardsRenewResponse> t = RenewCardAsync(customerId, cardId, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -609,8 +1324,8 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="customerId">Required parameter: Customer id</param>
         /// <param name="cardId">Required parameter: Card Id</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetCardResponse response from the API call</return>
-        public async Task<Models.GetCardResponse> RenewCardAsync(string customerId, string cardId, string idempotencyKey = null)
+        /// <return>Returns the Models.CustomersCardsRenewResponse response from the API call</return>
+        public async Task<Models.CustomersCardsRenewResponse> RenewCardAsync(string customerId, string cardId, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -633,7 +1348,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
@@ -644,12 +1359,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetCardResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.CustomersCardsRenewResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -660,12 +1395,12 @@ namespace MundiAPI.Standard.Controllers
         /// <summary>
         /// Creates a new customer
         /// </summary>
-        /// <param name="request">Required parameter: Request for creating a customer</param>
+        /// <param name="body">Required parameter: Request for creating a customer</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
-        public Models.GetCustomerResponse CreateCustomer(Models.CreateCustomerRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.CustomersResponse response from the API call</return>
+        public Models.CustomersResponse CreateCustomer(Models.CustomersRequest1 body, string idempotencyKey = null)
         {
-            Task<Models.GetCustomerResponse> t = CreateCustomerAsync(request, idempotencyKey);
+            Task<Models.CustomersResponse> t = CreateCustomerAsync(body, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -673,10 +1408,10 @@ namespace MundiAPI.Standard.Controllers
         /// <summary>
         /// Creates a new customer
         /// </summary>
-        /// <param name="request">Required parameter: Request for creating a customer</param>
+        /// <param name="body">Required parameter: Request for creating a customer</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
-        public async Task<Models.GetCustomerResponse> CreateCustomerAsync(Models.CreateCustomerRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.CustomersResponse response from the API call</return>
+        public async Task<Models.CustomersResponse> CreateCustomerAsync(Models.CustomersRequest1 body, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -692,14 +1427,14 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
 
             //append body params
-            var _body = APIHelper.JsonSerialize(request);
+            var _body = APIHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -707,733 +1442,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetCustomerResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Updates an address
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="addressId">Required parameter: Address Id</param>
-        /// <param name="request">Required parameter: Request for updating an address</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
-        public Models.GetAddressResponse UpdateAddress(
-                string customerId,
-                string addressId,
-                Models.UpdateAddressRequest request,
-                string idempotencyKey = null)
-        {
-            Task<Models.GetAddressResponse> t = UpdateAddressAsync(customerId, addressId, request, idempotencyKey);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Updates an address
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="addressId">Required parameter: Address Id</param>
-        /// <param name="request">Required parameter: Request for updating an address</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
-        public async Task<Models.GetAddressResponse> UpdateAddressAsync(
-                string customerId,
-                string addressId,
-                Models.UpdateAddressRequest request,
-                string idempotencyKey = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/customers/{customer_id}/addresses/{address_id}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "customer_id", customerId },
-                { "address_id", addressId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
-                { "idempotency-key", idempotencyKey }
-            };
-
-            //append body params
-            var _body = APIHelper.JsonSerialize(request);
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.PutBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetAddressResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Get all access tokens from a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListAccessTokensResponse response from the API call</return>
-        public Models.ListAccessTokensResponse GetAccessTokens(string customerId, int? page = null, int? size = null)
-        {
-            Task<Models.ListAccessTokensResponse> t = GetAccessTokensAsync(customerId, page, size);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Get all access tokens from a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListAccessTokensResponse response from the API call</return>
-        public async Task<Models.ListAccessTokensResponse> GetAccessTokensAsync(string customerId, int? page = null, int? size = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/customers/{customer_id}/access-tokens");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "customer_id", customerId }
-            });
-
-            //process optional query parameters
-            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "page", page },
-                { "size", size }
-            },ArrayDeserializationFormat,ParameterSeparator);
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.ListAccessTokensResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Updates the metadata a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: The customer id</param>
-        /// <param name="request">Required parameter: Request for updating the customer metadata</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
-        public Models.GetCustomerResponse UpdateCustomerMetadata(string customerId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
-        {
-            Task<Models.GetCustomerResponse> t = UpdateCustomerMetadataAsync(customerId, request, idempotencyKey);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Updates the metadata a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: The customer id</param>
-        /// <param name="request">Required parameter: Request for updating the customer metadata</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetCustomerResponse response from the API call</return>
-        public async Task<Models.GetCustomerResponse> UpdateCustomerMetadataAsync(string customerId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/Customers/{customer_id}/metadata");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "customer_id", customerId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
-                { "idempotency-key", idempotencyKey }
-            };
-
-            //append body params
-            var _body = APIHelper.JsonSerialize(request);
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.PatchBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetCustomerResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Delete a Customer's address
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="addressId">Required parameter: Address Id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
-        public Models.GetAddressResponse DeleteAddress(string customerId, string addressId, string idempotencyKey = null)
-        {
-            Task<Models.GetAddressResponse> t = DeleteAddressAsync(customerId, addressId, idempotencyKey);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Delete a Customer's address
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="addressId">Required parameter: Address Id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
-        public async Task<Models.GetAddressResponse> DeleteAddressAsync(string customerId, string addressId, string idempotencyKey = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/customers/{customer_id}/addresses/{address_id}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "customer_id", customerId },
-                { "address_id", addressId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" },
-                { "idempotency-key", idempotencyKey }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Delete(_queryUrl, _headers, null, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetAddressResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Updates a card
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="cardId">Required parameter: Card id</param>
-        /// <param name="request">Required parameter: Request for updating a card</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetCardResponse response from the API call</return>
-        public Models.GetCardResponse UpdateCard(
-                string customerId,
-                string cardId,
-                Models.UpdateCardRequest request,
-                string idempotencyKey = null)
-        {
-            Task<Models.GetCardResponse> t = UpdateCardAsync(customerId, cardId, request, idempotencyKey);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Updates a card
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="cardId">Required parameter: Card id</param>
-        /// <param name="request">Required parameter: Request for updating a card</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetCardResponse response from the API call</return>
-        public async Task<Models.GetCardResponse> UpdateCardAsync(
-                string customerId,
-                string cardId,
-                Models.UpdateCardRequest request,
-                string idempotencyKey = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/customers/{customer_id}/cards/{card_id}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "customer_id", customerId },
-                { "card_id", cardId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
-                { "idempotency-key", idempotencyKey }
-            };
-
-            //append body params
-            var _body = APIHelper.JsonSerialize(request);
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.PutBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetCardResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Delete a customer's access token
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="tokenId">Required parameter: Token Id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetAccessTokenResponse response from the API call</return>
-        public Models.GetAccessTokenResponse DeleteAccessToken(string customerId, string tokenId, string idempotencyKey = null)
-        {
-            Task<Models.GetAccessTokenResponse> t = DeleteAccessTokenAsync(customerId, tokenId, idempotencyKey);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Delete a customer's access token
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="tokenId">Required parameter: Token Id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetAccessTokenResponse response from the API call</return>
-        public async Task<Models.GetAccessTokenResponse> DeleteAccessTokenAsync(string customerId, string tokenId, string idempotencyKey = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/customers/{customer_id}/access-tokens/{token_id}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "customer_id", customerId },
-                { "token_id", tokenId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" },
-                { "idempotency-key", idempotencyKey }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Delete(_queryUrl, _headers, null, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetAccessTokenResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Creates a new address for a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="request">Required parameter: Request for creating an address</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
-        public Models.GetAddressResponse CreateAddress(string customerId, Models.CreateAddressRequest request, string idempotencyKey = null)
-        {
-            Task<Models.GetAddressResponse> t = CreateAddressAsync(customerId, request, idempotencyKey);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Creates a new address for a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="request">Required parameter: Request for creating an address</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetAddressResponse response from the API call</return>
-        public async Task<Models.GetAddressResponse> CreateAddressAsync(string customerId, Models.CreateAddressRequest request, string idempotencyKey = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/customers/{customer_id}/addresses");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "customer_id", customerId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
-                { "idempotency-key", idempotencyKey }
-            };
-
-            //append body params
-            var _body = APIHelper.JsonSerialize(request);
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetAddressResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Get a customer's card
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer id</param>
-        /// <param name="cardId">Required parameter: Card id</param>
-        /// <return>Returns the Models.GetCardResponse response from the API call</return>
-        public Models.GetCardResponse GetCard(string customerId, string cardId)
-        {
-            Task<Models.GetCardResponse> t = GetCardAsync(customerId, cardId);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Get a customer's card
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer id</param>
-        /// <param name="cardId">Required parameter: Card id</param>
-        /// <return>Returns the Models.GetCardResponse response from the API call</return>
-        public async Task<Models.GetCardResponse> GetCardAsync(string customerId, string cardId)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/customers/{customer_id}/cards/{card_id}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "customer_id", customerId },
-                { "card_id", cardId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetCardResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Get all cards from a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListCardsResponse response from the API call</return>
-        public Models.ListCardsResponse GetCards(string customerId, int? page = null, int? size = null)
-        {
-            Task<Models.ListCardsResponse> t = GetCardsAsync(customerId, page, size);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Get all cards from a customer
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="page">Optional parameter: Page number</param>
-        /// <param name="size">Optional parameter: Page size</param>
-        /// <return>Returns the Models.ListCardsResponse response from the API call</return>
-        public async Task<Models.ListCardsResponse> GetCardsAsync(string customerId, int? page = null, int? size = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/customers/{customer_id}/cards");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "customer_id", customerId }
-            });
-
-            //process optional query parameters
-            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "page", page },
-                { "size", size }
-            },ArrayDeserializationFormat,ParameterSeparator);
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.ListCardsResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Delete a customer's card
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="cardId">Required parameter: Card Id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetCardResponse response from the API call</return>
-        public Models.GetCardResponse DeleteCard(string customerId, string cardId, string idempotencyKey = null)
-        {
-            Task<Models.GetCardResponse> t = DeleteCardAsync(customerId, cardId, idempotencyKey);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Delete a customer's card
-        /// </summary>
-        /// <param name="customerId">Required parameter: Customer Id</param>
-        /// <param name="cardId">Required parameter: Card Id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetCardResponse response from the API call</return>
-        public async Task<Models.GetCardResponse> DeleteCardAsync(string customerId, string cardId, string idempotencyKey = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/customers/{customer_id}/cards/{card_id}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "customer_id", customerId },
-                { "card_id", cardId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" },
-                { "idempotency-key", idempotencyKey }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Delete(_queryUrl, _headers, null, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetCardResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.CustomersResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -1450,8 +1484,8 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="size">Optional parameter: Quantity pages of the search</param>
         /// <param name="email">Optional parameter: Customer's email</param>
         /// <param name="code">Optional parameter: Customer's code</param>
-        /// <return>Returns the Models.ListCustomersResponse response from the API call</return>
-        public Models.ListCustomersResponse GetCustomers(
+        /// <return>Returns the Models.CustomersResponse3 response from the API call</return>
+        public Models.CustomersResponse3 GetCustomers(
                 string name = null,
                 string document = null,
                 int? page = 1,
@@ -1459,7 +1493,7 @@ namespace MundiAPI.Standard.Controllers
                 string email = null,
                 string code = null)
         {
-            Task<Models.ListCustomersResponse> t = GetCustomersAsync(name, document, page, size, email, code);
+            Task<Models.CustomersResponse3> t = GetCustomersAsync(name, document, page, size, email, code);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -1473,8 +1507,8 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="size">Optional parameter: Quantity pages of the search</param>
         /// <param name="email">Optional parameter: Customer's email</param>
         /// <param name="code">Optional parameter: Customer's code</param>
-        /// <return>Returns the Models.ListCustomersResponse response from the API call</return>
-        public async Task<Models.ListCustomersResponse> GetCustomersAsync(
+        /// <return>Returns the Models.CustomersResponse3 response from the API call</return>
+        public async Task<Models.CustomersResponse3> GetCustomersAsync(
                 string name = null,
                 string document = null,
                 int? page = 1,
@@ -1507,7 +1541,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
                 { "accept", "application/json" }
             };
 
@@ -1517,12 +1551,398 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.ListCustomersResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.CustomersResponse3>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Updates the metadata a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: The customer id</param>
+        /// <param name="body">Required parameter: Request for updating the customer metadata</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.CustomersMetadataResponse response from the API call</return>
+        public Models.CustomersMetadataResponse UpdateCustomerMetadata(string customerId, Models.CustomersMetadataRequest body, string idempotencyKey = null)
+        {
+            Task<Models.CustomersMetadataResponse> t = UpdateCustomerMetadataAsync(customerId, body, idempotencyKey);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Updates the metadata a customer
+        /// </summary>
+        /// <param name="customerId">Required parameter: The customer id</param>
+        /// <param name="body">Required parameter: Request for updating the customer metadata</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.CustomersMetadataResponse response from the API call</return>
+        public async Task<Models.CustomersMetadataResponse> UpdateCustomerMetadataAsync(string customerId, Models.CustomersMetadataRequest body, string idempotencyKey = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/Customers/{customer_id}/metadata");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "customer_id", customerId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
+                { "accept", "application/json" },
+                { "Content-Type", "application/json" },
+                { "idempotency-key", idempotencyKey }
+            };
+
+            //append body params
+            var _body = APIHelper.JsonSerialize(body);
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.PatchBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.CustomersMetadataResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Updates a card
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="cardId">Required parameter: Card id</param>
+        /// <param name="body">Required parameter: Request for updating a card</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.CustomersCardsResponse response from the API call</return>
+        public Models.CustomersCardsResponse UpdateCard(
+                string customerId,
+                string cardId,
+                Models.CustomersCardsRequest1 body,
+                string idempotencyKey = null)
+        {
+            Task<Models.CustomersCardsResponse> t = UpdateCardAsync(customerId, cardId, body, idempotencyKey);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Updates a card
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="cardId">Required parameter: Card id</param>
+        /// <param name="body">Required parameter: Request for updating a card</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.CustomersCardsResponse response from the API call</return>
+        public async Task<Models.CustomersCardsResponse> UpdateCardAsync(
+                string customerId,
+                string cardId,
+                Models.CustomersCardsRequest1 body,
+                string idempotencyKey = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/customers/{customer_id}/cards/{card_id}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "customer_id", customerId },
+                { "card_id", cardId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
+                { "accept", "application/json" },
+                { "Content-Type", "application/json" },
+                { "idempotency-key", idempotencyKey }
+            };
+
+            //append body params
+            var _body = APIHelper.JsonSerialize(body);
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.PutBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.CustomersCardsResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Delete a customer's card
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="cardId">Required parameter: Card Id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.CustomersCardsResponse response from the API call</return>
+        public Models.CustomersCardsResponse DeleteCard(string customerId, string cardId, string idempotencyKey = null)
+        {
+            Task<Models.CustomersCardsResponse> t = DeleteCardAsync(customerId, cardId, idempotencyKey);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Delete a customer's card
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer Id</param>
+        /// <param name="cardId">Required parameter: Card Id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.CustomersCardsResponse response from the API call</return>
+        public async Task<Models.CustomersCardsResponse> DeleteCardAsync(string customerId, string cardId, string idempotencyKey = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/customers/{customer_id}/cards/{card_id}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "customer_id", customerId },
+                { "card_id", cardId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
+                { "accept", "application/json" },
+                { "idempotency-key", idempotencyKey }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Delete(_queryUrl, _headers, null, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.CustomersCardsResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Get a customer's card
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer id</param>
+        /// <param name="cardId">Required parameter: Card id</param>
+        /// <return>Returns the Models.CustomersCardsResponse response from the API call</return>
+        public Models.CustomersCardsResponse GetCard(string customerId, string cardId)
+        {
+            Task<Models.CustomersCardsResponse> t = GetCardAsync(customerId, cardId);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Get a customer's card
+        /// </summary>
+        /// <param name="customerId">Required parameter: Customer id</param>
+        /// <param name="cardId">Required parameter: Card id</param>
+        /// <return>Returns the Models.CustomersCardsResponse response from the API call</return>
+        public async Task<Models.CustomersCardsResponse> GetCardAsync(string customerId, string cardId)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/customers/{customer_id}/cards/{card_id}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "customer_id", customerId },
+                { "card_id", cardId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 2.4.1" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.CustomersCardsResponse>(_response.Body);
             }
             catch (Exception _ex)
             {

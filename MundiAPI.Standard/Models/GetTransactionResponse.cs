@@ -34,12 +34,12 @@ namespace MundiAPI.Standard.Models
         private DateTime? nextAttempt;
         private string transactionType;
         private string id;
-        private Models.GetGatewayResponseResponse gatewayResponse;
+        private Models.GatewayResponse gatewayResponse;
         private Models.GetAntifraudResponse antifraudResponse;
         private Dictionary<string, string> metadata;
         private List<Models.GetSplitResponse> split;
-        private Models.GetInterestResponse interest;
-        private Models.GetFineResponse fine;
+        private Models.Interest interest;
+        private Models.Fine fine;
         private int? maxDaysToPayPastDue;
 
         /// <summary>
@@ -250,10 +250,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// The Gateway Response
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("gateway_response")]
-        public Models.GetGatewayResponseResponse GatewayResponse 
+        public Models.GatewayResponse GatewayResponse 
         { 
             get 
             {
@@ -321,7 +321,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("interest")]
-        public Models.GetInterestResponse Interest 
+        public Models.Interest Interest 
         { 
             get 
             {
@@ -338,7 +338,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("fine")]
-        public Models.GetFineResponse Fine 
+        public Models.Fine Fine 
         { 
             get 
             {
