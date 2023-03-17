@@ -33,7 +33,7 @@ namespace MundiAPI.Standard.Models
         private string status;
         private DateTime createdAt;
         private DateTime updatedAt;
-        private Models.GetCustomerResponse customer;
+        private Models.Customer customer;
         private Dictionary<string, string> metadata;
         private string line1;
         private string line2;
@@ -249,7 +249,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("customer")]
-        public Models.GetCustomerResponse Customer 
+        public Models.Customer Customer 
         { 
             get 
             {

@@ -23,7 +23,7 @@ namespace MundiAPI.Standard.Models
         // These fields hold the values for the public properties.
         private int amount;
         private string description;
-        private Models.CreatePaymentRequest payment;
+        private Models.Payment payment;
 
         /// <summary>
         /// Setup amount
@@ -60,10 +60,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Payment data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("payment")]
-        public Models.CreatePaymentRequest Payment 
+        public Models.Payment Payment 
         { 
             get 
             {

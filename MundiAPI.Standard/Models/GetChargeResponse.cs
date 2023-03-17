@@ -32,9 +32,9 @@ namespace MundiAPI.Standard.Models
         private DateTime createdAt;
         private DateTime updatedAt;
         private Models.GetTransactionResponse lastTransaction;
-        private Models.GetInvoiceResponse invoice;
-        private Models.GetOrderResponse order;
-        private Models.GetCustomerResponse customer;
+        private Models.Invoice invoice;
+        private Models.Order order;
+        private Models.Customer customer;
         private Dictionary<string, string> metadata;
         private DateTime? paidAt;
         private DateTime? canceledAt;
@@ -237,7 +237,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("invoice")]
-        public Models.GetInvoiceResponse Invoice 
+        public Models.Invoice Invoice 
         { 
             get 
             {
@@ -254,7 +254,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("order")]
-        public Models.GetOrderResponse Order 
+        public Models.Order Order 
         { 
             get 
             {
@@ -271,7 +271,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("customer")]
-        public Models.GetCustomerResponse Customer 
+        public Models.Customer Customer 
         { 
             get 
             {

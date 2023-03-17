@@ -21,7 +21,7 @@ using MundiAPI.Standard.Exceptions;
 
 namespace MundiAPI.Standard.Controllers
 {
-    public partial class PlansController: BaseController, IPlansController
+    public partial class PlansController: BaseController
     {
         #region Singleton Pattern
 
@@ -56,14 +56,14 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="planItemId">Required parameter: Plan item id</param>
         /// <param name="body">Required parameter: Request for updating the plan item</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetPlanItemResponse response from the API call</return>
-        public Models.GetPlanItemResponse UpdatePlanItem(
+        /// <return>Returns the Models.PlansItemsResponse response from the API call</return>
+        public Models.PlansItemsResponse UpdatePlanItem(
                 string planId,
                 string planItemId,
-                Models.UpdatePlanItemRequest body,
+                Models.PlansItemsRequest body,
                 string idempotencyKey = null)
         {
-            Task<Models.GetPlanItemResponse> t = UpdatePlanItemAsync(planId, planItemId, body, idempotencyKey);
+            Task<Models.PlansItemsResponse> t = UpdatePlanItemAsync(planId, planItemId, body, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -75,11 +75,11 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="planItemId">Required parameter: Plan item id</param>
         /// <param name="body">Required parameter: Request for updating the plan item</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetPlanItemResponse response from the API call</return>
-        public async Task<Models.GetPlanItemResponse> UpdatePlanItemAsync(
+        /// <return>Returns the Models.PlansItemsResponse response from the API call</return>
+        public async Task<Models.PlansItemsResponse> UpdatePlanItemAsync(
                 string planId,
                 string planItemId,
-                Models.UpdatePlanItemRequest body,
+                Models.PlansItemsRequest body,
                 string idempotencyKey = null)
         {
             //the base uri for api requests
@@ -103,9 +103,9 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "APIMATIC 2.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
 
@@ -118,12 +118,205 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetPlanItemResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.PlansItemsResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Removes an item from a plan
+        /// </summary>
+        /// <param name="planId">Required parameter: Plan id</param>
+        /// <param name="planItemId">Required parameter: Plan item id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.PlansItemsResponse response from the API call</return>
+        public Models.PlansItemsResponse DeletePlanItem(string planId, string planItemId, string idempotencyKey = null)
+        {
+            Task<Models.PlansItemsResponse> t = DeletePlanItemAsync(planId, planItemId, idempotencyKey);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Removes an item from a plan
+        /// </summary>
+        /// <param name="planId">Required parameter: Plan id</param>
+        /// <param name="planItemId">Required parameter: Plan item id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.PlansItemsResponse response from the API call</return>
+        public async Task<Models.PlansItemsResponse> DeletePlanItemAsync(string planId, string planItemId, string idempotencyKey = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/plans/{plan_id}/items/{plan_item_id}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "plan_id", planId },
+                { "plan_item_id", planItemId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" },
+                { "idempotency-key", idempotencyKey }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Delete(_queryUrl, _headers, null, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.PlansItemsResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Gets a plan item
+        /// </summary>
+        /// <param name="planId">Required parameter: Plan id</param>
+        /// <param name="planItemId">Required parameter: Plan item id</param>
+        /// <return>Returns the Models.PlansItemsResponse response from the API call</return>
+        public Models.PlansItemsResponse GetPlanItem(string planId, string planItemId)
+        {
+            Task<Models.PlansItemsResponse> t = GetPlanItemAsync(planId, planItemId);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Gets a plan item
+        /// </summary>
+        /// <param name="planId">Required parameter: Plan id</param>
+        /// <param name="planItemId">Required parameter: Plan item id</param>
+        /// <return>Returns the Models.PlansItemsResponse response from the API call</return>
+        public async Task<Models.PlansItemsResponse> GetPlanItemAsync(string planId, string planItemId)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/plans/{plan_id}/items/{plan_item_id}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "plan_id", planId },
+                { "plan_item_id", planItemId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.PlansItemsResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -135,12 +328,12 @@ namespace MundiAPI.Standard.Controllers
         /// Adds a new item to a plan
         /// </summary>
         /// <param name="planId">Required parameter: Plan id</param>
-        /// <param name="request">Required parameter: Request for creating a plan item</param>
+        /// <param name="body">Required parameter: Request for creating a plan item</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetPlanItemResponse response from the API call</return>
-        public Models.GetPlanItemResponse CreatePlanItem(string planId, Models.CreatePlanItemRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.PlansItemsResponse response from the API call</return>
+        public Models.PlansItemsResponse CreatePlanItem(string planId, Models.PlansItemsRequest1 body, string idempotencyKey = null)
         {
-            Task<Models.GetPlanItemResponse> t = CreatePlanItemAsync(planId, request, idempotencyKey);
+            Task<Models.PlansItemsResponse> t = CreatePlanItemAsync(planId, body, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -149,10 +342,10 @@ namespace MundiAPI.Standard.Controllers
         /// Adds a new item to a plan
         /// </summary>
         /// <param name="planId">Required parameter: Plan id</param>
-        /// <param name="request">Required parameter: Request for creating a plan item</param>
+        /// <param name="body">Required parameter: Request for creating a plan item</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetPlanItemResponse response from the API call</return>
-        public async Task<Models.GetPlanItemResponse> CreatePlanItemAsync(string planId, Models.CreatePlanItemRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.PlansItemsResponse response from the API call</return>
+        public async Task<Models.PlansItemsResponse> CreatePlanItemAsync(string planId, Models.PlansItemsRequest1 body, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -174,14 +367,14 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "APIMATIC 2.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
 
             //append body params
-            var _body = APIHelper.JsonSerialize(request);
+            var _body = APIHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -189,12 +382,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetPlanItemResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.PlansItemsResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -212,8 +425,8 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="billingType">Optional parameter: Filter for plan's billing type</param>
         /// <param name="createdSince">Optional parameter: Filter for plan's creation date start range</param>
         /// <param name="createdUntil">Optional parameter: Filter for plan's creation date end range</param>
-        /// <return>Returns the Models.ListPlansResponse response from the API call</return>
-        public Models.ListPlansResponse GetPlans(
+        /// <return>Returns the Models.PlansResponse response from the API call</return>
+        public Models.PlansResponse GetPlans(
                 int? page = null,
                 int? size = null,
                 string name = null,
@@ -222,7 +435,7 @@ namespace MundiAPI.Standard.Controllers
                 DateTime? createdSince = null,
                 DateTime? createdUntil = null)
         {
-            Task<Models.ListPlansResponse> t = GetPlansAsync(page, size, name, status, billingType, createdSince, createdUntil);
+            Task<Models.PlansResponse> t = GetPlansAsync(page, size, name, status, billingType, createdSince, createdUntil);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -237,8 +450,8 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="billingType">Optional parameter: Filter for plan's billing type</param>
         /// <param name="createdSince">Optional parameter: Filter for plan's creation date start range</param>
         /// <param name="createdUntil">Optional parameter: Filter for plan's creation date end range</param>
-        /// <return>Returns the Models.ListPlansResponse response from the API call</return>
-        public async Task<Models.ListPlansResponse> GetPlansAsync(
+        /// <return>Returns the Models.PlansResponse response from the API call</return>
+        public async Task<Models.PlansResponse> GetPlansAsync(
                 int? page = null,
                 int? size = null,
                 string name = null,
@@ -273,7 +486,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "APIMATIC 2.0" },
                 { "accept", "application/json" }
             };
 
@@ -283,12 +496,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.ListPlansResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.PlansResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -297,36 +530,32 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// Gets a plan
+        /// Creates a new plan
         /// </summary>
-        /// <param name="planId">Required parameter: Plan id</param>
-        /// <return>Returns the Models.GetPlanResponse response from the API call</return>
-        public Models.GetPlanResponse GetPlan(string planId)
+        /// <param name="body">Required parameter: Request for creating a plan</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.PlansResponse1 response from the API call</return>
+        public Models.PlansResponse1 CreatePlan(Models.PlansRequest body, string idempotencyKey = null)
         {
-            Task<Models.GetPlanResponse> t = GetPlanAsync(planId);
+            Task<Models.PlansResponse1> t = CreatePlanAsync(body, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Gets a plan
+        /// Creates a new plan
         /// </summary>
-        /// <param name="planId">Required parameter: Plan id</param>
-        /// <return>Returns the Models.GetPlanResponse response from the API call</return>
-        public async Task<Models.GetPlanResponse> GetPlanAsync(string planId)
+        /// <param name="body">Required parameter: Request for creating a plan</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.PlansResponse1 response from the API call</return>
+        public async Task<Models.PlansResponse1> CreatePlanAsync(Models.PlansRequest body, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/plans/{plan_id}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "plan_id", planId }
-            });
+            _queryBuilder.Append("/plans");
 
 
             //validate and preprocess url
@@ -335,80 +564,187 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetPlanResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Updates a plan
-        /// </summary>
-        /// <param name="planId">Required parameter: Plan id</param>
-        /// <param name="request">Required parameter: Request for updating a plan</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetPlanResponse response from the API call</return>
-        public Models.GetPlanResponse UpdatePlan(string planId, Models.UpdatePlanRequest request, string idempotencyKey = null)
-        {
-            Task<Models.GetPlanResponse> t = UpdatePlanAsync(planId, request, idempotencyKey);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Updates a plan
-        /// </summary>
-        /// <param name="planId">Required parameter: Plan id</param>
-        /// <param name="request">Required parameter: Request for updating a plan</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetPlanResponse response from the API call</return>
-        public async Task<Models.GetPlanResponse> UpdatePlanAsync(string planId, Models.UpdatePlanRequest request, string idempotencyKey = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/plans/{plan_id}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "plan_id", planId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "APIMATIC 2.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
 
             //append body params
-            var _body = APIHelper.JsonSerialize(request);
+            var _body = APIHelper.JsonSerialize(body);
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.PlansResponse1>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Gets a plan
+        /// </summary>
+        /// <param name="planId">Required parameter: Plan id</param>
+        /// <return>Returns the Models.PlansResponse1 response from the API call</return>
+        public Models.PlansResponse1 GetPlan(string planId)
+        {
+            Task<Models.PlansResponse1> t = GetPlanAsync(planId);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Gets a plan
+        /// </summary>
+        /// <param name="planId">Required parameter: Plan id</param>
+        /// <return>Returns the Models.PlansResponse1 response from the API call</return>
+        public async Task<Models.PlansResponse1> GetPlanAsync(string planId)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/plans/{plan_id}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "plan_id", planId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.PlansResponse1>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Updates a plan
+        /// </summary>
+        /// <param name="planId">Required parameter: Plan id</param>
+        /// <param name="body">Required parameter: Request for updating a plan</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.PlansResponse1 response from the API call</return>
+        public Models.PlansResponse1 UpdatePlan(string planId, Models.PlansRequest1 body, string idempotencyKey = null)
+        {
+            Task<Models.PlansResponse1> t = UpdatePlanAsync(planId, body, idempotencyKey);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Updates a plan
+        /// </summary>
+        /// <param name="planId">Required parameter: Plan id</param>
+        /// <param name="body">Required parameter: Request for updating a plan</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.PlansResponse1 response from the API call</return>
+        public async Task<Models.PlansResponse1> UpdatePlanAsync(string planId, Models.PlansRequest1 body, string idempotencyKey = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/plans/{plan_id}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "plan_id", planId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" },
+                { "Content-Type", "application/json" },
+                { "idempotency-key", idempotencyKey }
+            };
+
+            //append body params
+            var _body = APIHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.PutBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -416,12 +752,117 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetPlanResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.PlansResponse1>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Deletes a plan
+        /// </summary>
+        /// <param name="planId">Required parameter: Plan id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.PlansResponse1 response from the API call</return>
+        public Models.PlansResponse1 DeletePlan(string planId, string idempotencyKey = null)
+        {
+            Task<Models.PlansResponse1> t = DeletePlanAsync(planId, idempotencyKey);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Deletes a plan
+        /// </summary>
+        /// <param name="planId">Required parameter: Plan id</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.PlansResponse1 response from the API call</return>
+        public async Task<Models.PlansResponse1> DeletePlanAsync(string planId, string idempotencyKey = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/plans/{plan_id}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "plan_id", planId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" },
+                { "idempotency-key", idempotencyKey }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Delete(_queryUrl, _headers, null, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.PlansResponse1>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -433,12 +874,12 @@ namespace MundiAPI.Standard.Controllers
         /// Updates the metadata from a plan
         /// </summary>
         /// <param name="planId">Required parameter: The plan id</param>
-        /// <param name="request">Required parameter: Request for updating the plan metadata</param>
+        /// <param name="body">Required parameter: Request for updating the plan metadata</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetPlanResponse response from the API call</return>
-        public Models.GetPlanResponse UpdatePlanMetadata(string planId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.PlansMetadataResponse response from the API call</return>
+        public Models.PlansMetadataResponse UpdatePlanMetadata(string planId, Models.PlansMetadataRequest body, string idempotencyKey = null)
         {
-            Task<Models.GetPlanResponse> t = UpdatePlanMetadataAsync(planId, request, idempotencyKey);
+            Task<Models.PlansMetadataResponse> t = UpdatePlanMetadataAsync(planId, body, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -447,10 +888,10 @@ namespace MundiAPI.Standard.Controllers
         /// Updates the metadata from a plan
         /// </summary>
         /// <param name="planId">Required parameter: The plan id</param>
-        /// <param name="request">Required parameter: Request for updating the plan metadata</param>
+        /// <param name="body">Required parameter: Request for updating the plan metadata</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetPlanResponse response from the API call</return>
-        public async Task<Models.GetPlanResponse> UpdatePlanMetadataAsync(string planId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.PlansMetadataResponse response from the API call</return>
+        public async Task<Models.PlansMetadataResponse> UpdatePlanMetadataAsync(string planId, Models.PlansMetadataRequest body, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -472,72 +913,9 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "APIMATIC 2.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
-                { "idempotency-key", idempotencyKey }
-            };
-
-            //append body params
-            var _body = APIHelper.JsonSerialize(request);
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.PatchBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetPlanResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Creates a new plan
-        /// </summary>
-        /// <param name="body">Required parameter: Request for creating a plan</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetPlanResponse response from the API call</return>
-        public Models.GetPlanResponse CreatePlan(Models.CreatePlanRequest body, string idempotencyKey = null)
-        {
-            Task<Models.GetPlanResponse> t = CreatePlanAsync(body, idempotencyKey);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Creates a new plan
-        /// </summary>
-        /// <param name="body">Required parameter: Request for creating a plan</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetPlanResponse response from the API call</return>
-        public async Task<Models.GetPlanResponse> CreatePlanAsync(Models.CreatePlanRequest body, string idempotencyKey = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/plans");
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
 
@@ -545,215 +923,37 @@ namespace MundiAPI.Standard.Controllers
             var _body = APIHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+            HttpRequest _request = ClientInstance.PatchBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
 
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetPlanResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Removes an item from a plan
-        /// </summary>
-        /// <param name="planId">Required parameter: Plan id</param>
-        /// <param name="planItemId">Required parameter: Plan item id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetPlanItemResponse response from the API call</return>
-        public Models.GetPlanItemResponse DeletePlanItem(string planId, string planItemId, string idempotencyKey = null)
-        {
-            Task<Models.GetPlanItemResponse> t = DeletePlanItemAsync(planId, planItemId, idempotencyKey);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Removes an item from a plan
-        /// </summary>
-        /// <param name="planId">Required parameter: Plan id</param>
-        /// <param name="planItemId">Required parameter: Plan item id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetPlanItemResponse response from the API call</return>
-        public async Task<Models.GetPlanItemResponse> DeletePlanItemAsync(string planId, string planItemId, string idempotencyKey = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/plans/{plan_id}/items/{plan_item_id}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "plan_id", planId },
-                { "plan_item_id", planItemId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" },
-                { "idempotency-key", idempotencyKey }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Delete(_queryUrl, _headers, null, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetPlanItemResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Deletes a plan
-        /// </summary>
-        /// <param name="planId">Required parameter: Plan id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetPlanResponse response from the API call</return>
-        public Models.GetPlanResponse DeletePlan(string planId, string idempotencyKey = null)
-        {
-            Task<Models.GetPlanResponse> t = DeletePlanAsync(planId, idempotencyKey);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Deletes a plan
-        /// </summary>
-        /// <param name="planId">Required parameter: Plan id</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetPlanResponse response from the API call</return>
-        public async Task<Models.GetPlanResponse> DeletePlanAsync(string planId, string idempotencyKey = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/plans/{plan_id}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "plan_id", planId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" },
-                { "idempotency-key", idempotencyKey }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Delete(_queryUrl, _headers, null, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetPlanResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Gets a plan item
-        /// </summary>
-        /// <param name="planId">Required parameter: Plan id</param>
-        /// <param name="planItemId">Required parameter: Plan item id</param>
-        /// <return>Returns the Models.GetPlanItemResponse response from the API call</return>
-        public Models.GetPlanItemResponse GetPlanItem(string planId, string planItemId)
-        {
-            Task<Models.GetPlanItemResponse> t = GetPlanItemAsync(planId, planItemId);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Gets a plan item
-        /// </summary>
-        /// <param name="planId">Required parameter: Plan id</param>
-        /// <param name="planItemId">Required parameter: Plan item id</param>
-        /// <return>Returns the Models.GetPlanItemResponse response from the API call</return>
-        public async Task<Models.GetPlanItemResponse> GetPlanItemAsync(string planId, string planItemId)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/plans/{plan_id}/items/{plan_item_id}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "plan_id", planId },
-                { "plan_item_id", planItemId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetPlanItemResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.PlansMetadataResponse>(_response.Body);
             }
             catch (Exception _ex)
             {

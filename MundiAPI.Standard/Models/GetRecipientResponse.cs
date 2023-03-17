@@ -31,13 +31,13 @@ namespace MundiAPI.Standard.Models
         private DateTime createdAt;
         private DateTime updatedAt;
         private DateTime deletedAt;
-        private Models.GetBankAccountResponse defaultBankAccount;
+        private Models.DefaultBankAccount defaultBankAccount;
         private List<Models.GetGatewayRecipientResponse> gatewayRecipients;
         private Dictionary<string, string> metadata;
-        private Models.GetAutomaticAnticipationResponse automaticAnticipationSettings;
+        private Models.CreateAutomaticAnticipationSettingsRequest automaticAnticipationSettings;
         private Models.GetTransferSettingsResponse transferSettings;
         private string code;
-        private string paymentMode = "bank_transfer";
+        private string paymentMode;
 
         /// <summary>
         /// Id
@@ -213,10 +213,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Default bank account
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("default_bank_account")]
-        public Models.GetBankAccountResponse DefaultBankAccount 
+        public Models.DefaultBankAccount DefaultBankAccount 
         { 
             get 
             {
@@ -267,7 +267,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("automatic_anticipation_settings")]
-        public Models.GetAutomaticAnticipationResponse AutomaticAnticipationSettings 
+        public Models.CreateAutomaticAnticipationSettingsRequest AutomaticAnticipationSettings 
         { 
             get 
             {

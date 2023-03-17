@@ -25,7 +25,7 @@ namespace MundiAPI.Standard.Models
         private string type;
         private DateTime createdAt;
         private string expiresAt;
-        private Models.GetCardTokenResponse card;
+        private Models.Card9 card;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -100,7 +100,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("card")]
-        public Models.GetCardTokenResponse Card 
+        public Models.Card9 Card 
         { 
             get 
             {

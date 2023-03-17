@@ -23,7 +23,7 @@ namespace MundiAPI.Standard.Models
         // These fields hold the values for the public properties.
         private string paymentMethod;
         private string cardId;
-        private Models.CreateCardRequest card;
+        private Models.Card1 card;
         private string cardToken;
 
         /// <summary>
@@ -61,10 +61,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Card data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("card")]
-        public Models.CreateCardRequest Card 
+        public Models.Card1 Card 
         { 
             get 
             {

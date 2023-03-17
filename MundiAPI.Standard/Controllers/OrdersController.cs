@@ -21,7 +21,7 @@ using MundiAPI.Standard.Exceptions;
 
 namespace MundiAPI.Standard.Controllers
 {
-    public partial class OrdersController: BaseController, IOrdersController
+    public partial class OrdersController: BaseController
     {
         #region Singleton Pattern
 
@@ -50,27 +50,27 @@ namespace MundiAPI.Standard.Controllers
         #endregion Singleton Pattern
 
         /// <summary>
-        /// TODO: type endpoint description here
+        /// UpdateOrderStatus
         /// </summary>
         /// <param name="id">Required parameter: Order Id</param>
-        /// <param name="request">Required parameter: Update Order Model</param>
+        /// <param name="body">Required parameter: Update Order Model</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
-        public Models.GetOrderResponse UpdateOrderStatus(string id, Models.UpdateOrderStatusRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.OrdersClosedResponse response from the API call</return>
+        public Models.OrdersClosedResponse UpdateOrderStatus(string id, Models.UpdateOrderStatusRequest body, string idempotencyKey = null)
         {
-            Task<Models.GetOrderResponse> t = UpdateOrderStatusAsync(id, request, idempotencyKey);
+            Task<Models.OrdersClosedResponse> t = UpdateOrderStatusAsync(id, body, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// TODO: type endpoint description here
+        /// UpdateOrderStatus
         /// </summary>
         /// <param name="id">Required parameter: Order Id</param>
-        /// <param name="request">Required parameter: Update Order Model</param>
+        /// <param name="body">Required parameter: Update Order Model</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
-        public async Task<Models.GetOrderResponse> UpdateOrderStatusAsync(string id, Models.UpdateOrderStatusRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.OrdersClosedResponse response from the API call</return>
+        public async Task<Models.OrdersClosedResponse> UpdateOrderStatusAsync(string id, Models.UpdateOrderStatusRequest body, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -92,14 +92,14 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "APIMATIC 2.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
 
             //append body params
-            var _body = APIHelper.JsonSerialize(request);
+            var _body = APIHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.PatchBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -107,12 +107,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetOrderResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.OrdersClosedResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -121,25 +141,25 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// TODO: type endpoint description here
+        /// DeleteAllOrderItems
         /// </summary>
         /// <param name="orderId">Required parameter: Order Id</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
-        public Models.GetOrderResponse DeleteAllOrderItems(string orderId, string idempotencyKey = null)
+        /// <return>Returns the Models.OrdersItemsResponse response from the API call</return>
+        public Models.OrdersItemsResponse DeleteAllOrderItems(string orderId, string idempotencyKey = null)
         {
-            Task<Models.GetOrderResponse> t = DeleteAllOrderItemsAsync(orderId, idempotencyKey);
+            Task<Models.OrdersItemsResponse> t = DeleteAllOrderItemsAsync(orderId, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// TODO: type endpoint description here
+        /// DeleteAllOrderItems
         /// </summary>
         /// <param name="orderId">Required parameter: Order Id</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
-        public async Task<Models.GetOrderResponse> DeleteAllOrderItemsAsync(string orderId, string idempotencyKey = null)
+        /// <return>Returns the Models.OrdersItemsResponse response from the API call</return>
+        public async Task<Models.OrdersItemsResponse> DeleteAllOrderItemsAsync(string orderId, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -161,7 +181,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "APIMATIC 2.0" },
                 { "accept", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
@@ -172,12 +192,123 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetOrderResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.OrdersItemsResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// CreateOrderItem
+        /// </summary>
+        /// <param name="orderId">Required parameter: Order Id</param>
+        /// <param name="body">Required parameter: Order Item Model</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.OrdersItemsResponse1 response from the API call</return>
+        public Models.OrdersItemsResponse1 CreateOrderItem(string orderId, Models.OrdersItemsRequest body, string idempotencyKey = null)
+        {
+            Task<Models.OrdersItemsResponse1> t = CreateOrderItemAsync(orderId, body, idempotencyKey);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// CreateOrderItem
+        /// </summary>
+        /// <param name="orderId">Required parameter: Order Id</param>
+        /// <param name="body">Required parameter: Order Item Model</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.OrdersItemsResponse1 response from the API call</return>
+        public async Task<Models.OrdersItemsResponse1> CreateOrderItemAsync(string orderId, Models.OrdersItemsRequest body, string idempotencyKey = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/orders/{orderId}/items");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "orderId", orderId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" },
+                { "Content-Type", "application/json" },
+                { "idempotency-key", idempotencyKey }
+            };
+
+            //append body params
+            var _body = APIHelper.JsonSerialize(body);
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.OrdersItemsResponse1>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -189,12 +320,12 @@ namespace MundiAPI.Standard.Controllers
         /// Updates the metadata from an order
         /// </summary>
         /// <param name="orderId">Required parameter: The order id</param>
-        /// <param name="request">Required parameter: Request for updating the order metadata</param>
+        /// <param name="body">Required parameter: Request for updating the order metadata</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
-        public Models.GetOrderResponse UpdateOrderMetadata(string orderId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.OrdersMetadataResponse response from the API call</return>
+        public Models.OrdersMetadataResponse UpdateOrderMetadata(string orderId, Models.OrdersMetadataRequest body, string idempotencyKey = null)
         {
-            Task<Models.GetOrderResponse> t = UpdateOrderMetadataAsync(orderId, request, idempotencyKey);
+            Task<Models.OrdersMetadataResponse> t = UpdateOrderMetadataAsync(orderId, body, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -203,10 +334,10 @@ namespace MundiAPI.Standard.Controllers
         /// Updates the metadata from an order
         /// </summary>
         /// <param name="orderId">Required parameter: The order id</param>
-        /// <param name="request">Required parameter: Request for updating the order metadata</param>
+        /// <param name="body">Required parameter: Request for updating the order metadata</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
-        public async Task<Models.GetOrderResponse> UpdateOrderMetadataAsync(string orderId, Models.UpdateMetadataRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.OrdersMetadataResponse response from the API call</return>
+        public async Task<Models.OrdersMetadataResponse> UpdateOrderMetadataAsync(string orderId, Models.OrdersMetadataRequest body, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -228,14 +359,14 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "APIMATIC 2.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
 
             //append body params
-            var _body = APIHelper.JsonSerialize(request);
+            var _body = APIHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.PatchBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -243,12 +374,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetOrderResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.OrdersMetadataResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -266,8 +417,8 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="createdSince">Optional parameter: Filter for order's creation date start range</param>
         /// <param name="createdUntil">Optional parameter: Filter for order's creation date end range</param>
         /// <param name="customerId">Optional parameter: Filter for order's customer id</param>
-        /// <return>Returns the Models.ListOrderResponse response from the API call</return>
-        public Models.ListOrderResponse GetOrders(
+        /// <return>Returns the Models.OrdersResponse response from the API call</return>
+        public Models.OrdersResponse GetOrders(
                 int? page = null,
                 int? size = null,
                 string code = null,
@@ -276,7 +427,7 @@ namespace MundiAPI.Standard.Controllers
                 DateTime? createdUntil = null,
                 string customerId = null)
         {
-            Task<Models.ListOrderResponse> t = GetOrdersAsync(page, size, code, status, createdSince, createdUntil, customerId);
+            Task<Models.OrdersResponse> t = GetOrdersAsync(page, size, code, status, createdSince, createdUntil, customerId);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -291,8 +442,8 @@ namespace MundiAPI.Standard.Controllers
         /// <param name="createdSince">Optional parameter: Filter for order's creation date start range</param>
         /// <param name="createdUntil">Optional parameter: Filter for order's creation date end range</param>
         /// <param name="customerId">Optional parameter: Filter for order's customer id</param>
-        /// <return>Returns the Models.ListOrderResponse response from the API call</return>
-        public async Task<Models.ListOrderResponse> GetOrdersAsync(
+        /// <return>Returns the Models.OrdersResponse response from the API call</return>
+        public async Task<Models.OrdersResponse> GetOrdersAsync(
                 int? page = null,
                 int? size = null,
                 string code = null,
@@ -327,7 +478,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "APIMATIC 2.0" },
                 { "accept", "application/json" }
             };
 
@@ -337,12 +488,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.ListOrderResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.OrdersResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -351,40 +522,32 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// TODO: type endpoint description here
+        /// Creates a new Order
         /// </summary>
-        /// <param name="orderId">Required parameter: Order Id</param>
-        /// <param name="request">Required parameter: Order Item Model</param>
+        /// <param name="body">Required parameter: Request for creating an order</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetOrderItemResponse response from the API call</return>
-        public Models.GetOrderItemResponse CreateOrderItem(string orderId, Models.CreateOrderItemRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.OrdersResponse1 response from the API call</return>
+        public Models.OrdersResponse1 CreateOrder(Models.OrdersRequest body, string idempotencyKey = null)
         {
-            Task<Models.GetOrderItemResponse> t = CreateOrderItemAsync(orderId, request, idempotencyKey);
+            Task<Models.OrdersResponse1> t = CreateOrderAsync(body, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// TODO: type endpoint description here
+        /// Creates a new Order
         /// </summary>
-        /// <param name="orderId">Required parameter: Order Id</param>
-        /// <param name="request">Required parameter: Order Item Model</param>
+        /// <param name="body">Required parameter: Request for creating an order</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetOrderItemResponse response from the API call</return>
-        public async Task<Models.GetOrderItemResponse> CreateOrderItemAsync(string orderId, Models.CreateOrderItemRequest request, string idempotencyKey = null)
+        /// <return>Returns the Models.OrdersResponse1 response from the API call</return>
+        public async Task<Models.OrdersResponse1> CreateOrderAsync(Models.OrdersRequest body, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/orders/{orderId}/items");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "orderId", orderId }
-            });
+            _queryBuilder.Append("/orders");
 
 
             //validate and preprocess url
@@ -393,14 +556,14 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "APIMATIC 2.0" },
                 { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
+                { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
 
             //append body params
-            var _body = APIHelper.JsonSerialize(request);
+            var _body = APIHelper.JsonSerialize(body);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -408,12 +571,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetOrderItemResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.OrdersResponse1>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -422,27 +605,27 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// TODO: type endpoint description here
+        /// DeleteOrderItem
         /// </summary>
         /// <param name="orderId">Required parameter: Order Id</param>
         /// <param name="itemId">Required parameter: Item Id</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetOrderItemResponse response from the API call</return>
-        public Models.GetOrderItemResponse DeleteOrderItem(string orderId, string itemId, string idempotencyKey = null)
+        /// <return>Returns the Models.OrdersItemsResponse1 response from the API call</return>
+        public Models.OrdersItemsResponse1 DeleteOrderItem(string orderId, string itemId, string idempotencyKey = null)
         {
-            Task<Models.GetOrderItemResponse> t = DeleteOrderItemAsync(orderId, itemId, idempotencyKey);
+            Task<Models.OrdersItemsResponse1> t = DeleteOrderItemAsync(orderId, itemId, idempotencyKey);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// TODO: type endpoint description here
+        /// DeleteOrderItem
         /// </summary>
         /// <param name="orderId">Required parameter: Order Id</param>
         /// <param name="itemId">Required parameter: Item Id</param>
         /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetOrderItemResponse response from the API call</return>
-        public async Task<Models.GetOrderItemResponse> DeleteOrderItemAsync(string orderId, string itemId, string idempotencyKey = null)
+        /// <return>Returns the Models.OrdersItemsResponse1 response from the API call</return>
+        public async Task<Models.OrdersItemsResponse1> DeleteOrderItemAsync(string orderId, string itemId, string idempotencyKey = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -465,7 +648,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "APIMATIC 2.0" },
                 { "accept", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
@@ -476,12 +659,219 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetOrderItemResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.OrdersItemsResponse1>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// GetOrderItem
+        /// </summary>
+        /// <param name="orderId">Required parameter: Order Id</param>
+        /// <param name="itemId">Required parameter: Item Id</param>
+        /// <return>Returns the Models.OrdersItemsResponse1 response from the API call</return>
+        public Models.OrdersItemsResponse1 GetOrderItem(string orderId, string itemId)
+        {
+            Task<Models.OrdersItemsResponse1> t = GetOrderItemAsync(orderId, itemId);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// GetOrderItem
+        /// </summary>
+        /// <param name="orderId">Required parameter: Order Id</param>
+        /// <param name="itemId">Required parameter: Item Id</param>
+        /// <return>Returns the Models.OrdersItemsResponse1 response from the API call</return>
+        public async Task<Models.OrdersItemsResponse1> GetOrderItemAsync(string orderId, string itemId)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/orders/{orderId}/items/{itemId}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "orderId", orderId },
+                { "itemId", itemId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" }
+            };
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.OrdersItemsResponse1>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// UpdateOrderItem
+        /// </summary>
+        /// <param name="orderId">Required parameter: Order Id</param>
+        /// <param name="itemId">Required parameter: Item Id</param>
+        /// <param name="body">Required parameter: Item Model</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.OrdersItemsResponse1 response from the API call</return>
+        public Models.OrdersItemsResponse1 UpdateOrderItem(
+                string orderId,
+                string itemId,
+                Models.OrdersItemsRequest1 body,
+                string idempotencyKey = null)
+        {
+            Task<Models.OrdersItemsResponse1> t = UpdateOrderItemAsync(orderId, itemId, body, idempotencyKey);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// UpdateOrderItem
+        /// </summary>
+        /// <param name="orderId">Required parameter: Order Id</param>
+        /// <param name="itemId">Required parameter: Item Id</param>
+        /// <param name="body">Required parameter: Item Model</param>
+        /// <param name="idempotencyKey">Optional parameter: Example: </param>
+        /// <return>Returns the Models.OrdersItemsResponse1 response from the API call</return>
+        public async Task<Models.OrdersItemsResponse1> UpdateOrderItemAsync(
+                string orderId,
+                string itemId,
+                Models.OrdersItemsRequest1 body,
+                string idempotencyKey = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/orders/{orderId}/items/{itemId}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "orderId", orderId },
+                { "itemId", itemId }
+            });
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" },
+                { "Content-Type", "application/json" },
+                { "idempotency-key", idempotencyKey }
+            };
+
+            //append body params
+            var _body = APIHelper.JsonSerialize(body);
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.PutBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.OrdersItemsResponse1>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -493,10 +883,10 @@ namespace MundiAPI.Standard.Controllers
         /// Gets an order
         /// </summary>
         /// <param name="orderId">Required parameter: Order id</param>
-        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
-        public Models.GetOrderResponse GetOrder(string orderId)
+        /// <return>Returns the Models.OrdersResponse1 response from the API call</return>
+        public Models.OrdersResponse1 GetOrder(string orderId)
         {
-            Task<Models.GetOrderResponse> t = GetOrderAsync(orderId);
+            Task<Models.OrdersResponse1> t = GetOrderAsync(orderId);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -505,8 +895,8 @@ namespace MundiAPI.Standard.Controllers
         /// Gets an order
         /// </summary>
         /// <param name="orderId">Required parameter: Order id</param>
-        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
-        public async Task<Models.GetOrderResponse> GetOrderAsync(string orderId)
+        /// <return>Returns the Models.OrdersResponse1 response from the API call</return>
+        public async Task<Models.OrdersResponse1> GetOrderAsync(string orderId)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
@@ -528,7 +918,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
+                { "user-agent", "APIMATIC 2.0" },
                 { "accept", "application/json" }
             };
 
@@ -538,222 +928,32 @@ namespace MundiAPI.Standard.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.GetOrderResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Creates a new Order
-        /// </summary>
-        /// <param name="body">Required parameter: Request for creating an order</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
-        public Models.GetOrderResponse CreateOrder(Models.CreateOrderRequest body, string idempotencyKey = null)
-        {
-            Task<Models.GetOrderResponse> t = CreateOrderAsync(body, idempotencyKey);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Creates a new Order
-        /// </summary>
-        /// <param name="body">Required parameter: Request for creating an order</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetOrderResponse response from the API call</return>
-        public async Task<Models.GetOrderResponse> CreateOrderAsync(Models.CreateOrderRequest body, string idempotencyKey = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/orders");
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
-                { "idempotency-key", idempotencyKey }
-            };
-
-            //append body params
-            var _body = APIHelper.JsonSerialize(body);
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetOrderResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// TODO: type endpoint description here
-        /// </summary>
-        /// <param name="orderId">Required parameter: Order Id</param>
-        /// <param name="itemId">Required parameter: Item Id</param>
-        /// <return>Returns the Models.GetOrderItemResponse response from the API call</return>
-        public Models.GetOrderItemResponse GetOrderItem(string orderId, string itemId)
-        {
-            Task<Models.GetOrderItemResponse> t = GetOrderItemAsync(orderId, itemId);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// TODO: type endpoint description here
-        /// </summary>
-        /// <param name="orderId">Required parameter: Order Id</param>
-        /// <param name="itemId">Required parameter: Item Id</param>
-        /// <return>Returns the Models.GetOrderItemResponse response from the API call</return>
-        public async Task<Models.GetOrderItemResponse> GetOrderItemAsync(string orderId, string itemId)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/orders/{orderId}/items/{itemId}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "orderId", orderId },
-                { "itemId", itemId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" }
-            };
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetOrderItemResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// TODO: type endpoint description here
-        /// </summary>
-        /// <param name="orderId">Required parameter: Order Id</param>
-        /// <param name="itemId">Required parameter: Item Id</param>
-        /// <param name="request">Required parameter: Item Model</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetOrderItemResponse response from the API call</return>
-        public Models.GetOrderItemResponse UpdateOrderItem(
-                string orderId,
-                string itemId,
-                Models.UpdateOrderItemRequest request,
-                string idempotencyKey = null)
-        {
-            Task<Models.GetOrderItemResponse> t = UpdateOrderItemAsync(orderId, itemId, request, idempotencyKey);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// TODO: type endpoint description here
-        /// </summary>
-        /// <param name="orderId">Required parameter: Order Id</param>
-        /// <param name="itemId">Required parameter: Item Id</param>
-        /// <param name="request">Required parameter: Item Model</param>
-        /// <param name="idempotencyKey">Optional parameter: Example: </param>
-        /// <return>Returns the Models.GetOrderItemResponse response from the API call</return>
-        public async Task<Models.GetOrderItemResponse> UpdateOrderItemAsync(
-                string orderId,
-                string itemId,
-                Models.UpdateOrderItemRequest request,
-                string idempotencyKey = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/orders/{orderId}/items/{itemId}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "orderId", orderId },
-                { "itemId", itemId }
-            });
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.0" },
-                { "accept", "application/json" },
-                { "content-type", "application/json; charset=utf-8" },
-                { "idempotency-key", idempotencyKey }
-            };
-
-            //append body params
-            var _body = APIHelper.JsonSerialize(request);
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.PutBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetOrderItemResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.OrdersResponse1>(_response.Body);
             }
             catch (Exception _ex)
             {

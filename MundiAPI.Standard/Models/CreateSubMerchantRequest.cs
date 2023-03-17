@@ -27,8 +27,8 @@ namespace MundiAPI.Standard.Models
         private string merchantCategoryCode;
         private string document;
         private string type;
-        private Models.CreatePhoneRequest phone;
-        private Models.CreateAddressRequest address;
+        private Models.GetPhoneResponse phone;
+        private Models.Address1 address;
 
         /// <summary>
         /// Payment Facilitator Code
@@ -133,10 +133,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Phone
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("phone")]
-        public Models.CreatePhoneRequest Phone 
+        public Models.GetPhoneResponse Phone 
         { 
             get 
             {
@@ -150,10 +150,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Address
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("address")]
-        public Models.CreateAddressRequest Address 
+        public Models.Address1 Address 
         { 
             get 
             {

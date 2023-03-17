@@ -30,7 +30,7 @@ namespace MundiAPI.Standard.Models
         private string document;
         private string type;
         private string fbAccessToken;
-        private Models.GetAddressResponse address;
+        private Models.Address address;
         private Dictionary<string, string> metadata;
         private Models.GetPhonesResponse phones;
         private long? fbId;
@@ -196,7 +196,7 @@ namespace MundiAPI.Standard.Models
         /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("address")]
-        public Models.GetAddressResponse Address 
+        public Models.Address Address 
         { 
             get 
             {

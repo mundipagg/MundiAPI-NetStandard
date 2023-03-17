@@ -28,7 +28,7 @@ namespace MundiAPI.Standard.Models
         private string acquirerNsu;
         private string acquirerAuthCode;
         private string operationType;
-        private Models.GetCardResponse card;
+        private Models.Card card;
         private string acquirerMessage;
         private string acquirerReturnCode;
         private int? installments;
@@ -153,10 +153,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Card data
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("card")]
-        public Models.GetCardResponse Card 
+        public Models.Card Card 
         { 
             get 
             {

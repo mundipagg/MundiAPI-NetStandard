@@ -21,14 +21,14 @@ namespace MundiAPI.Standard.Models
     public class GetAnticipationLimitsResponse : BaseModel 
     {
         // These fields hold the values for the public properties.
-        private Models.GetAnticipationLimitResponse max;
-        private Models.GetAnticipationLimitResponse min;
+        private Models.Max max;
+        private Models.Min min;
 
         /// <summary>
-        /// Max limit
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("max")]
-        public Models.GetAnticipationLimitResponse Max 
+        public Models.Max Max 
         { 
             get 
             {
@@ -42,10 +42,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Min limit
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("min")]
-        public Models.GetAnticipationLimitResponse Min 
+        public Models.Min Min 
         { 
             get 
             {

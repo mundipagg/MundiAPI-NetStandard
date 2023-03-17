@@ -25,7 +25,7 @@ namespace MundiAPI.Standard.Models
         private int expMonth;
         private int expYear;
         private string billingAddressId;
-        private Models.CreateAddressRequest billingAddress;
+        private Models.BillingAddress1 billingAddress;
         private Dictionary<string, string> metadata;
         private string label;
 
@@ -98,10 +98,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Billing address
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("billing_address")]
-        public Models.CreateAddressRequest BillingAddress 
+        public Models.BillingAddress1 BillingAddress 
         { 
             get 
             {

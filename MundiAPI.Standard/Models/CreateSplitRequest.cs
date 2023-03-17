@@ -24,7 +24,7 @@ namespace MundiAPI.Standard.Models
         private string type;
         private int amount;
         private string recipientId;
-        private Models.CreateSplitOptionsRequest options;
+        private Models.Options2 options;
 
         /// <summary>
         /// Split type
@@ -78,10 +78,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// The split options request
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("options")]
-        public Models.CreateSplitOptionsRequest Options 
+        public Models.Options2 Options 
         { 
             get 
             {

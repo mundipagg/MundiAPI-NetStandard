@@ -26,11 +26,11 @@ namespace MundiAPI.Standard.Models
         private string description;
         private string document;
         private string type;
-        private Models.CreateBankAccountRequest defaultBankAccount;
+        private Models.DefaultBankAccount1 defaultBankAccount;
         private Dictionary<string, string> metadata;
-        private Models.CreateTransferSettingsRequest transferSettings;
+        private Models.GetTransferSettingsResponse transferSettings;
         private string code;
-        private string paymentMode = "bank_transfer";
+        private string paymentMode;
 
         /// <summary>
         /// Recipient name
@@ -118,10 +118,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Bank account
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("default_bank_account")]
-        public Models.CreateBankAccountRequest DefaultBankAccount 
+        public Models.DefaultBankAccount1 DefaultBankAccount 
         { 
             get 
             {
@@ -152,10 +152,10 @@ namespace MundiAPI.Standard.Models
         }
 
         /// <summary>
-        /// Receiver Transfer Information
+        /// TODO: Write general description for this method
         /// </summary>
         [JsonProperty("transfer_settings")]
-        public Models.CreateTransferSettingsRequest TransferSettings 
+        public Models.GetTransferSettingsResponse TransferSettings 
         { 
             get 
             {
