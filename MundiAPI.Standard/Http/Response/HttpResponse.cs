@@ -1,24 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-
+// <copyright file="HttpResponse.cs" company="APIMatic">
+// Copyright (c) APIMatic. All rights reserved.
+// </copyright>
 namespace MundiAPI.Standard.Http.Response
 {
-    public class HttpResponse
+    using System.IO;
+    using System.Collections.Generic;
+    using APIMatic.Core.Types.Sdk;
+
+    /// <summary>
+    /// HttpResponse stores necessary information about the http response.
+    /// </summary>
+    public class HttpResponse : CoreResponse
     {
         /// <summary>
-        /// HTTP Status code of the http response
+        /// Initializes a new instance of the <see cref="HttpResponse"/> class.
         /// </summary>
-        public int StatusCode { get; set; }
-
-        /// <summary>
-        /// Headers of the http response
-        /// </summary>
-        public Dictionary<string,string> Headers { get; set; }
-
-        /// <summary>
-        /// Stream of the body
-        /// </summary>
-        public Stream RawBody { get; set; }
+        /// <param name="statusCode">statusCode.</param>
+        /// <param name="headers">headers.</param>
+        /// <param name="rawBody">rawBody.</param>
+        public HttpResponse(int statusCode, Dictionary<string, string> headers, Stream rawBody, string body = null)
+            : base(statusCode, headers, rawBody, body) { }
     }
 }

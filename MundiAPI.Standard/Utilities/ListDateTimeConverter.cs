@@ -1,45 +1,38 @@
-using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-
+// <copyright file="ListDateTimeConverter.cs" company="APIMatic">
+// Copyright (c) APIMatic. All rights reserved.
+// </copyright>
 namespace MundiAPI.Standard.Utilities
 {
-    class ListDateTimeConverter : JsonConverter
+    using System;
+    using APIMatic.Core.Utilities.Date;
+    
+    /// <summary>
+    /// Extends from JsonConverter, allows the use of a custom converter.
+    /// </summary>
+    public class ListDateTimeConverter : CoreListDateTimeConverter
     {
-        public ListDateTimeConverter()
-        {
-            Converter = new IsoDateTimeConverter();
-        }
-        public ListDateTimeConverter(Type Converter)
-        {
-            this.Converter = (JsonConverter)Activator.CreateInstance(Converter);
-        }
-        public ListDateTimeConverter(Type Converter,string format)
-        {
-            this.Converter = (JsonConverter)Activator.CreateInstance(Converter,format);
-        }
-        public JsonConverter Converter { get; set; }
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            serializer.Converters.Clear();
-            serializer.Converters.Add(Converter);
-            serializer.Serialize(writer,value);
-        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListDateTimeConverter"/>
+        /// class.
+        /// </summary>
+        public ListDateTimeConverter() 
+            : base() { }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            serializer.Converters.Clear();
-            serializer.Converters.Add(Converter);
-            return serializer.Deserialize(reader, objectType);
-        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListDateTimeConverter"/>
+        /// class.
+        /// </summary>
+        /// <param name="converter">converter.</param>
+        public ListDateTimeConverter(Type converter)
+            : base(converter) { }
 
-        public override bool CanConvert(Type objectType)
-        {
-            if (objectType == typeof(List<DateTime>)||objectType == typeof(DateTime) || objectType == typeof(List<DateTimeOffset>)||objectType == typeof(DateTimeOffset))
-                return true;
-            else
-                return false;
-        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListDateTimeConverter"/>
+        /// class.
+        /// </summary>
+        /// <param name="converter">converter.</param>
+        /// <param name="format">format.</param>
+        public ListDateTimeConverter(Type converter, string format)
+            : base(converter, format) { }
     }
 }

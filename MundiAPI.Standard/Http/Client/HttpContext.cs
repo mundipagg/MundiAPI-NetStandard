@@ -1,32 +1,24 @@
-using MundiAPI.Standard.Http.Request;
-using MundiAPI.Standard.Http.Response;
-
+// <copyright file="HttpContext.cs" company="APIMatic">
+// Copyright (c) APIMatic. All rights reserved.
+// </copyright>
 namespace MundiAPI.Standard.Http.Client
 {
+    using APIMatic.Core.Types.Sdk;
+    using MundiAPI.Standard.Http.Request;
+    using MundiAPI.Standard.Http.Response;
+    
     /// <summary>
-    /// Represents the contextual information of HTTP request and response
+    /// Represents the contextual information of HTTP request and response.
     /// </summary>
-    public class HttpContext
+    public sealed class HttpContext : CoreContext<HttpRequest, HttpResponse>
     {
         /// <summary>
-        /// The http request in the current context
+        /// Initializes a new instance of the <see cref="HttpContext"/> class.
         /// </summary>
-        public HttpRequest Request { get; set; }
-
-        /// <summary>
-        /// The http response in the current context
-        /// </summary>
-        public HttpResponse Response { get; set; }
-
-        /// <summary>
-        /// Constructor to initialize the context with http request and response information
-        /// </summary>
-        /// <param name="request">The http request in the current context</param>
-        /// <param name="response">The http response in the current context</param>
+        /// <param name="request">The http request in the current context.</param>
+        /// <param name="response">The http response in the current context.</param>
         public HttpContext(HttpRequest request, HttpResponse response)
-        {
-            Request = request;
-            Response = response;
-        }
+            : base(request, response) { }
     }
+
 }
