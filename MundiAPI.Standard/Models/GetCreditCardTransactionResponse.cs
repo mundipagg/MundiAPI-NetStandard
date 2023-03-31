@@ -33,6 +33,7 @@ namespace MundiAPI.Standard.Models
         private string acquirerReturnCode;
         private int? installments;
         private string threedAuthenticationUrl;
+        private string fundingSource;
 
         /// <summary>
         /// Text that will appear on the credit card's statement
@@ -235,6 +236,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.threedAuthenticationUrl = value;
                 onPropertyChanged("ThreedAuthenticationUrl");
+            }
+        }
+
+        /// <summary>
+        /// Identify when a card is prepaid, credit or debit.
+        /// </summary>
+        [JsonProperty("funding_source")]
+        public string FundingSource 
+        { 
+            get 
+            {
+                return this.fundingSource; 
+            } 
+            set 
+            {
+                this.fundingSource = value;
+                onPropertyChanged("FundingSource");
             }
         }
     }
