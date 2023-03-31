@@ -50,86 +50,6 @@ namespace MundiAPI.Standard.Controllers
         #endregion Singleton Pattern
 
         /// <summary>
-        /// CreateTransfer
-        /// </summary>
-        /// <param name="body">Required parameter: Example: </param>
-        /// <return>Returns the Models.GetTransfer response from the API call</return>
-        public Models.GetTransfer PostCreateTransfer(Models.CreateTransfer body)
-        {
-            Task<Models.GetTransfer> t = PostCreateTransferAsync(body);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// CreateTransfer
-        /// </summary>
-        /// <param name="body">Required parameter: Example: </param>
-        /// <return>Returns the Models.GetTransfer response from the API call</return>
-        public async Task<Models.GetTransfer> PostCreateTransferAsync(Models.CreateTransfer body)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/transfers/recipients");
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "MundiSDK - DotNet 2.4.1" },
-                { "accept", "application/json" },
-                { "Content-Type", "application/json" }
-            };
-
-            //append body params
-            var _body = APIHelper.JsonSerialize(body);
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-
-            //Error handling using HTTP status codes
-            if (_response.StatusCode == 400)
-                throw new ErrorException("Invalid request", _context);
-
-            if (_response.StatusCode == 401)
-                throw new ErrorException("Invalid API key", _context);
-
-            if (_response.StatusCode == 404)
-                throw new ErrorException("An informed resource was not found", _context);
-
-            if (_response.StatusCode == 412)
-                throw new ErrorException("Business validation error", _context);
-
-            if (_response.StatusCode == 422)
-                throw new ErrorException("Contract validation error", _context);
-
-            if (_response.StatusCode == 500)
-                throw new ErrorException("Internal server error", _context);
-
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.GetTransfer>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
         /// GetTransferById
         /// </summary>
         /// <param name="transferId">Required parameter: Example: </param>
@@ -168,12 +88,92 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.1" },
+                { "user-agent", "MundiSDK - DotNet 2.4.2" },
                 { "accept", "application/json" }
             };
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+
+            //Error handling using HTTP status codes
+            if (_response.StatusCode == 400)
+                throw new ErrorException("Invalid request", _context);
+
+            if (_response.StatusCode == 401)
+                throw new ErrorException("Invalid API key", _context);
+
+            if (_response.StatusCode == 404)
+                throw new ErrorException("An informed resource was not found", _context);
+
+            if (_response.StatusCode == 412)
+                throw new ErrorException("Business validation error", _context);
+
+            if (_response.StatusCode == 422)
+                throw new ErrorException("Contract validation error", _context);
+
+            if (_response.StatusCode == 500)
+                throw new ErrorException("Internal server error", _context);
+
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.GetTransfer>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// CreateTransfer
+        /// </summary>
+        /// <param name="body">Required parameter: Example: </param>
+        /// <return>Returns the Models.GetTransfer response from the API call</return>
+        public Models.GetTransfer PostCreateTransfer(Models.CreateTransfer body)
+        {
+            Task<Models.GetTransfer> t = PostCreateTransferAsync(body);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// CreateTransfer
+        /// </summary>
+        /// <param name="body">Required parameter: Example: </param>
+        /// <return>Returns the Models.GetTransfer response from the API call</return>
+        public async Task<Models.GetTransfer> PostCreateTransferAsync(Models.CreateTransfer body)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/transfers/recipients");
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "MundiSDK - DotNet 2.4.2" },
+                { "accept", "application/json" },
+                { "Content-Type", "application/json" }
+            };
+
+            //append body params
+            var _body = APIHelper.JsonSerialize(body);
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
 
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
@@ -242,7 +242,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.1" },
+                { "user-agent", "MundiSDK - DotNet 2.4.2" },
                 { "accept", "application/json" }
             };
 

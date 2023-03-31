@@ -96,9 +96,9 @@ MundiAPIClient client = new MundiAPIClient(basicAuthUserName, basicAuthPassword)
 * [CustomersController](#customers_controller)
 * [ChargesController](#charges_controller)
 * [RecipientsController](#recipients_controller)
+* [TransfersController](#transfers_controller)
 * [TokensController](#tokens_controller)
 * [TransactionsController](#transactions_controller)
-* [TransfersController](#transfers_controller)
 
 ## <a name="subscriptions_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Tests.Controllers.SubscriptionsController") SubscriptionsController
 
@@ -109,47 +109,6 @@ The singleton instance of the ``` SubscriptionsController ``` class can be acces
 ```csharp
 SubscriptionsController subscriptions = client.Subscriptions;
 ```
-
-### <a name="create_discount"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.CreateDiscount") CreateDiscount
-
-> Creates a discount
-
-
-```csharp
-Task<Standard.Models.SubscriptionsDiscountsResponse> CreateDiscount(string subscriptionId, Standard.Models.SubscriptionsDiscountsRequest body, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription id |
-| body |  ``` Required ```  | Request for creating a discount |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-var body = new Standard.Models.SubscriptionsDiscountsRequest();
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.SubscriptionsDiscountsResponse result = await subscriptions.CreateDiscount(subscriptionId, body, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
 
 ### <a name="get_subscription_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.GetSubscriptionItem") GetSubscriptionItem
 
@@ -237,172 +196,6 @@ Standard.Models.GetSubscriptionItemResponse result = await subscriptions.UpdateS
 | 500 | Internal server error |
 
 
-### <a name="delete_usage"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.DeleteUsage") DeleteUsage
-
-> Deletes a usage
-
-
-```csharp
-Task<Standard.Models.SubscriptionsItemsUsagesUsageIdResponse> DeleteUsage(
-        string subscriptionId,
-        string itemId,
-        string usageId,
-        string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | The subscription id |
-| itemId |  ``` Required ```  | The subscription item id |
-| usageId |  ``` Required ```  | The usage id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string itemId = "item_id";
-string usageId = "usage_id";
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.SubscriptionsItemsUsagesUsageIdResponse result = await subscriptions.DeleteUsage(subscriptionId, itemId, usageId, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="cancel_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.CancelSubscription") CancelSubscription
-
-> Cancels a subscription
-
-
-```csharp
-Task<Standard.Models.GetSubscriptionResponse> CancelSubscription(string subscriptionId, string idempotencyKey = null, Standard.Models.SubscriptionsRequest body = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-| body |  ``` Optional ```  | Request for cancelling a subscription |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string idempotencyKey = "idempotency-key";
-var body = new Standard.Models.SubscriptionsRequest();
-
-Standard.Models.GetSubscriptionResponse result = await subscriptions.CancelSubscription(subscriptionId, idempotencyKey, body);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="get_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.GetSubscription") GetSubscription
-
-> Gets a subscription
-
-
-```csharp
-Task<Standard.Models.GetSubscriptionResponse> GetSubscription(string subscriptionId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription id |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-
-Standard.Models.GetSubscriptionResponse result = await subscriptions.GetSubscription(subscriptionId);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="delete_increment"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.DeleteIncrement") DeleteIncrement
-
-> Deletes a increment
-
-
-```csharp
-Task<Standard.Models.SubscriptionsIncrementsResponse> DeleteIncrement(string subscriptionId, string incrementId, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription id |
-| incrementId |  ``` Required ```  | Increment id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string incrementId = "increment_id";
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.SubscriptionsIncrementsResponse result = await subscriptions.DeleteIncrement(subscriptionId, incrementId, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
 ### <a name="get_increment_by_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.GetIncrementById") GetIncrementById
 
 > GetIncrementById
@@ -466,6 +259,235 @@ string subscriptionId = "subscription_id";
 string cycleId = "cycleId";
 
 Standard.Models.SubscriptionsCyclesResponse result = await subscriptions.GetSubscriptionCycleById(subscriptionId, cycleId);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="update_current_cycle_status"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.UpdateCurrentCycleStatus") UpdateCurrentCycleStatus
+
+> UpdateCurrentCycleStatus
+
+
+```csharp
+Task UpdateCurrentCycleStatus(string subscriptionId, Standard.Models.UpdateCurrentCycleStatusRequest body, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription Id |
+| body |  ``` Required ```  | Request for updating the end date of the subscription current status |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+var body = new Standard.Models.UpdateCurrentCycleStatusRequest();
+string idempotencyKey = "idempotency-key";
+
+await subscriptions.UpdateCurrentCycleStatus(subscriptionId, body, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="get_usages"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.GetUsages") GetUsages
+
+> Lists all usages from a subscription item
+
+
+```csharp
+Task<Standard.Models.SubscriptionsItemsUsagesResponse1> GetUsages(
+        string subscriptionId,
+        string itemId,
+        int? page = null,
+        int? size = null,
+        string code = null,
+        string mgroup = null,
+        DateTime? usedSince = null,
+        DateTime? usedUntil = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | The subscription id |
+| itemId |  ``` Required ```  | The subscription item id |
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
+| code |  ``` Optional ```  | Identification code in the client system |
+| mgroup |  ``` Optional ```  | Identification group in the client system |
+| usedSince |  ``` Optional ```  | TODO: Add a parameter description |
+| usedUntil |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+string itemId = "item_id";
+int? page = 33;
+int? size = 33;
+string code = "code";
+string mgroup = "group";
+DateTime? usedSince = DateTime.Now();
+DateTime? usedUntil = DateTime.Now();
+
+Standard.Models.SubscriptionsItemsUsagesResponse1 result = await subscriptions.GetUsages(subscriptionId, itemId, page, size, code, mgroup, usedSince, usedUntil);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="update_subscription_affiliation_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.UpdateSubscriptionAffiliationId") UpdateSubscriptionAffiliationId
+
+> UpdateSubscriptionAffiliationId
+
+
+```csharp
+Task<Standard.Models.GetSubscriptionResponse> UpdateSubscriptionAffiliationId(string subscriptionId, Standard.Models.SubscriptionsGatewayAffiliationIdRequest body, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | TODO: Add a parameter description |
+| body |  ``` Required ```  | Request for updating a subscription affiliation id |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+var body = new Standard.Models.SubscriptionsGatewayAffiliationIdRequest();
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionAffiliationId(subscriptionId, body, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="create_discount"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.CreateDiscount") CreateDiscount
+
+> Creates a discount
+
+
+```csharp
+Task<Standard.Models.SubscriptionsDiscountsResponse> CreateDiscount(string subscriptionId, Standard.Models.SubscriptionsDiscountsRequest body, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription id |
+| body |  ``` Required ```  | Request for creating a discount |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+var body = new Standard.Models.SubscriptionsDiscountsRequest();
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.SubscriptionsDiscountsResponse result = await subscriptions.CreateDiscount(subscriptionId, body, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="delete_usage"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.DeleteUsage") DeleteUsage
+
+> Deletes a usage
+
+
+```csharp
+Task<Standard.Models.SubscriptionsItemsUsagesUsageIdResponse> DeleteUsage(
+        string subscriptionId,
+        string itemId,
+        string usageId,
+        string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | The subscription id |
+| itemId |  ``` Required ```  | The subscription item id |
+| usageId |  ``` Required ```  | The usage id |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+string itemId = "item_id";
+string usageId = "usage_id";
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.SubscriptionsItemsUsagesUsageIdResponse result = await subscriptions.DeleteUsage(subscriptionId, itemId, usageId, idempotencyKey);
 
 ```
 
@@ -563,13 +585,13 @@ Standard.Models.GetSubscriptionResponse result = await subscriptions.UpdateSubsc
 | 500 | Internal server error |
 
 
-### <a name="update_current_cycle_status"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.UpdateCurrentCycleStatus") UpdateCurrentCycleStatus
+### <a name="get_subscription_cycles"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.GetSubscriptionCycles") GetSubscriptionCycles
 
-> UpdateCurrentCycleStatus
+> GetSubscriptionCycles
 
 
 ```csharp
-Task UpdateCurrentCycleStatus(string subscriptionId, Standard.Models.UpdateCurrentCycleStatusRequest body, string idempotencyKey = null)
+Task<Standard.Models.SubscriptionsCyclesResponse2> GetSubscriptionCycles(string subscriptionId, string page, string size)
 ```
 
 #### Parameters
@@ -577,18 +599,18 @@ Task UpdateCurrentCycleStatus(string subscriptionId, Standard.Models.UpdateCurre
 | Parameter | Tags | Description |
 |-----------|------|-------------|
 | subscriptionId |  ``` Required ```  | Subscription Id |
-| body |  ``` Required ```  | Request for updating the end date of the subscription current status |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+| page |  ``` Required ```  | Page number |
+| size |  ``` Required ```  | Page size |
 
 
 #### Example Usage
 
 ```csharp
 string subscriptionId = "subscription_id";
-var body = new Standard.Models.UpdateCurrentCycleStatusRequest();
-string idempotencyKey = "idempotency-key";
+string page = "page";
+string size = "size";
 
-await subscriptions.UpdateCurrentCycleStatus(subscriptionId, body, idempotencyKey);
+Standard.Models.SubscriptionsCyclesResponse2 result = await subscriptions.GetSubscriptionCycles(subscriptionId, page, size);
 
 ```
 
@@ -604,30 +626,73 @@ await subscriptions.UpdateCurrentCycleStatus(subscriptionId, body, idempotencyKe
 | 500 | Internal server error |
 
 
-### <a name="create_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.CreateSubscription") CreateSubscription
+### <a name="delete_discount"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.DeleteDiscount") DeleteDiscount
 
-> Creates a new subscription
+> Deletes a discount
 
 
 ```csharp
-Task<Standard.Models.GetSubscriptionResponse> CreateSubscription(Standard.Models.SubscriptionsRequest1 body, string idempotencyKey = null)
+Task<Standard.Models.SubscriptionsDiscountsResponse> DeleteDiscount(string subscriptionId, string discountId, string idempotencyKey = null)
 ```
 
 #### Parameters
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| body |  ``` Required ```  | Request for creating a subscription |
+| subscriptionId |  ``` Required ```  | Subscription id |
+| discountId |  ``` Required ```  | Discount Id |
 | idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
 
 
 #### Example Usage
 
 ```csharp
-var body = new Standard.Models.SubscriptionsRequest1();
+string subscriptionId = "subscription_id";
+string discountId = "discount_id";
 string idempotencyKey = "idempotency-key";
 
-Standard.Models.GetSubscriptionResponse result = await subscriptions.CreateSubscription(body, idempotencyKey);
+Standard.Models.SubscriptionsDiscountsResponse result = await subscriptions.DeleteDiscount(subscriptionId, discountId, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="delete_increment"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.DeleteIncrement") DeleteIncrement
+
+> Deletes a increment
+
+
+```csharp
+Task<Standard.Models.SubscriptionsIncrementsResponse> DeleteIncrement(string subscriptionId, string incrementId, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription id |
+| incrementId |  ``` Required ```  | Increment id |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+string incrementId = "increment_id";
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.SubscriptionsIncrementsResponse result = await subscriptions.DeleteIncrement(subscriptionId, incrementId, idempotencyKey);
 
 ```
 
@@ -685,8 +750,8 @@ Task<Standard.Models.SubscriptionsResponse3> GetSubscriptions(
 #### Example Usage
 
 ```csharp
-int? page = 226;
-int? size = 226;
+int? page = 125;
+int? size = 125;
 string code = "code";
 string billingType = "billing_type";
 string customerId = "customer_id";
@@ -746,8 +811,8 @@ Task<Standard.Models.GetUsagesDetailsResponse> GetUsagesDetails(
 ```csharp
 string subscriptionId = "subscription_id";
 string cycleId = "cycle_id";
-int? size = 226;
-int? page = 226;
+int? size = 125;
+int? page = 125;
 string itemId = "item_id";
 string mgroup = "group";
 
@@ -806,32 +871,190 @@ Standard.Models.SubscriptionsCyclesResponse result = await subscriptions.RenewSu
 | 500 | Internal server error |
 
 
-### <a name="get_subscription_cycles"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.GetSubscriptionCycles") GetSubscriptionCycles
+### <a name="get_increments"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.GetIncrements") GetIncrements
 
-> GetSubscriptionCycles
+> GetIncrements
 
 
 ```csharp
-Task<Standard.Models.SubscriptionsCyclesResponse2> GetSubscriptionCycles(string subscriptionId, string page, string size)
+Task<Standard.Models.ListIncrementsResponse> GetIncrements(string subscriptionId, int? page = null, int? size = null)
 ```
 
 #### Parameters
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription Id |
-| page |  ``` Required ```  | Page number |
-| size |  ``` Required ```  | Page size |
+| subscriptionId |  ``` Required ```  | The subscription id |
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
 
 
 #### Example Usage
 
 ```csharp
 string subscriptionId = "subscription_id";
-string page = "page";
-string size = "size";
+int? page = 125;
+int? size = 125;
 
-Standard.Models.SubscriptionsCyclesResponse2 result = await subscriptions.GetSubscriptionCycles(subscriptionId, page, size);
+Standard.Models.ListIncrementsResponse result = await subscriptions.GetIncrements(subscriptionId, page, size);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="update_latest_period_end_at"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.UpdateLatestPeriodEndAt") UpdateLatestPeriodEndAt
+
+> UpdateLatestPeriodEndAt
+
+
+```csharp
+Task<Standard.Models.GetSubscriptionResponse> UpdateLatestPeriodEndAt(string subscriptionId, Standard.Models.SubscriptionsPeriodsLatestEndAtRequest body, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | TODO: Add a parameter description |
+| body |  ``` Required ```  | Request for updating the end date of the current signature cycle |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+var body = new Standard.Models.SubscriptionsPeriodsLatestEndAtRequest();
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.GetSubscriptionResponse result = await subscriptions.UpdateLatestPeriodEndAt(subscriptionId, body, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="cancel_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.CancelSubscription") CancelSubscription
+
+> Cancels a subscription
+
+
+```csharp
+Task<Standard.Models.GetSubscriptionResponse> CancelSubscription(string subscriptionId, string idempotencyKey = null, Standard.Models.SubscriptionsRequest body = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription id |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+| body |  ``` Optional ```  | Request for cancelling a subscription |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+string idempotencyKey = "idempotency-key";
+var body = new Standard.Models.SubscriptionsRequest();
+
+Standard.Models.GetSubscriptionResponse result = await subscriptions.CancelSubscription(subscriptionId, idempotencyKey, body);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="get_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.GetSubscription") GetSubscription
+
+> Gets a subscription
+
+
+```csharp
+Task<Standard.Models.GetSubscriptionResponse> GetSubscription(string subscriptionId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription id |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+
+Standard.Models.GetSubscriptionResponse result = await subscriptions.GetSubscription(subscriptionId);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="create_subscription"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.CreateSubscription") CreateSubscription
+
+> Creates a new subscription
+
+
+```csharp
+Task<Standard.Models.GetSubscriptionResponse> CreateSubscription(Standard.Models.SubscriptionsRequest1 body, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| body |  ``` Required ```  | Request for creating a subscription |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+var body = new Standard.Models.SubscriptionsRequest1();
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.GetSubscriptionResponse result = await subscriptions.CreateSubscription(body, idempotencyKey);
 
 ```
 
@@ -873,147 +1096,6 @@ string itemId = "item_id";
 string idempotencyKey = "idempotency-key";
 
 Standard.Models.SubscriptionsItemsUsagesResponse result = await subscriptions.CreateAnUsage(subscriptionId, itemId, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="get_usages"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.GetUsages") GetUsages
-
-> Lists all usages from a subscription item
-
-
-```csharp
-Task<Standard.Models.SubscriptionsItemsUsagesResponse1> GetUsages(
-        string subscriptionId,
-        string itemId,
-        int? page = null,
-        int? size = null,
-        string code = null,
-        string mgroup = null,
-        DateTime? usedSince = null,
-        DateTime? usedUntil = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | The subscription id |
-| itemId |  ``` Required ```  | The subscription item id |
-| page |  ``` Optional ```  | Page number |
-| size |  ``` Optional ```  | Page size |
-| code |  ``` Optional ```  | Identification code in the client system |
-| mgroup |  ``` Optional ```  | Identification group in the client system |
-| usedSince |  ``` Optional ```  | TODO: Add a parameter description |
-| usedUntil |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string itemId = "item_id";
-int? page = 226;
-int? size = 226;
-string code = "code";
-string mgroup = "group";
-DateTime? usedSince = DateTime.Now();
-DateTime? usedUntil = DateTime.Now();
-
-Standard.Models.SubscriptionsItemsUsagesResponse1 result = await subscriptions.GetUsages(subscriptionId, itemId, page, size, code, mgroup, usedSince, usedUntil);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="delete_discount"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.DeleteDiscount") DeleteDiscount
-
-> Deletes a discount
-
-
-```csharp
-Task<Standard.Models.SubscriptionsDiscountsResponse> DeleteDiscount(string subscriptionId, string discountId, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription id |
-| discountId |  ``` Required ```  | Discount Id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string discountId = "discount_id";
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.SubscriptionsDiscountsResponse result = await subscriptions.DeleteDiscount(subscriptionId, discountId, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="get_increments"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.GetIncrements") GetIncrements
-
-> GetIncrements
-
-
-```csharp
-Task<Standard.Models.ListIncrementsResponse> GetIncrements(string subscriptionId, int? page = null, int? size = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | The subscription id |
-| page |  ``` Optional ```  | Page number |
-| size |  ``` Optional ```  | Page size |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-int? page = 226;
-int? size = 226;
-
-Standard.Models.ListIncrementsResponse result = await subscriptions.GetIncrements(subscriptionId, page, size);
 
 ```
 
@@ -1107,8 +1189,8 @@ Task<Standard.Models.SubscriptionsItemsResponse3> GetSubscriptionItems(
 
 ```csharp
 string subscriptionId = "subscription_id";
-int? page = 226;
-int? size = 226;
+int? page = 125;
+int? size = 125;
 string name = "name";
 string code = "code";
 string status = "status";
@@ -1158,88 +1240,6 @@ var body = new Standard.Models.SubscriptionsBillingDateRequest();
 string idempotencyKey = "idempotency-key";
 
 Standard.Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionBillingDate(subscriptionId, body, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="update_latest_period_end_at"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.UpdateLatestPeriodEndAt") UpdateLatestPeriodEndAt
-
-> UpdateLatestPeriodEndAt
-
-
-```csharp
-Task<Standard.Models.GetSubscriptionResponse> UpdateLatestPeriodEndAt(string subscriptionId, Standard.Models.SubscriptionsPeriodsLatestEndAtRequest body, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | TODO: Add a parameter description |
-| body |  ``` Required ```  | Request for updating the end date of the current signature cycle |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-var body = new Standard.Models.SubscriptionsPeriodsLatestEndAtRequest();
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.GetSubscriptionResponse result = await subscriptions.UpdateLatestPeriodEndAt(subscriptionId, body, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="update_subscription_affiliation_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.UpdateSubscriptionAffiliationId") UpdateSubscriptionAffiliationId
-
-> UpdateSubscriptionAffiliationId
-
-
-```csharp
-Task<Standard.Models.GetSubscriptionResponse> UpdateSubscriptionAffiliationId(string subscriptionId, Standard.Models.SubscriptionsGatewayAffiliationIdRequest body, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | TODO: Add a parameter description |
-| body |  ``` Required ```  | Request for updating a subscription affiliation id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-var body = new Standard.Models.SubscriptionsGatewayAffiliationIdRequest();
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionAffiliationId(subscriptionId, body, idempotencyKey);
 
 ```
 
@@ -1337,6 +1337,47 @@ Standard.Models.GetSubscriptionResponse result = await subscriptions.UpdateSubsc
 | 500 | Internal server error |
 
 
+### <a name="get_discounts"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.GetDiscounts") GetDiscounts
+
+> GetDiscounts
+
+
+```csharp
+Task<Standard.Models.ListDiscountsResponse> GetDiscounts(string subscriptionId, int page, int size)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | The subscription id |
+| page |  ``` Required ```  | Page number |
+| size |  ``` Required ```  | Page size |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+int page = 125;
+int size = 125;
+
+Standard.Models.ListDiscountsResponse result = await subscriptions.GetDiscounts(subscriptionId, page, size);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
 ### <a name="update_subscription_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.UpdateSubscriptionMetadata") UpdateSubscriptionMetadata
 
 > Updates the metadata from a subscription
@@ -1378,54 +1419,13 @@ Standard.Models.GetSubscriptionResponse result = await subscriptions.UpdateSubsc
 | 500 | Internal server error |
 
 
-### <a name="update_subscription_due_days"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.UpdateSubscriptionDueDays") UpdateSubscriptionDueDays
+### <a name="get_discount_by_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.GetDiscountById") GetDiscountById
 
-> Updates the boleto due days from a subscription
-
-
-```csharp
-Task<Standard.Models.GetSubscriptionResponse> UpdateSubscriptionDueDays(string subscriptionId, Standard.Models.UpdateSubscriptionDueDaysRequest body, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | Subscription Id |
-| body |  ``` Required ```  | TODO: Add a parameter description |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-var body = new Standard.Models.UpdateSubscriptionDueDaysRequest();
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionDueDays(subscriptionId, body, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="get_discounts"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.GetDiscounts") GetDiscounts
-
-> GetDiscounts
+> GetDiscountById
 
 
 ```csharp
-Task<Standard.Models.ListDiscountsResponse> GetDiscounts(string subscriptionId, int page, int size)
+Task<Standard.Models.SubscriptionsDiscountsResponse> GetDiscountById(string subscriptionId, string discountId)
 ```
 
 #### Parameters
@@ -1433,18 +1433,16 @@ Task<Standard.Models.ListDiscountsResponse> GetDiscounts(string subscriptionId, 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
 | subscriptionId |  ``` Required ```  | The subscription id |
-| page |  ``` Required ```  | Page number |
-| size |  ``` Required ```  | Page size |
+| discountId |  ``` Required ```  | TODO: Add a parameter description |
 
 
 #### Example Usage
 
 ```csharp
 string subscriptionId = "subscription_id";
-int page = 185;
-int size = 185;
+string discountId = "discountId";
 
-Standard.Models.ListDiscountsResponse result = await subscriptions.GetDiscounts(subscriptionId, page, size);
+Standard.Models.SubscriptionsDiscountsResponse result = await subscriptions.GetDiscountById(subscriptionId, discountId);
 
 ```
 
@@ -1501,45 +1499,6 @@ Standard.Models.SubscriptionsIncrementsResponse result = await subscriptions.Cre
 | 500 | Internal server error |
 
 
-### <a name="get_discount_by_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.GetDiscountById") GetDiscountById
-
-> GetDiscountById
-
-
-```csharp
-Task<Standard.Models.SubscriptionsDiscountsResponse> GetDiscountById(string subscriptionId, string discountId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| subscriptionId |  ``` Required ```  | The subscription id |
-| discountId |  ``` Required ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string subscriptionId = "subscription_id";
-string discountId = "discountId";
-
-Standard.Models.SubscriptionsDiscountsResponse result = await subscriptions.GetDiscountById(subscriptionId, discountId);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
 ### <a name="update_subscription_minium_price"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.UpdateSubscriptionMiniumPrice") UpdateSubscriptionMiniumPrice
 
 > Atualização do valor mínimo da assinatura
@@ -1566,6 +1525,47 @@ var body = new Standard.Models.SubscriptionsMinimumPriceRequest();
 string idempotencyKey = "idempotency-key";
 
 Standard.Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionMiniumPrice(subscriptionId, body, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="update_subscription_due_days"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.SubscriptionsController.UpdateSubscriptionDueDays") UpdateSubscriptionDueDays
+
+> Updates the boleto due days from a subscription
+
+
+```csharp
+Task<Standard.Models.GetSubscriptionResponse> UpdateSubscriptionDueDays(string subscriptionId, Standard.Models.UpdateSubscriptionDueDaysRequest body, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| subscriptionId |  ``` Required ```  | Subscription Id |
+| body |  ``` Required ```  | TODO: Add a parameter description |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string subscriptionId = "subscription_id";
+var body = new Standard.Models.UpdateSubscriptionDueDaysRequest();
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.GetSubscriptionResponse result = await subscriptions.UpdateSubscriptionDueDays(subscriptionId, body, idempotencyKey);
 
 ```
 
@@ -1671,32 +1671,30 @@ The singleton instance of the ``` OrdersController ``` class can be accessed fro
 OrdersController orders = client.Orders;
 ```
 
-### <a name="update_order_status"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.OrdersController.UpdateOrderStatus") UpdateOrderStatus
+### <a name="create_order"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.OrdersController.CreateOrder") CreateOrder
 
-> UpdateOrderStatus
+> Creates a new Order
 
 
 ```csharp
-Task<Standard.Models.OrdersClosedResponse> UpdateOrderStatus(string id, Standard.Models.UpdateOrderStatusRequest body, string idempotencyKey = null)
+Task<Standard.Models.OrdersResponse1> CreateOrder(Standard.Models.OrdersRequest body, string idempotencyKey = null)
 ```
 
 #### Parameters
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| id |  ``` Required ```  | Order Id |
-| body |  ``` Required ```  | Update Order Model |
+| body |  ``` Required ```  | Request for creating an order |
 | idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
 
 
 #### Example Usage
 
 ```csharp
-string id = "id";
-var body = new Standard.Models.UpdateOrderStatusRequest();
+var body = new Standard.Models.OrdersRequest();
 string idempotencyKey = "idempotency-key";
 
-Standard.Models.OrdersClosedResponse result = await orders.UpdateOrderStatus(id, body, idempotencyKey);
+Standard.Models.OrdersResponse1 result = await orders.CreateOrder(body, idempotencyKey);
 
 ```
 
@@ -1712,30 +1710,28 @@ Standard.Models.OrdersClosedResponse result = await orders.UpdateOrderStatus(id,
 | 500 | Internal server error |
 
 
-### <a name="delete_all_order_items"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.OrdersController.DeleteAllOrderItems") DeleteAllOrderItems
+### <a name="get_order"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.OrdersController.GetOrder") GetOrder
 
-> DeleteAllOrderItems
+> Gets an order
 
 
 ```csharp
-Task<Standard.Models.OrdersItemsResponse> DeleteAllOrderItems(string orderId, string idempotencyKey = null)
+Task<Standard.Models.OrdersResponse1> GetOrder(string orderId)
 ```
 
 #### Parameters
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| orderId |  ``` Required ```  | Order Id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+| orderId |  ``` Required ```  | Order id |
 
 
 #### Example Usage
 
 ```csharp
-string orderId = "orderId";
-string idempotencyKey = "idempotency-key";
+string orderId = "order_id";
 
-Standard.Models.OrdersItemsResponse result = await orders.DeleteAllOrderItems(orderId, idempotencyKey);
+Standard.Models.OrdersResponse1 result = await orders.GetOrder(orderId);
 
 ```
 
@@ -1792,6 +1788,92 @@ Standard.Models.OrdersItemsResponse1 result = await orders.CreateOrderItem(order
 | 500 | Internal server error |
 
 
+### <a name="update_order_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.OrdersController.UpdateOrderItem") UpdateOrderItem
+
+> UpdateOrderItem
+
+
+```csharp
+Task<Standard.Models.OrdersItemsResponse1> UpdateOrderItem(
+        string orderId,
+        string itemId,
+        Standard.Models.OrdersItemsRequest1 body,
+        string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| orderId |  ``` Required ```  | Order Id |
+| itemId |  ``` Required ```  | Item Id |
+| body |  ``` Required ```  | Item Model |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string orderId = "orderId";
+string itemId = "itemId";
+var body = new Standard.Models.OrdersItemsRequest1();
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.OrdersItemsResponse1 result = await orders.UpdateOrderItem(orderId, itemId, body, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="delete_all_order_items"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.OrdersController.DeleteAllOrderItems") DeleteAllOrderItems
+
+> DeleteAllOrderItems
+
+
+```csharp
+Task<Standard.Models.OrdersItemsResponse> DeleteAllOrderItems(string orderId, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| orderId |  ``` Required ```  | Order Id |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string orderId = "orderId";
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.OrdersItemsResponse result = await orders.DeleteAllOrderItems(orderId, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
 ### <a name="update_order_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.OrdersController.UpdateOrderMetadata") UpdateOrderMetadata
 
 > Updates the metadata from an order
@@ -1818,6 +1900,47 @@ var body = new Standard.Models.OrdersMetadataRequest();
 string idempotencyKey = "idempotency-key";
 
 Standard.Models.OrdersMetadataResponse result = await orders.UpdateOrderMetadata(orderId, body, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="update_order_status"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.OrdersController.UpdateOrderStatus") UpdateOrderStatus
+
+> UpdateOrderStatus
+
+
+```csharp
+Task<Standard.Models.OrdersClosedResponse> UpdateOrderStatus(string id, Standard.Models.UpdateOrderStatusRequest body, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| id |  ``` Required ```  | Order Id |
+| body |  ``` Required ```  | Update Order Model |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string id = "id";
+var body = new Standard.Models.UpdateOrderStatusRequest();
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.OrdersClosedResponse result = await orders.UpdateOrderStatus(id, body, idempotencyKey);
 
 ```
 
@@ -1865,8 +1988,8 @@ Task<Standard.Models.OrdersResponse> GetOrders(
 #### Example Usage
 
 ```csharp
-int? page = 185;
-int? size = 185;
+int? page = 125;
+int? size = 125;
 string code = "code";
 string status = "status";
 DateTime? createdSince = DateTime.Now();
@@ -1874,45 +1997,6 @@ DateTime? createdUntil = DateTime.Now();
 string customerId = "customer_id";
 
 Standard.Models.OrdersResponse result = await orders.GetOrders(page, size, code, status, createdSince, createdUntil, customerId);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="create_order"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.OrdersController.CreateOrder") CreateOrder
-
-> Creates a new Order
-
-
-```csharp
-Task<Standard.Models.OrdersResponse1> CreateOrder(Standard.Models.OrdersRequest body, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| body |  ``` Required ```  | Request for creating an order |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-var body = new Standard.Models.OrdersRequest();
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.OrdersResponse1 result = await orders.CreateOrder(body, idempotencyKey);
 
 ```
 
@@ -2008,90 +2092,6 @@ Standard.Models.OrdersItemsResponse1 result = await orders.GetOrderItem(orderId,
 | 500 | Internal server error |
 
 
-### <a name="update_order_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.OrdersController.UpdateOrderItem") UpdateOrderItem
-
-> UpdateOrderItem
-
-
-```csharp
-Task<Standard.Models.OrdersItemsResponse1> UpdateOrderItem(
-        string orderId,
-        string itemId,
-        Standard.Models.OrdersItemsRequest1 body,
-        string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| orderId |  ``` Required ```  | Order Id |
-| itemId |  ``` Required ```  | Item Id |
-| body |  ``` Required ```  | Item Model |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string orderId = "orderId";
-string itemId = "itemId";
-var body = new Standard.Models.OrdersItemsRequest1();
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.OrdersItemsResponse1 result = await orders.UpdateOrderItem(orderId, itemId, body, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="get_order"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.OrdersController.GetOrder") GetOrder
-
-> Gets an order
-
-
-```csharp
-Task<Standard.Models.OrdersResponse1> GetOrder(string orderId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| orderId |  ``` Required ```  | Order id |
-
-
-#### Example Usage
-
-```csharp
-string orderId = "order_id";
-
-Standard.Models.OrdersResponse1 result = await orders.GetOrder(orderId);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
 [Back to List of Controllers](#list_of_controllers)
 
 ## <a name="plans_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Tests.Controllers.PlansController") PlansController
@@ -2103,133 +2103,6 @@ The singleton instance of the ``` PlansController ``` class can be accessed from
 ```csharp
 PlansController plans = client.Plans;
 ```
-
-### <a name="update_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.PlansController.UpdatePlanItem") UpdatePlanItem
-
-> Updates a plan item
-
-
-```csharp
-Task<Standard.Models.PlansItemsResponse> UpdatePlanItem(
-        string planId,
-        string planItemId,
-        Standard.Models.PlansItemsRequest body,
-        string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| planId |  ``` Required ```  | Plan id |
-| planItemId |  ``` Required ```  | Plan item id |
-| body |  ``` Required ```  | Request for updating the plan item |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string planId = "plan_id";
-string planItemId = "plan_item_id";
-var body = new Standard.Models.PlansItemsRequest();
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.PlansItemsResponse result = await plans.UpdatePlanItem(planId, planItemId, body, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="delete_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.PlansController.DeletePlanItem") DeletePlanItem
-
-> Removes an item from a plan
-
-
-```csharp
-Task<Standard.Models.PlansItemsResponse> DeletePlanItem(string planId, string planItemId, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| planId |  ``` Required ```  | Plan id |
-| planItemId |  ``` Required ```  | Plan item id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string planId = "plan_id";
-string planItemId = "plan_item_id";
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.PlansItemsResponse result = await plans.DeletePlanItem(planId, planItemId, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="get_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.PlansController.GetPlanItem") GetPlanItem
-
-> Gets a plan item
-
-
-```csharp
-Task<Standard.Models.PlansItemsResponse> GetPlanItem(string planId, string planItemId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| planId |  ``` Required ```  | Plan id |
-| planItemId |  ``` Required ```  | Plan item id |
-
-
-#### Example Usage
-
-```csharp
-string planId = "plan_id";
-string planItemId = "plan_item_id";
-
-Standard.Models.PlansItemsResponse result = await plans.GetPlanItem(planId, planItemId);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
 
 ### <a name="create_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.PlansController.CreatePlanItem") CreatePlanItem
 
@@ -2304,8 +2177,8 @@ Task<Standard.Models.PlansResponse> GetPlans(
 #### Example Usage
 
 ```csharp
-int? page = 185;
-int? size = 185;
+int? page = 125;
+int? size = 125;
 string name = "name";
 string status = "status";
 string billingType = "billing_type";
@@ -2313,6 +2186,84 @@ DateTime? createdSince = DateTime.Now();
 DateTime? createdUntil = DateTime.Now();
 
 Standard.Models.PlansResponse result = await plans.GetPlans(page, size, name, status, billingType, createdSince, createdUntil);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="get_plan"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.PlansController.GetPlan") GetPlan
+
+> Gets a plan
+
+
+```csharp
+Task<Standard.Models.PlansResponse1> GetPlan(string planId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| planId |  ``` Required ```  | Plan id |
+
+
+#### Example Usage
+
+```csharp
+string planId = "plan_id";
+
+Standard.Models.PlansResponse1 result = await plans.GetPlan(planId);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="delete_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.PlansController.DeletePlanItem") DeletePlanItem
+
+> Removes an item from a plan
+
+
+```csharp
+Task<Standard.Models.PlansItemsResponse> DeletePlanItem(string planId, string planItemId, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| planId |  ``` Required ```  | Plan id |
+| planItemId |  ``` Required ```  | Plan item id |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string planId = "plan_id";
+string planItemId = "plan_item_id";
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.PlansItemsResponse result = await plans.DeletePlanItem(planId, planItemId, idempotencyKey);
 
 ```
 
@@ -2352,43 +2303,6 @@ var body = new Standard.Models.PlansRequest();
 string idempotencyKey = "idempotency-key";
 
 Standard.Models.PlansResponse1 result = await plans.CreatePlan(body, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="get_plan"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.PlansController.GetPlan") GetPlan
-
-> Gets a plan
-
-
-```csharp
-Task<Standard.Models.PlansResponse1> GetPlan(string planId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| planId |  ``` Required ```  | Plan id |
-
-
-#### Example Usage
-
-```csharp
-string planId = "plan_id";
-
-Standard.Models.PlansResponse1 result = await plans.GetPlan(planId);
 
 ```
 
@@ -2469,6 +2383,92 @@ string planId = "plan_id";
 string idempotencyKey = "idempotency-key";
 
 Standard.Models.PlansResponse1 result = await plans.DeletePlan(planId, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="update_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.PlansController.UpdatePlanItem") UpdatePlanItem
+
+> Updates a plan item
+
+
+```csharp
+Task<Standard.Models.PlansItemsResponse> UpdatePlanItem(
+        string planId,
+        string planItemId,
+        Standard.Models.PlansItemsRequest body,
+        string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| planId |  ``` Required ```  | Plan id |
+| planItemId |  ``` Required ```  | Plan item id |
+| body |  ``` Required ```  | Request for updating the plan item |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string planId = "plan_id";
+string planItemId = "plan_item_id";
+var body = new Standard.Models.PlansItemsRequest();
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.PlansItemsResponse result = await plans.UpdatePlanItem(planId, planItemId, body, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="get_plan_item"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.PlansController.GetPlanItem") GetPlanItem
+
+> Gets a plan item
+
+
+```csharp
+Task<Standard.Models.PlansItemsResponse> GetPlanItem(string planId, string planItemId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| planId |  ``` Required ```  | Plan id |
+| planItemId |  ``` Required ```  | Plan item id |
+
+
+#### Example Usage
+
+```csharp
+string planId = "plan_id";
+string planItemId = "plan_item_id";
+
+Standard.Models.PlansItemsResponse result = await plans.GetPlanItem(planId, planItemId);
 
 ```
 
@@ -2621,84 +2621,6 @@ Standard.Models.SubscriptionsPartialInvoiceResponse result = await invoices.GetP
 | 500 | Internal server error |
 
 
-### <a name="update_invoice_status"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.InvoicesController.UpdateInvoiceStatus") UpdateInvoiceStatus
-
-> Updates the status from an invoice
-
-
-```csharp
-Task<Standard.Models.InvoicesStatusResponse> UpdateInvoiceStatus(string invoiceId, Standard.Models.UpdateCurrentCycleStatusRequest body, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| invoiceId |  ``` Required ```  | Invoice Id |
-| body |  ``` Required ```  | Request for updating an invoice's status |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string invoiceId = "invoice_id";
-var body = new Standard.Models.UpdateCurrentCycleStatusRequest();
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.InvoicesStatusResponse result = await invoices.UpdateInvoiceStatus(invoiceId, body, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="get_invoice"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.InvoicesController.GetInvoice") GetInvoice
-
-> Gets an invoice
-
-
-```csharp
-Task<Standard.Models.InvoicesResponse> GetInvoice(string invoiceId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| invoiceId |  ``` Required ```  | Invoice Id |
-
-
-#### Example Usage
-
-```csharp
-string invoiceId = "invoice_id";
-
-Standard.Models.InvoicesResponse result = await invoices.GetInvoice(invoiceId);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
 ### <a name="cancel_invoice"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.InvoicesController.CancelInvoice") CancelInvoice
 
 > Cancels an invoice
@@ -2779,6 +2701,84 @@ Standard.Models.InvoicesMetadataResponse result = await invoices.UpdateInvoiceMe
 | 500 | Internal server error |
 
 
+### <a name="update_invoice_status"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.InvoicesController.UpdateInvoiceStatus") UpdateInvoiceStatus
+
+> Updates the status from an invoice
+
+
+```csharp
+Task<Standard.Models.InvoicesStatusResponse> UpdateInvoiceStatus(string invoiceId, Standard.Models.UpdateCurrentCycleStatusRequest body, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| invoiceId |  ``` Required ```  | Invoice Id |
+| body |  ``` Required ```  | Request for updating an invoice's status |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string invoiceId = "invoice_id";
+var body = new Standard.Models.UpdateCurrentCycleStatusRequest();
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.InvoicesStatusResponse result = await invoices.UpdateInvoiceStatus(invoiceId, body, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="get_invoice"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.InvoicesController.GetInvoice") GetInvoice
+
+> Gets an invoice
+
+
+```csharp
+Task<Standard.Models.InvoicesResponse> GetInvoice(string invoiceId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| invoiceId |  ``` Required ```  | Invoice Id |
+
+
+#### Example Usage
+
+```csharp
+string invoiceId = "invoice_id";
+
+Standard.Models.InvoicesResponse result = await invoices.GetInvoice(invoiceId);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
 ### <a name="get_invoices"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.InvoicesController.GetInvoices") GetInvoices
 
 > Gets all invoices
@@ -2819,8 +2819,8 @@ Task<Standard.Models.InvoicesResponse2> GetInvoices(
 #### Example Usage
 
 ```csharp
-int? page = 185;
-int? size = 185;
+int? page = 83;
+int? size = 83;
 string code = "code";
 string customerId = "customer_id";
 string subscriptionId = "subscription_id";
@@ -2858,129 +2858,6 @@ The singleton instance of the ``` CustomersController ``` class can be accessed 
 ```csharp
 CustomersController customers = client.Customers;
 ```
-
-### <a name="create_access_token"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.CreateAccessToken") CreateAccessToken
-
-> Creates a access token for a customer
-
-
-```csharp
-Task<Standard.Models.CustomersAccessTokensResponse> CreateAccessToken(string customerId, Standard.Models.CustomersAccessTokensRequest body, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| customerId |  ``` Required ```  | Customer Id |
-| body |  ``` Required ```  | Request for creating a access token |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string customerId = "customer_id";
-var body = new Standard.Models.CustomersAccessTokensRequest();
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.CustomersAccessTokensResponse result = await customers.CreateAccessToken(customerId, body, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="get_access_tokens"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.GetAccessTokens") GetAccessTokens
-
-> Get all access tokens from a customer
-
-
-```csharp
-Task<Standard.Models.CustomersAccessTokensResponse1> GetAccessTokens(string customerId, int? page = null, int? size = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| customerId |  ``` Required ```  | Customer Id |
-| page |  ``` Optional ```  | Page number |
-| size |  ``` Optional ```  | Page size |
-
-
-#### Example Usage
-
-```csharp
-string customerId = "customer_id";
-int? page = 185;
-int? size = 185;
-
-Standard.Models.CustomersAccessTokensResponse1 result = await customers.GetAccessTokens(customerId, page, size);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="update_customer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.UpdateCustomer") UpdateCustomer
-
-> Updates a customer
-
-
-```csharp
-Task<Standard.Models.CustomersResponse> UpdateCustomer(string customerId, Standard.Models.CustomersRequest body, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| customerId |  ``` Required ```  | Customer id |
-| body |  ``` Required ```  | Request for updating a customer |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string customerId = "customer_id";
-var body = new Standard.Models.CustomersRequest();
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.CustomersResponse result = await customers.UpdateCustomer(customerId, body, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
 
 ### <a name="get_customer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.GetCustomer") GetCustomer
 
@@ -3056,47 +2933,6 @@ Standard.Models.CustomersAccessTokensResponse1 result = await customers.DeleteAc
 | 500 | Internal server error |
 
 
-### <a name="get_addresses"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.GetAddresses") GetAddresses
-
-> Gets all adressess from a customer
-
-
-```csharp
-Task<Standard.Models.CustomersAddressesResponse> GetAddresses(string customerId, int? page = null, int? size = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| customerId |  ``` Required ```  | Customer id |
-| page |  ``` Optional ```  | Page number |
-| size |  ``` Optional ```  | Page size |
-
-
-#### Example Usage
-
-```csharp
-string customerId = "customer_id";
-int? page = 185;
-int? size = 185;
-
-Standard.Models.CustomersAddressesResponse result = await customers.GetAddresses(customerId, page, size);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
 ### <a name="create_address"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.CreateAddress") CreateAddress
 
 > Creates a new address for a customer
@@ -3123,6 +2959,512 @@ var body = new Standard.Models.CustomersAddressesRequest();
 string idempotencyKey = "idempotency-key";
 
 Standard.Models.CustomersAddressesResponse1 result = await customers.CreateAddress(customerId, body, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="update_address"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.UpdateAddress") UpdateAddress
+
+> Updates an address
+
+
+```csharp
+Task<Standard.Models.CustomersAddressesResponse1> UpdateAddress(
+        string customerId,
+        string addressId,
+        Standard.Models.CustomersAddressesRequest1 body,
+        string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| customerId |  ``` Required ```  | Customer Id |
+| addressId |  ``` Required ```  | Address Id |
+| body |  ``` Required ```  | Request for updating an address |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string customerId = "customer_id";
+string addressId = "address_id";
+var body = new Standard.Models.CustomersAddressesRequest1();
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.CustomersAddressesResponse1 result = await customers.UpdateAddress(customerId, addressId, body, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="get_cards"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.GetCards") GetCards
+
+> Get all cards from a customer
+
+
+```csharp
+Task<Standard.Models.CustomersCardsResponse1> GetCards(string customerId, int? page = null, int? size = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| customerId |  ``` Required ```  | Customer Id |
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
+
+
+#### Example Usage
+
+```csharp
+string customerId = "customer_id";
+int? page = 83;
+int? size = 83;
+
+Standard.Models.CustomersCardsResponse1 result = await customers.GetCards(customerId, page, size);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="create_customer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.CreateCustomer") CreateCustomer
+
+> Creates a new customer
+
+
+```csharp
+Task<Standard.Models.CustomersResponse> CreateCustomer(Standard.Models.CustomersRequest1 body, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| body |  ``` Required ```  | Request for creating a customer |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+var body = new Standard.Models.CustomersRequest1();
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.CustomersResponse result = await customers.CreateCustomer(body, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="update_customer_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.UpdateCustomerMetadata") UpdateCustomerMetadata
+
+> Updates the metadata a customer
+
+
+```csharp
+Task<Standard.Models.CustomersMetadataResponse> UpdateCustomerMetadata(string customerId, Standard.Models.CustomersMetadataRequest body, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| customerId |  ``` Required ```  | The customer id |
+| body |  ``` Required ```  | Request for updating the customer metadata |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string customerId = "customer_id";
+var body = new Standard.Models.CustomersMetadataRequest();
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.CustomersMetadataResponse result = await customers.UpdateCustomerMetadata(customerId, body, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="delete_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.DeleteCard") DeleteCard
+
+> Delete a customer's card
+
+
+```csharp
+Task<Standard.Models.CustomersCardsResponse> DeleteCard(string customerId, string cardId, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| customerId |  ``` Required ```  | Customer Id |
+| cardId |  ``` Required ```  | Card Id |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string customerId = "customer_id";
+string cardId = "card_id";
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.CustomersCardsResponse result = await customers.DeleteCard(customerId, cardId, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="get_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.GetCard") GetCard
+
+> Get a customer's card
+
+
+```csharp
+Task<Standard.Models.CustomersCardsResponse> GetCard(string customerId, string cardId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| customerId |  ``` Required ```  | Customer id |
+| cardId |  ``` Required ```  | Card id |
+
+
+#### Example Usage
+
+```csharp
+string customerId = "customer_id";
+string cardId = "card_id";
+
+Standard.Models.CustomersCardsResponse result = await customers.GetCard(customerId, cardId);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="get_access_tokens"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.GetAccessTokens") GetAccessTokens
+
+> Get all access tokens from a customer
+
+
+```csharp
+Task<Standard.Models.CustomersAccessTokensResponse1> GetAccessTokens(string customerId, int? page = null, int? size = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| customerId |  ``` Required ```  | Customer Id |
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
+
+
+#### Example Usage
+
+```csharp
+string customerId = "customer_id";
+int? page = 83;
+int? size = 83;
+
+Standard.Models.CustomersAccessTokensResponse1 result = await customers.GetAccessTokens(customerId, page, size);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="update_customer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.UpdateCustomer") UpdateCustomer
+
+> Updates a customer
+
+
+```csharp
+Task<Standard.Models.CustomersResponse> UpdateCustomer(string customerId, Standard.Models.CustomersRequest body, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| customerId |  ``` Required ```  | Customer id |
+| body |  ``` Required ```  | Request for updating a customer |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string customerId = "customer_id";
+var body = new Standard.Models.CustomersRequest();
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.CustomersResponse result = await customers.UpdateCustomer(customerId, body, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="renew_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.RenewCard") RenewCard
+
+> Renew a card
+
+
+```csharp
+Task<Standard.Models.CustomersCardsRenewResponse> RenewCard(string customerId, string cardId, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| customerId |  ``` Required ```  | Customer id |
+| cardId |  ``` Required ```  | Card Id |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string customerId = "customer_id";
+string cardId = "card_id";
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.CustomersCardsRenewResponse result = await customers.RenewCard(customerId, cardId, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="get_customers"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.GetCustomers") GetCustomers
+
+> Get all Customers
+
+
+```csharp
+Task<Standard.Models.CustomersResponse3> GetCustomers(
+        string name = null,
+        string document = null,
+        int? page = 1,
+        int? size = 10,
+        string email = null,
+        string code = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| name |  ``` Optional ```  | Name of the Customer |
+| document |  ``` Optional ```  | Document of the Customer |
+| page |  ``` Optional ```  ``` DefaultValue ```  | Current page the the search |
+| size |  ``` Optional ```  ``` DefaultValue ```  | Quantity pages of the search |
+| email |  ``` Optional ```  | Customer's email |
+| code |  ``` Optional ```  | Customer's code |
+
+
+#### Example Usage
+
+```csharp
+string name = "name";
+string document = "document";
+int? page = 1;
+int? size = 10;
+string email = "email";
+string code = "Code";
+
+Standard.Models.CustomersResponse3 result = await customers.GetCustomers(name, document, page, size, email, code);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="create_access_token"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.CreateAccessToken") CreateAccessToken
+
+> Creates a access token for a customer
+
+
+```csharp
+Task<Standard.Models.CustomersAccessTokensResponse> CreateAccessToken(string customerId, Standard.Models.CustomersAccessTokensRequest body, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| customerId |  ``` Required ```  | Customer Id |
+| body |  ``` Required ```  | Request for creating a access token |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string customerId = "customer_id";
+var body = new Standard.Models.CustomersAccessTokensRequest();
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.CustomersAccessTokensResponse result = await customers.CreateAccessToken(customerId, body, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="get_addresses"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.GetAddresses") GetAddresses
+
+> Gets all adressess from a customer
+
+
+```csharp
+Task<Standard.Models.CustomersAddressesResponse> GetAddresses(string customerId, int? page = null, int? size = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| customerId |  ``` Required ```  | Customer id |
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
+
+
+#### Example Usage
+
+```csharp
+string customerId = "customer_id";
+int? page = 83;
+int? size = 83;
+
+Standard.Models.CustomersAddressesResponse result = await customers.GetAddresses(customerId, page, size);
 
 ```
 
@@ -3257,53 +3599,6 @@ Standard.Models.CustomersAddressesResponse1 result = await customers.GetAddress(
 | 500 | Internal server error |
 
 
-### <a name="update_address"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.UpdateAddress") UpdateAddress
-
-> Updates an address
-
-
-```csharp
-Task<Standard.Models.CustomersAddressesResponse1> UpdateAddress(
-        string customerId,
-        string addressId,
-        Standard.Models.CustomersAddressesRequest1 body,
-        string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| customerId |  ``` Required ```  | Customer Id |
-| addressId |  ``` Required ```  | Address Id |
-| body |  ``` Required ```  | Request for updating an address |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string customerId = "customer_id";
-string addressId = "address_id";
-var body = new Standard.Models.CustomersAddressesRequest1();
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.CustomersAddressesResponse1 result = await customers.UpdateAddress(customerId, addressId, body, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
 ### <a name="delete_address"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.DeleteAddress") DeleteAddress
 
 > Delete a Customer's address
@@ -3386,221 +3681,6 @@ Standard.Models.CustomersCardsResponse result = await customers.CreateCard(custo
 | 500 | Internal server error |
 
 
-### <a name="get_cards"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.GetCards") GetCards
-
-> Get all cards from a customer
-
-
-```csharp
-Task<Standard.Models.CustomersCardsResponse1> GetCards(string customerId, int? page = null, int? size = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| customerId |  ``` Required ```  | Customer Id |
-| page |  ``` Optional ```  | Page number |
-| size |  ``` Optional ```  | Page size |
-
-
-#### Example Usage
-
-```csharp
-string customerId = "customer_id";
-int? page = 21;
-int? size = 21;
-
-Standard.Models.CustomersCardsResponse1 result = await customers.GetCards(customerId, page, size);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="renew_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.RenewCard") RenewCard
-
-> Renew a card
-
-
-```csharp
-Task<Standard.Models.CustomersCardsRenewResponse> RenewCard(string customerId, string cardId, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| customerId |  ``` Required ```  | Customer id |
-| cardId |  ``` Required ```  | Card Id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string customerId = "customer_id";
-string cardId = "card_id";
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.CustomersCardsRenewResponse result = await customers.RenewCard(customerId, cardId, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="create_customer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.CreateCustomer") CreateCustomer
-
-> Creates a new customer
-
-
-```csharp
-Task<Standard.Models.CustomersResponse> CreateCustomer(Standard.Models.CustomersRequest1 body, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| body |  ``` Required ```  | Request for creating a customer |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-var body = new Standard.Models.CustomersRequest1();
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.CustomersResponse result = await customers.CreateCustomer(body, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="get_customers"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.GetCustomers") GetCustomers
-
-> Get all Customers
-
-
-```csharp
-Task<Standard.Models.CustomersResponse3> GetCustomers(
-        string name = null,
-        string document = null,
-        int? page = 1,
-        int? size = 10,
-        string email = null,
-        string code = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| name |  ``` Optional ```  | Name of the Customer |
-| document |  ``` Optional ```  | Document of the Customer |
-| page |  ``` Optional ```  ``` DefaultValue ```  | Current page the the search |
-| size |  ``` Optional ```  ``` DefaultValue ```  | Quantity pages of the search |
-| email |  ``` Optional ```  | Customer's email |
-| code |  ``` Optional ```  | Customer's code |
-
-
-#### Example Usage
-
-```csharp
-string name = "name";
-string document = "document";
-int? page = 1;
-int? size = 10;
-string email = "email";
-string code = "Code";
-
-Standard.Models.CustomersResponse3 result = await customers.GetCustomers(name, document, page, size, email, code);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="update_customer_metadata"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.UpdateCustomerMetadata") UpdateCustomerMetadata
-
-> Updates the metadata a customer
-
-
-```csharp
-Task<Standard.Models.CustomersMetadataResponse> UpdateCustomerMetadata(string customerId, Standard.Models.CustomersMetadataRequest body, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| customerId |  ``` Required ```  | The customer id |
-| body |  ``` Required ```  | Request for updating the customer metadata |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string customerId = "customer_id";
-var body = new Standard.Models.CustomersMetadataRequest();
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.CustomersMetadataResponse result = await customers.UpdateCustomerMetadata(customerId, body, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
 ### <a name="update_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.UpdateCard") UpdateCard
 
 > Updates a card
@@ -3648,86 +3728,6 @@ Standard.Models.CustomersCardsResponse result = await customers.UpdateCard(custo
 | 500 | Internal server error |
 
 
-### <a name="delete_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.DeleteCard") DeleteCard
-
-> Delete a customer's card
-
-
-```csharp
-Task<Standard.Models.CustomersCardsResponse> DeleteCard(string customerId, string cardId, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| customerId |  ``` Required ```  | Customer Id |
-| cardId |  ``` Required ```  | Card Id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string customerId = "customer_id";
-string cardId = "card_id";
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.CustomersCardsResponse result = await customers.DeleteCard(customerId, cardId, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="get_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.CustomersController.GetCard") GetCard
-
-> Get a customer's card
-
-
-```csharp
-Task<Standard.Models.CustomersCardsResponse> GetCard(string customerId, string cardId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| customerId |  ``` Required ```  | Customer id |
-| cardId |  ``` Required ```  | Card id |
-
-
-#### Example Usage
-
-```csharp
-string customerId = "customer_id";
-string cardId = "card_id";
-
-Standard.Models.CustomersCardsResponse result = await customers.GetCard(customerId, cardId);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
 [Back to List of Controllers](#list_of_controllers)
 
 ## <a name="charges_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Tests.Controllers.ChargesController") ChargesController
@@ -3739,84 +3739,6 @@ The singleton instance of the ``` ChargesController ``` class can be accessed fr
 ```csharp
 ChargesController charges = client.Charges;
 ```
-
-### <a name="get_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.ChargesController.GetCharge") GetCharge
-
-> Get a charge from its id
-
-
-```csharp
-Task<Standard.Models.ChargesResponse> GetCharge(string chargeId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| chargeId |  ``` Required ```  | Charge id |
-
-
-#### Example Usage
-
-```csharp
-string chargeId = "charge_id";
-
-Standard.Models.ChargesResponse result = await charges.GetCharge(chargeId);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="cancel_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.ChargesController.CancelCharge") CancelCharge
-
-> Cancel a charge
-
-
-```csharp
-Task<Standard.Models.ChargesResponse> CancelCharge(string chargeId, string idempotencyKey = null, Standard.Models.ChargesRequest body = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| chargeId |  ``` Required ```  | Charge id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-| body |  ``` Optional ```  | Request for cancelling a charge |
-
-
-#### Example Usage
-
-```csharp
-string chargeId = "charge_id";
-string idempotencyKey = "idempotency-key";
-var body = new Standard.Models.ChargesRequest();
-
-Standard.Models.ChargesResponse result = await charges.CancelCharge(chargeId, idempotencyKey, body);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
 
 ### <a name="confirm_payment"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.ChargesController.ConfirmPayment") ConfirmPayment
 
@@ -3844,47 +3766,6 @@ string idempotencyKey = "idempotency-key";
 var body = new Standard.Models.CreateConfirmPaymentRequest();
 
 Standard.Models.ChargesConfirmPaymentResponse result = await charges.ConfirmPayment(chargeId, idempotencyKey, body);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="update_charge_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.ChargesController.UpdateChargeCard") UpdateChargeCard
-
-> Updates the card from a charge
-
-
-```csharp
-Task<Standard.Models.ChargesCardResponse> UpdateChargeCard(string chargeId, Standard.Models.ChargesCardRequest body, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| chargeId |  ``` Required ```  | Charge id |
-| body |  ``` Required ```  | Request for updating a charge's card |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string chargeId = "charge_id";
-var body = new Standard.Models.ChargesCardRequest();
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.ChargesCardResponse result = await charges.UpdateChargeCard(chargeId, body, idempotencyKey);
 
 ```
 
@@ -3936,8 +3817,8 @@ Task<Standard.Models.ChargesResponse2> GetCharges(
 #### Example Usage
 
 ```csharp
-int? page = 21;
-int? size = 21;
+int? page = 83;
+int? size = 83;
 string code = "code";
 string status = "status";
 string paymentMethod = "payment_method";
@@ -3947,86 +3828,6 @@ DateTime? createdSince = DateTime.Now();
 DateTime? createdUntil = DateTime.Now();
 
 Standard.Models.ChargesResponse2 result = await charges.GetCharges(page, size, code, status, paymentMethod, customerId, orderId, createdSince, createdUntil);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="retry_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.ChargesController.RetryCharge") RetryCharge
-
-> Retries a charge
-
-
-```csharp
-Task<Standard.Models.ChargesRetryResponse> RetryCharge(string chargeId, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| chargeId |  ``` Required ```  | Charge id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string chargeId = "charge_id";
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.ChargesRetryResponse result = await charges.RetryCharge(chargeId, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="update_charge_payment_method"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.ChargesController.UpdateChargePaymentMethod") UpdateChargePaymentMethod
-
-> Updates a charge's payment method
-
-
-```csharp
-Task<Standard.Models.ChargesPaymentMethodResponse> UpdateChargePaymentMethod(string chargeId, Standard.Models.ChargesPaymentMethodRequest body, string idempotencyKey = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| chargeId |  ``` Required ```  | Charge id |
-| body |  ``` Required ```  | Request for updating the payment method from a charge |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string chargeId = "charge_id";
-var body = new Standard.Models.ChargesPaymentMethodRequest();
-string idempotencyKey = "idempotency-key";
-
-Standard.Models.ChargesPaymentMethodResponse result = await charges.UpdateChargePaymentMethod(chargeId, body, idempotencyKey);
 
 ```
 
@@ -4068,47 +3869,6 @@ var body = new Standard.Models.ChargesMetadataRequest();
 string idempotencyKey = "idempotency-key";
 
 Standard.Models.ChargesMetadataResponse result = await charges.UpdateChargeMetadata(chargeId, body, idempotencyKey);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="capture_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.ChargesController.CaptureCharge") CaptureCharge
-
-> Captures a charge
-
-
-```csharp
-Task<Standard.Models.ChargesCaptureResponse> CaptureCharge(string chargeId, string idempotencyKey = null, Standard.Models.ChargesCaptureRequest body = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| chargeId |  ``` Required ```  | Charge id |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
-| body |  ``` Optional ```  | Request for capturing a charge |
-
-
-#### Example Usage
-
-```csharp
-string chargeId = "charge_id";
-string idempotencyKey = "idempotency-key";
-var body = new Standard.Models.ChargesCaptureRequest();
-
-Standard.Models.ChargesCaptureResponse result = await charges.CaptureCharge(chargeId, idempotencyKey, body);
 
 ```
 
@@ -4204,6 +3964,45 @@ Standard.Models.ChargesResponse result = await charges.CreateCharge(body, idempo
 | 500 | Internal server error |
 
 
+### <a name="retry_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.ChargesController.RetryCharge") RetryCharge
+
+> Retries a charge
+
+
+```csharp
+Task<Standard.Models.ChargesRetryResponse> RetryCharge(string chargeId, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| chargeId |  ``` Required ```  | Charge id |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string chargeId = "charge_id";
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.ChargesRetryResponse result = await charges.RetryCharge(chargeId, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
 ### <a name="get_charge_transactions"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.ChargesController.GetChargeTransactions") GetChargeTransactions
 
 > GetChargeTransactions
@@ -4226,8 +4025,8 @@ Task<Standard.Models.ChargesTransactionsResponse> GetChargeTransactions(string c
 
 ```csharp
 string chargeId = "charge_id";
-int? page = 21;
-int? size = 21;
+int? page = 83;
+int? size = 83;
 
 Standard.Models.ChargesTransactionsResponse result = await charges.GetChargeTransactions(chargeId, page, size);
 
@@ -4271,6 +4070,207 @@ DateTime? createdSince = DateTime.Now();
 DateTime? createdUntil = DateTime.Now();
 
 Standard.Models.GetChargesSummaryResponse result = await charges.GetChargesSummary(status, createdSince, createdUntil);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="capture_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.ChargesController.CaptureCharge") CaptureCharge
+
+> Captures a charge
+
+
+```csharp
+Task<Standard.Models.ChargesCaptureResponse> CaptureCharge(string chargeId, string idempotencyKey = null, Standard.Models.ChargesCaptureRequest body = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| chargeId |  ``` Required ```  | Charge id |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+| body |  ``` Optional ```  | Request for capturing a charge |
+
+
+#### Example Usage
+
+```csharp
+string chargeId = "charge_id";
+string idempotencyKey = "idempotency-key";
+var body = new Standard.Models.ChargesCaptureRequest();
+
+Standard.Models.ChargesCaptureResponse result = await charges.CaptureCharge(chargeId, idempotencyKey, body);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="get_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.ChargesController.GetCharge") GetCharge
+
+> Get a charge from its id
+
+
+```csharp
+Task<Standard.Models.ChargesResponse> GetCharge(string chargeId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| chargeId |  ``` Required ```  | Charge id |
+
+
+#### Example Usage
+
+```csharp
+string chargeId = "charge_id";
+
+Standard.Models.ChargesResponse result = await charges.GetCharge(chargeId);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="cancel_charge"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.ChargesController.CancelCharge") CancelCharge
+
+> Cancel a charge
+
+
+```csharp
+Task<Standard.Models.ChargesResponse> CancelCharge(string chargeId, string idempotencyKey = null, Standard.Models.ChargesRequest body = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| chargeId |  ``` Required ```  | Charge id |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+| body |  ``` Optional ```  | Request for cancelling a charge |
+
+
+#### Example Usage
+
+```csharp
+string chargeId = "charge_id";
+string idempotencyKey = "idempotency-key";
+var body = new Standard.Models.ChargesRequest();
+
+Standard.Models.ChargesResponse result = await charges.CancelCharge(chargeId, idempotencyKey, body);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="update_charge_card"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.ChargesController.UpdateChargeCard") UpdateChargeCard
+
+> Updates the card from a charge
+
+
+```csharp
+Task<Standard.Models.ChargesCardResponse> UpdateChargeCard(string chargeId, Standard.Models.ChargesCardRequest body, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| chargeId |  ``` Required ```  | Charge id |
+| body |  ``` Required ```  | Request for updating a charge's card |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string chargeId = "charge_id";
+var body = new Standard.Models.ChargesCardRequest();
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.ChargesCardResponse result = await charges.UpdateChargeCard(chargeId, body, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="update_charge_payment_method"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.ChargesController.UpdateChargePaymentMethod") UpdateChargePaymentMethod
+
+> Updates a charge's payment method
+
+
+```csharp
+Task<Standard.Models.ChargesPaymentMethodResponse> UpdateChargePaymentMethod(string chargeId, Standard.Models.ChargesPaymentMethodRequest body, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| chargeId |  ``` Required ```  | Charge id |
+| body |  ``` Required ```  | Request for updating the payment method from a charge |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string chargeId = "charge_id";
+var body = new Standard.Models.ChargesPaymentMethodRequest();
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.ChargesPaymentMethodResponse result = await charges.UpdateChargePaymentMethod(chargeId, body, idempotencyKey);
 
 ```
 
@@ -4380,84 +4380,6 @@ Standard.Models.RecipientsTransferSettingsResponse result = await recipients.Upd
 | 500 | Internal server error |
 
 
-### <a name="get_anticipation"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.GetAnticipation") GetAnticipation
-
-> Gets an anticipation
-
-
-```csharp
-Task<Standard.Models.RecipientsAnticipationsResponse> GetAnticipation(string recipientId, string anticipationId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| recipientId |  ``` Required ```  | Recipient id |
-| anticipationId |  ``` Required ```  | Anticipation id |
-
-
-#### Example Usage
-
-```csharp
-string recipientId = "recipient_id";
-string anticipationId = "anticipation_id";
-
-Standard.Models.RecipientsAnticipationsResponse result = await recipients.GetAnticipation(recipientId, anticipationId);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="get_recipients"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.GetRecipients") GetRecipients
-
-> Retrieves paginated recipients information
-
-
-```csharp
-Task<Standard.Models.RecipientsResponse> GetRecipients(int? page = null, int? size = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| page |  ``` Optional ```  | Page number |
-| size |  ``` Optional ```  | Page size |
-
-
-#### Example Usage
-
-```csharp
-int? page = 21;
-int? size = 21;
-
-Standard.Models.RecipientsResponse result = await recipients.GetRecipients(page, size);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
 ### <a name="create_recipient"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.CreateRecipient") CreateRecipient
 
 > Creates a new recipient
@@ -4497,57 +4419,17 @@ Standard.Models.RecipientsResponse1 result = await recipients.CreateRecipient(bo
 | 500 | Internal server error |
 
 
-### <a name="get_balance"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.GetBalance") GetBalance
+### <a name="get_withdrawals"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.GetWithdrawals") GetWithdrawals
 
-> Get balance information for a recipient
-
-
-```csharp
-Task<Standard.Models.RecipientsBalanceResponse> GetBalance(string recipientId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| recipientId |  ``` Required ```  | Recipient id |
-
-
-#### Example Usage
-
-```csharp
-string recipientId = "recipient_id";
-
-Standard.Models.RecipientsBalanceResponse result = await recipients.GetBalance(recipientId);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="get_anticipations"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.GetAnticipations") GetAnticipations
-
-> Retrieves a paginated list of anticipations from a recipient
+> Gets a paginated list of transfers for the recipient
 
 
 ```csharp
-Task<Standard.Models.RecipientsAnticipationsResponse1> GetAnticipations(
+Task<Standard.Models.ListWithdrawals> GetWithdrawals(
         string recipientId,
         int? page = null,
         int? size = null,
         string status = null,
-        string timeframe = null,
-        DateTime? paymentDateSince = null,
-        DateTime? paymentDateUntil = null,
         DateTime? createdSince = null,
         DateTime? createdUntil = null)
 ```
@@ -4556,31 +4438,25 @@ Task<Standard.Models.RecipientsAnticipationsResponse1> GetAnticipations(
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| recipientId |  ``` Required ```  | Recipient id |
-| page |  ``` Optional ```  | Page number |
-| size |  ``` Optional ```  | Page size |
-| status |  ``` Optional ```  | Filter for anticipation status |
-| timeframe |  ``` Optional ```  | Filter for anticipation timeframe |
-| paymentDateSince |  ``` Optional ```  | Filter for start range for anticipation payment date |
-| paymentDateUntil |  ``` Optional ```  | Filter for end range for anticipation payment date |
-| createdSince |  ``` Optional ```  | Filter for start range for anticipation creation date |
-| createdUntil |  ``` Optional ```  | Filter for end range for anticipation creation date |
+| recipientId |  ``` Required ```  | TODO: Add a parameter description |
+| page |  ``` Optional ```  | TODO: Add a parameter description |
+| size |  ``` Optional ```  | TODO: Add a parameter description |
+| status |  ``` Optional ```  | TODO: Add a parameter description |
+| createdSince |  ``` Optional ```  | TODO: Add a parameter description |
+| createdUntil |  ``` Optional ```  | TODO: Add a parameter description |
 
 
 #### Example Usage
 
 ```csharp
 string recipientId = "recipient_id";
-int? page = 21;
-int? size = 21;
+int? page = 83;
+int? size = 83;
 string status = "status";
-string timeframe = "timeframe";
-DateTime? paymentDateSince = DateTime.Now();
-DateTime? paymentDateUntil = DateTime.Now();
 DateTime? createdSince = DateTime.Now();
 DateTime? createdUntil = DateTime.Now();
 
-Standard.Models.RecipientsAnticipationsResponse1 result = await recipients.GetAnticipations(recipientId, page, size, status, timeframe, paymentDateSince, paymentDateUntil, createdSince, createdUntil);
+Standard.Models.ListWithdrawals result = await recipients.GetWithdrawals(recipientId, page, size, status, createdSince, createdUntil);
 
 ```
 
@@ -4596,13 +4472,13 @@ Standard.Models.RecipientsAnticipationsResponse1 result = await recipients.GetAn
 | 500 | Internal server error |
 
 
-### <a name="create_anticipation"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.CreateAnticipation") CreateAnticipation
+### <a name="update_automatic_anticipation_settings"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.UpdateAutomaticAnticipationSettings") UpdateAutomaticAnticipationSettings
 
-> Creates an anticipation
+> Updates recipient metadata
 
 
 ```csharp
-Task<Standard.Models.RecipientsAnticipationsResponse> CreateAnticipation(string recipientId, Standard.Models.RecipientsAnticipationsRequest body, string idempotencyKey = null)
+Task<Standard.Models.RecipientsAutomaticAnticipationSettingsResponse> UpdateAutomaticAnticipationSettings(string recipientId, Standard.Models.UpdateAutomaticAnticipationSettingsRequest body, string idempotencyKey = null)
 ```
 
 #### Parameters
@@ -4610,7 +4486,7 @@ Task<Standard.Models.RecipientsAnticipationsResponse> CreateAnticipation(string 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
 | recipientId |  ``` Required ```  | Recipient id |
-| body |  ``` Required ```  | Anticipation data |
+| body |  ``` Required ```  | Metadata |
 | idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
 
 
@@ -4618,10 +4494,10 @@ Task<Standard.Models.RecipientsAnticipationsResponse> CreateAnticipation(string 
 
 ```csharp
 string recipientId = "recipient_id";
-var body = new Standard.Models.RecipientsAnticipationsRequest();
+var body = new Standard.Models.UpdateAutomaticAnticipationSettingsRequest();
 string idempotencyKey = "idempotency-key";
 
-Standard.Models.RecipientsAnticipationsResponse result = await recipients.CreateAnticipation(recipientId, body, idempotencyKey);
+Standard.Models.RecipientsAutomaticAnticipationSettingsResponse result = await recipients.UpdateAutomaticAnticipationSettings(recipientId, body, idempotencyKey);
 
 ```
 
@@ -4637,13 +4513,50 @@ Standard.Models.RecipientsAnticipationsResponse result = await recipients.Create
 | 500 | Internal server error |
 
 
-### <a name="update_recipient_default_bank_account"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.UpdateRecipientDefaultBankAccount") UpdateRecipientDefaultBankAccount
+### <a name="get_recipient_by_code"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.GetRecipientByCode") GetRecipientByCode
 
-> Updates the default bank account from a recipient
+> Retrieves recipient information
 
 
 ```csharp
-Task<Standard.Models.RecipientsDefaultBankAccountResponse> UpdateRecipientDefaultBankAccount(string recipientId, Standard.Models.RecipientsDefaultBankAccountRequest body, string idempotencyKey = null)
+Task<Standard.Models.RecipientsCodeResponse> GetRecipientByCode(string code)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| code |  ``` Required ```  | Recipient code |
+
+
+#### Example Usage
+
+```csharp
+string code = "code";
+
+Standard.Models.RecipientsCodeResponse result = await recipients.GetRecipientByCode(code);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="get_anticipation"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.GetAnticipation") GetAnticipation
+
+> Gets an anticipation
+
+
+```csharp
+Task<Standard.Models.RecipientsAnticipationsResponse> GetAnticipation(string recipientId, string anticipationId)
 ```
 
 #### Parameters
@@ -4651,18 +4564,16 @@ Task<Standard.Models.RecipientsDefaultBankAccountResponse> UpdateRecipientDefaul
 | Parameter | Tags | Description |
 |-----------|------|-------------|
 | recipientId |  ``` Required ```  | Recipient id |
-| body |  ``` Required ```  | Bank account data |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+| anticipationId |  ``` Required ```  | Anticipation id |
 
 
 #### Example Usage
 
 ```csharp
 string recipientId = "recipient_id";
-var body = new Standard.Models.RecipientsDefaultBankAccountRequest();
-string idempotencyKey = "idempotency-key";
+string anticipationId = "anticipation_id";
 
-Standard.Models.RecipientsDefaultBankAccountResponse result = await recipients.UpdateRecipientDefaultBankAccount(recipientId, body, idempotencyKey);
+Standard.Models.RecipientsAnticipationsResponse result = await recipients.GetAnticipation(recipientId, anticipationId);
 
 ```
 
@@ -4795,6 +4706,125 @@ Standard.Models.RecipientsTransfersResponse result = await recipients.GetTransfe
 | 500 | Internal server error |
 
 
+### <a name="get_anticipation_limits"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.GetAnticipationLimits") GetAnticipationLimits
+
+> Gets the anticipation limits for a recipient
+
+
+```csharp
+Task<Standard.Models.RecipientsAnticipationLimitsResponse> GetAnticipationLimits(string recipientId, string timeframe, DateTime paymentDate)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| recipientId |  ``` Required ```  | Recipient id |
+| timeframe |  ``` Required ```  | Timeframe |
+| paymentDate |  ``` Required ```  | Anticipation payment date |
+
+
+#### Example Usage
+
+```csharp
+string recipientId = "recipient_id";
+string timeframe = "timeframe";
+DateTime paymentDate = DateTime.Now();
+
+Standard.Models.RecipientsAnticipationLimitsResponse result = await recipients.GetAnticipationLimits(recipientId, timeframe, paymentDate);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="get_balance"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.GetBalance") GetBalance
+
+> Get balance information for a recipient
+
+
+```csharp
+Task<Standard.Models.RecipientsBalanceResponse> GetBalance(string recipientId)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| recipientId |  ``` Required ```  | Recipient id |
+
+
+#### Example Usage
+
+```csharp
+string recipientId = "recipient_id";
+
+Standard.Models.RecipientsBalanceResponse result = await recipients.GetBalance(recipientId);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="create_anticipation"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.CreateAnticipation") CreateAnticipation
+
+> Creates an anticipation
+
+
+```csharp
+Task<Standard.Models.RecipientsAnticipationsResponse> CreateAnticipation(string recipientId, Standard.Models.RecipientsAnticipationsRequest body, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| recipientId |  ``` Required ```  | Recipient id |
+| body |  ``` Required ```  | Anticipation data |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string recipientId = "recipient_id";
+var body = new Standard.Models.RecipientsAnticipationsRequest();
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.RecipientsAnticipationsResponse result = await recipients.CreateAnticipation(recipientId, body, idempotencyKey);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
 ### <a name="get_transfers"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.GetTransfers") GetTransfers
 
 > Gets a paginated list of transfers for the recipient
@@ -4826,13 +4856,155 @@ Task<Standard.Models.RecipientsTransfersResponse1> GetTransfers(
 
 ```csharp
 string recipientId = "recipient_id";
-int? page = 21;
-int? size = 21;
+int? page = 83;
+int? size = 83;
 string status = "status";
 DateTime? createdSince = DateTime.Now();
 DateTime? createdUntil = DateTime.Now();
 
 Standard.Models.RecipientsTransfersResponse1 result = await recipients.GetTransfers(recipientId, page, size, status, createdSince, createdUntil);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="get_recipients"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.GetRecipients") GetRecipients
+
+> Retrieves paginated recipients information
+
+
+```csharp
+Task<Standard.Models.RecipientsResponse> GetRecipients(int? page = null, int? size = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
+
+
+#### Example Usage
+
+```csharp
+int? page = 83;
+int? size = 83;
+
+Standard.Models.RecipientsResponse result = await recipients.GetRecipients(page, size);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="get_anticipations"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.GetAnticipations") GetAnticipations
+
+> Retrieves a paginated list of anticipations from a recipient
+
+
+```csharp
+Task<Standard.Models.RecipientsAnticipationsResponse1> GetAnticipations(
+        string recipientId,
+        int? page = null,
+        int? size = null,
+        string status = null,
+        string timeframe = null,
+        DateTime? paymentDateSince = null,
+        DateTime? paymentDateUntil = null,
+        DateTime? createdSince = null,
+        DateTime? createdUntil = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| recipientId |  ``` Required ```  | Recipient id |
+| page |  ``` Optional ```  | Page number |
+| size |  ``` Optional ```  | Page size |
+| status |  ``` Optional ```  | Filter for anticipation status |
+| timeframe |  ``` Optional ```  | Filter for anticipation timeframe |
+| paymentDateSince |  ``` Optional ```  | Filter for start range for anticipation payment date |
+| paymentDateUntil |  ``` Optional ```  | Filter for end range for anticipation payment date |
+| createdSince |  ``` Optional ```  | Filter for start range for anticipation creation date |
+| createdUntil |  ``` Optional ```  | Filter for end range for anticipation creation date |
+
+
+#### Example Usage
+
+```csharp
+string recipientId = "recipient_id";
+int? page = 83;
+int? size = 83;
+string status = "status";
+string timeframe = "timeframe";
+DateTime? paymentDateSince = DateTime.Now();
+DateTime? paymentDateUntil = DateTime.Now();
+DateTime? createdSince = DateTime.Now();
+DateTime? createdUntil = DateTime.Now();
+
+Standard.Models.RecipientsAnticipationsResponse1 result = await recipients.GetAnticipations(recipientId, page, size, status, timeframe, paymentDateSince, paymentDateUntil, createdSince, createdUntil);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="update_recipient_default_bank_account"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.UpdateRecipientDefaultBankAccount") UpdateRecipientDefaultBankAccount
+
+> Updates the default bank account from a recipient
+
+
+```csharp
+Task<Standard.Models.RecipientsDefaultBankAccountResponse> UpdateRecipientDefaultBankAccount(string recipientId, Standard.Models.RecipientsDefaultBankAccountRequest body, string idempotencyKey = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| recipientId |  ``` Required ```  | Recipient id |
+| body |  ``` Required ```  | Bank account data |
+| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+
+
+#### Example Usage
+
+```csharp
+string recipientId = "recipient_id";
+var body = new Standard.Models.RecipientsDefaultBankAccountRequest();
+string idempotencyKey = "idempotency-key";
+
+Standard.Models.RecipientsDefaultBankAccountResponse result = await recipients.UpdateRecipientDefaultBankAccount(recipientId, body, idempotencyKey);
 
 ```
 
@@ -4889,47 +5061,6 @@ Standard.Models.RecipientsTransfersResponse result = await recipients.CreateTran
 | 500 | Internal server error |
 
 
-### <a name="get_anticipation_limits"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.GetAnticipationLimits") GetAnticipationLimits
-
-> Gets the anticipation limits for a recipient
-
-
-```csharp
-Task<Standard.Models.RecipientsAnticipationLimitsResponse> GetAnticipationLimits(string recipientId, string timeframe, DateTime paymentDate)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| recipientId |  ``` Required ```  | Recipient id |
-| timeframe |  ``` Required ```  | Timeframe |
-| paymentDate |  ``` Required ```  | Anticipation payment date |
-
-
-#### Example Usage
-
-```csharp
-string recipientId = "recipient_id";
-string timeframe = "timeframe";
-DateTime paymentDate = DateTime.Now();
-
-Standard.Models.RecipientsAnticipationLimitsResponse result = await recipients.GetAnticipationLimits(recipientId, timeframe, paymentDate);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
 ### <a name="create_withdraw"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.CreateWithdraw") CreateWithdraw
 
 > CreateWithdraw
@@ -4954,59 +5085,6 @@ string recipientId = "recipient_id";
 var body = new Standard.Models.CreateWithdrawRequest();
 
 Standard.Models.GetWithdrawResponse result = await recipients.CreateWithdraw(recipientId, body);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="get_withdrawals"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.GetWithdrawals") GetWithdrawals
-
-> Gets a paginated list of transfers for the recipient
-
-
-```csharp
-Task<Standard.Models.ListWithdrawals> GetWithdrawals(
-        string recipientId,
-        int? page = null,
-        int? size = null,
-        string status = null,
-        DateTime? createdSince = null,
-        DateTime? createdUntil = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| recipientId |  ``` Required ```  | TODO: Add a parameter description |
-| page |  ``` Optional ```  | TODO: Add a parameter description |
-| size |  ``` Optional ```  | TODO: Add a parameter description |
-| status |  ``` Optional ```  | TODO: Add a parameter description |
-| createdSince |  ``` Optional ```  | TODO: Add a parameter description |
-| createdUntil |  ``` Optional ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string recipientId = "recipient_id";
-int? page = 113;
-int? size = 113;
-string status = "status";
-DateTime? createdSince = DateTime.Now();
-DateTime? createdUntil = DateTime.Now();
-
-Standard.Models.ListWithdrawals result = await recipients.GetWithdrawals(recipientId, page, size, status, createdSince, createdUntil);
 
 ```
 
@@ -5061,32 +5139,40 @@ Standard.Models.GetWithdrawResponse result = await recipients.GetWithdrawById(re
 | 500 | Internal server error |
 
 
-### <a name="update_automatic_anticipation_settings"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.UpdateAutomaticAnticipationSettings") UpdateAutomaticAnticipationSettings
+[Back to List of Controllers](#list_of_controllers)
 
-> Updates recipient metadata
+## <a name="transfers_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Tests.Controllers.TransfersController") TransfersController
+
+### Get singleton instance
+
+The singleton instance of the ``` TransfersController ``` class can be accessed from the API Client.
+
+```csharp
+TransfersController transfers = client.Transfers;
+```
+
+### <a name="get_transfer_by_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.TransfersController.GetTransferById") GetTransferById
+
+> GetTransferById
 
 
 ```csharp
-Task<Standard.Models.RecipientsAutomaticAnticipationSettingsResponse> UpdateAutomaticAnticipationSettings(string recipientId, Standard.Models.UpdateAutomaticAnticipationSettingsRequest body, string idempotencyKey = null)
+Task<Standard.Models.GetTransfer> GetTransferById(string transferId)
 ```
 
 #### Parameters
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| recipientId |  ``` Required ```  | Recipient id |
-| body |  ``` Required ```  | Metadata |
-| idempotencyKey |  ``` Optional ```  | TODO: Add a parameter description |
+| transferId |  ``` Required ```  | TODO: Add a parameter description |
 
 
 #### Example Usage
 
 ```csharp
-string recipientId = "recipient_id";
-var body = new Standard.Models.UpdateAutomaticAnticipationSettingsRequest();
-string idempotencyKey = "idempotency-key";
+string transferId = "transfer_id";
 
-Standard.Models.RecipientsAutomaticAnticipationSettingsResponse result = await recipients.UpdateAutomaticAnticipationSettings(recipientId, body, idempotencyKey);
+Standard.Models.GetTransfer result = await transfers.GetTransferById(transferId);
 
 ```
 
@@ -5102,28 +5188,57 @@ Standard.Models.RecipientsAutomaticAnticipationSettingsResponse result = await r
 | 500 | Internal server error |
 
 
-### <a name="get_recipient_by_code"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.RecipientsController.GetRecipientByCode") GetRecipientByCode
+### <a name="post_create_transfer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.TransfersController.PostCreateTransfer") PostCreateTransfer
 
-> Retrieves recipient information
+> CreateTransfer
 
 
 ```csharp
-Task<Standard.Models.RecipientsCodeResponse> GetRecipientByCode(string code)
+Task<Standard.Models.GetTransfer> PostCreateTransfer(Standard.Models.CreateTransfer body)
 ```
 
 #### Parameters
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| code |  ``` Required ```  | Recipient code |
+| body |  ``` Required ```  | TODO: Add a parameter description |
 
 
 #### Example Usage
 
 ```csharp
-string code = "code";
+var body = new Standard.Models.CreateTransfer();
 
-Standard.Models.RecipientsCodeResponse result = await recipients.GetRecipientByCode(code);
+Standard.Models.GetTransfer result = await transfers.PostCreateTransfer(body);
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Invalid request |
+| 401 | Invalid API key |
+| 404 | An informed resource was not found |
+| 412 | Business validation error |
+| 422 | Contract validation error |
+| 500 | Internal server error |
+
+
+### <a name="get_transfers1"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.TransfersController.GetTransfers1") GetTransfers1
+
+> Gets all transfers
+
+
+```csharp
+Task<Standard.Models.ListTransfers> GetTransfers1()
+```
+
+#### Example Usage
+
+```csharp
+
+Standard.Models.ListTransfers result = await transfers.GetTransfers1();
 
 ```
 
@@ -5277,121 +5392,6 @@ Task<Standard.Models.GetTransactionResponse> GetTransaction(string transactionId
 string transactionId = "transaction_id";
 
 Standard.Models.GetTransactionResponse result = await transactions.GetTransaction(transactionId);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-[Back to List of Controllers](#list_of_controllers)
-
-## <a name="transfers_controller"></a>![Class: ](https://apidocs.io/img/class.png "MundiAPI.Tests.Controllers.TransfersController") TransfersController
-
-### Get singleton instance
-
-The singleton instance of the ``` TransfersController ``` class can be accessed from the API Client.
-
-```csharp
-TransfersController transfers = client.Transfers;
-```
-
-### <a name="post_create_transfer"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.TransfersController.PostCreateTransfer") PostCreateTransfer
-
-> CreateTransfer
-
-
-```csharp
-Task<Standard.Models.GetTransfer> PostCreateTransfer(Standard.Models.CreateTransfer body)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| body |  ``` Required ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-var body = new Standard.Models.CreateTransfer();
-
-Standard.Models.GetTransfer result = await transfers.PostCreateTransfer(body);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="get_transfer_by_id"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.TransfersController.GetTransferById") GetTransferById
-
-> GetTransferById
-
-
-```csharp
-Task<Standard.Models.GetTransfer> GetTransferById(string transferId)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| transferId |  ``` Required ```  | TODO: Add a parameter description |
-
-
-#### Example Usage
-
-```csharp
-string transferId = "transfer_id";
-
-Standard.Models.GetTransfer result = await transfers.GetTransferById(transferId);
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 400 | Invalid request |
-| 401 | Invalid API key |
-| 404 | An informed resource was not found |
-| 412 | Business validation error |
-| 422 | Contract validation error |
-| 500 | Internal server error |
-
-
-### <a name="get_transfers1"></a>![Method: ](https://apidocs.io/img/method.png "MundiAPI.Tests.Controllers.TransfersController.GetTransfers1") GetTransfers1
-
-> Gets all transfers
-
-
-```csharp
-Task<Standard.Models.ListTransfers> GetTransfers1()
-```
-
-#### Example Usage
-
-```csharp
-
-Standard.Models.ListTransfers result = await transfers.GetTransfers1();
 
 ```
 

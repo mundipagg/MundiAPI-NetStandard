@@ -91,6 +91,17 @@ namespace MundiAPI.Standard
         }
 
         /// <summary>
+        /// Singleton access to Transfers controller
+        /// </summary>
+        public TransfersController Transfers
+        {
+            get
+            {
+                return TransfersController.Instance;
+            }
+        }
+
+        /// <summary>
         /// Singleton access to Tokens controller
         /// </summary>
         public TokensController Tokens
@@ -109,17 +120,6 @@ namespace MundiAPI.Standard
             get
             {
                 return TransactionsController.Instance;
-            }
-        }
-
-        /// <summary>
-        /// Singleton access to Transfers controller
-        /// </summary>
-        public TransfersController Transfers
-        {
-            get
-            {
-                return TransfersController.Instance;
             }
         }
         /// <summary>
