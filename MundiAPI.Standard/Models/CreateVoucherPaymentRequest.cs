@@ -26,6 +26,7 @@ namespace MundiAPI.Standard.Models
         private string cardToken;
         private Models.Card1 card;
         private string recurrencyCycle;
+        private long? merchantCategoryCode;
 
         /// <summary>
         /// The text that will be shown on the voucher's statement
@@ -109,6 +110,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.recurrencyCycle = value;
                 onPropertyChanged("RecurrencyCycle");
+            }
+        }
+
+        /// <summary>
+        /// Customer business segment code
+        /// </summary>
+        [JsonProperty("merchant_category_code")]
+        public long? MerchantCategoryCode 
+        { 
+            get 
+            {
+                return this.merchantCategoryCode; 
+            } 
+            set 
+            {
+                this.merchantCategoryCode = value;
+                onPropertyChanged("MerchantCategoryCode");
             }
         }
     }
