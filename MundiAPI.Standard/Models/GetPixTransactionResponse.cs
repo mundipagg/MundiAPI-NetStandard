@@ -26,6 +26,7 @@ namespace MundiAPI.Standard.Models
         private DateTime expiresAt;
         private List<Models.PixAdditionalInformation> additionalInformation;
         private object payer;
+        private string providerTransactionId;
 
         /// <summary>
         /// TODO: Write general description for this method
@@ -110,6 +111,23 @@ namespace MundiAPI.Standard.Models
             {
                 this.payer = value;
                 onPropertyChanged("Payer");
+            }
+        }
+
+        /// <summary>
+        /// Provider transaction id
+        /// </summary>
+        [JsonProperty("provider_transaction_id")]
+        public string ProviderTransactionId 
+        { 
+            get 
+            {
+                return this.providerTransactionId; 
+            } 
+            set 
+            {
+                this.providerTransactionId = value;
+                onPropertyChanged("ProviderTransactionId");
             }
         }
     }
