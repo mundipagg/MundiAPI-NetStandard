@@ -17,11 +17,11 @@ namespace MundiAPI.Standard.Models
             {
                 { "bank_transfer",typeof(GetBankTransferTransactionResponse)},
                 { "debit_card",typeof(GetDebitCardTransactionResponse)},
-                { "credit_card",typeof(GetCreditCardTransactionResponse)},
-                { "safetypay",typeof(GetSafetyPayTransactionResponse)},
                 { "voucher",typeof(GetVoucherTransactionResponse)},
                 { "boleto",typeof(GetBoletoTransactionResponse)},
                 { "cash",typeof(GetCashTransactionResponse)},
+                { "safetypay",typeof(GetSafetyPayTransactionResponse)},
+                { "credit_card",typeof(GetCreditCardTransactionResponse)},
                 { "private_label",typeof(GetPrivateLabelTransactionResponse)},
                 { "pix",typeof(GetPixTransactionResponse)},
             };
