@@ -50,36 +50,30 @@ namespace MundiAPI.Standard.Controllers
         #endregion Singleton Pattern
 
         /// <summary>
-        /// GetTransferById
+        /// CreateTransfer
         /// </summary>
-        /// <param name="transferId">Required parameter: Example: </param>
+        /// <param name="body">Required parameter: Example: </param>
         /// <return>Returns the Models.GetTransfer response from the API call</return>
-        public Models.GetTransfer GetTransferById(string transferId)
+        public Models.GetTransfer PostCreateTransfer(Models.CreateTransfer body)
         {
-            Task<Models.GetTransfer> t = GetTransferByIdAsync(transferId);
+            Task<Models.GetTransfer> t = PostCreateTransferAsync(body);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// GetTransferById
+        /// CreateTransfer
         /// </summary>
-        /// <param name="transferId">Required parameter: Example: </param>
+        /// <param name="body">Required parameter: Example: </param>
         /// <return>Returns the Models.GetTransfer response from the API call</return>
-        public async Task<Models.GetTransfer> GetTransferByIdAsync(string transferId)
+        public async Task<Models.GetTransfer> PostCreateTransferAsync(Models.CreateTransfer body)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/transfers/{transfer_id}");
-
-            //process optional template parameters
-            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "transfer_id", transferId }
-            });
+            _queryBuilder.Append("/transfers/recipients");
 
 
             //validate and preprocess url
@@ -88,12 +82,16 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.3" },
-                { "accept", "application/json" }
+                { "user-agent", "MundiSDK - DotNet 2.4.4" },
+                { "accept", "application/json" },
+                { "Content-Type", "application/json" }
             };
 
+            //append body params
+            var _body = APIHelper.JsonSerialize(body);
+
             //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
 
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
@@ -132,30 +130,36 @@ namespace MundiAPI.Standard.Controllers
         }
 
         /// <summary>
-        /// CreateTransfer
+        /// GetTransferById
         /// </summary>
-        /// <param name="body">Required parameter: Example: </param>
+        /// <param name="transferId">Required parameter: Example: </param>
         /// <return>Returns the Models.GetTransfer response from the API call</return>
-        public Models.GetTransfer PostCreateTransfer(Models.CreateTransfer body)
+        public Models.GetTransfer GetTransferById(string transferId)
         {
-            Task<Models.GetTransfer> t = PostCreateTransferAsync(body);
+            Task<Models.GetTransfer> t = GetTransferByIdAsync(transferId);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// CreateTransfer
+        /// GetTransferById
         /// </summary>
-        /// <param name="body">Required parameter: Example: </param>
+        /// <param name="transferId">Required parameter: Example: </param>
         /// <return>Returns the Models.GetTransfer response from the API call</return>
-        public async Task<Models.GetTransfer> PostCreateTransferAsync(Models.CreateTransfer body)
+        public async Task<Models.GetTransfer> GetTransferByIdAsync(string transferId)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/transfers/recipients");
+            _queryBuilder.Append("/transfers/{transfer_id}");
+
+            //process optional template parameters
+            APIHelper.AppendUrlWithTemplateParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "transfer_id", transferId }
+            });
 
 
             //validate and preprocess url
@@ -164,16 +168,12 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.3" },
-                { "accept", "application/json" },
-                { "Content-Type", "application/json" }
+                { "user-agent", "MundiSDK - DotNet 2.4.4" },
+                { "accept", "application/json" }
             };
 
-            //append body params
-            var _body = APIHelper.JsonSerialize(body);
-
             //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.PostBody(_queryUrl, _headers, _body, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
+            HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
 
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
@@ -242,7 +242,7 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.3" },
+                { "user-agent", "MundiSDK - DotNet 2.4.4" },
                 { "accept", "application/json" }
             };
 
