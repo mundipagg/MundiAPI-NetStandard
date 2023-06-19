@@ -145,8 +145,9 @@ namespace MundiAPI.Standard
         /// <summary>
         /// Client initialization constructor
         /// </summary>
-        public MundiAPIClient(string basicAuthUserName, string basicAuthPassword)
+        public MundiAPIClient(string serviceRefererName, string basicAuthUserName, string basicAuthPassword)
         {
+            Configuration.ServiceRefererName = serviceRefererName;
             Configuration.BasicAuthUserName = basicAuthUserName;
             Configuration.BasicAuthPassword = basicAuthPassword;
         }

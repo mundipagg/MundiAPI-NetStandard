@@ -103,11 +103,12 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.4" },
+                { "user-agent", "MundiSDK - DotNet 2.4.5" },
                 { "accept", "application/json" },
                 { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
+            _headers.Add("ServiceRefererName", Configuration.ServiceRefererName);
 
             //append body params
             var _body = APIHelper.JsonSerialize(body);
@@ -195,10 +196,11 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.4" },
+                { "user-agent", "MundiSDK - DotNet 2.4.5" },
                 { "accept", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
+            _headers.Add("ServiceRefererName", Configuration.ServiceRefererName);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.Delete(_queryUrl, _headers, null, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -281,9 +283,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.4" },
+                { "user-agent", "MundiSDK - DotNet 2.4.5" },
                 { "accept", "application/json" }
             };
+            _headers.Add("ServiceRefererName", Configuration.ServiceRefererName);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -367,11 +370,12 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.4" },
+                { "user-agent", "MundiSDK - DotNet 2.4.5" },
                 { "accept", "application/json" },
                 { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
+            _headers.Add("ServiceRefererName", Configuration.ServiceRefererName);
 
             //append body params
             var _body = APIHelper.JsonSerialize(body);
@@ -486,9 +490,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.4" },
+                { "user-agent", "MundiSDK - DotNet 2.4.5" },
                 { "accept", "application/json" }
             };
+            _headers.Add("ServiceRefererName", Configuration.ServiceRefererName);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -564,11 +569,12 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.4" },
+                { "user-agent", "MundiSDK - DotNet 2.4.5" },
                 { "accept", "application/json" },
                 { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
+            _headers.Add("ServiceRefererName", Configuration.ServiceRefererName);
 
             //append body params
             var _body = APIHelper.JsonSerialize(body);
@@ -651,9 +657,10 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.4" },
+                { "user-agent", "MundiSDK - DotNet 2.4.5" },
                 { "accept", "application/json" }
             };
+            _headers.Add("ServiceRefererName", Configuration.ServiceRefererName);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.Get(_queryUrl,_headers, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -737,11 +744,12 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.4" },
+                { "user-agent", "MundiSDK - DotNet 2.4.5" },
                 { "accept", "application/json" },
                 { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
+            _headers.Add("ServiceRefererName", Configuration.ServiceRefererName);
 
             //append body params
             var _body = APIHelper.JsonSerialize(body);
@@ -826,10 +834,11 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.4" },
+                { "user-agent", "MundiSDK - DotNet 2.4.5" },
                 { "accept", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
+            _headers.Add("ServiceRefererName", Configuration.ServiceRefererName);
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.Delete(_queryUrl, _headers, null, Configuration.BasicAuthUserName, Configuration.BasicAuthPassword);
@@ -913,11 +922,12 @@ namespace MundiAPI.Standard.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                { "user-agent", "MundiSDK - DotNet 2.4.4" },
+                { "user-agent", "MundiSDK - DotNet 2.4.5" },
                 { "accept", "application/json" },
                 { "Content-Type", "application/json" },
                 { "idempotency-key", idempotencyKey }
             };
+            _headers.Add("ServiceRefererName", Configuration.ServiceRefererName);
 
             //append body params
             var _body = APIHelper.JsonSerialize(body);
